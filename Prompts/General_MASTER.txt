@@ -1,0 +1,336 @@
+You are a world-class systems architect, semiconductor architect, automotive architect, embedded systems expert, Linux kernel engineer, network protocol expert, aerospace communication engineer, and protocol historian.
+
+Your task is to create a COMPLETE UNIVERSAL PROTOCOL FAMILY DICTIONARY & KNOWLEDGE MAP covering ALL protocols/interfaces/buses/interconnects/middleware/communication standards used across:
+
+- Embedded Systems
+- Operating Systems
+- Linux Kernel
+- Android / AAOS / AOSP
+- Automotive
+- Semiconductor / SoC / ASIC / FPGA
+- Networking
+- Telecom
+- Aerospace / Avionics / Space
+- Industrial Automation
+- Robotics
+- AI Accelerators
+- Data Centers
+- Cloud Infrastructure
+- Security Systems
+- Real-Time Systems
+- IoT
+- Consumer Electronics
+- High-Speed PHY
+- Storage Systems
+- Distributed Systems
+- Hardware Verification
+- Protocol Testing
+- Computer Architecture
+
+===========================================================
+GOAL
+===========================================================
+
+Generate a COMPLETE categorized protocol family tree and dictionary.
+
+The output should become:
+- protocol encyclopedia
+- engineering reference library
+- interview preparation system
+- architecture knowledge graph
+- debugging handbook
+- protocol taxonomy
+- semiconductor interconnect map
+- automotive communication reference
+- Linux subsystem map
+- AAOS communication stack reference
+- research-oriented protocol knowledge base
+
+===========================================================
+OUTPUT FORMAT
+===========================================================
+
+For EVERY protocol family/category:
+
+1. Give CATEGORY OVERVIEW
+2. Explain WHY this family exists
+3. Explain ENGINEERING PROBLEM it solves
+4. Explain WHERE it is used
+5. Explain MODERN relevance
+6. Explain FUTURE trends
+7. List ALL protocols in that family
+8. Give VERY SHORT SUMMARY for every protocol
+9. Mention protocol variants/sub-versions
+10. Mention competing protocols
+11. Mention successor protocols
+12. Mention industry/domain usage
+13. Mention OSI layer mapping if applicable
+14. Mention whether:
+   - wired
+   - wireless
+   - synchronous
+   - asynchronous
+   - serial
+   - parallel
+   - packet-based
+   - memory-mapped
+   - message-oriented
+   - deterministic
+   - real-time
+15. Mention speed range
+16. Mention topology
+17. Mention famous companies/products using it
+18. Mention Linux/Android relevance
+19. Mention Automotive/AUTOSAR relevance
+20. Mention Semiconductor relevance
+21. Mention Security/Safety relevance
+
+===========================================================
+FORMAT STYLE
+===========================================================
+
+For EVERY protocol family use this structure:
+
+# CATEGORY NAME
+
+## Purpose
+(Why this family exists)
+
+## Solves
+(Engineering problems solved)
+
+## Common Usage
+(Real-world systems)
+
+## Modern Trends
+(Current industry movement)
+
+## Future Direction
+(Where industry is heading)
+
+## Protocol Family List
+
+| Protocol | Type | Short Description | Typical Speed | Domain | Status |
+|-----------|------|------------------|---------------|--------|--------|
+
+Then continue with ALL protocols in that family.
+
+===========================================================
+REQUIRED PROTOCOL CATEGORIES
+===========================================================
+
+Cover ALL major categories including but NOT limited to:
+
+1. Basic Communication Types
+2. Serial Communication
+3. Parallel Communication
+4. Semiconductor On-Chip Buses
+5. AMBA Family
+6. Cache Coherency Protocols
+7. NoC Architectures
+8. Chiplet Interconnects
+9. Memory Protocols
+10. Storage Protocols
+11. Peripheral Expansion Buses
+12. Display Protocols
+13. Camera Protocols
+14. Audio Protocols
+15. Sensor Protocols
+16. Networking Protocols
+17. Internet Protocol Stack
+18. Wireless Protocols
+19. Cellular Protocols
+20. Automotive Networks
+21. Automotive Diagnostics
+22. AUTOSAR Communication
+23. Industrial Automation
+24. SCADA Protocols
+25. Aerospace/Avionics
+26. Space/Satellite Communication
+27. Telecom Protocols
+28. Distributed Middleware
+29. RPC Frameworks
+30. Streaming Protocols
+31. Cloud/Data Center Protocols
+32. Security Protocols
+33. Authentication Protocols
+34. Real-Time Protocols
+35. Safety-Critical Protocols
+36. FPGA Interfaces
+37. Robotics Protocols
+38. Drone Communication
+39. AI Accelerator Interconnects
+40. Storage Network Protocols
+41. Time Synchronization Protocols
+42. USB Ecosystem
+43. Boot/Firmware Interfaces
+44. Linux IPC
+45. Android IPC
+46. Hypervisor/Virtualization Communication
+47. Debug/Test Protocols
+48. Verification Methodologies
+49. High-Speed PHY Technologies
+50. Battery/Charging Protocols
+51. Smart Home / IoT Protocols
+52. Vehicle-to-Everything (V2X)
+53. Industrial Ethernet
+54. Military Communication Standards
+55. Quantum Computing Interfaces
+56. Optical/Photonics Interconnects
+57. Edge Computing Protocols
+58. AR/VR Communication Interfaces
+59. Medical Device Communication
+60. Financial Trading Protocols
+61. CDN/Streaming Delivery Protocols
+62. AI/ML Distributed Training Protocols
+63. HPC Interconnects
+64. Blockchain/Distributed Ledger Protocols
+65. Embedded RTOS IPC
+66. Sensor Fusion Communication
+67. Secure Boot/Trusted Execution Interfaces
+68. Datacenter Fabric Protocols
+69. GPU Interconnect Protocols
+70. Smart Grid Protocols
+71. Railway Communication Protocols
+72. Maritime Communication Standards
+73. Defense Tactical Communication Systems
+74. Semiconductor Manufacturing/Test Protocols
+75. EDA/Simulation Communication Standards
+
+===========================================================
+FOR EVERY PROTOCOL INCLUDE
+===========================================================
+
+For EACH protocol give:
+
+- Full Name
+- Short Name
+- Domain
+- Category
+- Layer
+- Year Introduced
+- Created By
+- Main Purpose
+- Key Features
+- Strengths
+- Weaknesses
+- Common Usage
+- Typical Speed
+- Physical Medium
+- Topology
+- Packet/Frame Based?
+- Deterministic?
+- Real-Time Capable?
+- Safety Critical?
+- Security Support?
+- Linux Support?
+- Android Support?
+- AUTOSAR Support?
+- FPGA Usage?
+- ASIC/SoC Usage?
+- Current Industry Status
+- Modern Relevance
+- Future Outlook
+- Competing Protocols
+- Successor Technologies
+
+===========================================================
+REQUIRED SPECIAL SECTIONS
+===========================================================
+
+Add these sections at the end:
+
+1. Protocol Evolution Timeline
+2. Protocol Family Trees
+3. Protocol Dependency Graph
+4. Semiconductor Interconnect Hierarchy
+5. Automotive Communication Stack
+6. Linux Networking Stack Mapping
+7. Android Communication Stack Mapping
+8. Cloud/Data Center Protocol Hierarchy
+9. AI Accelerator Interconnect Map
+10. High-Speed PHY Evolution
+11. Safety-Critical Communication Evolution
+12. Wireless Evolution Timeline
+13. Internet Protocol Evolution
+14. Chip-to-Chip Communication Evolution
+15. Future Emerging Protocols
+16. Declining/Legacy Protocols
+17. Most Important Protocols to Learn
+18. Best Learning Order
+19. Career-Oriented Protocol Mapping
+20. Beginner → Architect Roadmap
+
+===========================================================
+MERMAID DIAGRAM REQUIREMENTS
+===========================================================
+
+Generate extensive Mermaid diagrams including:
+
+- protocol hierarchy trees
+- OSI stack diagrams
+- automotive stack
+- semiconductor interconnects
+- Linux IPC maps
+- Android Binder architecture
+- networking stack
+- memory hierarchy
+- chiplet architecture
+- NoC topology
+- protocol evolution timelines
+- protocol dependency graphs
+
+===========================================================
+LEARNING FEATURES
+===========================================================
+
+Also generate:
+
+- flash cards
+- interview questions
+- debugging scenarios
+- troubleshooting guides
+- architecture comparison tables
+- protocol cheat sheets
+- quick revision summaries
+- behavioral engineering questions
+- production debugging case studies
+- protocol selection decision trees
+
+===========================================================
+STYLE REQUIREMENTS
+===========================================================
+
+- extremely detailed
+- technically accurate
+- architect-level depth
+- beginner-friendly explanations
+- modern industry relevance
+- practical engineering focus
+- Linux + Automotive + Semiconductor focus
+- include historical evolution
+- include modern industry migration trends
+- include future protocol direction
+- include real product examples
+- include kernel/driver relevance
+- include firmware/bootloader relevance
+- include cloud/AI/datacenter relevance
+
+===========================================================
+FINAL GOAL
+===========================================================
+
+The final output should become a:
+- universal protocol encyclopedia
+- semiconductor interconnect handbook
+- automotive communication bible
+- Linux/Android protocol reference
+- interview preparation system
+- debugging knowledge base
+- architecture learning roadmap
+- lifelong engineering reference system
+
+Generate the most complete protocol knowledge map possible.
+
+
+

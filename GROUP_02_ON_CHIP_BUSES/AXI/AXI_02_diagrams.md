@@ -1,0 +1,379 @@
+# AXI — DIAGRAMS & VISUALS
+# ════════════════════════════════════════════════════════════════════
+# Protocol: AMBA AXI | Document: 02 of 08
+# ════════════════════════════════════════════════════════════════════
+
+---
+
+## DIAGRAM 1: Five-Channel Architecture
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                        AXI MASTER                             │
+│  (CPU, DMA, GPU — initiates transactions)                    │
+└──────┬────────┬────────┬────────┬────────┬───────────────────┘
+       │AW      │W       │B       │AR      │R
+       │(addr)  │(data)  │(resp)  │(addr)  │(data+resp)
+       ▼        ▼        ▲        ▼        ▲
+┌──────┴────────┴────────┴────────┴────────┴───────────────────┐
+│                      AXI INTERCONNECT                         │
+│  (Crossbar / NoC — routes transactions)                      │
+└──────┬────────┬────────┬────────┬────────┬───────────────────┘
+       │AW      │W       │B       │AR      │R
+       ▼        ▼        ▲        ▼        ▲
+┌──────┴────────┴────────┴────────┴────────┴───────────────────┐
+│                        AXI SLAVE                              │
+│  (Memory controller, Peripheral — responds)                  │
+└──────────────────────────────────────────────────────────────┘
+
+Write path: AW ──► (address)  +  W ──► (data)  →  B ◄── (response)
+Read path:  AR ──► (address)  →  R ◄── (data + response)
+```
+
+---
+
+## DIAGRAM 2: VALID/READY Handshake Timing
+
+```
+Case 1: VALID before READY
+════════════════════════════
+CLK     ─┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──
+          └──┘  └──┘  └──┘  └──┘  └──┘
+VALID   ─────────┐                    ┌───
+                 └────────────────────┘
+READY   ─────────────────┐       ┌────────
+                         └───────┘
+DATA    ═════════╪══VALID DATA═══╪════════
+                 ↑               ↑
+                 │    TRANSFER ──┘ (VALID & READY both 1)
+                 └── VALID asserted, holds stable
+
+Case 2: READY before VALID
+════════════════════════════
+CLK     ─┐  ┌──┐  ┌──┐  ┌──┐  ┌──
+          └──┘  └──┘  └──┘  └──┘
+READY   ──┐                    ┌──────
+          └────────────────────┘
+VALID   ─────────────────┐  ┌────────
+                         └──┘
+DATA    ═════════════════╪VD╪═════════
+                         ↑
+                         └── Transfer (one cycle)
+
+Case 3: Simultaneous
+═════════════════════
+CLK     ─┐  ┌──┐  ┌──
+          └──┘  └──┘
+VALID   ─────┐  ┌─────
+             └──┘
+READY   ─────┐  ┌─────
+             └──┘
+DATA    ═════╪VD╪═════
+             ↑
+             └── Immediate transfer
+```
+
+---
+
+## DIAGRAM 3: Write Transaction Waveform
+
+```
+CLK    ─┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐
+        └─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘
+
+AWVALID ────┐                          ┌──────────────
+            └──────────────────────────┘
+AWREADY ────────┐                      ┌──────────────
+                └──────────────────────┘
+AWADDR  ════╪═══A0══╪═════════════════════════════════
+AWLEN   ════╪═══03══╪═══════ (4 beats) ══════════════
+
+WVALID  ────────────┐                       ┌─────────
+                    └───────────────────────┘
+WREADY  ────────────────┐    ┌┐  ┌┐  ┌┐    ┌─────────
+                        └────┘└──┘└──┘└────┘
+WDATA   ════════════╪═D0═╪═D1╪═D2╪═D3═╪══════════════
+WSTRB   ════════════╪═FF═╪═FF╪═FF╪═FF═╪══════════════
+WLAST   ────────────────────────────┐  ┌─────────────
+                                    └──┘ (last beat)
+
+BVALID  ──────────────────────────────────┐     ┌─────
+                                          └─────┘
+BREADY  ──────────────────────────────────────┐ ┌─────
+                                              └─┘
+BRESP   ══════════════════════════════════╪═OK═╪══════
+
+Timeline: AW accepted → W beats (4) → B response
+```
+
+---
+
+## DIAGRAM 4: Read Transaction Waveform
+
+```
+CLK    ─┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐ ┌┐
+        └─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘└─┘
+
+ARVALID ────┐           ┌─────────────────────────
+            └───────────┘
+ARREADY ────────┐       ┌─────────────────────────
+                └───────┘
+ARADDR  ════╪═══A0══╪═════════════════════════════
+ARLEN   ════╪═══03══╪═══ (4 beats) ══════════════
+
+RVALID  ────────────────────┐              ┌──────
+                            └──────────────┘
+RREADY  ──────────────────────┐    ┌───────┌──────
+                              └────┘
+RDATA   ════════════════════╪D0╪D1╪D2╪D3╪═════════
+RRESP   ════════════════════╪OK╪OK╪OK╪OK╪═════════
+RLAST   ──────────────────────────────┐  ┌────────
+                                      └──┘
+
+Slave has latency after AR → first R data
+```
+
+---
+
+## DIAGRAM 5: Burst Types (Address Patterns)
+
+```
+FIXED BURST (AxBURST = 0b00):
+══════════════════════════════
+Start=0x1000, Size=4, Len=3 (4 beats)
+  Beat 0: 0x1000
+  Beat 1: 0x1000  ← Same address!
+  Beat 2: 0x1000
+  Beat 3: 0x1000
+Use: FIFO register access (same addr, different data each time)
+
+
+INCR BURST (AxBURST = 0b01):
+══════════════════════════════
+Start=0x1000, Size=4, Len=3 (4 beats)
+  Beat 0: 0x1000
+  Beat 1: 0x1004  ← +4
+  Beat 2: 0x1008  ← +4
+  Beat 3: 0x100C  ← +4
+Use: Normal sequential memory access, DMA
+
+
+WRAP BURST (AxBURST = 0b10):
+══════════════════════════════
+Start=0x1004, Size=4, Len=3 → boundary = 4×4 = 16 (0x10)
+Wrap boundary: 0x1000-0x100F
+  Beat 0: 0x1004  ← Start (critical word)
+  Beat 1: 0x1008
+  Beat 2: 0x100C
+  Beat 3: 0x1000  ← WRAP! Back to boundary start
+Use: Cache line fill starting at critical word first
+```
+
+---
+
+## DIAGRAM 6: Crossbar Interconnect
+
+```
+         Master 0    Master 1    Master 2    Master 3
+         (CPU)       (GPU)       (DMA)       (Display)
+           │           │           │           │
+           ▼           ▼           ▼           ▼
+    ┌──────────────────────────────────────────────────┐
+    │              AXI CROSSBAR (4×4)                   │
+    │                                                  │
+    │  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐           │
+    │  │Arb 0│  │Arb 1│  │Arb 2│  │Arb 3│           │
+    │  └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘           │
+    │     │        │        │        │                │
+    │  ┌──┴────────┴────────┴────────┴──┐             │
+    │  │      Switch Matrix              │             │
+    │  │  (any master → any slave)       │             │
+    │  └──┬────────┬────────┬────────┬──┘             │
+    │     │        │        │        │                │
+    │  ┌──┴──┐  ┌──┴──┐  ┌──┴──┐  ┌──┴──┐           │
+    │  │Dec 0│  │Dec 1│  │Dec 2│  │Dec 3│           │
+    │  └─────┘  └─────┘  └─────┘  └─────┘           │
+    └──────┬───────────┬──────────┬────────┬──────────┘
+           │           │          │        │
+           ▼           ▼          ▼        ▼
+        Slave 0     Slave 1    Slave 2   Slave 3
+        (DDR)       (SRAM)     (Flash)   (Periph)
+
+Concurrent: CPU→DDR AND GPU→SRAM simultaneously!
+Conflict: CPU→DDR AND DMA→DDR → arbiter decides
+```
+
+---
+
+## DIAGRAM 7: Outstanding Transactions
+
+```
+Without Outstanding (1 at a time):
+═══════════════════════════════════
+Time → ─────────────────────────────────────────────────►
+Master: [AR₀]────────wait──────────[AR₁]────────wait───
+Slave:        [latency][R₀ data]         [latency][R₁]
+                                  ↑ idle!
+
+With Outstanding (multiple in-flight):
+═════════════════════════════════════
+Time → ─────────────────────────────────────────────────►
+Master: [AR₀][AR₁][AR₂][AR₃]─────────────────────────
+Slave:      [lat]  [lat]  [lat]  [lat]
+            [R₀ data][R₁ data][R₂ data][R₃ data]
+                                  ↑ no idle — pipeline full!
+
+Throughput improvement = latency_cycles / 1 = Nx speedup
+Typical memory latency = 20-100 cycles → 20-100× potential gain!
+```
+
+---
+
+## DIAGRAM 8: Out-of-Order Completion
+
+```
+Master issues (in order):
+  T1: Read ID=A, Addr=slow_memory (100 cycles)
+  T2: Read ID=B, Addr=fast_sram   (5 cycles)
+  T3: Read ID=A, Addr=slow_memory (100 cycles)
+
+Response order:
+  R2 (ID=B): Returns first (fast SRAM, 5 cycles)     ← OUT OF ORDER!
+  R1 (ID=A): Returns second (slow memory, 100 cycles)
+  R3 (ID=A): Returns third (same ID as R1, must be after R1)
+
+Rules:
+  ✓ R2 before R1: OK (different IDs)
+  ✓ R1 before R3: Required (same ID=A, must be in-order)
+  ✗ R3 before R1: ILLEGAL (same ID=A violates ordering)
+```
+
+---
+
+## DIAGRAM 9: Exclusive Access Sequence
+
+```
+    CPU Core 0                     Exclusive Monitor        Memory
+    ══════════                     ════════════════        ═══════
+        │                               │                    │
+   ①   │ ARLOCK=1, ARADDR=0x1000       │                    │
+        │ ──── Exclusive Read ─────────►│────────────────────►│
+        │                               │ Record: {A=0x1000,  │
+        │ ◄──── RDATA=5, RRESP=EXOKAY──│◄────── data=5 ─────│
+        │                               │  ID=0, Size=4}     │
+        │                               │                    │
+   ②   │ (compute new value: 5+1=6)    │                    │
+        │                               │                    │
+   ③   │ AWLOCK=1, AWADDR=0x1000       │                    │
+        │ ──── Exclusive Write ────────►│ Check: 0x1000      │
+        │ WDATA = 6                     │ still valid?       │
+        │                               │                    │
+   ④a  │ (No intervening write)        │ YES → clear claim  │
+        │ ◄──── BRESP = EXOKAY ────────│────── Write 6 ─────►│
+        │ SUCCESS! Atomic increment done│                    │
+        │                               │                    │
+   OR                                                        │
+   ④b  │ (Another core wrote 0x1000!)  │ NO → claim invalid │
+        │ ◄──── BRESP = OKAY ──────────│ (write discarded)  │
+        │ FAILED! Must retry from ① ────│                    │
+```
+
+---
+
+## DIAGRAM 10: AXI4-Lite vs AXI4
+
+```
+AXI4 FULL (complex master like DMA):
+═════════════════════════════════════
+┌────────────────────────────────────────────┐
+│ AW: AWADDR, AWLEN, AWSIZE, AWBURST, AWID, │
+│     AWCACHE, AWPROT, AWQOS, AWREGION,     │
+│     AWLOCK, AWVALID, AWREADY               │
+│ W:  WDATA(128b), WSTRB(16b), WLAST,       │
+│     WVALID, WREADY                         │
+│ B:  BRESP, BID, BVALID, BREADY            │
+│ AR: (same as AW but for reads)             │
+│ R:  RDATA(128b), RRESP, RLAST, RID,       │
+│     RVALID, RREADY                         │
+└────────────────────────────────────────────┘
+Total signals: ~150+ (depending on width/ID)
+
+AXI4-LITE (simple register access):
+════════════════════════════════════
+┌────────────────────────────────────────────┐
+│ AW: AWADDR, AWPROT, AWVALID, AWREADY      │
+│ W:  WDATA(32b), WSTRB(4b), WVALID, WREADY │
+│ B:  BRESP, BVALID, BREADY                 │
+│ AR: ARADDR, ARPROT, ARVALID, ARREADY      │
+│ R:  RDATA(32b), RRESP, RVALID, RREADY     │
+└────────────────────────────────────────────┘
+Total signals: ~30 (much simpler!)
+
+No bursts, no IDs, no QoS → easy to implement in RTL
+```
+
+---
+
+## DIAGRAM 11: Width Conversion
+
+```
+UPSIZING (32-bit master → 128-bit slave):
+══════════════════════════════════════════
+Master writes 4 × 32-bit beats:
+  Beat 0: WDATA=0xAAAAAAAA (bytes 0-3)
+  Beat 1: WDATA=0xBBBBBBBB (bytes 4-7)
+  Beat 2: WDATA=0xCCCCCCCC (bytes 8-11)
+  Beat 3: WDATA=0xDDDDDDDD (bytes 12-15)
+
+Interconnect packs into 1 × 128-bit beat:
+  WDATA = 0xDDDDDDDD_CCCCCCCC_BBBBBBBB_AAAAAAAA
+  WSTRB = 0xFFFF (all 16 bytes valid)
+
+
+DOWNSIZING (128-bit master → 32-bit slave):
+════════════════════════════════════════════
+Master writes 1 × 128-bit beat:
+  WDATA = 0xDDDDDDDD_CCCCCCCC_BBBBBBBB_AAAAAAAA
+
+Interconnect splits into 4 × 32-bit beats:
+  Beat 0: WDATA=0xAAAAAAAA, Addr+0
+  Beat 1: WDATA=0xBBBBBBBB, Addr+4
+  Beat 2: WDATA=0xCCCCCCCC, Addr+8
+  Beat 3: WDATA=0xDDDDDDDD, Addr+12
+```
+
+---
+
+## DIAGRAM 12: ID Routing Through Interconnect
+
+```
+Master 0 (ID width: 4 bits)         Master 1 (ID width: 4 bits)
+  ID=0x3                              ID=0x5
+    │                                   │
+    ▼                                   ▼
+┌─────────────────────────────────────────────┐
+│              INTERCONNECT                    │
+│                                             │
+│  Appends port number to ID:                 │
+│  Master 0 → prepend "00"  → ID = 0b00_0011 │
+│  Master 1 → prepend "01"  → ID = 0b01_0101 │
+│                                             │
+│  Slave sees wider IDs (6 bits):             │
+│  Can distinguish which master originated    │
+│  each transaction                           │
+└──────────────────────┬──────────────────────┘
+                       │
+                       ▼
+                    SLAVE
+              (sees 6-bit IDs)
+         ID=0x03 → from Master 0
+         ID=0x15 → from Master 1
+         
+Response routing: Slave returns BID/RID
+                  Interconnect strips port bits
+                  Routes response to correct master
+```
+
+---
+
+END OF DOCUMENT 02 — DIAGRAMS

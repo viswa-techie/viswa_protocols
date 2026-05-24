@@ -1,0 +1,209 @@
+# CXL — DIAGRAMS & VISUAL REFERENCES
+# ════════════════════════════════════════════════════════════════════
+# Protocol: CXL | Document: 02 of 08
+# ════════════════════════════════════════════════════════════════════
+
+---
+
+## DIAGRAM 1: CXL Protocol Stack
+
+```
+┌──────────────────────────────────────────────────────┐
+│                  APPLICATION                          │
+├──────────────────────────────────────────────────────┤
+│                                                      │
+│   CXL.io        CXL.cache         CXL.mem           │
+│   (PCIe TLP)    (Coherence)       (Memory)          │
+│                                                      │
+├──────────────────────────────────────────────────────┤
+│              ARB/MUX Layer                           │
+│    (Flit packing, credit mgmt, arbitration)         │
+├──────────────────────────────────────────────────────┤
+│              PCIe Link Layer                         │
+│         (DLLP, retry, flow control)                 │
+├──────────────────────────────────────────────────────┤
+│              PCIe PHY                                │
+│    (SERDES, electrical, 32/64 GT/s)                 │
+└──────────────────────────────────────────────────────┘
+```
+
+---
+
+## DIAGRAM 2: CXL Device Types
+
+```
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│   TYPE 1        │  │   TYPE 2        │  │   TYPE 3        │
+│   (SmartNIC)    │  │   (GPU/FPGA)    │  │   (Mem Expander)│
+│                 │  │                 │  │                 │
+│  ┌───────────┐  │  │  ┌───────────┐  │  │                 │
+│  │ Device    │  │  │  │ Device    │  │  │                 │
+│  │ Cache     │  │  │  │ Cache     │  │  │                 │
+│  └───────────┘  │  │  └───────────┘  │  │                 │
+│                 │  │  ┌───────────┐  │  │  ┌───────────┐  │
+│                 │  │  │ Device    │  │  │  │ Device    │  │
+│                 │  │  │ Memory    │  │  │  │ Memory    │  │
+│                 │  │  │ (HDM)     │  │  │  │ (HDM)     │  │
+│                 │  │  └───────────┘  │  │  └───────────┘  │
+│                 │  │                 │  │                 │
+│ CXL.io ✓       │  │ CXL.io ✓       │  │ CXL.io ✓       │
+│ CXL.cache ✓    │  │ CXL.cache ✓    │  │ CXL.cache ✗    │
+│ CXL.mem ✗      │  │ CXL.mem ✓      │  │ CXL.mem ✓      │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+```
+
+---
+
+## DIAGRAM 3: CXL.cache Transaction (Device reads host memory)
+
+```
+   Device (Type 1/2)           Host CPU
+        │                         │
+   ①    │──D2H Req: RdShared────►│
+        │  (device wants host     │
+        │   memory line in S)     │
+        │                         │ Host checks its cache/memory
+        │                         │
+   ②    │◄──H2D Resp: GO-S───────│  (grant Shared)
+        │◄──H2D Data: 64B────────│  (send data)
+        │                         │
+        │  Device allocates in    │
+        │  its cache (S state)    │
+        │                         │
+```
+
+---
+
+## DIAGRAM 4: Host Snoops Device Cache
+
+```
+   Device (has line in M)        Host CPU (another core wants line)
+        │                         │
+   ①    │◄──H2D Req: SnpInv──────│  (invalidate device copy)
+        │                         │
+   ②    │──D2H Resp: RspIHitSE──►│  (was Exclusive, going Invalid)
+        │──D2H Data: 64B─────────│  (dirty data returned)
+        │                         │
+        │  Device invalidates     │
+        │  its cached copy        │
+```
+
+---
+
+## DIAGRAM 5: CXL.mem Transaction (Host reads device memory)
+
+```
+   Host CPU                    Type 3 Device (Memory)
+        │                         │
+   ①    │──M2S Req: MemRd────────►│  (read 64B from HDM)
+        │  (addr in HDM range)    │
+        │                         │ Device accesses its DRAM
+        │                         │
+   ②    │◄──S2M DRS: MemData─────│  (64B data response)
+        │                         │
+        │  CPU caches in its      │
+        │  local cache hierarchy  │
+```
+
+---
+
+## DIAGRAM 6: Type 2 Device — Bias Modes
+
+```
+HOST BIAS MODE:                    DEVICE BIAS MODE:
+┌──────────────────────┐          ┌──────────────────────┐
+│ Host owns coherence  │          │ Device owns coherence│
+│                      │          │                      │
+│ Device access to     │          │ Device access to     │
+│ its own memory:      │          │ its own memory:      │
+│   → Must request     │          │   → Direct (fast!)   │
+│     from host        │          │                      │
+│                      │          │ Host access to       │
+│ Host access to       │          │ device memory:       │
+│ device memory:       │          │   → Must BI device   │
+│   → Direct (fast!)   │          │     cache first      │
+└──────────────────────┘          └──────────────────────┘
+
+Switch bias based on workload phase:
+- CPU-heavy phase → Host Bias (CPU accesses faster)
+- Device-heavy phase → Device Bias (device accesses faster)
+```
+
+---
+
+## DIAGRAM 7: CXL Switch Topology (CXL 2.0)
+
+```
+      ┌────────┐         ┌────────┐
+      │ Host 0 │         │ Host 1 │
+      └───┬────┘         └───┬────┘
+          │                   │
+     ┌────┴───────────────────┴────┐
+     │       CXL SWITCH            │
+     │   ┌─────────────────────┐   │
+     │   │   Virtual CXL Switch│   │
+     │   │   (per LD routing)  │   │
+     │   └─────────────────────┘   │
+     └──┬──────────┬──────────┬────┘
+        │          │          │
+   ┌────┴───┐ ┌───┴────┐ ┌──┴─────┐
+   │ Type 3 │ │ Type 3 │ │ Type 3 │
+   │ MLD    │ │ SLD    │ │ SLD    │
+   │(LD0,1) │ │        │ │        │
+   └────────┘ └────────┘ └────────┘
+
+MLD = Multi-Logical Device (partitioned)
+SLD = Single Logical Device
+```
+
+---
+
+## DIAGRAM 8: 68B Flit Structure (CXL 1.x/2.0)
+
+```
+┌───────────────────────────────────────────────────────┐
+│                    68-Byte FLIT                        │
+├───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┤
+│H  │S0 │S1 │S2 │S3 │S4 │S5 │S6 │S7 │S8 │...│S15│CRC│
+│2B │4B │4B │4B │4B │4B │4B │4B │4B │4B │   │4B │2B │
+├───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┤
+│ Header: protocol/channel ID, credit returns          │
+│ Slots: carry CXL.cache or CXL.mem messages          │
+│ CRC: error detection                                 │
+└──────────────────────────────────────────────────────┘
+
+Slots can carry:
+- D2H Req, D2H Resp, D2H Data (CXL.cache)
+- H2D Req, H2D Resp, H2D Data (CXL.cache)
+- M2S Req, M2S RwD (CXL.mem)
+- S2M NDR, S2M DRS (CXL.mem)
+```
+
+---
+
+## DIAGRAM 9: CXL Memory Address Map
+
+```
+Host Physical Address Space:
+┌─────────────────────────────┐ 0xFFFF_FFFF_FFFF
+│    High MMIO                │
+├─────────────────────────────┤
+│    CXL HDM Range 1          │ ← Type 3 Device B
+│    (memory expander B)      │
+├─────────────────────────────┤
+│    CXL HDM Range 0          │ ← Type 3 Device A
+│    (memory expander A)      │
+├─────────────────────────────┤
+│    Local DRAM               │ ← Regular DDR DIMMs
+│    (NUMA node 0)            │
+├─────────────────────────────┤
+│    Low MMIO + Legacy        │
+└─────────────────────────────┘ 0x0000_0000_0000
+
+HDM = Host-managed Device Memory
+CPU sees CXL memory as additional NUMA nodes
+```
+
+---
+
+END OF DOCUMENT 02 — DIAGRAMS
