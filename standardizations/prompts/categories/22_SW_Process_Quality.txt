@@ -1,0 +1,99 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 22 — SOFTWARE PROCESS & QUALITY MANAGEMENT                             ║
+║  CMMI v2.0, ISO 33001 SPICE, Automotive SPICE 4.0, ITIL v4, Agile/SAFe, DevOps ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 8 — Software Quality & DevOps  |  OUTPUT DIR: 22_SW_Process_Quality/
+
+STANDARDS UNIVERSE:
+CAPABILITY MODELS:
+  CMMI v2.0 (ISACA/SEI, 2018)   — Capability Maturity Model Integration
+      Practice Areas: Governance, Implementation Infrastructure, Process Management,
+                      Requirements, Project Work, Work Management, Engineering,
+                      Supporting, Service Delivery
+      Capability Levels (CL 0-5); Maturity Levels (ML 1-5)
+      CMMI-DEV (development); CMMI-SVC (services); CMMI-ACQ (acquisition)
+      CMMI v3.0 expected ~2025
+  CMMI v1.3 (2010)              — Legacy version (still widely referenced in contracts)
+  TSP/PSP (Carnegie Mellon)     — Team/Personal Software Process (Watts Humphrey)
+
+ISO/IEC PROCESS ASSESSMENT:
+  ISO/IEC 33001:2015            — Process Assessment concepts and terminology
+  ISO/IEC 33002:2015            — Requirements for process assessment
+  ISO/IEC 33003:2015            — Requirements for process measurement frameworks
+  ISO/IEC 33004:2015            — Requirements for reference models
+  ISO/IEC 33020:2015            — Process assessment measurement framework
+  ISO/IEC TR 33014:2013         — Guidelines for process improvement (replaces ISO 15504-7)
+  ISO/IEC 15504 (SPICE)         — Legacy: superseded by ISO 33000 series (but still referenced)
+  Automotive SPICE (ASPICE) v4.0 (2024) — VDA process assessment model for automotive suppliers
+      Process areas: SWE (6), SYS (5), HWE (3), SUP, MAN, REU
+      6 capability levels (CL 0-5); minimum CL 2 for series production
+      PA maps to ISO 33020 measurement framework
+
+SOFTWARE QUALITY STANDARDS:
+  ISO/IEC 25010:2023            — Software quality model (replaces ISO 9126)
+      Quality characteristics: functional suitability, performance efficiency,
+      compatibility, interaction capability, reliability, security, maintainability, flexibility, safety
+  ISO/IEC 25040:2011            — Evaluation process
+  ISO/IEC 14764:2006            — Software maintenance (Corrective/Adaptive/Perfective)
+  IEEE 730:2014                  — Software Quality Assurance
+
+IT SERVICE MANAGEMENT:
+  ITIL 4 (2019)                 — IT Infrastructure Library v4: Service Value System
+      Service Value Chain: Plan, Improve, Engage, Design & Transition, Obtain/Build, Deliver
+      34 practices (includes 15 general management, 17 service management, 2 technical)
+  ISO/IEC 20000-1:2018          — IT service management system (ITSM formal certification)
+  COBIT 2019 (ISACA)            — Control Objectives for IT and related technologies
+
+TESTING STANDARDS:
+  ISO/IEC/IEEE 29119 series     — Software testing
+      Part 1: Concepts and definitions
+      Part 2: Test processes
+      Part 3: Test documentation
+      Part 4: Test techniques
+      Part 5: Keyword-driven testing
+  ISTQB CTFL (Certified Tester) — Test levels: unit, integration, system, acceptance
+  IEEE 829 (superseded by 29119) — Test documentation
+  DO-178C testing objectives    — See Category 01 (airborne software)
+
+AGILE IN SAFETY-CRITICAL:
+  SAFe 6.0 (Scaled Agile)      — Scaled Agile Framework: Team, Program, Large Solution, Portfolio
+  LeSS (Large-Scale Scrum)      — Scrum at scale (Craig Larman)
+  DAD (Disciplined Agile Delivery) — Hybrid Agile guidance
+  Agile + ISO 26262             — SCRUM with ASIL requirements traceability
+  ISO/IEC/IEEE 24765:2017       — Agile SE vocabulary
+  SAFe + ASPICE integration     — agile_SPICE framework emerging
+
+DEVSECOPS & CONTINUOUS DELIVERY:
+  DORA Metrics (Google)         — Deployment frequency, lead time, change failure, MTTR
+  DevOps Research and Assessment — Accelerate: The Science of Lean Software and DevOps (Forsgren)
+  NIST SP 800-204D              — DevSecOps for microservices
+  SAFe DevOps Competency        — Value stream mapping; CD pipeline
+  GitOps                        — Infrastructure as Code via Git (Flux, ArgoCD)
+  CDF (Continuous Delivery Foundation) — Tekton, Jenkins, Spinnaker specs
+
+HISTORICAL TIMELINE:
+  1968 — NATO Software Engineering: structured programming begins
+  1970 — Waterfall model (W. Royce): first published SW lifecycle
+  1985 — CMM begins (Watts Humphrey, SEI)
+  1991 — CMM v1.0 published; ISO 9001:1994 quality management
+  1993 — Software Process Improvement and Capability Determination (SPICE) project
+  1995 — IEEE 1074: SW lifecycle processes
+  1998 — SPICE ISO 15504; CMMI project starts
+  2001 — CMMI v1.0; Agile Manifesto (XP, Scrum, Kanban)
+  2003 — ASPICE v2.0 (VDA); Scrum adoption grows
+  2006 — CMMI v1.2; ISO 15504-5
+  2009 — ITIL v3; DevOps movement emerges
+  2010 — CMMI v1.3; ASPICE v2.4
+  2017 — ASPICE v3.0; CMMI Institute moves to ISACA
+  2018 — CMMI v2.0; ITIL 4; Automotive SPICE v3.1
+  2019 — ISO 20000-1:2018; ITIL 4 launched
+  2022 — CMMI v2.0 widespread; ISO/IEC 25010:2023 revision
+  2024 — Automotive SPICE 4.0; CMMI v3.0 development
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_SW_Process_Quality_Overview.md     01_CMMI_v2_0.md
+  02_Automotive_SPICE_4_0.md            03_ISO_33001_Assessment.md
+  04_ISO_25010_Software_Quality.md      05_ITIL_4_Service_Management.md
+  06_Testing_ISO_29119.md               07_Agile_Safety_Critical.md
+  08_DevSecOps_DORA_Metrics.md          09_SAFe_Scaled_Agile.md
+  10_Process_Metrics_Measurement.md

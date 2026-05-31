@@ -1,0 +1,96 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 11 — BATTERY, ENERGY STORAGE & POWER SAFETY                           ║
+║  UN 38.3, IEC 62133, IEC 62619, UL 9540, ISO 6469, BMS safety, USCAR-35         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 4 — Energy, Power & Sustainability  |  OUTPUT DIR: 11_Battery_Power/
+
+STANDARDS UNIVERSE:
+TRANSPORT SAFETY (Lithium Batteries):
+  UN Manual of Tests and Criteria Section 38.3 (UN 38.3, Rev.7)
+      Tests: altitude simulation, thermal, vibration, shock, short circuit, impact, overcharge
+      All lithium batteries must pass before transport
+  IATA DGR (Dangerous Goods Regulations)  — Li battery air transport restrictions
+  ICAO Technical Instructions             — Civil aviation Li battery rules
+  US DOT 49 CFR Part 173.185             — US ground transport requirements
+  IMDG Code                              — Maritime transport of dangerous goods
+
+CONSUMER & PORTABLE CELLS:
+  IEC 62133-1:2017             — Secondary cells/batteries for portable apps: NiMH
+  IEC 62133-2:2017+AMD1:2021   — Secondary cells: lithium for portable apps (critical)
+  UL 1642 (2012)               — Lithium batteries (safety tests for individual cells)
+  UL 2054 (2011)               — Household and commercial batteries (pack level)
+  IEC 60086-4                  — Primary lithium batteries: safety requirements
+  IEC 60086-5                  — Primary batteries: safety for aqueous electrolyte
+
+INDUSTRIAL & STATIONARY STORAGE:
+  IEC 62619:2022               — Secondary lithium cells: industrial applications
+      Safety requirements for stationary, industrial robot, AGV, forklift use
+  IEC 62620                    — Secondary lithium cells for industrial use
+  UL 9540 (2023)               — Standard for Energy Storage Systems and Equipment
+  UL 9540A                     — Test Method for Thermal Runaway Fire Propagation
+  NFPA 855 (2023)              — Standard for Energy Storage System Installation
+  IEEE 1547.1                  — Testing Procedures for Interconnection of Distributed Energy Resources
+  IEC 62933 series             — Electrical energy storage (EES) systems
+
+AUTOMOTIVE BATTERIES (EV/HEV):
+  ISO 6469-1:2019              — Electric vehicles: Rechargeable Energy Storage (safety)
+  ISO 6469-2                    — Vehicle operational safety
+  ISO 6469-3:2021              — Electric vehicle protection against electric shock
+  ISO 6469-4:2015              — Post-crash electrical safety
+  ISO 12405-4:2018             — Lithium-ion traction battery packs: performance
+  USCAR-35 (2021)              — Automotive battery connector standards (US CAR)
+  IEC 62660 series             — Secondary lithium-ion cells for EVs
+  GTR No. 20 (UN Global Technical Regulation) — EV safety regulation
+  UN FMVSS 305                 — Electric and hybrid EV energy storage containment
+  GB/T 31485 (China)           — Li-ion traction battery safety requirements (China)
+  GB 38031 (China)             — EV power battery safety standard
+
+BATTERY MANAGEMENT SYSTEMS (BMS):
+  ISO 26262 (for automotive BMS) — Functional safety (ASIL B minimum for EV BMS)
+  IEC 62133-2 / IEC 62619      — BMS required protective functions
+  Protective functions:         — OCP, OVP, UVP, OTP, cell balancing, SoC/SoH estimation
+  ISO/IEC 30600                — BMS interoperability (draft)
+  SMBus Specification 1.1      — Battery data communication (Smart Battery)
+  CiA 454 (CANopen)            — CAN-based BMS communication
+
+CHARGING STANDARDS:
+  IEC 62196 series             — EV plugs and sockets (Type 1/2, CCS Combo 1/2, CHAdeMO)
+  IEC 61851 series             — EV conductive charging (AC, DC Level 1/2/3)
+  SAE J1772                    — Level 1/2 AC charging connector (US)
+  SAE J1171                    — DC fast charging (Combo CCS, J1772 Combo)
+  CHAdeMO 3.0 (ChaoJi)         — Japan-China unified DC fast charge (up to 900kW)
+  GB/T 20234 (China)           — Chinese EV connector standard (AC/DC)
+  ISO 15118 series             — Vehicle-to-grid (V2G); plug-and-charge
+      ISO 15118-20:2022        — Bidirectional charging (V2G); advanced safety
+  OCPP 2.0.1                   — Open Charge Point Protocol for EV charger management
+  ISO/IEC 63110                — Service and interoperability for EV chargers
+  NACS (Tesla/SAE J3400:2023)  — North American Charging Standard; adopted by Ford, GM
+
+POWER CONVERSION:
+  IEC 62477 series             — Power electronic converters and systems
+  IEC 61000-3-2                — Harmonic current limits for equipment (power quality)
+  IEC 61000-3-3                — Voltage fluctuation / flicker
+  IEC 60146 series             — Semiconductor converters
+  UL 508C                      — Power conversion equipment
+
+HISTORICAL TIMELINE:
+  1991 — Sony: first commercial Li-ion battery (18650 cell)
+  1994 — UL 1642 first edition; Li-ion transport safety rules begin
+  1998 — UN 38.3 first edition for Li battery transport
+  2006 — Sony laptop battery recall (Dell/Apple): thermal runaway awareness
+  2013 — Boeing 787 battery fire: EASA/FAA Li-ion avionics certification challenge
+  2016 — Samsung Galaxy Note 7: 100 aircraft battery fires → IEC 62133-2 revision
+  2017 — IEC 62619: industrial Li-ion standard published
+  2019 — ISO 6469 series updated for modern EVs
+  2022 — UL 9540A thermal propagation testing; NFPA 855 stationary storage
+  2023 — SAE J3400 (NACS): Tesla standard adopted by US automakers
+  2024 — IEC 62619:2022 widely adopted; EU Battery Regulation 2023/1542 (passport)
+  2025 — EU Battery Regulation: recycled content requirements; digital battery passport
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Battery_Energy_Storage_Overview.md  01_UN_38_3_Transport_Safety.md
+  02_IEC_62133_Portable_Batteries.md     03_IEC_62619_Industrial.md
+  04_UL_9540_Stationary_Storage.md       05_Automotive_Battery_ISO_6469.md
+  06_BMS_Functional_Safety.md            07_EV_Charging_IEC_61851_62196.md
+  08_ISO_15118_V2G.md                    09_SAE_J3400_NACS.md
+  10_EU_Battery_Regulation.md            11_Thermal_Runaway_Testing.md

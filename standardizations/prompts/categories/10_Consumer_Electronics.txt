@@ -1,0 +1,113 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 10 — CONSUMER ELECTRONICS SAFETY & REGULATORY COMPLIANCE              ║
+║  FCC Part 15, CE marking (RED/LVD/EMC), UL 62368-1, SAR, ICES, KC, BIS          ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 3 — Silicon & Electronics  |  OUTPUT DIR: 10_Consumer_Electronics/
+
+STANDARDS UNIVERSE:
+US REGULATORY:
+  FCC Part 15                   — Radio Frequency Devices (unintentional/intentional radiators)
+      Subpart B: Unintentional radiators (Class A industrial, Class B residential)
+      Subpart C: Intentional radiators (Wi-Fi, Bluetooth, ZigBee)
+      Subpart D: Unlicensed personal communications services
+  FCC Part 68                   — Connection of terminal equipment to telephone network
+  FCC CFR 47 Part 25            — Satellite equipment
+  SAR (Specific Absorption Rate) — FCC OET Bulletin 65: 1.6 W/kg (US)
+                                   ICNIRP: 2.0 W/kg (EU); averaged over 10g tissue
+  FCC ID authorization           — 3 paths: DoC, SDoC, Certification by TCB
+  UL 62368-1 (2019)             — Audio/video, IT, and communication safety
+  UL 1310                        — Class 2 power supplies
+  ANSI/UL 2054                   — Household and commercial batteries
+
+EU REGULATORY (CE MARKING):
+  Radio Equipment Directive (RED 2014/53/EU) — Replaces R&TTE directive
+      Essential requirements: §3.1(a) safety, §3.1(b) EMC, §3.2 spectrum efficiency
+      Delegated acts: §3.3(d) privacy, §3.3(e) network protection, §3.3(f) anti-fraud
+      RED §3.3 delayed mandate: August 2025 enforcement for IoT/phones/tablets
+  Low Voltage Directive (LVD 2014/35/EU) — 50V-1000V AC, 75V-1500V DC
+  EMC Directive (2014/30/EU)    — Emissions and immunity for non-radio equipment
+  Machinery Directive (2006/42/EC) — Safety of industrial machines
+  Machinery Regulation 2023/1230 — Replaces 2006/42/EC (fully in force 2027)
+  RoHS Directive (2011/65/EU)   — Hazardous substance restrictions (see Cat 14)
+  Ecodesign Regulation 2019/2020 — Energy efficiency requirements
+  Ecodesign for Sustainable Products Regulation (ESPR 2022) — Updated product sustainability
+
+INTERNATIONAL SAFETY STANDARDS:
+  IEC 62368-1:2018              — Audio/Video/IT/Comms equipment (replaced UL 60950/IEC 60065)
+      Hazard-Based Safety Engineering (HBSE) methodology
+      Source → transfer → body → severity levels
+  IEC 60950-1                   — IT equipment safety (superseded by 62368-1, widely used)
+  IEC 60335 series              — Household and similar electrical appliances
+  IEC 60065                     — Audio/video appliances (superseded by 62368-1)
+  IEC 60825-1 (2014)            — Laser safety; Class 1 to Class 4
+  IEC 62471 (2006)              — Photobiological safety of lamps
+
+EMC STANDARDS:
+  CISPR 32 (2012)               — Multimedia equipment: emission limits
+  CISPR 35 (2016)               — Multimedia equipment: immunity
+  CISPR 22 (superseded)         — IT equipment emissions
+  CISPR 24 (superseded)         — IT equipment immunity
+  IEC 61000 series:
+      IEC 61000-3-2              — Harmonic current limits
+      IEC 61000-3-3              — Voltage fluctuation / flicker
+      IEC 61000-4-2              — ESD immunity
+      IEC 61000-4-3              — Radiated immunity (GTEM)
+      IEC 61000-4-4              — EFT/Burst immunity
+      IEC 61000-4-5              — Surge immunity
+      IEC 61000-4-6              — Conducted disturbances immunity
+  ICES-003 (Canada)             — Digital apparatus emissions
+  AS/NZS CISPR 32               — Australia/NZ equivalent
+
+JAPAN:
+  VCCI                          — Voluntary Control Council for Interference (IT equipment)
+  MIC (Ministry of Internal Affairs) — Certification for radio equipment
+  PSE (Act on Product Safety for Consumer Products) — Electrical appliances
+  PAL/TELEC                     — Telecom equipment certification
+
+KOREA:
+  NRA (National Radio Agency) / MSIT — Radio certification (EMC + RF)
+  KC Mark                       — Mandatory product safety for Korean market
+  KCC (Korea Communications Commission) — Equipment registration
+
+INDIA:
+  BIS (Bureau of Indian Standards) — Compulsory registration order (CRO) for electronics
+  WPC (Wireless Planning & Coordination) — Type approval for RF devices
+  TRAI                          — Telecom spectrum regulatory
+
+CHINA:
+  SRRC (State Radio Regulation Committee) — Radio type approval
+  MIIT (Ministry of Industry and IT) — Telecom terminal equipment
+  3C (China Compulsory Certification) — CCC for safety, EMC, telecom
+  GB/T standards                — National equivalents to IEC standards
+
+BATTERY SAFETY:
+  UN 38.3                       — Transport tests for lithium batteries
+  IEC 62133-2:2017              — Secondary lithium cells for portable applications
+  UL 1642                       — Lithium batteries
+  IEC 62619:2017                — Secondary cells for industrial use
+
+HISTORICAL TIMELINE:
+  1934 — FCC established (Communications Act 1934)
+  1968 — FCC Part 15 first issue
+  1985 — FCC Part 15 Class A/B radiated/conducted limits
+  1992 — CE marking (EEC Directives consolidated)
+  1995 — RoHS lead-free solder directives begin (EU)
+  1996 — FCC 1.6 W/kg SAR limit for mobile phones
+  1999 — ICNIRP EMF guidelines (2.0 W/kg)
+  2002 — RoHS 2002/95/EC published (effective 2006)
+  2004 — R&TTE Directive for radio equipment (EU)
+  2011 — RoHS 2 (2011/65/EU); 62368-1 project begins
+  2014 — RED replaces R&TTE; LVD 2014/35/EU
+  2016 — FCC IoT security guidance (post-Mirai)
+  2019 — IEC 62368-1:2018 (3rd edition); replaces 60950-1 and 60065
+  2022 — EU Radio Equipment Directive §3.3 cybersecurity delegated acts
+  2024 — EU RED §3.3 IoT cybersecurity enforcement begins
+  2025 — BIS India expanded CRO list; China 3C for IoT
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Consumer_Electronics_Compliance.md  01_FCC_Part_15_US_Certification.md
+  02_CE_Marking_RED_LVD_EMC.md           03_IEC_62368_1_Safety.md
+  04_SAR_Human_Exposure_Limits.md        05_EMC_Standards_CISPR.md
+  06_Japan_MIC_VCCI_PSE.md               07_Korea_KC_KCC.md
+  08_India_BIS_WPC.md                    09_China_SRRC_MIIT_CCC.md
+  10_Battery_Safety_UN38_3.md            11_Global_Market_Access_Roadmap.md

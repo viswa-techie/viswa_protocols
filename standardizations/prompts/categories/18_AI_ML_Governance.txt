@@ -1,0 +1,110 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 18 — ARTIFICIAL INTELLIGENCE & MACHINE LEARNING GOVERNANCE             ║
+║  EU AI Act 2024, ISO/IEC 42001:2023, NIST AI RMF 1.0, OECD AI, IEEE 7000       ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 8 — Software Quality & DevOps  |  OUTPUT DIR: 18_AI_ML_Governance/
+
+STANDARDS UNIVERSE:
+EU ARTIFICIAL INTELLIGENCE ACT:
+  EU AI Act (Regulation 2024/1689) — Published August 2024; phased enforcement
+      Risk tiers:
+        UNACCEPTABLE: banned AI (social scoring, real-time biometrics public)
+        HIGH RISK: medical, safety, infrastructure, HR, law enforcement
+        LIMITED RISK: chatbots, deep fakes (transparency obligations)
+        MINIMAL RISK: spam filters, AI in games
+      High-risk AI obligations:
+        Conformity assessment (Annex VII: notified body or self-assessment)
+        Quality management system (ISO 42001 aligned)
+        Technical documentation, logs, human oversight, accuracy/robustness/cybersecurity
+        Registration in EU AI database
+      GPAI (General Purpose AI) rules: systemic risk, copyright, transparency
+      Penalties: €30M or 6% global turnover
+      Timeline: Prohibited AI — Feb 2025; GPAI — Aug 2025; High-risk — Aug 2026
+
+MANAGEMENT SYSTEMS:
+  ISO/IEC 42001:2023            — AI Management System (AIMS)
+      Annex A: Organizational objectives; risk management; data governance
+      Annex B: Guidance for AI development; responsible AI practices
+      First ISO standard for AI organizations; aligns with 9001/27001
+  ISO/IEC 23894:2023            — AI Risk Management (guidance for ISO 42001)
+  ISO/IEC TR 24030              — Use cases and applications of AI
+  ISO/IEC 38507:2022            — Governance implications of AI for organizations
+
+NIST AI FRAMEWORK:
+  NIST AI RMF 1.0 (2023)        — AI Risk Management Framework
+      Core functions: GOVERN, MAP, MEASURE, MANAGE
+      Profiles: Organizational and technical AI risk practices
+  NIST AI RMF Playbook          — Suggested actions for each subcategory
+  NIST SP 1270 (2022)           — Towards a Standard for Identifying and Managing Bias in AI
+  NIST AI 600-1 (2024)          — Profile for Generative AI (foundation models)
+
+OECD & INTERNATIONAL:
+  OECD AI Principles (2019)     — Inclusive growth, human oversight, transparency, robustness
+  UNESCO Rec on Ethics of AI (2021) — Soft law; 193 states
+  G7 Hiroshima AI Process (2023) — Guiding principles + Code of Conduct for advanced AI
+  G20 AI Principles             — Interoperability with OECD
+  Council of Europe AI Treaty   — Framework Convention on AI (2024)
+
+IEEE STANDARDS:
+  IEEE 7000:2021                — Model Process for Addressing Ethical Concerns During System Design
+  IEEE 7001:2021                — Transparency of Autonomous Systems
+  IEEE 7002:2022                — Data Privacy Process
+  IEEE 7003:2023                — Algorithmic Bias Considerations
+  IEEE 7007                     — Ontological Standard for Ethically Driven Robotics
+  IEEE P2830                    — Technical Requirements for Shared Machine Learning
+
+SAFETY STANDARDS FOR AI/ML:
+  ISO/IEC TR 24027:2021         — Bias in AI systems and AI-aided decision making
+  ISO/IEC TR 24028:2020         — AI trustworthiness (transparency, explainability)
+  ISO/IEC TR 24029:2021         — Robustness of NN: testing methods
+  ISO/IEC CD 5469               — AI functional safety (under development)
+  IEC TR 63317                  — AI in functional safety systems guidance (TC65)
+  ISO/SAE 21448 (SOTIF)         — Safety of intended functionality (automotive AI)
+  ISO TR 4804                   — Safety and AI for automated driving
+  DO-178C + ML considerations   — EASA Guidance for ML in civil aviation (2023)
+  EASA AI Roadmap 2.0 (2023)    — ML for aviation: concept of learning systems (CoLS)
+
+EXPLAINABLE AI (XAI):
+  DARPA XAI Program             — Explainability for government AI systems
+  EU AI Act Art. 13             — Transparency and provision of information
+  NIST SP 1270                  — Bias detection and measurement
+  ISO/IEC TR 29119-11           — AI-based systems testing (draft)
+
+AI SECURITY:
+  MITRE ATLAS (Adversarial Threat Landscape for AI Systems)
+      ML attack categories: input attacks, poisoning, model extraction
+  OWASP Top 10 for LLM (2023)   — LLM01: Prompt injection; LLM02: Insecure output
+  NIST AI 100-2E (2024)         — Adversarial Machine Learning taxonomy
+  EU AI Act Art. 15             — Accuracy, robustness, cybersecurity requirements
+
+FOUNDATION MODELS & GENERATIVE AI:
+  NIST AI 600-1 (2024)          — GenAI profile (hallucination, CBRN risks, bias)
+  EU AI Act Chapter V/VI        — GPAI model obligations (Annex XIII)
+  OpenAI Model Spec             — Industry self-governance attempt
+  Frontier AI Safety Commitments (2023) — G7 voluntary commitments
+  AI Safety Summit Bletchley Declaration (2023) — International AI governance
+
+HISTORICAL TIMELINE:
+  1950 — Alan Turing: "Computing Machinery and Intelligence" (Turing Test)
+  1956 — Dartmouth Conference: "Artificial Intelligence" term coined
+  1986 — Backpropagation (Rumelhart, Hinton): neural network training
+  1997 — Deep Blue beats Kasparov: AI in specialized domains
+  2012 — AlexNet: deep learning revolution (ImageNet competition)
+  2016 — AlphaGo: reinforcement learning at world champion level
+  2017 — Transformer architecture (Vaswani: "Attention is All You Need")
+  2018 — BERT (Google): language model pre-training
+  2019 — GPT-2 (OpenAI): responsible disclosure debate
+  2020 — GPT-3: 175B parameters; OECD AI Observatory
+  2021 — EU AI Act proposal; NIST AI RMF v1.0 draft
+  2022 — ChatGPT (Nov 2022): public AI governance crisis begins
+  2023 — GPT-4; Claude 2; EU AI Act political agreement; NIST AI RMF 1.0
+  2024 — EU AI Act published (Aug 2024); ISO 42001 certifications; NIST GenAI profile
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_AI_Governance_Landscape.md         01_EU_AI_Act_2024.md
+  02_ISO_IEC_42001_2023.md              03_NIST_AI_RMF_1_0.md
+  04_OECD_AI_Principles.md              05_IEEE_7000_Series.md
+  06_AI_Safety_Functional_Safety.md     07_Explainable_AI_XAI.md
+  08_AI_Security_ATLAS.md              09_Generative_AI_GPAI.md
+  10_Bias_Fairness_Standards.md         11_EASA_AI_Aviation.md
+  12_AI_Testing_ISO_29119.md

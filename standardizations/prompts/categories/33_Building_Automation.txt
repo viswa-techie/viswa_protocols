@@ -1,0 +1,97 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 33 — BUILDING AUTOMATION & SMART CITIES                               ║
+║  BACnet, KNX, LonWorks, ISO 37120, ETSI Smart City, IEC 60364                  ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  6 — Industrial & Robotics
+OUTPUT DIR:   33_Building_Automation/
+APPLIES TO:   Building management system (BMS) engineers, HVAC controls engineers,
+              smart city planners, IoT platform architects, facility managers,
+              edge computing architects for built environments
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BUILDING AUTOMATION PROTOCOLS:
+  ASHRAE BACnet (ISO 16484-5:2017) — Building Automation and Control Networks
+      BACnet/IP (Annex J), BACnet MS/TP (RS-485), BACnet Secure Connect (BACnet/SC)
+      Object types: Analog/Binary/Multi-state Input/Output/Value, Schedule, Calendar
+      BACnet Testing Laboratories (BTL) certification
+  KNX (ISO/IEC 14543-3:2006)    — European home/building automation standard
+      Wired (TP, PL, RF) and IP-based KNX
+      KNX Association certification program
+  LonWorks (ISO/IEC 14908)      — Local Operating Network (Echelon)
+  Modbus TCP (for BAS)          — Legacy HVAC controller integration
+  DALI (IEC 62386)              — Digital Addressable Lighting Interface
+  EnOcean (ISO/IEC 14543-3-10)  — Energy harvesting wireless standard
+  Thread (IEEE 802.15.4e)       — IP-based mesh for BAS devices
+  Matter (CSA/Connectivity Stds Alliance) — Consumer IoT + BAS convergence
+  OPC UA (IEC 62541)            — Data exchange in BAS (Siemens, ABB integration)
+
+ENERGY MANAGEMENT IN BUILDINGS:
+  ISO 50001:2018                — Energy management systems
+  EN 15232 (EPBD)               — Energy performance of buildings (BAS impact)
+  ASHRAE Standard 90.1          — Energy Standard for Buildings (USA)
+  ASHRAE Standard 55            — Thermal environmental conditions
+  IEC 61970/61968 (CIM)         — Common Information Model (BAS-to-grid gateway)
+  BREEAM (UK Green Building)    — Building Research Establishment Environmental Assessment
+  LEED (US Green Building)      — Leadership in Energy and Environmental Design
+
+ELECTRICAL INSTALLATION:
+  IEC 60364 series              — Electrical installations of buildings
+      Part 4-41: Protection against electric shock
+      Part 5-54: Earthing arrangements
+      Part 7-715: Extra-low-voltage lighting installations
+  NFPA 70 (NEC)                 — National Electrical Code (USA)
+  NFPA 101                      — Life Safety Code (USA)
+  IEC 62305 series              — Protection against lightning
+  IEEE 1100 (Emerald Book)      — Power and grounding for sensitive electronics
+
+SMART CITY STANDARDS:
+  ISO 37120:2018                — Sustainable cities: indicators for city services
+  ISO 37122:2019                — Smart cities: indicators for smart cities
+  ISO 37123:2019                — Resilient cities: indicators for resilient cities
+  ISO 37106:2021                — Smart city operating model guidance
+  ISO 37153:2017                — Smart community infrastructures
+  ISO/IEC 30182:2017            — Smart city concept model
+  ETSI EN 302 637               — Smart City communications
+  ITU-T Y.4000                  — Overview of the Internet of Things (Smart City IoT)
+  ITU-T Y.4406                  — Requirements for smart sustainable cities
+  IEC 63152                     — Smart city infrastructure interoperability
+  IEEE P2784                    — Smart city framework
+  oBIX (Open Building Information eXchange) — Web services for BAS
+
+FIRE & LIFE SAFETY:
+  EN 54 series                  — Fire detection and alarm systems
+  NFPA 72                       — National Fire Alarm and Signaling Code (USA)
+  IEC 60849:1998                — Sound systems for emergency purposes
+  UL 864                        — Control units for fire protection
+
+SECURITY SYSTEMS:
+  EN 50131 series               — Alarm systems: intrusion and hold-up
+  IEC 60839 series              — Alarm and electronic security systems
+  ONVIF (Open Network Video Interface Forum) — IP camera interoperability
+  PSIA (Physical Security Interoperability Alliance)
+
+CYBERSECURITY FOR BAS:
+  NIST SP 800-82 Rev3           — OT security guidance (buildings as OT)
+  IEC 62443 applied to BAS      — Security levels for building control networks
+  ASHRAE Guideline 36-2021      — High-Performance Sequences of Operation (cybersecurity notes)
+  BACnet/SC (ASHRAE Addendum bj) — TLS 1.3 transport for BACnet (2020)
+  KNX IP Secure                 — AES-128 encryption for KNX over IP
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Building_Smart_City_Overview.md      — Protocol landscape, ISO/ETSI smart city map
+  01_BACnet_ISO_16484_5.md                — Object model, services, BACnet/SC security
+  02_KNX_ISO_14543.md                     — Topology, commissioning, ETS software
+  03_DALI_IEC_62386_Lighting.md           — Lighting control, commands, groups, scenes
+  04_ISO_50001_Energy_Management.md       — EnMS requirements, energy baseline, EnPIs
+  05_ISO_37120_Smart_City_Indicators.md   — 100 indicators, gold/silver/bronze levels
+  06_Smart_City_IoT_Architecture.md       — Edge/cloud integration, data models
+  07_BAS_Cybersecurity.md                 — BACnet/SC, KNX IP Secure, IEC 62443
+  08_Green_Building_LEED_BREEAM.md        — Certification criteria, BAS contribution
+  09_Building_Interview_Questions.md

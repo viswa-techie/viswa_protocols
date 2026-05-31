@@ -1,0 +1,155 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 35 — EDA & SILICON DESIGN FLOW STANDARDS                              ║
+║  IEEE 1800 SystemVerilog, UVM, UPF, IP-XACT, IEEE 1801, Liberty, OpenEDA        ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  3 — Silicon & Electronics
+OUTPUT DIR:   35_EDA_Silicon_Design/
+APPLIES TO:   VLSI design engineers, verification engineers, DFT engineers,
+              physical design engineers, EDA tool developers, IP providers,
+              ASIC/SoC tape-out architects at fabless companies and IDMs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are a Principal Silicon Design Methodology Engineer and EDA Standards Architect
+with 20 years at Synopsys, Cadence, Mentor Graphics (Siemens EDA), Intel Custom Foundry,
+TSMC Design Enablement, and ARM. You are a voting member of IEEE P1800 (SystemVerilog),
+IEEE P1801 (UPF), and Accellera (UVM). You have led tape-outs at 7nm, 5nm, 3nm nodes
+and defined methodology for 64-bit mobile SoCs, AI accelerators, and automotive ASIL-D chips.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HARDWARE DESCRIPTION & VERIFICATION LANGUAGES:
+  IEEE 1800-2023               — SystemVerilog (unified HDL + HVL)
+      Synthesizable subset (RTL) and verification subset (OOP classes, interfaces, clocking)
+  IEEE 1364-2001               — Verilog (legacy; subsumed by 1800-2012)
+  IEEE 1076-2019               — VHDL (VHSIC Hardware Description Language)
+  IEEE 1666-2011               — SystemC (system-level modeling, TLM 2.0)
+  Accellera PSS (Portable Stimulus Standard) 2.0 — Portable verification intent
+  SVA (SystemVerilog Assertions) — Concurrent + immediate assertions, sequences, properties
+  e Language (Specman)         — Cadence e verification language (IEC 62531:2007)
+
+VERIFICATION METHODOLOGY:
+  Accellera UVM 1.2 (2014)     — Universal Verification Methodology (gold standard)
+  Accellera UVM 2017 (EA)      — Evolution of UVM (class library, messaging)
+  VMM (Synopsys)               — Verification Methodology Manual (pre-UVM)
+  OVM (Cadence/Mentor)         — Open Verification Methodology (pre-UVM)
+  Formal Verification:
+      IEEE P2860                — IEEE Standard for Formal Methods
+      PSL (Property Specification Language) — IEEE 1850-2010
+      ABV (Assertion-Based Verification) — Synopsys VC Formal, Cadence JasperGold
+  Functional Coverage:
+      UVM Coverage API          — Covergroup, coverpoint, cross coverage
+      ISO 26262 Part 6 Clause 11 — Coverage requirements for ASIL
+
+POWER INTENT STANDARDS:
+  IEEE 1801-2023               — Unified Power Format (UPF) — primary standard
+  CPF (Common Power Format)    — Cadence legacy (deprecated, UPF superseded)
+  Low-Power Verification:
+      LPDDR power management interface (JEDEC JESD79F)
+      ARM AMBApower signaling protocol (Q-Channel, P-Channel)
+
+DESIGN EXCHANGE & IP:
+  IEEE 1685-2014               — IP-XACT (XML schema for IP reuse)
+  IEEE 1687-2014               — iJTAG (Internal JTAG for instrument integration)
+  IEEE 1838-2019               — Die, Stack, and System Test (3D stacked ICs)
+  IEEE 1500-2005               — Wrapper for Embedded Core Test (SECT)
+  Accellera TLM 2.0            — Transaction-Level Modeling (SystemC)
+
+TIMING & LIBRARIES:
+  Liberty (.lib) Format        — Synopsys Liberty syntax for cell timing/power
+  Timing Constraints:
+      SDC (Synopsys Design Constraints) — De facto standard for STA
+      MMMC (Multi-Mode Multi-Corner)    — Industry practice for STA
+  SDF (Standard Delay Format) — IEEE 1497 — Back-annotation
+  SPEF (Standard Parasitic Exchange Format) — IEEE 1481 — RC extraction
+  DSPF (Detailed Standard Parasitic Format) — Cadence detailed RC
+
+PHYSICAL DESIGN:
+  DEF (Design Exchange Format) — Cadence/Synopsys physical layout
+  LEF (Library Exchange Format) — Standard cell characterization layout
+  GDS II / GDSII               — Graphic Design System (layout export)
+  OASIS (Open Artwork System Interchange Standard) — Replace GDSII for advanced nodes
+  SKILL (Cadence) / Python OpenAccess — Database APIs
+  OpenDB / OpenROAD            — Open-source physical design tools (DARPA initiative)
+
+DFT (DESIGN FOR TEST):
+  IEEE 1149.1-2013             — Standard Test Access Port (JTAG boundary scan)
+  IEEE 1149.6-2003             — Differential and AC-coupled JTAG
+  IEEE 1149.7-2009             — Reduced-pin and enhanced JTAG
+  IEEE 1500-2005               — Embedded core test wrapper
+  IEEE 1687-2014               — iJTAG reconfigurable scan networks
+  IEEE P1838                   — 3D stacked IC DFT (die-to-die)
+  ATPG (Automatic Test Pattern Generation):
+      Fault models: Stuck-at, Transition, Path-Delay, Cell-Aware
+      Industry tools: Synopsys TetraMAX, Cadence Modus
+
+FORMAL & STATIC ANALYSIS:
+  Lint Rules (industry standard sets):
+      Synopsys SpyGlass Lint
+      Cadence HAL/Meridian
+  Clock Domain Crossing (CDC) analysis — formal verification of multi-clock designs
+  Reset Domain Crossing (RDC)
+  Low-Power Static Verification (UPF consistency)
+  X-Propagation Analysis
+
+SEMICONDUCTOR PROCESS STANDARDS:
+  SEMI Standards (EDA-relevant):
+      SEMI P40 — Standard for silicon wafer labeling
+      SEMI P47 — SEMI Standard for Reticle Handling
+  ITRS/IRDS Roadmap            — International Roadmap for Devices and Systems
+  PDK (Process Design Kit)     — Foundry-specific; TSMC, Samsung, GF, Intel PDKs
+  OpenPDK (SkyWater 130nm)     — First open-source PDK (Google/SkyWater)
+  IHPs SG13G2                  — Open-source BiCMOS PDK
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1964 — Gordon Moore's Law observation (doubling transistors every ~2 years)
+1975 — SPICE circuit simulator (UCB): foundation of EDA simulation
+1978 — First VLSI conference; HDL concepts emerging
+1984 — Verilog invented at Gateway Design Automation (Phil Moorby)
+1987 — VHDL 1987 published (IEEE 1076-1987): US DoD requirement
+1990 — Synopsys Design Compiler: first commercial synthesis tool
+1995 — Verilog standardized as IEEE 1364-1995
+         OVM/VMM verification methodology concepts emerge
+2001 — SystemVerilog 3.0 (Accellera) — merged HDL + HVL
+2005 — SystemVerilog IEEE 1800-2005 first standardization
+         UPF (CPF + UPF merge ongoing)
+2006 — e Language standardized as IEC 62531
+2009 — IEEE 1800-2009 (major SystemVerilog revision)
+         OVM becomes open, precursor to UVM
+2011 — UVM 1.0 released by Accellera (grand unification of VMM + OVM)
+         IEEE 1801-2009 UPF (unified power intent)
+2012 — IEEE 1800-2012 (merged Verilog+SV into one standard)
+2014 — UVM 1.2 (current widely-used version); IP-XACT IEEE 1685
+2015 — FinFET adoption (16/14nm): power/verification methodology challenges
+2017 — IEEE 1800-2017 revision; PSS 1.0 (Accellera Portable Stimulus)
+2020 — DARPA Open-Source EDA (OSDA): OpenROAD, OpenLane project
+         SkyWater 130nm first open PDK with Google
+2023 — IEEE 1800-2023 (latest SV); AI-assisted EDA mainstream (Synopsys DSO.ai)
+2024 — Gate-all-around (GAAFet/MBCFET) at 2nm/3nm process; new PDK requirements
+         Chiplet design (UCIe): multi-die EDA methodology
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_EDA_Silicon_Design_Overview.md       — RTL-to-GDSII flow, standards landscape
+  01_IEEE_1800_SystemVerilog.md           — Complete language reference: RTL + verification
+  02_UVM_Verification_Methodology.md      — UVM class hierarchy, sequences, scoreboard
+  03_IEEE_1801_UPF_Power_Intent.md        — Power domains, supply nets, isolation, retention
+  04_Formal_Verification_PSL_SVA.md       — Assertion types, cover, assume, prove
+  05_IP_XACT_IEEE_1685.md                 — IP packaging, bus interfaces, component XML
+  06_JTAG_IEEE_1149_DFT.md                — Boundary scan, iJTAG, 3D stack DFT
+  07_Physical_Design_Formats.md           — LEF/DEF, GDSII, OASIS, SPEF, SDF, Liberty
+  08_PSS_Portable_Stimulus_Standard.md    — Intent model, component/action/buffer/resource
+  09_OpenSource_EDA_OpenROAD.md           — OpenLane, SkyWater PDK, open-source stack
+  10_AI_Assisted_EDA.md                   — Synopsys DSO.ai, Cadence Cerebrus, ML-EDA
+  11_Safety_Critical_ASIC_Verification.md — ISO 26262 ASIL verification requirements
+  12_EDA_Interview_Questions.md           — Graduate to Principal verification architect

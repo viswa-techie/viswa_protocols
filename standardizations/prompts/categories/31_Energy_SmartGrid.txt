@@ -1,0 +1,141 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 31 — ENERGY, POWER GRID & SMART GRID STANDARDS                        ║
+║  IEC 61850, NERC CIP, IEEE 1547, IEC 62351, SCADA, Microgrid, EV Charging       ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  8 — Infrastructure & Sustainability
+OUTPUT DIR:   31_Energy_SmartGrid/
+APPLIES TO:   Power utility protection engineers, SCADA/EMS architects, smart meter
+              engineers, EV charging network designers, renewable energy integration
+              engineers, grid cybersecurity architects, substation automation engineers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SUBSTATION AUTOMATION & PROTECTION:
+  IEC 61850:2013               — Communication networks for power utility automation
+      Part 6: SCL (Substation Configuration Language)
+      Part 7-1: Principles and models
+      Part 7-3: Common data classes
+      Part 7-4: Compatible logical node classes and data classes
+      Part 8-1: MMS and XMPP (SCADA communication mapping)
+      Part 9-2: Sampled Values (process bus, merging units)
+      Part 90-12: Wide-area network to IEC 61968/61970 (smart grid gateway)
+  IEC 60255                    — Measuring relays and protection equipment
+  IEC 61968                    — Application integration at electric utilities (CIM)
+  IEC 61970                    — Energy management system API (CIM-based)
+  IEC 60870-5                  — Telecontrol equipment and systems (legacy SCADA)
+      IEC 60870-5-101/103/104  — Specific companion standards
+  DNP3 (IEEE 1815-2012)        — Distributed Network Protocol (US utilities)
+
+GRID CYBERSECURITY:
+  NERC CIP (Critical Infrastructure Protection) Standards — v7 current:
+      CIP-002: BES Cyber System Categorization
+      CIP-003: Security Management Controls
+      CIP-004: Personnel & Training
+      CIP-005: Electronic Security Perimeters
+      CIP-006: Physical Security
+      CIP-007: Systems Security Management
+      CIP-008: Incident Reporting
+      CIP-009: Recovery Plans
+      CIP-010: Configuration Change Management
+      CIP-011: Information Protection
+      CIP-013: Supply Chain Risk Management
+      CIP-014: Physical Security (transmission)
+  IEC 62351 series             — Security for IEC 61850, IEC 60870, IEC 61968
+      Part 5: Security for IEC 60870-5 and derived standards
+      Part 6: Security for IEC 61850
+      Part 7: Network and system management
+      Part 8: Role-Based Access Control (RBAC)
+  NIST SP 800-82 Rev3          — Guide to Operational Technology Security
+  CISA ICS-CERT Advisories     — US critical infrastructure security alerts
+
+SMART GRID & METERING:
+  IEEE 2030 series             — Smart Grid Interoperability
+  IEC 62056 (DLMS/COSEM)       — Electricity metering data exchange
+  ANSI C12.18/C12.19           — AMI (Advanced Metering Infrastructure) USA standards
+  NIST Framework for Smart Grid (NISTIR 7628) — Smart Grid cybersecurity
+  PRIME / G3-PLC               — Powerline communication for smart meters
+  Wi-SUN Alliance              — Smart utility network communication
+  OpenADR 2.0b                 — Demand response automation
+
+DISTRIBUTED ENERGY RESOURCES (DER) & RENEWABLES:
+  IEEE 1547-2018               — Interconnection and Interoperability of DER
+  IEEE 1547.1-2020             — Conformance test procedures for IEEE 1547
+  VDE-AR-N 4110/4120/4130      — German DER connection standards
+  IEC 61727                    — PV systems: characteristics of utility interface
+  IEC 62116                    — Islanding prevention for inverters
+
+EV CHARGING:
+  IEC 61851-1:2017             — Electric vehicle conductive charging (Mode 1/2/3/4)
+  IEC 61851-21-2               — EMC requirements for off-board EV chargers
+  ISO 15118-2:2019             — Vehicle-to-Grid (V2G) communication (CHAdeMO/CCS)
+  ISO 15118-20:2022            — Advanced charging (bidirectional, wireless)
+  OCPP 2.0.1                   — Open Charge Point Protocol (cloud-to-charger)
+  OCPI 2.2.1                   — Open Charge Point Interface (roaming between networks)
+  SAE J1772                    — EV charge coupler standard (USA)
+  CHAdeMO 2.0 (JP)             — DC fast charge (Japanese standard)
+  GB/T 20234 (China)           — Chinese EV charging standard
+
+POWER QUALITY & PROTECTION:
+  IEC 61000 series             — Electromagnetic compatibility (EMC)
+  IEEE 519-2022                — Harmonic control in power systems
+  IEC 60364 series             — Low-voltage electrical installations
+  IEC 60038:2009               — IEC standard voltages
+  ANSI/IEEE C57 series         — Power transformers
+  IEC 62271 series             — High-voltage switchgear
+  IEEE C62 series              — Surge protection
+
+NUCLEAR POWER (I&C):
+  IEC 61513:2011               — Nuclear plants I&C systems
+  IEEE 603-2018                — Safety systems for nuclear power generating stations
+  IAEA NS-G-1.3                — Instrumentation and control important to safety
+  10 CFR 50 Appendix B         — US NRC quality assurance (nuclear)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1882 — Edison's Pearl Street Station (NYC): first central power grid
+1889 — Edison-Westinghouse AC/DC war; Niagara Falls hydroelectric plant (AC wins)
+1907 — First interconnected power grids (UK, Germany)
+1965 — Northeast Blackout (USA/Canada): 30M people, 13 hours → triggered grid reliability work
+1968 — NERC (North American Electric Reliability Corporation) founded
+1977 — New York City Blackout: looting, civil unrest → grid investment increase
+1984 — IEC SC57 formed: utility communication standards
+1996 — Western US cascading blackout: 12 states, 2M customers
+2000 — IEC 61850 Part 1-2 published (first edition)
+2003 — Northeast Blackout (USA/Canada): 50M people, 55B USD loss
+         → NERC CIP mandatory standard process begins
+2003 — Ukrainian power grid attack: first proven cyberattack on power grid (Slammer worm)
+2005 — NERC CIP standards development accelerated
+2007 — Aurora Generator Test (Idaho): cyber command destroys generator via protection relay
+2009 — Smart Metering rollout begins Europe (EU mandate for 80% by 2020)
+2010 — Stuxnet: ICS cyberattack paradigm shift (nuclear relevance)
+2015/2016 — Ukraine BlackEnergy/Industroyer: 225,000 customers lost power
+              → NERC CIP supply chain (CIP-013) development
+2018 — IEC 61850 Edition 2.1 (enhanced cybersecurity edition)
+2019 — First NERC CIP enforcement penalty >$10M (US utility)
+2021 — Colonial Pipeline ransomware: fuel supply disruption → ICS security emergency
+2022 — Sandworm Industroyer2 attack on Ukraine grid
+         Texas grid failure (Winter Storm Uri): 246 dead, $195B damage
+2023 — IEEE 1547-2018 grid interconnection for solar/wind/battery widely adopted
+2024 — EU NIS2 makes energy grid operators subject to strict cybersecurity requirements
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Energy_Grid_Standards_Overview.md    — T&D architecture, standards landscape
+  01_IEC_61850_Substation_Automation.md   — Full architecture, GOOSE, SV, MMS, SCL
+  02_NERC_CIP_Grid_Cybersecurity.md       — All 13 CIP standards, compliance program
+  03_IEC_62351_Security.md                — Authentication, encryption for grid protocols
+  04_Smart_Metering_AMI_Standards.md      — DLMS/COSEM, PRIME, G3-PLC, ANSI C12
+  05_IEEE_1547_DER_Interconnection.md     — Ride-through, response functions, anti-island
+  06_EV_Charging_Standards.md             — IEC 61851, ISO 15118, OCPP, CHAdeMO, CCS
+  07_SCADA_EMS_Standards.md               — ICCP, DNP3, Modbus, IEC 60870 for grid
+  08_Nuclear_IEC_61513.md                 — I&C for nuclear plants, SIL assessment
+  09_Grid_Cybersecurity_Incidents.md      — Ukraine, Colonial, Aurora — deep analysis
+  10_Smart_Grid_Future.md                 — V2G, microgrid, hydrogen, flexibility markets
+  11_Energy_Interview_Questions.md

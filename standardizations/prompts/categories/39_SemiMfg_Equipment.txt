@@ -1,0 +1,88 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 39 — SEMICONDUCTOR MANUFACTURING EQUIPMENT STANDARDS                  ║
+║  SEMI Standards, SECS/GEM, EDA Fab Interface, Cleanroom, Reliability            ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  3 — Silicon & Electronics
+OUTPUT DIR:   39_SemiMfg_Equipment/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EQUIPMENT COMMUNICATION (SECS/GEM):
+  SEMI E4 (SECS-I)             — SEMI Equipment Communication Standard (serial)
+  SEMI E5 (SECS-II)            — Message content and format
+  SEMI E30 (GEM)               — Generic Equipment Model (core automation model)
+  SEMI E37 (HSMS)              — High-Speed Message Services (TCP/IP replacement for SECS-I)
+  SEMI E39 (OSMS)              — Object Services Model
+  SEMI E40 (PJM)               — Processing Job Management
+  SEMI E87 (CMS)               — Carrier Management System (FOUP/cassette)
+  SEMI E90 (STS)               — Substrate Tracking Standard
+  SEMI E94 (CJM)               — Control Job Management
+  SEMI E116 (EqPM)             — Equipment Performance Management
+  SEMI E132 (SECSGEM.NET)      — .NET implementation
+  SEMI E137                    — Equipment Self-Description
+
+MATERIAL HANDLING & AUTOMATION:
+  SEMI E84                     — Enhanced Parallel I/O Interface (passive handoff)
+  SEMI E87                     — Carrier Management (FOUP-to-loadport)
+  SEMI E23                     — Mechanical specification for cassettes
+  SEMI M1 series               — Silicon wafer standards (dimensions, bow, warp)
+  SEMI E58 (AMHS)              — Automated Material Handling Systems
+  SEMI E167                    — AMHS 450mm wafer guidelines
+
+EQUIPMENT RELIABILITY & OEE:
+  SEMI E10-0812                — Metrics for Fab Equipment OEE (Overall Equipment Effectiveness)
+      States: Equipment Down, Scheduled Down, Unscheduled Down, Idle,
+              Productive, Engineering, Non-Scheduled
+  SEMI E35                     — Cost of Ownership Metrics
+  SEMI E79                     — Overall Equipment Effectiveness for semiconductor
+  SEMI E116                    — Equipment Performance Management
+
+CYBERSECURITY FOR FAB:
+  SEMI E187 (2022)             — Specification for Cybersecurity of Fab Equipment
+      Asset management, threat detection, authentication, network segmentation
+  SEMI E188 (2022)             — Malware Free Equipment Integration
+      Pre-delivery scanning, patch management, incident response
+  SEMI CS-0 through CS-4       — Cybersecurity security levels for equipment
+
+CLEANROOM & CONTAMINATION:
+  ISO 14644-1:2015             — Cleanrooms: Classification of air cleanliness by particle
+      ISO Class 1 through 9 (replaces US Fed Std 209E)
+  ISO 14644-2:2015             — Monitoring to provide evidence of cleanroom performance
+  SEMI E78                     — Guide to Assess and Control Electrostatic Discharge (ESD)
+  SEMI F47                     — Specification for semiconductor processing equipment:
+                                  voltage sag immunity
+  SEMI S2-0706E                — Environmental, Health and Safety Guideline for Semiconductor Equipment
+  SEMI S8-0706                 — Safety guidelines for ergonomics
+
+ADVANCED PACKAGING & 3D IC:
+  SEMI P47                     — Specification for reticle handling
+  SEMI E167                    — 450mm AMHS guidelines
+  JEDEC JESD22-B112A           — Package warpage measurement
+  IPC-7095C                    — Design/Assembly Process for BGA packages
+  SEMI 3DS (3D Stacking)       — Through-Silicon Via (TSV) standards
+  IEEE 1838                    — Die, Stack, System Test
+
+ENVIRONMENTAL & SAFETY:
+  SEMI S2                      — Environmental, Health, Safety (EH&S) for equipment
+  SEMI S14                     — Fire risk assessment
+  SEMI S8                      — Ergonomics
+  SEMI S10                     — Risk assessment for semiconductor equipment
+  OSHA 1910.119                — Process Safety Management (hazardous materials)
+  IEC 61010-1                  — Safety for lab/measurement/control equipment
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_SemiMfg_Standards_Overview.md        — SEMI standards landscape, fab automation
+  01_SECS_GEM_E30_Communication.md        — Equipment host communication, GEM model
+  02_SEMI_E10_OEE_Metrics.md              — Equipment states, OEE calculation
+  03_SEMI_E187_E188_Cybersecurity.md      — Fab equipment security requirements
+  04_AMHS_Material_Handling.md            — E84, E87, FOUP/cassette management
+  05_ISO_14644_Cleanroom.md               — Particle classification, monitoring
+  06_SEMI_S2_Safety_Guidelines.md         — EH&S for equipment design
+  07_3DIC_Advanced_Packaging.md           — TSV standards, IEEE 1838, JEDEC
+  08_SemiMfg_Interview_Questions.md

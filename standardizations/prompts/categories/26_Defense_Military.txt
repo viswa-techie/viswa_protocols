@@ -1,0 +1,212 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 26 — DEFENSE & MILITARY STANDARDS                                     ║
+║  MIL-STDs, NATO STANAGs, ITAR, Electronic Warfare, Survivability & Reliability  ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  7 — Transportation & Defense
+OUTPUT DIR:   26_Defense_Military/
+APPLIES TO:   Defense primes (Lockheed, Raytheon, BAE Systems, MBDA), military SoC
+              designers, defense electronics OEMs, EW system engineers, NATO suppliers,
+              ITAR-controlled technology handlers, military embedded software teams
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are a Principal Defense Systems Engineer and Military Standards Authority with
+20 years at Lockheed Martin, Raytheon Technologies, BAE Systems, L3Harris, and DARPA.
+You are an expert in MIL-STD qualification, ITAR compliance, NATO interoperability,
+electronic warfare, and defense embedded systems (DO-178C DAL-A avionics, FACE profile,
+MOSA architecture). You have first-hand experience with JCIDS acquisition process,
+DoDI 5000.02 program management, and NSA Type 1 encryption certification.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MISSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate a COMPLETE DEFENSE & MILITARY STANDARDS ENGINEERING GUIDE covering
+environmental qualification, EMC/EMI, system safety, cybersecurity, reliability,
+export controls, and interoperability standards used in military and defense programs.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE — ALL MUST BE COVERED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENVIRONMENTAL & RELIABILITY:
+  MIL-STD-810H (2019)        — Environmental Engineering Considerations & Lab Tests
+      Methods: vibration (514.8), shock (516.8), temperature (501-503), humidity (507),
+               salt fog (509), altitude (500), sand/dust (510), rain (506), EMF (605)
+  MIL-STD-202H               — Electronic & Electrical Component Parts (test methods)
+  MIL-STD-750F               — Test Methods for Semiconductor Devices
+  MIL-STD-883L               — Microelectronics Test Methods
+  MIL-HDBK-217F              — Reliability Prediction of Electronic Equipment (MTBF)
+  MIL-HDBK-338B              — Electronic Reliability Design Handbook
+  MIL-STD-785B               — Reliability Program for Systems and Equipment
+  MIL-HDBK-781A              — Reliability Test Methods, Plans, and Environments
+  MIL-PRF-38535              — Integrated Circuits (Microcircuits) Performance Spec
+  MIL-PRF-19500              — Semiconductor Devices (general spec)
+
+EMC / EMI / EMP:
+  MIL-STD-461G (2015)        — Requirements for the Control of EM Interference
+      Tests: CE101/102, CS101/114/115/116, RE101/102, RS101/103
+  MIL-STD-464C (2010)        — EM Environmental Effects Requirements for Systems
+  MIL-STD-1541A              — EMC for Space Systems
+  RTCA DO-160G               — Environmental conditions & test procedures (avionics)
+  MIL-STD-2169B              — High-Altitude EMP (HEMP) hardening
+  IEC 61000-2-10             — EMP environment (civil equivalent)
+
+SYSTEM SAFETY:
+  MIL-STD-882E (2012)        — Standard Practice for System Safety
+      - System Safety Working Group (SSWG)
+      - Software System Safety (SSS) per task 207
+      - Hazard Risk Index (HRI): probability x severity
+      - Mishap Risk Acceptance Authority (MRAA)
+  MIL-HDBK-516C              — Airworthiness Certification Criteria
+  MIL-HDBK-454B              — General Guidelines for Electronic Equipment
+
+ELECTRONICS & COMPONENTS:
+  MIL-PRF-55365              — Tantalum capacitors
+  MIL-PRF-123                — Capacitors (established reliability)
+  MIL-DTL-38999              — Military circular connectors
+  MIL-DTL-83513              — Micro-D connectors
+  MIL-STD-1553B              — Digital Time Division Command/Response Multiplex Bus
+  MIL-STD-1760              — Aircraft/Store Interface standard
+  ARINC 429                  — Digital information transfer for avionics
+  MIL-STD-704F               — Aircraft Electric Power Characteristics
+
+CYBERSECURITY & INFORMATION ASSURANCE:
+  NIST SP 800-53 Rev5        — Security controls (DoD baseline)
+  CNSS Instruction 1253      — Security categorization for NSS
+  DoDI 8500.01               — Cybersecurity activities DoD
+  DoDI 8510.01 (RMF)         — Risk Management Framework for DoD IT
+  DISA STIGs                 — Security Technical Implementation Guides
+  NSA Suite B / CNSA Suite   — Commercial National Security Algorithm Suite
+  FIPS 140-3                 — Cryptographic module standard (NSS use)
+  Common Criteria EAL 4+     — For security products in classified environments
+  STIG Viewer                — DoD tool for STIG compliance checking
+
+EXPORT CONTROL & TRADE:
+  ITAR (22 CFR 120-130)      — International Traffic in Arms Regulations
+  EAR (15 CFR 730-774)       — Export Administration Regulations
+  USML (United States Munitions List)  — Controlled defense articles
+  CCL (Commerce Control List)          — Dual-use export controls
+  Wassenaar Arrangement                — Multilateral export control regime
+  ECCN Classification                  — Export Control Classification Numbers
+
+NATO INTEROPERABILITY:
+  NATO STANAG 4671            — UAV airworthiness requirements
+  NATO STANAG 4586            — UAV control systems interoperability
+  NATO STANAG 4609            — UAV imagery intelligence
+  NATO STANAG 5066            — HF data communications
+  NATO STANAG 7085            — Interoperability of UAV links
+  NATO STANAG 2920            — Ballistic protection (armor)
+  AEDP-3 (NATO)               — Electronic warfare data library
+  NIAP (NSA)                  — National Information Assurance Partnership
+
+ACQUISITION & PROGRAM MANAGEMENT:
+  DoDI 5000.02T               — Operation of the Adaptive Acquisition Framework
+  JCIDS Manual                — Joint Capabilities Integration & Development System
+  MIL-HDBK-61B               — Configuration Management Guidance
+  MIL-STD-498                — Software Development & Documentation (legacy, see 2167A)
+  MIL-STD-2167A              — Defense System Software Development (historical)
+  DI-IPSC series              — Data Item Descriptions for software products
+
+FACE & MOSA ARCHITECTURE:
+  FACE (Future Airborne Capability Environment) Technical Standard v3.1
+  MOSA (Modular Open Systems Approach) DoDI 5000.88
+  SOSA (Sensor Open Systems Architecture) Technical Standard
+  OMS/UCI (Open Mission Systems / Universal Command Interface)
+  OpenVPX (VITA 65) — Backplane standard for mil-grade computing
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT TIMELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1938 — US War Department begins standardizing military specifications
+1949 — MIL-SPEC system formally established post-WWII (military standardization reform)
+1962 — Cuban Missile Crisis triggers classified EM hardening requirements
+1980 — MIL-STD-2167 established (software development for defense systems)
+1986 — MIL-STD-461D published (EMI/EMC for defense equipment)
+1992 — ITAR regulations strengthened post-Cold War export control reform
+1994 — DoD moves to Commercial Off-The-Shelf (COTS) preference — Perry Reform
+1996 — MIL-STD-882D (system safety) — evolution from industrial accidents
+2001 — DoD RDT&E paradigm shift post-9/11; ITAR enforcement intensified
+2008 — Counterfeit parts crisis (Chinese counterfeit ICs in military aircraft)
+         → SAE AS6081, AS5553 counterfeit avoidance standards
+2012 — MIL-STD-882E (current system safety standard)
+2014 — FACE Technical Standard v2.0 (avionics software portability)
+2016 — DoDI 8510.01 RMF replaces DIACAP for cybersecurity
+2018 — National Defense Authorization Act bans Huawei/ZTE in federal supply chain
+2019 — MIL-STD-810H (current environmental standard)
+2020 — NDAA Section 889: Supply chain security requirements formalized
+2022 — Ukraine conflict highlights EW vulnerability, GPS jamming, drone warfare
+2023 — CMMC 2.0 (Cybersecurity Maturity Model Certification) finalized
+2024 — MOSA mandate for all new DoD program starts
+2025 — AI in defense: DoD AI Ethics Principles enforcement; autonomous weapons debate
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Defense_Standards_Overview.md       — Landscape, acquisition framework, mega-table
+  01_MIL_STD_810H_Environmental.md       — All 29 test methods, chamber specs, tailoring
+  02_MIL_STD_461G_EMC.md                 — 17 test requirements, frequency ranges, limits
+  03_MIL_STD_882E_System_Safety.md       — Risk matrix, SSWG, mishap risk index, SW safety
+  04_MIL_STD_1553B_Bus.md                — Aviation/defense databus, RT/BC/MT roles
+  05_MIL_PRF_38535_Microcircuits.md      — Radiation hardness assurance, QML programs
+  06_ITAR_EAR_Export_Controls.md         — USML categories, ECCN, licensing, violations
+  07_NATO_STANAG_Interoperability.md     — Key STANAGs for comms, UAV, armor, EW
+  08_DoD_Cybersecurity_RMF_DISA.md       — RMF steps, DISA STIGs, CMMC 2.0 levels
+  09_FACE_MOSA_OpenVPX_Architecture.md   — Open architecture for defense electronics
+  10_Radiation_Hardening_Space_Defense.md — TID, SEE, ELDRS, latch-up, MIL-PRF-38535
+  11_Counterfeit_Parts_AS6081.md         — SAE AS5553, AS6081, AS6171 supply chain
+  12_Electronic_Warfare_Standards.md     — EW taxonomy, AEDP-3, NATO EW standards
+  13_Defense_Case_Studies.md             — F-22 software failure, GPS jamming incidents
+  14_Defense_Interview_Questions.md      — Systems to program manager level
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL TECHNICAL DEPTH REQUIRED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. MIL-STD-810H — Complete method summary table:
+   Method 500.6 (Low Pressure), 501.7 (High Temp), 502.7 (Low Temp), 503.7 (Temp Shock),
+   507.6 (Humidity), 509.7 (Salt Fog), 510.7 (Sand/Dust), 511.6 (Explosive Atm),
+   512.6 (Immersion), 514.8 (Vibration), 515.8 (Acoustic Noise), 516.8 (Shock),
+   521.4 (Icing), 527 (Multi-excitation), 528 (Gunfire Vibration)
+
+2. MIL-STD-461G — Critical tests:
+   RE102: Radiated Emissions 2 MHz–18 GHz (antenna vs. equipment boundary)
+   RS103: Radiated Susceptibility 2 MHz–40 GHz (field strength 200 V/m military)
+   CE101: Conducted Emissions below 10 kHz
+   CS114: Conducted Susceptibility, bulk cable injection 10 kHz–200 MHz
+
+3. MIL-STD-882E — Mishap Risk Index:
+   Severity: Catastrophic/Critical/Marginal/Negligible
+   Likelihood: Frequent/Probable/Occasional/Remote/Improbable
+   Risk Index: IA, IB, IIA, IIB, etc. (5×5 matrix)
+
+4. ITAR Categories (22 CFR Part 121 USML):
+   Cat I: Firearms; Cat VI: Vessels; Cat VII: Tanks; Cat VIII: Aircraft;
+   Cat XI: Military Electronics; Cat XIII: Materials; Cat XV: Spacecraft
+
+5. DoD RMF 6-step process:
+   Categorize → Select → Implement → Assess → Authorize → Monitor
+
+6. Radiation Effects:
+   TID (Total Ionizing Dose), SEE (Single Event Effects: SEU/SEL/SEB/SEFI),
+   ELDRS (Enhanced Low Dose Rate Sensitivity), Displacement Damage
+   Hardness Assurance Testing: Co-60 gamma, proton, heavy ion
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FUTURE TRENDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Autonomous weapons: DoD Directive 3000.09 (lethal autonomous weapons policy)
+- AI ethics in defense: DoD AI Ethical Principles (accountability, traceability)
+- CMMC 2.0 full enforcement (2025) — all DoD contractors
+- Trusted Foundry Program expansion (secure semiconductor supply)
+- Hybrid warfare: cyber + kinetic standards integration
+- Space domain: USSF (US Space Force) standards development
+- JADC2 (Joint All-Domain Command & Control) open architecture standards
+- Drone swarm coordination: emerging interoperability standards
+- Post-quantum cryptography in NSS (NSA CNSA Suite 2.0 mandate by 2033)

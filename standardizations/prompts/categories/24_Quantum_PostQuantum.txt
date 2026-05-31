@@ -1,0 +1,112 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 24 — QUANTUM COMPUTING & POST-QUANTUM CRYPTOGRAPHY                     ║
+║  NIST FIPS 203/204/205, ETSI QKD, ISO 23837, Crypto Agility, QRNG               ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 2 — Security & Privacy  |  OUTPUT DIR: 24_Quantum_PostQuantum/
+
+STANDARDS UNIVERSE:
+NIST POST-QUANTUM CRYPTOGRAPHY (PQC) STANDARDS:
+  NIST FIPS 203 (August 2024)   — ML-KEM (Module-Lattice Key Encapsulation Mechanism)
+      Based on CRYSTALS-Kyber (IND-CCA2 secure KEM)
+      Key sizes: ML-KEM-512, ML-KEM-768, ML-KEM-1024
+      Security levels: ~AES-128, ~AES-192, ~AES-256 equivalent
+      Replaces RSA/ECDH for key exchange
+  NIST FIPS 204 (August 2024)   — ML-DSA (Module-Lattice Digital Signature Algorithm)
+      Based on CRYSTALS-Dilithium (unforgeability under lattice hardness)
+      Modes: ML-DSA-44, ML-DSA-65, ML-DSA-87
+      Replaces RSA/ECDSA/EdDSA for digital signatures
+  NIST FIPS 205 (August 2024)   — SLH-DSA (Stateless Hash-Based Digital Signature)
+      Based on SPHINCS+ (hash-based; conservative security assumptions)
+      Modes: fast (larger signatures) and small (slower)
+      Backup signature if lattice broken
+  NIST FIPS 206 (expected 2025) — FN-DSA (FALCON: Fast-Fourier lattice-based signature)
+      Compact signature size; GPU-friendly verification
+  NIST IR 8413 (2022)           — Status report on PQC candidates (Round 3)
+  NIST SP 1800-38               — Migration to Post-Quantum Cryptography (draft)
+
+LEGACY CRYPTOGRAPHY VULNERABILITIES TO QUANTUM:
+  Shor's Algorithm (1994)       — Breaks RSA, ECC, DSA, DH in polynomial time
+                                    → All current asymmetric cryptography is threatened
+  Grover's Algorithm (1996)     — Quadratic speedup for symmetric key search
+                                    → AES-128 → needs AES-256 for post-quantum security
+  Harvest Now, Decrypt Later (HNDL) — Nation-states collecting encrypted data today
+  NIST SP 800-131A Rev2         — Current algorithms; sunset dates for RSA/ECC
+  Crypto agility                — Ability to swap algorithms without re-architecting
+
+QUANTUM KEY DISTRIBUTION (QKD):
+  ETSI GS QKD 001 (2010)        — Key management (first QKD spec)
+  ETSI GS QKD 002               — Use cases
+  ETSI GS QKD 004               — Interfaces
+  ETSI GS QKD 005               — Security proofs
+  ETSI GS QKD 011               — Component characterization
+  ETSI GS QKD 014 (2019)        — Protocol and data format
+  ETSI GS QKD 015               — Control interface for SDN QKD
+  ISO/IEC 23837:2023            — Security requirements for QKD networks
+  ITU-T Y.3800                  — Framework for QKD networks
+  ITU-T X.1714                  — Security framework for QKD
+  China ETSI ISG QKD             — China extensive QKD deployments (Beijing-Shanghai, 2000km)
+
+QUANTUM RANDOM NUMBER GENERATORS (QRNG):
+  NIST SP 800-90A/B/C           — Deterministic/True/SP RNG standards
+  BSI AIS 31                    — TRNG requirements (Germany)
+  NIST SP 800-22 Rev1a          — Statistical tests for RNGs (TestU01, DIEHARD)
+  ISO/IEC 20543:2019            — Test and analysis of TRNG
+  ETSI TS 104 000                — QRNG characterization
+  QRNG products: ID Quantique, Toshiba, IBM Q, QuTech
+
+QUANTUM NETWORK STANDARDS:
+  IETF Quantum Internet Alliance (QIA) — Internet-Draft: quantum network architecture
+  ITU-T FG-QIT4N                — Focus Group on Quantum Information Technology for Networks
+  IEEE P2073                    — Quantum communications test standards
+  ETSI ISG ENI                   — QKD integration in telecom networks
+
+CRYPTO AGILITY FRAMEWORKS:
+  IETF RFC 8446 (TLS 1.3)       — Negotiated algorithms; agility built in
+  IETF LAMPS WG                  — PQ algorithm integration in X.509, CMS
+  IETF TLS WG                    — Hybrid key exchange drafts (classical + PQC)
+  IETF OPENPGP WG                — PQC for OpenPGP
+  X.509 PQC extensions          — OIDs for ML-KEM, ML-DSA, SLH-DSA
+  Hybrid certificates            — Dual-algorithm certificates for transition period
+  NIST NCCoE                    — Migration playbooks for TLS, code signing, SSH, PKI
+
+QUANTUM COMPUTING HARDWARE STANDARDS:
+  IEEE P7131                     — Quantum Computing Performance Benchmarks
+  QED-C (Quantum Economic Development Consortium) — Benchmarking framework
+  Quantum Volume (IBM)           — Hardware quality metric (2^n circuit depth)
+  CLOPS (Circuit Layer Operations per Second) — IBM metric for quantum speed
+  Gate fidelity metrics          — Single-qubit gate error; two-qubit gate error; readout error
+
+GOVERNMENT PROGRAMS:
+  US NSM-10 (May 2022)          — National Security Memo: migrate to PQC by 2035
+  CISA/NSA/NIST PQC Advisory (2022) — Migration guidance for critical infrastructure
+  CNSA 2.0 (NSA, 2022)          — Commercial National Security Algorithm Suite 2.0
+      Timeline: PQC deployment in national security systems by 2030-2033
+  EU Quantum Flagship (2018-2028) — €1B investment; QKD + quantum computing
+  UK National Quantum Strategy (2023)
+  China Quantum Internet Alliance
+
+HISTORICAL TIMELINE:
+  1935 — Einstein-Podolsky-Rosen paper (entanglement)
+  1981 — Feynman: quantum computers to simulate quantum systems
+  1984 — BB84 (Bennett & Brassard): QKD protocol
+  1994 — Shor's algorithm: factoring in polynomial time (quantum threat to RSA)
+  1996 — Grover's algorithm; AES-256 needed for quantum security
+  1997 — ETSI first QKD standardization discussions
+  2001 — IBM: first quantum computer (7-qubit)
+  2016 — NIST PQC competition announced (69 submissions)
+  2017 — China: intercontinental QKD satellite (Micius)
+  2018 — NIST Round 1: 26 candidates
+  2019 — Google claims quantum supremacy (Sycamore, 53 qubits)
+  2020 — NIST Round 3: 7 candidates finalists
+  2022 — NIST selects Kyber, Dilithium, FALCON, SPHINCS+; NSM-10
+  2023 — IBM 1121-qubit Condor; FIPS drafts published
+  2024 — FIPS 203/204/205 published (August); active migration programs
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Quantum_PostQuantum_Overview.md    01_Shor_Grover_Quantum_Threat.md
+  02_NIST_FIPS_203_ML_KEM.md            03_NIST_FIPS_204_ML_DSA.md
+  04_NIST_FIPS_205_SLH_DSA.md           05_Crypto_Agility_Migration.md
+  06_QKD_ETSI_ISO_Standards.md          07_QRNG_Standards.md
+  08_Hybrid_Certificates_TLS.md         09_PQC_Migration_Playbook.md
+  10_Quantum_Hardware_Benchmarks.md     11_Government_PQC_Programs.md
+  12_PQC_For_Embedded_Systems.md

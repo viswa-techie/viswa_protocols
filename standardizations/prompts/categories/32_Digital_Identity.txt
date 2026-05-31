@@ -1,0 +1,155 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 32 — DIGITAL IDENTITY, AUTHENTICATION & BIOMETRICS                    ║
+║  FIDO2, eIDAS, NIST 800-63, ISO 19794, OpenID, Passkeys, ICAO 9303              ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  2 — Security & Privacy
+OUTPUT DIR:   32_Digital_Identity/
+APPLIES TO:   Identity and access management (IAM) architects, biometric system
+              engineers, e-passport/e-ID chip designers, mobile wallet engineers,
+              authentication platform developers, government digital ID program leads
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are a Principal Digital Identity Architect and Biometric Standards Expert with
+18 years at Thales DIS, IDEMIA, Gemalto, Yubico, Google Identity, and NIST. You
+have certified FIDO Authenticators, designed e-passport LDS2 applications, led
+eIDAS trust service provider (TSP) assessments, and architected passkey deployment
+for hundreds of millions of users. You are a FIDO Alliance board member and NIST
+SP 800-63 contributing editor.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FIDO ALLIANCE:
+  FIDO2 = WebAuthn + CTAP2      — Passwordless authentication standard (2018)
+  W3C WebAuthn Level 3          — Web Authentication API specification
+  FIDO CTAP2.2                  — Client to Authenticator Protocol (hardware keys/biometric)
+  FIDO UAF 1.1                  — Universal Authentication Framework (mobile biometric)
+  FIDO U2F 1.2                  — Universal 2nd Factor (legacy hardware token)
+  FIDO Passkeys                 — Syncable passkeys (Apple/Google/Microsoft — 2022)
+  FIDO Device Onboard (FDO)     — IoT device onboarding specification
+  FIDO Alliance Certification   — L1/L2/L3 authenticator certification levels
+
+IDENTITY ASSURANCE:
+  NIST SP 800-63-3 (2017)       — Digital Identity Guidelines
+      Vol. A: Enrollment & Identity Proofing (IAL 1/2/3)
+      Vol. B: Authentication & Lifecycle Mgmt (AAL 1/2/3)
+      Vol. C: Federation & Assertions (FAL 1/2/3)
+  NIST SP 800-63-4 (2024 draft) — Updated guidelines
+  NIST SP 800-157               — Derived PIV credentials
+  ISO/IEC 29115:2013            — Entity authentication assurance framework
+  ITU-T X.1254                  — Entity authentication assurance
+
+EU ELECTRONIC IDENTIFICATION:
+  eIDAS Regulation (EU 910/2014) — Electronic identification & trust services
+  eIDAS 2.0 (Regulation 2024/1183) — EU Digital Identity Wallet (EUDIW)
+  ETSI TS 119 461               — Identity proofing requirements
+  ETSI EN 319 411               — Policy requirements for TSPs issuing certificates
+  ETSI EN 319 102               — Electronic signature creation and validation
+  CEN/TS 419241                 — Security requirements for trustworthy systems
+
+TRAVEL DOCUMENTS (e-PASSPORT):
+  ICAO Doc 9303 (8 Parts)       — Machine Readable Travel Documents
+      Part 9: Deployment of biometric identification and electronic storage of data
+      Part 10: Logical data structure for the storage of data
+      Part 11: Security mechanisms for MRTDs
+  ICAO PKD                      — Public Key Directory for e-passport verification
+  BAC (Basic Access Control)    — Passive authentication for RFID chip
+  PACE (Password Authenticated Connection Establishment) — New access control
+  EAC (Extended Access Control) — For fingerprints and iris (restricted biometrics)
+  AA (Active Authentication)    — Anti-cloning of e-passport chip
+  SAC (Supplemental Access Control) — PACE replacement for BAC
+
+BIOMETRIC STANDARDS:
+  ISO/IEC 19794 series          — Biometric data interchange formats
+      Part 1: Framework
+      Part 2: Finger minutiae data (2011)
+      Part 4: Finger image data (2011)
+      Part 5: Face image data (2011)
+      Part 6: Iris image data (2011)
+      Part 10: Hand geometry silhouette data
+  ISO/IEC 30107 series          — Biometric presentation attack detection (PAD)
+      Part 1: Framework
+      Part 3: Testing and reporting (anti-spoofing)
+  ISO/IEC 19989 series          — Criteria and methodology for biometric security eval.
+  ISO/IEC 29164:2011            — Embedded biometrics (mobile, card-based)
+  NIST FRVT (Face Recognition Vendor Test) — de facto industry benchmark
+  NIST IREX (Iris Exchange)     — Iris algorithm evaluation
+  NIST MINEX (Minutiae Exchange) — Fingerprint minutiae template interoperability
+  FBI IAFIS/NGI                 — Next Generation Identification (fingerprint + iris + face)
+  Morpho/IDEMIA/NEC/Aware       — Commercial biometric algorithm vendors (refer to NIST FRVT)
+
+FEDERATED IDENTITY & SSO:
+  OpenID Connect 1.0 (OIDC)    — Identity layer on OAuth 2.0 (W3C + IETF)
+  OAuth 2.0 (RFC 6749)          — Authorization framework
+  OAuth 2.1 (draft)             — Security-focused OAuth update
+  SAML 2.0 (OASIS)              — Security Assertion Markup Language (enterprise SSO)
+  SCIM 2.0 (RFC 7644)           — System for Cross-domain Identity Management
+  JWT (RFC 7519)                — JSON Web Token
+  SD-JWT (Selective Disclosure JWT) — Privacy-preserving credential sharing
+  DIF Presentation Exchange     — Credential presentation protocols
+
+DECENTRALIZED IDENTITY (SSI):
+  W3C DID (Decentralized Identifiers) v1.0 (2022)
+  W3C Verifiable Credentials (VC) Data Model v2.0
+  Hyperledger Aries / Indy      — SSI open-source stack
+  EBSI (EU Blockchain Services Infrastructure) — EU digital credentials
+
+SMART CARD & TOKEN STANDARDS:
+  ISO/IEC 7816 series           — Identification cards (contact chip)
+  ISO/IEC 14443 series          — Contactless integrated circuit cards
+  ISO/IEC 15693                 — Vicinity cards (NFC proximity)
+  GlobalPlatform Specifications — Secure element management (TEE, SE)
+  PIV (FIPS 201-3)              — Personal Identity Verification (US government)
+  CAC (DoD Common Access Card)  — Military smart card identity
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1858 — William Herschel uses fingerprints for identification in India (colonial admin)
+1892 — Juan Vucetich: first criminal conviction by fingerprint (Argentina)
+1903 — New York State Prison adopts fingerprint identification (USA)
+1968 — Roland Moreno invents smart card concept (patent filed 1974)
+1994 — SET (Secure Electronic Transactions): first attempt at digital identity
+         FIPS PUB 201 PIV card concept begins
+2000 — ICAO Doc 9303 updated for digital travel documents
+2001 — Post-9/11: US VISIT program (biometric entry); ICAO e-passport mandate push
+2004 — First e-passports issued (Malaysia, Belgium, USA)
+2005 — NIST SP 800-63 v1: first authentication assurance guidelines
+         EU eIDAS predecessor (Directive 1999/93/EC electronic signatures)
+2013 — FIDO Alliance founded (Google, PayPal, Lenovo, NXP, Nok Nok Labs)
+2014 — FIDO UAF 1.0 and U2F 1.0 published
+         eIDAS Regulation 910/2014 published
+2016 — NIST SP 800-63-3: identity assurance levels (IAL/AAL/FAL) framework
+2018 — W3C WebAuthn published; FIDO2 launched
+         GDPR enforcement: biometric data as "special category" personal data
+2021 — ICAO LDS2 (e-passport new applications: health, additional biometrics)
+2022 — Passkeys announced (Apple WWDC, Google I/O, Microsoft) — mass market FIDO2
+2023 — Apple/Google/Microsoft passkey implementation ships to billions of devices
+         eIDAS 2.0 political agreement reached
+2024 — eIDAS 2.0 / EUDIW Regulation published; 24-month implementation clock starts
+         NIST SP 800-63-4 second public draft
+2025 — EU member states deploying national EUDIW wallets
+         Post-quantum considerations entering ICAO e-passport discussion
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Digital_Identity_Overview.md         — Trust hierarchy, identity proofing, authentication
+  01_FIDO2_WebAuthn_Passkeys.md           — Full technical spec, attestation, ceremonies
+  02_NIST_SP_800_63_Identity_Assurance.md — IAL/AAL/FAL levels, proofing methods
+  03_eIDAS_EUDIW_EU_Wallet.md             — eIDAS 2.0, trust services, wallet architecture
+  04_ICAO_9303_ePassport.md               — LDS structure, BAC/PACE/EAC, chip architecture
+  05_Biometric_ISO_19794_Standards.md     — Data formats, PAD testing, vendor evaluation
+  06_OpenID_OAuth_SAML_Federation.md      — Federation protocols, token standards
+  07_Decentralized_Identity_DID_VC.md     — W3C DID/VC, SSI architecture, EBSI
+  08_PIV_CAC_Smart_Card.md                — US government identity, GlobalPlatform
+  09_Biometric_Accuracy_Evaluation.md     — NIST FRVT, FAR/FRR, FMR, FNMR metrics
+  10_Identity_Privacy_GDPR.md             — Biometric as special category data
+  11_Identity_Interview_Questions.md

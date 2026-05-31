@@ -1,0 +1,105 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 07 — WIRELESS, RF & IoT STANDARDS                                      ║
+║  IEEE 802.11 Wi-Fi 7, Bluetooth 6, Matter, Thread, UWB, LoRaWAN, NB-IoT         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 5 — Connectivity & RF  |  OUTPUT DIR: 07_Wireless_RF_IoT/
+
+STANDARDS UNIVERSE:
+Wi-Fi (IEEE 802.11):
+  IEEE 802.11b (1999)           — 2.4 GHz, 11 Mbps (Wi-Fi 1)
+  IEEE 802.11a (1999)           — 5 GHz, 54 Mbps (Wi-Fi 2)
+  IEEE 802.11g (2003)           — 2.4 GHz, 54 Mbps (Wi-Fi 3)
+  IEEE 802.11n (2009)           — MIMO, 2.4/5 GHz, 600 Mbps (Wi-Fi 4)
+  IEEE 802.11ac (2013)          — 5 GHz, MU-MIMO, 6.9 Gbps (Wi-Fi 5)
+  IEEE 802.11ax (2021)          — OFDMA, BSS coloring, 9.6 Gbps (Wi-Fi 6/6E)
+  IEEE 802.11be (2024)          — 320 MHz BW, MLO, 46 Gbps (Wi-Fi 7)
+  IEEE 802.11bn (in progress)   — Wi-Fi 8 (EHT extension)
+  WPA3 (Wi-Fi Alliance)         — SAE (Dragonfly) key exchange; PMF mandatory
+  Wi-Fi CERTIFIED 6E            — 6 GHz band (US, Europe, Brazil)
+
+BLUETOOTH:
+  Bluetooth 4.0 (2010)          — BLE (Low Energy): 1 Mbps, mesh prep
+  Bluetooth 4.2 (2014)          — IPv6/6LoWPAN, privacy enhancement
+  Bluetooth 5.0 (2016)          — 2 Mbps, 4x range, 8x broadcast capacity
+  Bluetooth 5.1 (2019)          — AoA/AoD direction finding
+  Bluetooth 5.2 (2020)          — LE Audio (LC3 codec), Auracast
+  Bluetooth 5.3 (2021)          — Enhanced reliability
+  Bluetooth 5.4 (2023)          — PAwR (Periodic Advertising with Responses)
+  Bluetooth 6.0 (2024)          — Channel Sounding (High Accuracy Ranging), HADM
+  Bluetooth Mesh 1.1 (2022)     — BT Mesh networking specification
+  BLE Audio / LE Audio (2022)   — Multi-stream, hearing aid profile (TMAP, HAP)
+
+IEEE 802.15 (PAN / WPAN):
+  IEEE 802.15.4-2020            — Physical and MAC for WPAN (ZigBee, Thread, 6LoWPAN base)
+  IEEE 802.15.4z (2020)         — HRP UWB physical layer amendment
+  IEEE 802.15.4a (2007)         — UWB impulse radio PHY
+  IEEE 802.15.1                 — Bluetooth (IEEE normative base, now Bluetooth SIG driven)
+
+MATTER & SMART HOME:
+  Matter 1.0 (CSA, 2022)        — Connectivity Standards Alliance (formerly Zigbee Alliance)
+      IP-based (Thread, Wi-Fi, BLE for commissioning)
+      Supported by Apple, Amazon, Google, Samsung
+  Matter 1.1 (2023)             — EV charging, energy management
+  Matter 1.2 (2023)             — Refrigerators, room AC, smoke detectors, cameras
+  Matter 1.3 (2024)             — Water management, EV, energy appliances
+  CSA Zigbee 3.0 (2016)         — Legacy Zigbee (moving to Matter)
+  Z-Wave Alliance (800 series)  — Sub-GHz home automation (800-series chips)
+
+THREAD:
+  Thread 1.1 / 1.3 (Thread Group) — 6LoWPAN mesh, IEEE 802.15.4 PHY/MAC
+  OpenThread                     — Open source Thread stack (Google)
+  Matter commissioning over Thread — Border Router (OTBR)
+
+ULTRA-WIDEBAND (UWB):
+  IEEE 802.15.4z (2020)          — HRP UWB, STS for ranging
+  FiRa Consortium (2019)         — Interoperability profiles for UWB ranging
+  CCC (Car Connectivity Consortium) Digital Key 3.0 — UWB car access
+  ISO/IEC 24730-62:2021          — UWB RTLS standard
+  FiRa UCI spec                  — UWB Controller Interface protocol
+
+LPWAN (Low Power Wide Area Network):
+  LoRaWAN (LoRa Alliance)        — L2 specification v1.1; class A/B/C devices
+      LoRaWAN 1.0.4 (2020), LoRaWAN 1.1 (2017) — MAC protocol
+      Regional Parameters v1.0.3 — Channel plans (EU868, US915, AS923, AU915)
+  NB-IoT (3GPP R13/14)           — Narrowband IoT; Cat-NB1/NB2
+  LTE-M / eMTC (3GPP R13)        — LTE Machine Type Communication Cat-M1/M2
+  Sigfox (ETSI TS 103 868)       — 868/915 MHz ALOHA-based LPWAN
+  Weightless-P (Weightless SIG)  — TDMA 169 MHz LPWAN
+
+RF REGULATORY:
+  FCC Part 15 (Subpart C/F)      — Unintentional/intentional radiators (US)
+  FCC Part 15.247/407            — 2.4 GHz/5 GHz ISM and UNII bands
+  RED (Radio Equipment Directive 2014/53/EU) — CE marking for RF devices in EU
+  ETSI EN 300 328 v2.2.2         — Wi-Fi 2.4 GHz conformance (EU)
+  ETSI EN 301 893 v2.1.1         — Wi-Fi 5 GHz (EU)
+  ARIB STD-T66/T71               — Japan 2.4/5 GHz regulations (MIC Japan)
+  KC Korea (MSIT/NRA)            — Korea electromagnetic spectrum regulation
+  ANATEL Brazil                  — Brasil RF equipment type approval
+
+HISTORICAL TIMELINE:
+  1998 — Bluetooth SIG founded (Nokia, Ericsson, IBM)
+  1999 — IEEE 802.11b (Wi-Fi 1); Wi-Fi Alliance formed
+  2003 — WPA security (RC4 patch for WEP)
+  2004 — WPA2 (AES-CCMP)
+  2006 — ZigBee 1.0 stack (IEEE 802.15.4 based)
+  2009 — IEEE 802.11n (Wi-Fi 4 MIMO)
+  2010 — Bluetooth 4.0 BLE (low energy revolution)
+  2013 — Wi-Fi 5 (802.11ac); BLE proliferation in fitness devices
+  2014 — LoRaWAN specification v1.0
+  2016 — Mirai botnet: IoT device botnet → IoT security standardization urgency
+  2018 — WPA3 (SAE); Wi-Fi 6 (802.11ax) development
+  2019 — Wi-Fi 6 (802.11ax) certified; Thread 1.1
+  2020 — IEEE 802.15.4z UWB; Matter (then CHIP) announced
+  2021 — WPA3 mandatory for Wi-Fi CERTIFIED devices
+  2022 — Matter 1.0; Wi-Fi 6E (6 GHz) deployments; Bluetooth 5.3
+  2023 — Wi-Fi 7 (802.11be) drafts; LoRaWAN v1.1 mainstream
+  2024 — Wi-Fi 7 certified; Bluetooth 6.0 (channel sounding); Matter 1.3
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Wireless_RF_IoT_Overview.md        01_Wi_Fi_IEEE_802_11_History.md
+  02_Wi_Fi_7_IEEE_802_11be.md           03_Bluetooth_5_and_6.md
+  04_BLE_Audio_LE_Audio.md              05_Matter_Smart_Home_Protocol.md
+  06_Thread_6LoWPAN.md                  07_UWB_IEEE_802_15_4z.md
+  08_LoRaWAN_LPWAN.md                   09_NB_IoT_eMTC_Cat_M.md
+  10_Wi_Fi_Security_WPA3.md             11_IoT_Security_Standards.md
+  12_RF_Regulatory_FCC_RED.md

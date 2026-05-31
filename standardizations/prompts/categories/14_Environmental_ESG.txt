@@ -1,0 +1,103 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 14 — ENVIRONMENTAL, ESG & HAZARDOUS SUBSTANCE COMPLIANCE              ║
+║  RoHS 3, REACH SVHC, WEEE, PFAS, Conflict Minerals, GHG Protocol, ISO 14001    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 4 — Energy, Power & Sustainability  |  OUTPUT DIR: 14_Environmental_ESG/
+
+STANDARDS UNIVERSE:
+HAZARDOUS SUBSTANCE RESTRICTIONS:
+  RoHS 3 Directive (EU 2015/863/EU) — Restriction of Hazardous Substances (10 substances)
+      8 from RoHS 2: Pb, Hg, Cd, Cr(VI), PBB, PBDE, DEHP, BBP, DBP, DIBP
+      Applies to EEE placed on EU market; max 0.1% (0.01% Cd) by weight
+  REACH Regulation (EC 1907/2006)  — Registration, Evaluation, Authorisation and Restriction
+      SVHC (Substances of Very High Concern): Article 59 candidate list (250+ substances)
+      SVHC >0.1% in article: inform customers; >1 tonne/year: ECHA notification
+      Authorisation: PFAS, phthalates, hexavalent chromium
+  WEEE Directive (2012/19/EU)      — Waste Electrical and Electronic Equipment
+      Producer responsibility; collection targets (45/65%); recycling categories
+  RoHS China (SJ/T 11364-2014)     — China RoHS marking requirements
+  RoHS Japan (JPOSSM)               — Japan Green Procurement Guidelines
+  TSCA (US EPA)                     — Toxic Substances Control Act (Frank R. Lautenberg Chemical Safety Act 2016)
+  California Prop 65               — OEHHA listed chemicals; discharge warning
+
+PFAS & EMERGING POLLUTANTS:
+  REACH PFAS restriction (Annex XV) — EU universal PFAS restriction proposal (pending 2026)
+  US PFAS Strategic Roadmap (EPA)  — Drinking water, cleanup
+  EU Drinking Water Directive        — 0.1 μg/L total PFAS limit
+  ECHA PFAS classification           — C8/C4 PFOS/PFOA/PFNA already restricted under Stockholm
+
+CONFLICT MINERALS:
+  US Dodd-Frank Act Section 1502    — 3TG minerals (tantalum, tin, tungsten, gold) from DRC
+  OECD Due Diligence Guidance       — Responsible mineral supply chains
+  EU Conflict Minerals Regulation (2017/821) — Effective Jan 2021
+  RMI (Responsible Minerals Initiative) — CMRT (Conflict Minerals Reporting Template)
+  London Bullion Market Association  — Responsible Gold Guidance
+
+ENVIRONMENTAL MANAGEMENT SYSTEMS:
+  ISO 14001:2015                    — Environmental Management System (EMS)
+  ISO 14004:2016                    — EMS: guidance for implementation
+  ISO 14040:2006                    — Life Cycle Assessment (LCA): principles
+  ISO 14044:2006                    — LCA: requirements and guidelines
+  ISO 14064 series                  — GHG inventory and verification
+  ISO 50001:2018                    — Energy Management System (EnMS)
+
+GREENHOUSE GAS & CLIMATE:
+  GHG Protocol (WRI/WBCSD)         — Corporate accounting and reporting standard
+      Scope 1 (direct); Scope 2 (purchased energy); Scope 3 (value chain)
+  Paris Agreement (2015)            — 1.5°C target; NDC reporting
+  TCFD (Task Force on Climate-Related Financial Disclosures) — Climate risk disclosure
+  ISSB IFRS S1/S2 (2023)           — Sustainability disclosure standards (replaces TCFD)
+  EU CSRD (Corporate Sustainability Reporting Directive 2022) — Mandatory ESG reporting
+  EU Taxonomy Regulation (2020/852) — Green finance classification
+  SBTI (Science Based Targets initiative) — Corporate emissions reduction pathways
+  SEC Climate Disclosure Rules (2024) — Scope 1/2 emissions in financial filings
+
+ELECTRONIC RECYCLING & CIRCULAR ECONOMY:
+  EU Ecodesign Regulation (ESPR 2022) — Right to repair, recyclability, digital product passport
+  EU Battery Regulation 2023/1542   — Battery passport, recycled content targets, extended producer responsibility
+  IPC-1752A                         — Materials Declaration (replaces IPC-1752)
+  IPC-4101C                         — Specification for Base Materials (halogen-free)
+  JEDEC JESD97                      — Marking and Labeling of Lead-Free
+  IPC-9701A                         — Performance Test Methods for Pb-Free Solder
+  IEC 62321 series                  — RoHS substance testing methods
+
+ESG REPORTING FRAMEWORKS:
+  GRI Standards (Global Reporting Initiative) — GRI 300 series: Environmental; GRI 400: Social
+  SASB Standards                    — Industry-specific ESG metrics (now ISSB)
+  CDP (Carbon Disclosure Project)   — Supply chain climate questionnaire
+  ISO 26000:2010                    — Guidance on social responsibility
+  B Corp Certification              — Social/environmental performance standards
+  UN SDGs (Sustainable Development Goals) — 17 goals, 169 targets
+
+RESTRICTED CHEMICAL DATABASES:
+  ECHA C&L Inventory               — GHS classification and labelling
+  RSL (Restricted Substances List)  — AFIRM, Apparel industry
+  Full Material Declaration (FMD)  — IPC-1752A; Chemist AIS format
+  IEC 62474                         — Declarable substance list for electrotechnical products
+
+HISTORICAL TIMELINE:
+  1972 — Stockholm Conference on Human Environment (UN first env. conference)
+  1987 — Montreal Protocol: CFCs and ozone
+  1994 — Basel Convention: transboundary hazardous waste
+  1995 — EU Packaging Directive
+  2001 — Stockholm Convention: POPs (persistent organic pollutants)
+  2003 — EU RoHS 2002/95/EC published; WEEE 2002/96/EC
+  2006 — RoHS enforcement; REACH regulation enters into force
+  2011 — RoHS 2 (2011/65/EU) + WEEE 2012 update
+  2012 — WEEE Directive recast
+  2015 — RoHS 3 delegated regulation for 4 phthalates
+  2016 — Paris Agreement enters into force
+  2020 — TCFD recommendations widely adopted by financial regulators
+  2021 — EU Conflict Minerals Regulation full enforcement
+  2022 — EU CSRD; EU Battery Regulation; ISSB formation
+  2023 — ISSB IFRS S1/S2 published; US SEC climate rules proposed
+  2024 — EU ESPR digital product passport; PFAS universal restriction proposal
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Environmental_ESG_Overview.md    01_RoHS_Directive_Compliance.md
+  02_REACH_SVHC_Management.md         03_WEEE_Extended_Producer_Resp.md
+  04_PFAS_Restrictions.md             05_Conflict_Minerals_3TG.md
+  06_ISO_14001_EMS.md                 07_GHG_Protocol_Scope_1_2_3.md
+  08_ESG_Reporting_Frameworks.md      09_Life_Cycle_Assessment_ISO14040.md
+  10_EU_Battery_Regulation.md         11_Material_Declaration_IPC1752.md
+  12_Digital_Product_Passport.md

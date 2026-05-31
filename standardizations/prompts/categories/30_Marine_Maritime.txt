@@ -1,0 +1,129 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 30 — MARINE & MARITIME STANDARDS                                      ║
+║  IMO, SOLAS, ISM Code, IEC 61162, DNV, Lloyd's Register, IACS                  ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  7 — Transportation
+OUTPUT DIR:   30_Marine_Maritime/
+APPLIES TO:   Marine electronics engineers, ship automation designers, naval architects,
+              classification society surveyors, ECDIS/AIS system engineers, autonomous
+              vessel (MASS) developers, offshore platform electronics teams
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IMO (International Maritime Organization):
+  SOLAS (Safety of Life at Sea) — Consolidated Edition 2020
+      Chapter II-1: Construction, structure, subdivision
+      Chapter II-2: Fire protection, detection, extinction
+      Chapter III: Life-saving appliances
+      Chapter IV: Radiocommunications (GMDSS)
+      Chapter V: Safety of navigation (ECDIS, AIS, VDR, LRIT)
+      Chapter XI-2: Special measures to enhance maritime security (ISPS Code)
+  MARPOL (Marine Pollution) — Annexes I-VI
+      Annex VI: Air pollution (SOx, NOx, GHG)
+  ISM Code (International Safety Management) — Safety management systems
+  ISPS Code — International Ship & Port Facility Security Code
+  STCW Convention — Standards of Training, Certification and Watchkeeping
+  MLC (Maritime Labour Convention) 2006 — Seafarer working conditions
+  COLREGS — Convention on the International Regulations for Preventing Collisions at Sea
+  UNCLOS — UN Convention on the Law of the Sea
+  Load Line Convention (LL66/88) — Structural integrity and freeboard
+
+IEC MARINE STANDARDS:
+  IEC 60945:2002               — Maritime navigation & radiocommunication: general requirements
+  IEC 61162 series             — Digital interfaces for navigation:
+      IEC 61162-1:2016         — Single talker, multiple listeners (NMEA 0183 based)
+      IEC 61162-2              — IEC 61162-1, serial high-speed communication
+      IEC 61162-3:2010         — Serial data: instrument networks (IEC 61162-1 extended)
+      IEC 61162-450:2018       — Multiple talkers/listeners — Ethernet interconnection
+      IEC 61162-460:2015       — Ethernet interconnection (integrated bridge systems)
+  IEC 62287-1:2017             — AIS (Automatic Identification System) Class A
+  IEC 61924-2                  — Integrated navigation systems
+  IEC 60092 series             — Electrical installations in ships
+  IEC 60533:2015               — Electrical and electronic installations (EMC)
+  IEC 61191-2                  — Electronic assemblies (printed board assembly)
+
+CLASSIFICATION SOCIETIES (Rules & Standards):
+  DNV (Det Norske Veritas)     — DNV Rules for Ships; CyberSecurity RP-0496/0521
+  Lloyd's Register (LR)        — Rules and Regulations for Classification
+  ABS (American Bureau of Shipping) — Rules for Building and Classing
+  Bureau Veritas (BV)          — Rules for the Classification of Steel Ships
+  ClassNK (Nippon Kaiji Kyokai) — Japanese classification rules
+  RINA (Italian Register)      — Rules and Standards
+  CCS (China Classification Society) — China rules
+  IACS (Intl. Assn. of Classification Societies) — Unified Requirements (UR)
+      IACS E22 — Software maintenance; IACS E10 — Machinery alarms
+
+NAVIGATION SYSTEMS:
+  ECDIS: IEC 61174:2015        — Electronic Chart Display & Information System
+  AIS: ITU-R M.1371-5          — Technical characteristics for Class A/B AIS
+  GNSS: IEC 61108 series       — Global navigation satellite systems (GPS, GLONASS, Galileo)
+  VDR: IEC 61996-1:2013        — Voyage Data Recorders (black box for ships)
+  S-VDR: IEC 61996-2           — Simplified VDR for smaller vessels
+  LRIT: SOLAS Reg. V/19-1      — Long Range Identification and Tracking
+  ARPA: IEC 62288:2021         — Radar plotting aids
+
+CYBERSECURITY:
+  IMO Res. MSC-FAL.1/Circ.3   — Maritime cybersecurity guidelines (2017)
+  BIMCO / INTERTANKO guidelines — Industry cybersecurity guidelines
+  IACS UR E26 (2022)           — Cyber resilience for ships (mandatory from 2024)
+  IACS UR E27 (2022)           — Cyber resilience for ship systems
+  NIST CSF maritime adaptation  — US Coast Guard cybersecurity guidance
+  IEC 62443 for OT systems on ships
+
+AUTOMATION & AUTONOMOUS SHIPS:
+  IMO MASS Framework           — Maritime Autonomous Surface Ships (degree 1-4)
+  DNV Cyber SECURE notation    — Autonomous vessel cybersecurity
+  IACS Unified Req. UR S27    — Bridge design
+  IEEE P2061                   — Unmanned maritime vessels (draft)
+  ISO 19847 / ISO 19848        — Ship condition monitoring, data transmission
+
+OFFSHORE:
+  IEC 61511 (Safety of Process Plants) — Applied to offshore oil & gas platforms
+  NORSOK standards (Norway)    — Norwegian Petroleum Industry standards
+  API RP 14C                   — Analysis, Design, Installation of SCSSV
+  DNV-OS-D202                  — Automation, Safety and Telecom for offshore
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1912 — RMS Titanic sinking: 1,500 dead → triggers first SOLAS Convention (1914)
+1929 — SOLAS 1929: international agreement on minimum safety standards
+1948 — IMO established (as IMCO, Inter-Governmental Maritime Consultative Organization)
+1960 — SOLAS 1960: major update post-WWII maritime expansion
+1974 — SOLAS 1974 (current base): comprehensive safety framework
+1978 — SOLAS Protocol 1978: tanker safety post-Amoco Cadiz spill
+1979 — Amoco Cadiz: 1.6M barrels spilled → MARPOL ratification acceleration
+1989 — Exxon Valdez: 37,000 tons crude → OPA 90 (USA) and MARPOL Annex I tightening
+1994 — Estonia ferry disaster (852 dead): roll-on/roll-off ferry stability requirements
+2001 — 9/11 → ISPS Code development for port and ship security
+2004 — ISM Code becomes universal for all ships >500 GT
+2012 — Costa Concordia (32 dead): evacuation procedures, ECDIS mandatory timeline set
+2016 — ECDIS mandatory for most vessel types (finally)
+2017 — IMO MSC-FAL.1/Circ.3: first maritime cyber guidance
+2019 — IMO 2020: global 0.5% sulphur cap (SOx regulations, MARPOL Annex VI)
+2021 — IMO initial GHG strategy: 50% reduction by 2050
+2022 — IACS UR E26/E27: mandatory cyber resilience requirements for new ships
+2023 — IMO revised GHG strategy: net-zero by 2050
+         MASS Code development (autonomous ships regulatory framework)
+2024 — Maritime cyber incidents increase (GPS spoofing in Black Sea, Red Sea)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Maritime_Standards_Overview.md        — IMO structure, SOLAS chapters, classification
+  01_SOLAS_Deep_Dive.md                    — All chapters, amendment history, compliance
+  02_IEC_61162_NMEA_Integration.md         — Navigation bus protocols, Ethernet bridge
+  03_ECDIS_AIS_VDR_Standards.md            — Navigation electronics type approval
+  04_ISM_Code_Safety_Management.md         — SMS elements, DOC, SMC, ISM audit
+  05_ISPS_Maritime_Security.md             — Ship Security Plan, SSO, port facility interface
+  06_Classification_Society_Overview.md    — DNV/LR/ABS comparison, notations, surveys
+  07_IACS_E26_E27_Cyber_Resilience.md      — New build cybersecurity requirements
+  08_MASS_Autonomous_Ships.md              — Degree 1-4 autonomy, IMO MASS Code
+  09_Maritime_GHG_ESG_MARPOL.md            — Annex VI, CII, EEXI, IMO 2050 strategy
+  10_Maritime_Case_Studies.md              — Titanic, Estonia, Costa Concordia, GPS spoofing
+  11_Maritime_Interview_Questions.md

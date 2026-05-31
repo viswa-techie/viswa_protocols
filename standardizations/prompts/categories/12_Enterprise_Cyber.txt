@@ -1,0 +1,104 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 12 — ENTERPRISE CYBERSECURITY                                          ║
+║  NIST CSF 2.0, NIST SP 800-53 Rev5, Zero Trust, ISO 27001:2022, CIS Controls    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 2 — Security & Privacy  |  OUTPUT DIR: 12_Enterprise_Cyber/
+
+STANDARDS UNIVERSE:
+NIST CYBERSECURITY FRAMEWORK:
+  NIST CSF 2.0 (2024)          — Cybersecurity Framework: Govern, Identify, Protect, Detect, Respond, Recover
+      New function: GOVERN (CSF 2.0 addition)
+      Tiers: 1 Partial → 4 Adaptive
+      Profiles: Current vs. Target; gap analysis
+  NIST CSF 1.1 (2018)          — Earlier version (still widely referenced)
+  NIST Privacy Framework 1.0 (2020) — Complement to CSF for privacy
+
+NIST SPECIAL PUBLICATIONS:
+  NIST SP 800-53 Rev5 (2020)    — Security and Privacy Controls for Information Systems
+      20 families: AC, AT, AU, CA, CM, CP, IA, IR, MA, MP, PE, PL, PM, PS, RA, SA, SC, SI, SR, PT
+      Privacy controls integrated (unlike Rev4)
+  NIST SP 800-53A Rev5 (2022)   — Assessment Procedures for 800-53
+  NIST SP 800-37 Rev2 (2018)    — Risk Management Framework (RMF): 7 steps
+  NIST SP 800-30 Rev1           — Guide for Conducting Risk Assessments
+  NIST SP 800-39                — Managing Information Security Risk (3 tiers)
+  NIST SP 800-61 Rev2           — Computer Security Incident Handling Guide
+  NIST SP 800-92                — Log Management Guide
+  NIST SP 800-137A              — Continuous Monitoring (ISCM)
+  NIST SP 800-171 Rev2/3        — Protecting CUI in non-federal systems
+  NIST SP 800-172               — Enhanced CUI requirements (CMMC basis)
+
+ZERO TRUST:
+  NIST SP 800-207               — Zero Trust Architecture (2020)
+      Core tenets: verify explicitly, use least privilege, assume breach
+      ZTA components: PE, PEP, PA (Policy Engine, Enforcement Point, Admin)
+  CISA Zero Trust Maturity Model v2.0 — 5 pillars: Identity, Devices, Networks, Apps, Data
+  DoD Zero Trust Strategy (2022) — Target Level / Advanced Level
+  BeyondCorp (Google)           — Enterprise ZTA implementation reference
+
+ISO/IEC 27000 SERIES:
+  ISO/IEC 27001:2022            — Information Security Management System (ISMS)
+      Annex A: 93 controls (restructured from 114 in 2013)
+      New controls: 11 added (threat intelligence, cloud security, ICT continuity)
+  ISO/IEC 27002:2022            — Information security controls guidance
+      4 themes: Organizational (37), People (8), Physical (14), Technological (34)
+  ISO/IEC 27005:2022            — Information security risk management
+  ISO/IEC 27017:2015            — Cloud security (ISO 27002 extension)
+  ISO/IEC 27018:2019            — PII in public cloud (privacy)
+  ISO/IEC 27019:2017            — Energy utility sector controls
+  ISO/IEC 27031:2011            — ICT readiness for business continuity
+  ISO/IEC 27032:2023            — Cybersecurity guidelines for the Internet
+  ISO/IEC 27035 series          — Incident management
+  ISO/IEC 27701:2019            — Privacy Information Management (PIMS) — extension to 27001
+
+SOC 2 (AICPA):
+  SOC 2 Type I / Type II        — Trust Services Criteria: Security, Availability, Processing Integrity, Confidentiality, Privacy
+  TSC CC series                 — Common Criteria (Security principle: CC1-CC9)
+  SOC 2+ extensions             — HIPAA, HITRUST, CSA STAR mappings
+
+CIS CONTROLS:
+  CIS Controls v8 (2021)        — 18 controls; Implementation Groups IG1/IG2/IG3
+      IG1: Essential cyber hygiene (< 25 controls for SMBs)
+  CIS Benchmarks                — Hardening benchmarks (OS, cloud, containers, applications)
+  CIS CSAT Pro                  — Self-assessment tool
+
+THREAT INTELLIGENCE & ATTACK FRAMEWORKS:
+  MITRE ATT&CK v14              — Enterprise: 196 techniques, 14 tactics
+  MITRE ATT&CK ICS              — ICS-specific tactics and techniques
+  MITRE ATT&CK Mobile           — Mobile threat matrix
+  MITRE D3FEND                  — Defensive techniques (countermeasure to ATT&CK)
+  STIX 2.1 / TAXII 2.1          — Structured Threat Intelligence eXchange / transport
+  CAPEC (MITRE)                 — Common Attack Pattern Enumeration and Classification
+  CVE / CWE / CVSS v4.0         — Vulnerability enumeration, weakness enumeration, scoring
+  EPSS (FIRST.org)              — Exploit Prediction Scoring System
+  NVD (NIST)                    — National Vulnerability Database
+
+COMPLIANCE FRAMEWORKS:
+  FedRAMP                       — US Federal cloud authorization (NIST SP 800-53 basis)
+  CMMC 2.0                      — Cybersecurity Maturity Model (DoD contractors; NIST 800-171)
+  HIPAA Security Rule           — Healthcare: administrative, physical, technical safeguards
+  HITRUST CSF v11               — Healthcare: 19 domains, 250+ controls
+  PCI DSS v4.0 (2022)           — Payment security (see Category 28)
+  DORA (EU 2022/2554)           — Digital Operational Resilience Act for financial sector
+  EU NIS2 Directive (2022)      — Critical infrastructure cybersecurity
+  EU CRA (Cyber Resilience Act) — Product cybersecurity and SBOM
+
+HISTORICAL TIMELINE:
+  2003 — ISF Standard of Good Practice published
+  2005 — ISO/IEC 27001:2005 first edition
+  2008 — NIST SP 800-53 Rev1; PCI DSS v1.2
+  2013 — NIST CSF 1.0 (Obama EO 13636); ISO 27001:2013
+  2014 — NIST CSF 1.0 published (Feb 2014)
+  2018 — NIST SP 800-207 ZTA drafts begin; CSF 1.1
+  2020 — SolarWinds: ZTA urgency; NIST SP 800-207 final
+  2021 — US EO 14028 (ZTA mandate for federal); Log4Shell
+  2022 — NIST SP 800-53 Rev5 final; ISO 27001:2022
+  2024 — NIST CSF 2.0 (February); CMMC 2.0 final rule; CVSS v4.0
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Enterprise_Cyber_Landscape.md      01_NIST_CSF_2_0.md
+  02_NIST_SP_800_53_Rev5.md             03_Zero_Trust_Architecture.md
+  04_ISO_27001_2022_ISMS.md             05_SOC2_AICPA.md
+  06_CIS_Controls_v8.md                 07_MITRE_ATT_CK.md
+  08_CVE_CVSS_Vulnerability_Mgmt.md     09_FedRAMP_CMMC.md
+  10_EU_NIS2_DORA_CRA.md               11_Incident_Response_NIST.md
+  12_Threat_Intelligence_STIX_TAXII.md

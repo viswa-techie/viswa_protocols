@@ -1,0 +1,244 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 99 — MISCELLANEOUS & SPECIALIZED INDUSTRIES                            ║
+║  Oil & Gas, Mining, Agriculture, Food, Chemicals, Pharma, Broadcasting,          ║
+║  Consumer Appliances, Packaging/Logistics, Nuclear, HPC                           ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  All domains (Cross-Industry Reference)
+OUTPUT DIR:   99_Misc_Industries/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MISSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate a CONCISE REFERENCE GUIDE covering standards for specialized industries
+not covered in the primary 40 categories. One chapter per industry. Each chapter
+should be 500-1000 words: key standards, SDOs, major compliance requirements, and
+notable incidents. This is a reference document, not a deep-dive guide.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 1: OIL, GAS & PETROCHEMICALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: API (American Petroleum Institute), IEC TC31, ATEX, IECEx
+Key Standards:
+  API 570           — Piping Inspection Code
+  API 580           — Risk-Based Inspection (RBI)
+  API 750           — Management of Process Hazards
+  API 1165          — Recommended Practice for Pipeline SCADA Displays
+  IEC 60079 series  — Equipment in explosive atmospheres (ATEX zone classification)
+  IECEx (2001)      — International Explosive Atmospheres Certification Scheme
+  ATEX Directive 2014/34/EU — Equipment in explosive atmospheres (EU)
+  IEC 61511:2016    — Functional safety: process industry (SIS for oil & gas)
+  ISA-84 (ANSI/ISA-84.00.01) — US equivalent of IEC 61511
+  IP Rating (IEC 60529) — Ingress protection for equipment
+  HAZOP studies     — Standard method for oil & gas PHA (Process Hazard Analysis)
+  Piper Alpha (1988): 167 dead; UK Offshore Installations Regulations
+  Deepwater Horizon (2010): blowout preventer; BSEE regulations; BOEMRE
+
+Incidents driving standards:
+  Bhopal 1984 → ISA-84 / IEC 61511 (SIS for process)
+  Piper Alpha 1988 → UK OSR; offshore safety case
+  Texas City 2005 → CSB Investigation; API RP 754 (process safety indicators)
+  Deepwater Horizon 2010 → US BSEE regulations; API S53
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 2: MINING & EXTRACTIVE INDUSTRIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: ISO TC 82 (Mining), MSHA (US), IEC TC31
+Key Standards:
+  ISO 13850         — Safety of machinery: Emergency stop function
+  ISO 17757          — Autonomous and semi-autonomous machinery: safety
+  IEC 60079          — Hazardous areas: explosion protection (underground)
+  MSHA 30 CFR Part 56/57 — US Mine Safety: surface/underground
+  IEC 62280          — Railway application (applied in mine railway)
+  Anglo American / BHP internal SLAM — Stop, Look, Assess, Manage risk
+  Rio Tinto FMG AutoHaul — Autonomous haul trucks (700+ worldwide); proximity detection
+  ISO 9001 / ISO 45001 — Quality + OHS management system
+  ICMM (International Council on Mining & Metals) — Sustainability principles
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 3: AGRICULTURE & AGRITECH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: ISO TC 23, AEF (Agricultural Industry Electronics Foundation)
+Key Standards:
+  ISO 11783 (ISOBUS) — Tractors and machinery for agriculture: CAN-based bus
+      Parts 1-14; replaces NMEA 2000 for agriculture
+  ISO 25119         — Agricultural tractors and machinery: functional safety (SIL equivalent: AgrIL a-d)
+  AEF ISOBUS        — Interoperability implementation (virtual terminal, task controller)
+  ISO 11474         — Machinery for agriculture: ergonomics
+  ISO 10884         — Tractors: operator environment
+  EU Machinery Directive (2006/42/EC) — Applies to agricultural equipment
+  US EPA Tier 4 Final — Engine emissions for agricultural equipment
+  UN/ECE R 108/109   — Tyres for agricultural vehicles
+  GPS-based precision farming standards — NTRIP, RTCM, VRS networks
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 4: FOOD TECHNOLOGY & FOOD SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: Codex Alimentarius Commission (FAO/WHO), ISO TC 34, GFSI
+Key Standards:
+  ISO 22000:2018    — Food safety management system (FSMS) — combines HACCP + ISO 9001
+  HACCP             — Hazard Analysis Critical Control Points (Codex Alimentarius)
+  ISO/TS 22002 series — Prerequisite programs for food safety sectors
+  BRC Global Standard (Issue 9) — British Retail Consortium food safety
+  FSSC 22000 v6     — Food Safety System Certification (ISO 22000 + TS 22002)
+  SQF Code Ed. 9    — Safe Quality Food Institute certification
+  GlobalGAP         — Good Agricultural Practices certification for produce
+  FDA FSMA (2011)   — Food Safety Modernization Act (US): preventive controls
+  GFSI              — Global Food Safety Initiative: benchmarking scheme (BRC, SQF, IFS)
+  ISO 22005         — Traceability in feed and food chain
+  EU Reg 852/2004   — Food hygiene regulation (Hygiene Package)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 5: CHEMICAL PROCESSING & PROCESS PLANTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: ISA, IEC TC65, EIGA (European Industrial Gases Association)
+Key Standards:
+  IEC 61511:2016    — Safety Instrumented Systems for process (SIL)
+  ISA-84.00.01      — Functional safety: SIS (US equivalent)
+  IEC 61512 (ISA-88) — Batch process control
+  ISA-106           — Procedural automation for continuous process operations
+  OSHA PSM (29 CFR 1910.119) — Process Safety Management (US)
+  EPA RMP           — Risk Management Plan (US: chemical release)
+  Seveso III Directive (2012/18/EU) — Chemical accident prevention
+  Responsible Care (CEFIC, ICCA) — Chemical industry self-regulation
+  COSHH (UK HSE)    — Control of Substances Hazardous to Health
+  IEC 80001-1       — IT networks: risk management (applied in process)
+  ISO 14001 (EMS)   — Environmental management for chemical plants
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 6: PHARMACEUTICAL MANUFACTURING & BIOTECHNOLOGY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: ICH (International Council for Harmonisation of Technical Requirements)
+Key Standards:
+  FDA 21 CFR Part 11 — Electronic records & electronic signatures
+  FDA 21 CFR Part 210/211 — Current Good Manufacturing Practice (cGMP) for drugs
+  ICH Q7            — Good Manufacturing Practice for APIs
+  ICH Q8(R2)        — Pharmaceutical Development (Quality by Design)
+  ICH Q9(R1)        — Quality Risk Management
+  ICH Q10           — Pharmaceutical Quality System
+  GxP               — Good Laboratory/Manufacturing/Clinical Practice umbrella
+  EU GMP Annex 11   — Computerised systems in pharmaceutical manufacturing
+  ISPE GAMP 5       — Software validation for pharma (user, functional, design requirements)
+  EU Falsified Medicines Directive — Serialization, traceability
+  ISO 13485:2016    — QMS for medical devices (some pharma crossover)
+  CSV (Computer System Validation) — 21 CFR Part 11 + Annex 11 framework
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 7: CONSUMER APPLIANCES & WHITE GOODS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: IEC TC59, UL, AHAM
+Key Standards:
+  IEC 60335-1       — Safety of household and similar electrical appliances: general requirements
+  IEC 60335-2-x     — Specific appliance standards (Part 2-x for each type)
+      Part 2-3: Irons; Part 2-6: Cooking ranges; Part 2-11: Tumble dryers
+      Part 2-14: Kitchen machines; Part 2-25: Microwave ovens
+  IEC 60730 series  — Automatic electrical controls for household use
+  ENERGY STAR       — US EPA/DOE energy efficiency labeling (voluntary)
+  EU Ecodesign Directive — Energy efficiency requirements for appliances (Regulation 2019/2020)
+  EU Energy Labelling (Regulation 2017/1369) — A-G energy labels
+  AHAM (Association of Home Appliance Manufacturers) — Performance standards
+  HVI (Home Ventilating Institute) — Ventilation appliance ratings
+  FCC Part 18       — Industrial, scientific, and medical equipment (microwave ovens)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 8: BROADCASTING, AUDIO & VIDEO PRODUCTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: EBU, SMPTE, DVB, ATSC, ITU-R, AES
+Key Standards:
+  SMPTE ST 2110     — Professional Media over IP Networks (video, audio, metadata over IP)
+  SMPTE ST 2022     — Digital video transport over IP; ST 2022-6/7 (professional media)
+  DVB-T2            — Digital Video Broadcasting Terrestrial 2nd generation
+  DVB-S2X           — Satellite broadcasting
+  ATSC 3.0          — Next-Generation TV (US): HEVC, IP delivery, 4K HDR
+  HbbTV 2.0         — Hybrid Broadcast Broadband TV (EU interactive television)
+  AES67             — Audio over IP (Ravenna, Dante interoperability)
+  AES70 (OCA)       — Open Control Architecture for media networks
+  ITU-R BT.2020     — Wide Color Gamut (WCG): Rec. 2020 color space
+  ITU-R BT.2100     — High Dynamic Range (HDR): HLG and PQ transfer functions
+  H.264/H.265/H.266 — HEVC/VVC video compression (see Category 06)
+  SMPTE ST 12-1     — Timecode (SMPTE timecode)
+  MXF (SMPTE ST 377) — Material eXchange Format for professional video
+  IMF (SMPTE ST 2067) — Interoperable Master Format for streaming delivery
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 9: PACKAGING, SUPPLY CHAIN & LOGISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: GS1, ISO TC 122, ETSI TC ITS
+Key Standards:
+  GS1 Standards     — GTIN (barcode), SSCC (pallet), GLN (location), GRAI, GSRN
+  GS1-128 / EAN-13  — Barcode formats (linear)
+  GS1 DataMatrix    — 2D barcode; pharma serialization
+  GS1 RFID (EPC)    — Electronic Product Code (EPC Gen2 ISO 18000-63)
+  ISO 17363-17367   — RFID for supply chain (freight containers, returnable transport)
+  ISO 15394          — Bar code and 2D symbols for packages
+  ISO 11607          — Packaging for terminally sterilized medical devices
+  ISTA Transit Testing — International Safe Transit Association protocols
+  UN dangerous goods packaging — UN Model Regulations; ADR (road), RID (rail)
+  ISO 3394           — Dimensions of rigid rectangular packages (unit load)
+  GS1 EDI (EDIFACT/ANSI X12) — Electronic Data Interchange for supply chain
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 10: NUCLEAR POWER & RADIATION SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: IAEA, IEEE (Nuclear Power Engineering Committee), IEC TC45
+Key Standards:
+  IEC 61513:2011    — Nuclear power plants: Instrumentation and Control (I&C) architecture
+  IEC 62340          — Defense-in-depth for I&C systems
+  IEC 60880:2006    — I&C software: safety functions (SIL 4 equivalent)
+  IEC 62138          — Software for non-safety I&C functions
+  IEC 61226:2009    — Classification of I&C functions
+  IEEE 603          — IEEE Standard Criteria for Safety Systems of Nuclear Power Plants
+  IEEE 7-4.3.2       — IEEE Standard Criteria for Digital Computers in Safety Systems
+  IAEA Safety Standards (GSR, SSR, SSG series) — Nuclear safety fundamentals
+  NRC 10 CFR Part 50 (US) — Domestic licensing; Appendix B: Quality Assurance Criteria
+  RSK Guidelines (Germany) — Nuclear Safety Commission recommendations
+  N+2 defense in depth — Redundancy requirements for safety I&C
+  Key incidents: TMI (1979) → NUREG-0660; Chernobyl (1986) → INSAG-7; Fukushima (2011) → WANO
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INDUSTRY 11: HIGH PERFORMANCE COMPUTING (HPC)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SDO: Top500, Green500, OpenHPC Community
+Key Standards / Benchmarks:
+  TOP500 List        — LINPACK benchmark (Rmax, Rpeak): biannual HPC rankings
+  Green500 List      — Energy efficiency: GFLOPS/Watt (sublist of Top500)
+  HPCG (High-Performance Conjugate Gradient) — Realistic workload benchmark
+  HPL (High-Performance LINPACK) — BLAS-based dense linear algebra
+  MLPerf HPC         — AI training benchmarks for HPC (NVIDIA A100/H100 baselines)
+  MPI (Message Passing Interface) — MPI-4.0 (2021): standard for parallel computing
+  OpenMP 5.2         — Shared memory parallelism; SIMD vectorization
+  OpenHPC v2.x       — Community distribution for HPC tools, OpenHPC.community
+  OFI (OpenFabrics Interfaces) — Libfabric for RDMA/HPC networking
+  HPC IO Benchmark (IOR) — Parallel file system I/O performance
+  Lustre (OFI)       — Parallel file system (most HPC centers)
+  GPFS/Spectrum Scale — IBM parallel file system standard
+  LINPACK           — Dongarra et al. linear algebra benchmark (de facto HPC standard)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Misc_Industries_Overview.md         — Cross-reference to main categories; scope statement
+  01_Oil_Gas_Petrochemicals.md           — API standards; ATEX/IECEx; IEC 61511 SIS; major incidents
+  02_Mining_Extractive.md                — MSHA; IEC 60079 underground; autonomous equipment
+  03_Agriculture_AgriTech.md             — ISOBUS ISO 11783; ISO 25119 functional safety; precision farming
+  04_Food_Safety.md                      — HACCP; ISO 22000; FSSC 22000; FDA FSMA; traceability
+  05_Chemical_Processing.md             — IEC 61511; ISA-84; HAZOP; Seveso; process safety metrics
+  06_Pharmaceutical_Manufacturing.md    — GxP; FDA 21 CFR; ICH Q series; GAMP 5; CSV
+  07_Consumer_Appliances.md             — IEC 60335; Energy Star; EU Ecodesign; energy labels
+  08_Broadcasting_AV.md                  — SMPTE ST 2110; DVB; ATSC 3.0; AES67; HDR/WCG
+  09_Packaging_Logistics.md             — GS1; RFID EPC; ISO 17363; UN DG packaging
+  10_Nuclear_Power.md                    — IEC 61513; IEEE 603; IAEA safety standards; defense in depth
+  11_HPC_Computing.md                    — TOP500/Green500; MPI 4.0; OpenHPC; MLPerf HPC

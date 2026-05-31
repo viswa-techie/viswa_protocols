@@ -1,0 +1,107 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 15 — OPEN SOURCE LICENSING & SOFTWARE BILL OF MATERIALS (SBOM)        ║
+║  SPDX 3.0, OpenChain ISO 5230, CycloneDX, NTIA SBOM, GPL/Apache/MIT/BSD         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 8 — Software Quality & DevOps  |  OUTPUT DIR: 15_OpenSource_SBOM/
+
+STANDARDS UNIVERSE:
+SBOM FORMATS & STANDARDS:
+  SPDX 3.0 (Linux Foundation, 2024) — Software Package Data Exchange
+      Profiles: Software, Security, License, AI, Dataset, Build, Lint
+      Formats: JSON-LD, YAML, XML, Tag-Value, RDF/Turtle
+      SPDX 2.3 (2022): current widely deployed version
+  CycloneDX 1.6 (OWASP, 2024)   — SBOM format for cybersecurity use cases
+      Component types: libraries, frameworks, containers, devices, firmware
+      Supports VEX (Vulnerability Exploitability eXchange)
+      Also: SaaSBOM (services), OBOM (operations), HBOM (hardware)
+  SWID Tags (ISO/IEC 19770-2:2015) — Software Identification Tags; ISO standard
+  NTIA SBOM Minimum Elements (2021) — Supplier, component name, version, identifier,
+                                       dependency relationships, author, timestamp
+  VEX (Vulnerability Exploitability eXchange) — OpenVEX spec; CycloneDX VEX support
+
+SBOM MANDATES:
+  US Executive Order 14028 (2021) — SBOM for federal software procurement
+  NTIA SBOM Guidance (2021-2023)  — Minimum elements, formats, sharing
+  FDA Guidance 2023               — SBOM for medical device submissions
+  EU Cyber Resilience Act (2024)  — SBOM for products with digital elements
+  EU NIS2                         — Supply chain security (SBOM implied)
+  DoD SBOM Guidance               — Defense contractor requirements
+
+OPEN SOURCE LICENSES:
+COPYLEFT:
+  GPL v2 (1991)                  — GNU General Public License v2: share-alike for derived works
+  GPL v3 (2007)                  — GPL v3: added patent protection, Tivoization prohibition
+  LGPL v2.1 (1999)               — Lesser GPL: library linking without full copyleft
+  LGPL v3 (2007)                 — Updated LGPL with GPLv3 terms
+  AGPL v3 (2007)                 — Affero GPL: network use triggers copyleft (SaaS)
+  MPL 2.0 (Mozilla, 2012)        — File-level copyleft; compatible with GPL
+  EUPL v1.2 (2017)               — European Union Public License (multilingual)
+  OSL 3.0                         — Open Software License (copyleft)
+
+PERMISSIVE:
+  MIT License                    — Extremely permissive; attribution only
+  BSD 2-Clause / 3-Clause        — Similar to MIT; 3-clause: no endorsement
+  BSD 4-Clause (original)        — Advertising clause (largely deprecated)
+  Apache License 2.0 (2004)      — Permissive + explicit patent grant
+  ISC License                    — OpenBSD preferred; similar to MIT
+  Boost Software License 1.0     — C++ Boost library license
+  Zlib License                    — Compression library; minimal restrictions
+  Public Domain (CC0)            — Creative Commons Zero: no rights reserved
+
+COPYLEFT ANALYSIS:
+  Tivoization prohibition        — GPLv3 § 6: hardware installation information
+  Dynamic vs. static linking     — GPL contamination debate
+  Network clause (AGPL)         — SaaS GPL loophole closed
+  License compatibility matrix  — GPL v2 vs. v3 vs. Apache 2.0 vs. MIT conflicts
+  Copyleft strength spectrum     — CC0 → MIT → Apache → LGPL → MPL → GPL → AGPL
+
+SUPPLY CHAIN STANDARDS:
+  OpenChain ISO 5230:2020        — Open source license compliance program
+      Minimum requirements for open source compliance
+      Trusted open source provider certification
+  OpenChain ISO 18974:2023       — Open source security assurance (SBOM)
+  OWASP Dependency-Check         — Known vulnerable components scanner
+  OWASP CycloneDX BOM Tools      — SBOM generation tools
+  OWASP SAMM (Software Assurance Maturity Model) — Security practice maturity
+
+VULNERABILITY TRACKING:
+  CVE (MITRE)                    — Common Vulnerabilities and Exposures numbering
+  NVD (NIST)                     — National Vulnerability Database (CVSS scores)
+  OSV (Google)                   — Open Source Vulnerabilities database
+  GitHub Advisory Database       — GitHub security advisories
+  Sonatype OSS Index             — Open source vulnerability tracking
+  GHSA format                    — GitHub Security Advisory format
+
+LEGAL TOOLS & SCANNING:
+  FOSSA                          — License compliance SaaS
+  Black Duck (Synopsys)          — Enterprise license & security scanning
+  FOSSology                      — Open source license scanner (Linux Foundation)
+  Scancode Toolkit               — Open source license detection
+  Trivy (Aqua)                   — Container SBOM + vulnerability scanner
+  Syft (Anchore)                 — SBOM generation (SPDX/CycloneDX)
+
+HISTORICAL TIMELINE:
+  1983 — GNU project (Stallman): free software movement
+  1985 — Free Software Foundation (FSF) founded
+  1989 — GPL v1 published (first copyleft license)
+  1991 — Linux kernel (GPL v2); LGPL v2
+  1998 — Open Source Initiative (OSI) founded; OSI OSD (Open Source Definition)
+  1999 — Apache License 1.0
+  2004 — Apache License 2.0 (patent grant)
+  2007 — GPL v3, AGPL v3, LGPL v3 published
+  2010 — Oracle v. Google (Java APIs copyright case); open source legal landscape
+  2015 — FOSS license compliance gains traction; Heartbleed (OpenSSL)
+  2019 — OpenChain Project (Linux Foundation)
+  2020 — OpenChain ISO 5230:2020; SolarWinds (supply chain)
+  2021 — EO 14028: SBOM federal mandate; Log4Shell
+  2022 — SPDX 2.3; CycloneDX 1.4; OpenChain ISO 18974
+  2023 — SPDX 3.0 draft; CycloneDX 1.5/1.6; EU CRA SBOM requirements
+  2024 — SPDX 3.0 final; CycloneDX 1.6; VEX format adoption
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_OSS_SBOM_Overview.md          01_SPDX_3_0_Format.md
+  02_CycloneDX_1_6.md              03_Open_Source_License_Guide.md
+  04_Copyleft_Analysis.md          05_GPL_v2_v3_Deep_Dive.md
+  06_Apache_MIT_BSD_Permissive.md  07_OpenChain_ISO_5230.md
+  08_NTIA_SBOM_Requirements.md     09_SBOM_Tooling.md
+  10_VEX_Vulnerability_Exchange.md 11_OSS_Supply_Chain_Risk.md

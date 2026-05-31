@@ -1,0 +1,97 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 13 — MEDICAL DEVICES & HEALTH INFORMATION TECHNOLOGY                   ║
+║  IEC 62304, ISO 13485, IEC 60601, FDA 21 CFR, EU MDR/IVDR, HL7 FHIR, DICOM     ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 1 — Safety & Reliability  |  OUTPUT DIR: 13_Medical_Devices/
+
+STANDARDS UNIVERSE:
+MEDICAL DEVICE QUALITY MANAGEMENT:
+  ISO 13485:2016               — Medical devices: Quality Management System
+      21 CFR Part 820 alignment; EU MDR Annex IX compliance
+      Design controls (7.3); CAPA; complaint handling; post-market surveillance
+  FDA 21 CFR Part 820           — Quality System Regulation (QSR) — MDR update 2024
+  FDA 21 CFR Part 820 (2024)    — Device Quality System Regulation aligned with ISO 13485:2016
+  MDSAP                         — Medical Device Single Audit Program (US/Canada/Brazil/Australia/Japan)
+
+MEDICAL DEVICE SAFETY (ELECTRICAL & SOFTWARE):
+  IEC 60601-1:2005+AMD1:2012+AMD2:2020 — Medical electrical equipment: general safety
+      Classification: class I/II; applied parts: type B/BF/CF
+      Means of Protection (MOP); means of operator protection (MOOP)
+  IEC 60601-1-2:2014+AMD1:2020  — EMC requirements for medical devices
+  IEC 60601-1-6:2010            — Usability engineering for medical devices
+  IEC 60601-1-9:2007            — Environmentally conscious design
+  IEC 62304:2006+AMD1:2015      — Medical device software lifecycle
+      Class A (no harm), B (non-serious harm), C (serious injury/death)
+      Software development planning, architecture, unit testing, SCCS
+  IEC 82304-1:2016              — Health software: standalone software (apps, SaMD)
+  IEC 82304-2:2021              — Guidance documents for health software
+
+REGULATORY FRAMEWORKS:
+  FDA 21 CFR Part 11            — Electronic Records and Electronic Signatures
+  FDA 21 CFR Part 820           — QSR (see above)
+  FDA Guidance: Software as a Medical Device (SaMD) — 2023 update
+  FDA Guidance: Predetermined Change Control Plan (PCCP) — AI/ML devices
+  FDA Guidance: Cybersecurity in Medical Devices (2023) — SBOM, patching
+  EU Medical Device Regulation (MDR 2017/745) — CE marking for medical devices
+  EU In Vitro Diagnostic Regulation (IVDR 2017/746) — IVD devices
+  TGA (Australia) — Therapeutic Goods Administration classification
+  PMDA (Japan) — Pharmaceuticals and Medical Devices Agency
+  ANVISA (Brazil) — Medical device regulation
+  Health Canada — Registrar Medical Device Class I-IV
+
+HEALTH INFORMATION INTEROPERABILITY:
+  HL7 FHIR R4 / R4B / R5 (2023) — Fast Healthcare Interoperability Resources
+      REST-based exchange; Resources (Patient, Observation, Condition, MedicationRequest)
+      SMART on FHIR — OAuth 2.0 authorization for FHIR
+  HL7 v2.x                       — Legacy ADT, ORU, ORM messaging (still dominant)
+  HL7 v3 / CDA                   — Clinical Document Architecture (C-CDA)
+  DICOM (ACR-NEMA 2024)          — Digital Imaging and Communications in Medicine
+      DIMSE services; WADO-RS/STOW-RS; SR; PS 3.15 security
+  IHE (Integrating the Healthcare Enterprise) — Integration profiles:
+      IHE XDS: Cross-Enterprise Document Sharing
+      IHE PIX/PDQ: Patient Identity management
+      IHE ATNA: Audit Trail and Node Authentication
+  SNOMED CT                      — Clinical terminology (IHTSDO)
+  LOINC                          — Lab results coding (Regenstrief Institute)
+  ICD-10/ICD-11 (WHO)            — International Classification of Diseases
+
+CYBERSECURITY FOR MEDICAL DEVICES:
+  FDA Guidance 2023             — Cybersecurity in Medical Devices (mandatory SBOM)
+  NIST SP 1800-2                — Identity and Access Management for EHR
+  IEC 80001-1:2021              — Application of risk management for IT-networks with MD
+  IMDRF Cybersecurity Guidance  — Pre-/post-market cyber for SaMD
+  ENISA Medical Device Security  — EU guidance for medical device cyber
+
+AI IN MEDICAL DEVICES:
+  FDA AI/ML Action Plan (2021)  — Predetermined Change Control Plan
+  WHO Guidance on AI for Health  — Regulatory considerations
+  EU AI Act Article 6           — High-risk AI: medical devices Class IIa+
+  ISO/IEC 42001                 — AI management (see Category 18)
+
+HISTORICAL TIMELINE:
+  1906 — FDA precursor (Pure Food and Drug Act, US)
+  1938 — FD&C Act: drug safety after 1937 sulfonamide deaths
+  1976 — US Medical Device Amendments (device classification A/B/C)
+  1985 — Therac-25: software safety in medical devices
+  1993 — ISO 9001/13485 first medical quality management
+  1996 — HIPAA: patient data protection
+  1998 — IEC 60601-1 2nd edition
+  2006 — IEC 62304: medical device software standard
+  2011 — EU Medical Device Directive revision process starts
+  2013 — HL7 FHIR R1 draft
+  2016 — FDA Guidance: Digital Health; ISO 13485:2016
+  2017 — EU MDR 2017/745 and IVDR 2017/746 published
+  2019 — HL7 FHIR R4 (current stable version)
+  2021 — EU MDR enforcement (postponed COVID extension)
+  2022 — FDA Guidance: Cybersecurity for Medical Devices
+  2023 — FDA Guidance: SBOM mandatory for medical devices; HL7 FHIR R5
+  2024 — FDA 21 CFR 820 ISO 13485 alignment; EU AI Act high-risk medical
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Medical_Device_Regulatory_Landscape.md  01_ISO_13485_QMS.md
+  02_IEC_62304_Software_Lifecycle.md         03_IEC_60601_1_Electrical_Safety.md
+  04_FDA_21_CFR_820_QSR.md                   05_EU_MDR_IVDR.md
+  06_HL7_FHIR_Interoperability.md            07_DICOM_Imaging_Standard.md
+  08_Medical_Device_Cybersecurity.md         09_AI_ML_In_Medical_Devices.md
+  10_IHE_Integration_Profiles.md             11_Usability_IEC_62366.md
+  12_Post_Market_Surveillance.md

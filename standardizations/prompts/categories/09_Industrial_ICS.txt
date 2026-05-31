@@ -1,0 +1,97 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 09 — INDUSTRIAL AUTOMATION & ICS CYBERSECURITY                         ║
+║  IEC 62443, ISA-99, OPC-UA, PROFINET, EtherCAT, Modbus, IEC 61131, TSN          ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 6 — Industry 4.0 & Manufacturing  |  OUTPUT DIR: 09_Industrial_ICS/
+
+STANDARDS UNIVERSE:
+ICS / OT CYBERSECURITY:
+  IEC 62443 series (ISA-99)     — Security for industrial automation and control systems
+      IEC 62443-1-1:2009        — Terminology, concepts, models (foundational)
+      IEC 62443-2-1:2010        — IACS Security Management System (CSMS for OT)
+      IEC 62443-2-2             — IACS Security Protection Rating (SP rating)
+      IEC 62443-2-3:2015        — Patch Management in IACS Environment
+      IEC 62443-2-4:2015+Amd1   — Security Program Requirements for IACS Service Providers
+      IEC 62443-3-1:2009        — Security Technologies for IACS
+      IEC 62443-3-2:2020        — Security Risk Assessment for System Design
+      IEC 62443-3-3:2013        — System Security Requirements and Security Levels (SL1-4)
+      IEC 62443-4-1:2018        — Product Security Development Life-Cycle Requirements (SDL)
+      IEC 62443-4-2:2019        — Technical Security Requirements for IACS Components
+      Security Level: SL1 (casual), SL2 (intentional), SL3 (sophisticated), SL4 (nation state)
+  NERC CIP (v7, 2020)          — See Category 31 Energy for full coverage
+  IEC 62351 series              — Power Systems Security (see Category 31)
+
+INDUSTRIAL COMMUNICATION PROTOCOLS:
+  OPC UA (IEC 62541)            — Open Platform Communications Unified Architecture
+      IEC 62541-1               — Concepts and Overview
+      IEC 62541-4               — Services
+      IEC 62541-5               — Information Model
+      IEC 62541-6               — Mappings
+      IEC 62541-7               — Profiles
+      IEC 62541-8               — Data Access
+      IEC 62541-100             — Device Interface specification
+  OPC UA FX (Field Exchange)    — OPC UA for publisher-subscriber in field devices
+  PROFINET (IEC 61784-2)        — RT/IRT real-time classes (RT: 1ms; IRT: 250μs jitter)
+  EtherCAT (IEC 61784-2 Type 12) — EtherCAT: distributed clock, 100μs cycle time
+  PROFIBUS (IEC 61784-1)        — Process field bus (DP, PA, FMS)
+  Modbus RTU/TCP (MODBUS.org)   — De facto serial/IP standard; no auth by default
+  DeviceNet (ODVA)              — CAN-based device network
+  EtherNet/IP (ODVA)            — Ethernet Industrial Protocol (CIP over Ethernet)
+  CC-Link IE Field (CLPA)       — Mitsubishi-led 1Gbps field network
+  SERCOS III (IGS)              — Digital drive interface (servo motion)
+  CANopen (CiA 301)             — CAN-based device network (building, embedded)
+
+TIME-SENSITIVE NETWORKING (TSN):
+  IEEE 802.1AS-2020 (gPTP)      — Generalized Precision Time Protocol
+  IEEE 802.1Qbv (2015)         — Enhancements for Scheduled Traffic
+  IEEE 802.1Qav (2009)         — Forwarding and Queuing for Time-Sensitive Streams
+  IEEE 802.1Qbu (2016)         — Frame Preemption
+  IEEE 802.1Qcc (2018)         — Stream Reservation Enhancement (centralized model)
+  IEEE 802.1CB (2017)          — Frame Replication and Elimination for Reliability
+  IEEE 802.1CM-2018             — TSN for Fronthaul (5G Open RAN)
+
+PROGRAMMABLE LOGIC CONTROLLERS (PLC):
+  IEC 61131-1                  — Overview
+  IEC 61131-2                  — Hardware requirements
+  IEC 61131-3 (2013)           — Programming Languages: LD, FBD, ST, IL, SFC
+  IEC 61131-6                  — Functional Safety (FuSa PLC)
+  IEC 61131-7                  — Fuzzy Control
+  IEC 61131-9                  — Single Drop Digital Communication Interface (SDCI/IO-Link)
+
+IO-LINK:
+  IO-Link Consortium (IEC 62026-3) — Point-to-point sensor/actuator communication
+
+SAFETY NETWORK PROTOCOLS:
+  PROFIsafe (IEC 61784-3)       — Safety over PROFIBUS/PROFINET (SIL 3, Cat 4, PLe)
+  FSoE (EtherCAT Safety)        — Functional Safety over EtherCAT
+  CIP Safety (ODVA)             — Safety over CAN, DeviceNet, EtherNet/IP
+  openSAFETY (B&R)              — Safety protocol for any fieldbus (IEC 61784-3-17)
+
+HISTORICAL TIMELINE:
+  1975 — Modbus invented by Modicon (Dick Morley)
+  1977 — PROFIBUS development begins (Germany)
+  1989 — IEC 61131 begins; first PLCs commercialized (1968 Modicon 084)
+  1993 — PROFIBUS IEC 61784; international fieldbus wars
+  1994 — Foundation Fieldbus; fieldbus wars (PROFIBUS vs. FF vs. ControlNet)
+  1996 — IEC 61131-3 published (PLC programming languages)
+  1999 — EtherNet/IP (ODVA); industrial Ethernet begins
+  2001 — OPC Classic (OPC DA) widely adopted
+  2003 — EtherCAT (Beckhoff) launched
+  2005 — OPC Unified Architecture (OPC UA) design begins
+  2006 — Stuxnet (discovered 2010) development: SCADA attack proof-of-concept
+  2008 — ISA-99 → IEC 62443 formal adoption process begins
+  2010 — Stuxnet discovered: ICS security emergency
+  2014 — IEC 62443-4-2 drafts; SHODAN exposes 100K+ internet-connected PLCs
+  2016 — Industroyer/CrashOverride: Ukraine grid attack (second attack)
+  2017 — TRITON/TRISIS: SIS attack (Schneider Triconex); IEC 62443 SL4 urgency
+  2020 — OPC UA FX (Field Exchange) for publisher-subscriber
+  2023 — Volt Typhoon (China): critical infrastructure pre-positioning
+  2024 — IEC 62443-2-1 revision; IT/OT convergence security gaps
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Industrial_OT_IT_Landscape.md       01_IEC_62443_Full_Series.md
+  02_OPC_UA_IEC_62541.md                 03_PROFINET_EtherCAT.md
+  04_Modbus_and_Legacy_Protocols.md      05_TSN_IEEE_802_1.md
+  06_IEC_61131_PLC_Programming.md        07_Safety_Network_Protocols.md
+  08_ICS_Attack_Case_Studies.md          09_OT_Security_Architecture.md
+  10_IT_OT_Convergence.md

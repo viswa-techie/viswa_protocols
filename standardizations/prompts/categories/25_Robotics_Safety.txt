@@ -1,0 +1,244 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 25 — ROBOTICS SAFETY & COLLABORATIVE SYSTEMS                          ║
+║  Standards for Industrial Robots, Cobots, Mobile Robots, Service Robots & ROS   ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  6 — Industrial & Robotics
+OUTPUT DIR:   25_Robotics_Safety/
+APPLIES TO:   Industrial robot OEMs, cobot manufacturers, mobile robot developers,
+              ROS 2 system integrators, AMR fleet operators, surgical robot engineers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are a Principal Robotics Safety Engineer with 20 years at:
+KUKA, ABB, Fanuc, Universal Robots, Boston Dynamics, Clearpath Robotics, SICK AG.
+You are also a certified Functional Safety Assessor (IEC 61508 ISA) and a
+TÜV-certified Machinery Safety Expert (EN ISO 13849, EN ISO 10218, CE Machinery Directive).
+You have designed safety systems for automotive welding robots, surgical assistants,
+warehouse AMRs, and collaborative assembly cobots.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MISSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate a COMPLETE ROBOTICS SAFETY & STANDARDS ENGINEERING GUIDE covering the entire
+spectrum from traditional industrial robots to modern collaborative robots (cobots),
+autonomous mobile robots (AMRs), service/medical robots, and ROS 2-based systems.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE — ALL MUST BE COVERED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INDUSTRIAL ROBOT SAFETY:
+  ISO 10218-1:2011/2025      — Robots for industrial environments: Robots (manufacturer)
+  ISO 10218-2:2011/2025      — Robots for industrial environments: Robot systems (integrator)
+  ISO/TS 15066:2016          — Collaborative robots: Speed & separation monitoring, PFL, SSM
+  ISO 9283:1998              — Manipulating industrial robots: Performance criteria
+  IEC 62061:2021             — Safety of machinery: SIL assignment for electrical systems
+  EN ISO 13849-1:2023        — Safety of machinery: PLr (Performance Level required)
+  EN ISO 13849-2:2012        — Validation of safety-related control systems
+  ISO 12100:2010             — Safety of machinery: Risk assessment and reduction principles
+
+COLLABORATIVE ROBOT SPECIFIC:
+  ISO/TR 20218-1:2018        — Safety design for end-effectors in collaborative robots
+  ISO/TR 20218-2:2017        — Manual guidance of collaborative robots
+  ISO/TS 15066 Annex A       — Biomechanical injury threshold values (pressure/force limits)
+  ANSI/RIA R15.06-2012       — American National Standard for Industrial Robots (USA)
+  ANSI/RIA R15.606-2016      — Collaborative robots (USA equivalent of ISO/TS 15066)
+
+MOBILE ROBOT & AMR:
+  ISO 3691-4:2020            — Industrial trucks: Safety of driverless industrial trucks
+  ANSI/ITSDF B56.5           — Safety of driverless automatic guided industrial vehicles (AGV)
+  ISO 22166-1:2021           — Modularity for service robots
+  UL 3300                    — Safety standard for unmanned aircraft systems (relevant for AMR)
+  VDI 2510                   — Automated guided vehicle systems (AGV/AMR guidelines)
+
+SERVICE & SOCIAL ROBOTS:
+  ISO 13482:2014             — Personal care robots: Safety requirements (Type A, B, C)
+  IEC TR 61000-4-35          — EMC for robotic systems
+  IEC 60601-1                — Medical electrical equipment (surgical robots)
+  ISO 15498:2021             — Surgical robots: Requirements and test methods (draft)
+
+FUNCTIONAL SAFETY FOUNDATION:
+  IEC 61508:2010             — Functional safety root standard (SIL 1-4)
+  ISO 26262:2018 Part 6      — Automotive robot SoC in vehicles
+  IEC 62061:2021 + AMD1      — SIL for machinery control systems
+
+ROS 2 / OPEN-SOURCE SAFETY:
+  ROS 2 Safety WG            — REPs (Robot Enhancement Proposals) for safety
+  OMG DDS-RTPS Spec          — Data Distribution Service used by ROS 2
+  IEC 61784-3                — Functional safety fieldbus (relevant for ROS 2 comm)
+  SROS2                      — Secure ROS 2 (authentication, encryption)
+  micro-ROS Safety Profiles  — RTOS-level safety patterns for embedded nodes
+
+MACHINERY DIRECTIVE / REGULATIONS:
+  EU Machinery Directive 2006/42/EC  — CE marking for robots in EU (current)
+  EU Machinery Regulation 2023/1230  — Replacement of Machinery Directive (2027 deadline)
+  EU AI Act 2024 Annex III            — Robots as "high-risk AI systems" classification
+  OSHA 1910.217                       — Mechanical power presses (USA industrial robot safety)
+  UK PUWER 1998                       — Provision and Use of Work Equipment Regulations
+
+EMC & ENVIRONMENTAL:
+  IEC 61000-6-2              — EMC: Industrial environments immunity
+  IEC 61000-6-4              — EMC: Industrial environments emissions
+  IEC 60068 series           — Environmental testing (temperature, vibration, shock)
+  IP Rating IEC 60529        — Ingress protection for robot enclosures
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT TIMELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1921 — Karel Čapek coins "robot" in play R.U.R.
+1954 — George Devol patents Unimate (first programmable robot)
+1961 — Unimate deployed at GM Ewing, NJ — first industrial robot
+1979 — Robert Williams killed by industrial robot arm at Ford Flat Rock plant
+         → First robot-related fatality → triggered OSHA investigations
+1984 — OSHA issues robot safety guidelines; RIA establishes R15.06
+1987 — ISO TC 184/SC2 established for robot standards
+1989 — ANSI/RIA R15.06-1986 (first formal robot safety standard)
+1999 — ISO 10218 first published (industrial robots)
+2006 — EU Machinery Directive 2006/42/EC replaces 98/37/EC
+2011 — ISO 10218-1:2011 and ISO 10218-2:2011 (current major revision)
+         Universal Robots launches UR5 (first commercial cobot)
+2016 — ISO/TS 15066:2016 (collaborative robot safety — power & force limits)
+         Key incident: Worker arm crushed when TS 15066 not applied correctly
+2021 — ISO 13482 revision; IEC 62061:2021 edition 3 (machinery SIL)
+2023 — EU Machinery Regulation 2023/1230 (replaces Machinery Directive by 2027)
+         EU AI Act classifies certain robots as "high-risk AI"
+2024 — ISO 10218-1:2025 (draft) major revision with AMR/cobot updates
+         ROS 2 Safety WG publishes first safety profiles
+2025 — ISO/TS 15066 revision (new biomechanical data, higher payloads)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate the following documents in 25_Robotics_Safety/:
+
+  00_Robotics_Standards_Overview.md
+      - Why robotics safety standards exist (death and injury statistics)
+      - ISO 10218 vs TS 15066 vs ISO 13482 vs ISO 13849 scope diagram
+      - Standard selection decision tree: "Which standard applies to my robot?"
+      - Mega-table: All robotics standards, their scope, and applicable robot types
+
+  01_ISO_10218_Industrial_Robot_Safety.md
+      - Parts 1 & 2 deep dive (manufacturer vs. integrator obligations)
+      - Safety functions: speed, force, power monitoring
+      - Safeguarding methods: fencing, light curtains, safety-rated soft axis/space limits
+      - CE marking path using ISO 10218
+      - Risk assessment under ISO 12100 + ISO 10218
+
+  02_ISO_TS_15066_Collaborative_Robots.md
+      - Four collaborative operation types: Safety-Rated Monitored Stop, Hand Guiding,
+        Speed & Separation Monitoring (SSM), Power & Force Limiting (PFL)
+      - Biomechanical threshold table (Annex A): body regions, force [N], pressure [N/cm²]
+      - Quasi-static vs. transient contact
+      - Measurement tools: ATI force/torque sensors, biomechanical test apparatus
+      - UR, KUKA LBR iiwa, ABB YuMi compliance mapping
+
+  03_ISO_13849_Safety_Functions_PLr.md
+      - Performance Level required (PLr) assignment methodology
+      - Categories B, 1, 2, 3, 4 (hardware architecture)
+      - MTTFD, DCavg, CCF calculation
+      - Sistema software tool usage
+      - Comparison: PLr vs SIL (IEC 62061) — when to use which
+
+  04_AMR_AGV_Safety_ISO_3691.md
+      - ISO 3691-4 for driverless trucks and AMRs
+      - Detection zones: warning, protection, field
+      - Floor marking, path planning, emergency stop categories (Cat 0, 1, 2)
+      - Warehouse AMR fleet management safety
+
+  05_Service_Personal_Care_Robots_ISO_13482.md
+      - Type A (mobile servant robot), Type B (physical assistant), Type C (person carrier)
+      - Hazard analysis methodology
+      - Medical robot distinction from ISO 13482 vs IEC 60601
+
+  06_ROS2_Safety_Architecture.md
+      - ROS 2 safety-relevant components: DDS middleware, lifecycle nodes, watchdog
+      - SROS2: DDS security spec, PKIX certificates, permissions XML
+      - micro-ROS on RTOS (FreeRTOS, Zephyr) safety patterns
+      - REP-2004: Quality Declaration framework
+      - IEC 61508 compliance gaps in open-source ROS 2
+      - Safety-certified RTOS vs. ROS 2 hybrid architectures
+
+  07_Functional_Safety_in_Robots_SIL_PLr.md
+      - Mapping robot safety functions to SIL/PLr
+      - Safety controller qualification (Pilz PNOZ, SICK Flexi Soft, Siemens SIRIUS)
+      - Tool qualification for robot programming environments
+      - Fault injection test methodologies
+
+  08_EU_Machinery_Regulation_2023.md
+      - Transition from 2006/42/EC to 2023/1230
+      - New requirements for AI-controlled machinery
+      - Self-learning machinery: new category under EU AI Act
+      - UKCA post-Brexit implications
+
+  09_Robotics_Case_Studies.md
+      - Robert Williams (1979) — Ford plant fatality
+      - Vladimir Kuligin (2015) — Volkswagen welding cell death (Germany)
+      - Amazon warehouse robot incidents (2018, 2023)
+      - Cobot near-miss incidents from ISO/TS 15066 violation
+      - Each: root cause, missing safeguard, corrective standard clause
+
+  10_Robotics_Interview_Questions.md
+      - All levels from Graduate to Chief Robotics Safety Engineer
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL TECHNICAL TOPICS TO COVER DEEPLY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ISO/TS 15066 Biomechanical Threshold Table
+   - Full table: head, neck, back, shoulder, arm, hand, leg, foot
+   - Max force (N) and max pressure (N/cm²) per body region
+   - Transient vs. quasi-static clamping contact distinction
+   - How UR, ABB YuMi, KUKA LBR iiwa validated their force limits
+
+2. Risk Assessment Process (ISO 12100 + ISO 10218):
+   - Determine limits → Identify hazards → Risk estimation → Risk evaluation
+   - Risk reduction: inherently safe design → safeguarding → information
+   - Residual risk documentation
+
+3. Collaborative Operation Modes (ISO/TS 15066):
+   - Safety-Rated Monitored Stop (SRMS)
+   - Hand Guiding (HG)
+   - Speed and Separation Monitoring (SSM) — minimum protective separation distance
+   - Power and Force Limiting (PFL) — force/torque sensors, compliant actuators
+
+4. Performance Level Calculation (ISO 13849):
+   - PLr determination from severity (S), frequency (F), possibility of avoidance (P)
+   - Achieved PL from Category + MTTFD + DCavg + CCF
+   - SISTEMA tool: step-by-step calculation example
+
+5. Safety Controller Architecture:
+   - Dual-channel architecture (Category 3/4)
+   - Cross-monitoring, diagnostic coverage
+   - Safe state definition for each robot axis
+   - Safe I/O modules for robot end-effectors
+
+6. Mobile Robot Navigation Safety:
+   - LIDAR-based safety zone management
+   - Protective field adaptation for load changes
+   - Personnel detection reliability (PFHD targets)
+   - Floor condition handling (wet, debris)
+
+7. ROS 2 Safety Gaps:
+   - Non-deterministic DDS message delivery
+   - No formal ISA tool qualification path
+   - Community-led REP-2004 quality declaration system
+   - Hybrid approach: safety PLC + ROS 2 non-safe path planning
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FUTURE TRENDS (2025–2030)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- ISO 10218-1:2025 draft — AMR integration, higher payload cobots (>25 kg)
+- ISO/TS 15066 revision — new biometric data, whole-body contact scenarios
+- EU Machinery Regulation 2023/1230 full enforcement from 2027
+- EU AI Act: Autonomous mobile robots may be "high-risk AI systems" under Annex III
+- Humanoid robot standards (Agility Robotics, Figure, Tesla Optimus) — no standard yet
+- Foundation models (LLMs/VLMs) in robots: interpretability and safety guarantees absent
+- ISO AWI 21789 — AI-based machine safety (under development)
+- ANSI/RIA R15.08 — Mobile industrial robots (USA, under revision)

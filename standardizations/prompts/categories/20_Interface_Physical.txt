@@ -1,0 +1,101 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 20 — PHYSICAL LAYER & HIGH-SPEED INTERFACE STANDARDS                   ║
+║  USB4 Gen4, PCIe 7.0, MIPI CSI-3/DSI-2/I3C, DisplayPort 2.1, HDMI 2.1+, UCIe   ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 3 — Silicon & Electronics  |  OUTPUT DIR: 20_Interface_Physical/
+
+STANDARDS UNIVERSE:
+USB STANDARDS (USB-IF):
+  USB4 Gen 3x2 (40 Gbps, 2019)  — Thunderbolt 3 protocol integrated; Alternate Mode
+  USB4 Version 2.0 (80 Gbps, 2022) — 80G: PAM2 at 80 Gbps; USB Power Delivery 3.1
+  USB 3.2 Gen 2x2 (20 Gbps)    — Legacy; used in USB-A/C connectors
+  USB Power Delivery (PD) 3.1   — Up to 240W (EPR: Extended Power Range)
+  USB-C Spec 2.4                 — Connector: 24-pin; 10,000 cycle durability
+  USB Alternate Mode            — Tunneling: DisplayPort, HDMI, Thunderbolt, CXL
+  USB Audio Class 3.0           — Audio over USB-C
+  USB Video Class (UVC)         — Webcam standardization
+
+PCIE (PCI-SIG):
+  PCIe 5.0 (2019): 32 GT/s      — Server, AI accelerators; 128-lane topologies
+  PCIe 6.0 (2022): 64 GT/s PAM4 — FLIT mode; CRC per flit; 256 GT/s x16
+  PCIe 7.0 (2025): 128 GT/s     — 1 Tbps x16; data center, AI clusters
+  PCIe over Optical (OIF)        — Co-packaged optics for chip-to-chip
+
+THUNDERBOLT (Intel):
+  Thunderbolt 3 (2015)           — 40 Gbps; USB-C connector; merged into USB4
+  Thunderbolt 4 (2020)           — Mandatory 40 Gbps; guaranteed capabilities
+  Thunderbolt 5 (2023)           — 120 Gbps bidirectional (bandwidth boost mode)
+  Thunderbolt 5 USB4 v2.0        — Unified spec
+
+DISPLAY INTERFACES:
+  DisplayPort 2.1 (VESA, 2022)  — UHBR 20: 77.37 Gbps; 16K@60Hz; DP Tunneling over USB4
+  DisplayPort 1.4a               — HBR3: 32.4 Gbps; DSC (Display Stream Compression)
+  HDMI 2.1 (2017)                — 48 Gbps; 10K@120Hz; eARC; VRR (FRL mode)
+  HDMI 2.1a (2022)               — SBTM (Source-Based Tone Mapping)
+  HDMI 2.2 (2024)                — 96 Gbps (FRL 12); 16K support
+  VESA DSC (Display Stream Compression) — ISO/IEC 18477-1: visually lossless compression
+  VESA Embedded DisplayPort (eDP) 1.5 — Panel link standard (laptops, tablets)
+
+MIPI STANDARDS (Mobile):
+  MIPI CSI-2 v3.0 (2021)        — Camera Serial Interface 2: up to 160 Gbps
+      D-PHY v2.1, C-PHY v1.2, M-PHY
+  MIPI CSI-3 (in development)   — Next-gen camera: >100 Gbps
+  MIPI DSI-2 v1.0 (2019)        — Display Serial Interface 2 (OFDM over M-PHY)
+  MIPI D-PHY 2.5 (2021)         — 4.5 Gbps/lane for camera/display
+  MIPI C-PHY 2.0                 — 3-symbol encoding; 12.5 Gbps/trio
+  MIPI I3C v1.1.1 (2021)        — Improved I2C: up to 12.5 Mbps; device interrupt; in-band
+  MIPI I3C Basic (2021)         — Simplified I3C for IoT sensors
+  MIPI SoundWire v1.2           — Audio interface (replaces I2S/PCM/SLIMbus)
+  MIPI RFFE v3.0                — RF Front-End control interface (LTE/5G antenna)
+  MIPI UniPro v2.0              — UFS transport layer
+
+SERIAL INTERFACES (INDUSTRY STANDARD):
+  I2C (Philips/NXP, 1982)       — 100K/400K/1M/3.4M Hz; FM+ and HS modes
+  SPI (Motorola)                 — 4-wire serial: SCK, MOSI, MISO, CS; no standard (de facto)
+  QSPI / OSPI                    — Quad/Octal SPI for flash memory
+  UART/RS-232                    — EIA-232: 20Kbps legacy; still dominant in embedded
+  RS-485 (TIA-485)               — Half-duplex balanced: 10 Mbps; industrial/MODBUS
+  CAN FD (ISO 11898-1:2015)     — 8 Mbps data phase; 0.5-1M arbitration
+
+DIE-TO-DIE (CHIPLET INTERCONNECTS):
+  UCIe 1.1 (2023)               — Universal Chiplet Interconnect Express
+      Package: D2D; advanced (foveros), standard package
+      Bandwidth density: 16 Gbps/mm in standard; 2 TB/s/mm in advanced
+  BoW (Bunch of Wires) OCP      — Open Compute: chiplet serial interconnect
+  AIB (Advanced Interface Bus)  — Intel: die-to-die 2pJ/bit standard
+  ODSA (Open Domain Specific Architecture) — Open chip-to-chip standardization
+  OpenHBI (Marvell)             — High bandwidth interface for chiplets
+  TSMC CoWoS SoIC               — Proprietary die-stacking with industry interfaces
+
+OPTICAL & HIGH-SPEED:
+  OIF CEI-112G (2021)           — 112 Gbps Electrical Interface for optical modules
+  OIF CEI-224G (2024)           — 224 Gbps for 800GE optical connectivity
+  IEEE 802.3bs (400GbE)         — 400G Ethernet
+  IEEE 802.3ck (800GbE)         — 800G Ethernet (2022)
+  OSFP / QSFP-DD / QSFP112     — Optical transceiver form factors (800G)
+  CPO (Co-packaged Optics)      — Silicon photonics for DC switches (Intel IPDK, IBM)
+
+HISTORICAL TIMELINE:
+  1981 — IBM PC: ISA bus standard
+  1995 — USB 1.0 (12 Mbps); PCI 2.0
+  1998 — USB 2.0 (480 Mbps); MIPI Alliance founded (2003)
+  2003 — MIPI I2C → I3C evolution starts; PCIe 1.0
+  2006 — SATA 2.0; PCIe 2.0; HDMI 1.0
+  2008 — USB 3.0 (5 Gbps SuperSpeed)
+  2012 — USB 3.1; HDMI 2.0; Thunderbolt 1 (2011)
+  2013 — PCIe 3.0; MIPI CSI-2
+  2015 — USB Type-C; USB PD 2.0; Thunderbolt 3
+  2017 — USB 3.2; HDMI 2.1; MIPI D-PHY 2.0
+  2019 — USB4 (USB4 Gen3x2 40G); PCIe 5.0; CXL 1.0
+  2021 — MIPI I3C v1.1; CSI-2 v3.0; UCIe concept
+  2022 — UCIe 1.0; PCIe 6.0; DisplayPort 2.1; USB4 v2.0 (80G)
+  2023 — UCIe 1.1; Thunderbolt 5; HDMI 2.2
+  2024 — PCIe 7.0 spec; OIF CEI-224G; 1.6T optics
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Interface_Physical_Overview.md     01_USB4_Gen4_Standards.md
+  02_PCIe_6_0_7_0.md                    03_MIPI_CSI_DSI_Camera.md
+  04_MIPI_I3C_Sensor_Interface.md       05_DisplayPort_2_1.md
+  06_HDMI_2_1_2_2.md                    07_UCIe_Chiplet_Interconnect.md
+  08_Die_to_Die_Interconnects.md        09_Thunderbolt_5.md
+  10_High_Speed_Serial_RS485.md         11_Optical_Interconnects_CPO.md

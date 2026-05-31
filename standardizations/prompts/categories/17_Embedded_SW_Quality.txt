@@ -1,0 +1,92 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 17 — EMBEDDED SOFTWARE QUALITY & CODING STANDARDS                     ║
+║  MISRA C:2012, MISRA C++:2023, AUTOSAR C++14, CERT C/C++, JPL C, MC/DC         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 8 — Software Quality & DevOps  |  OUTPUT DIR: 17_Embedded_SW_Quality/
+
+STANDARDS UNIVERSE:
+CODING STANDARDS:
+  MISRA C:2012 (4th Edition 2019 Corrigendum) — Guidelines for C use in safety-critical systems
+      3 rule types: Mandatory (27), Required (139), Advisory (31) = 197 rules total
+      Rule categories: preprocessor, identifiers, types, declarations, exprs, control flow
+      Compliance: Zero mandatory deviations; required deviations need formal waiver
+  MISRA C:2004 (2nd Edition)    — Legacy version still in use; DO NOT use for new projects
+  MISRA C++:2023 (2nd Edition)  — Guidelines for C++ in safety-critical; up to C++17
+  MISRA C++:2008                 — Legacy C++ rules (largely superseded)
+  AUTOSAR C++14 (R21-11)        — AUTOSAR adaptive platform coding guidelines (C++14)
+      Based on MISRA C++:2008 + Automotive domain rules
+  JSF AV C++ (Lockheed Martin)   — Joint Strike Fighter Air Vehicle C++ rules (aerospace)
+  JPL C Coding Standard (2009)  — 10 rules for critical software (Gerard Holzmann, JPL)
+  CERT C Coding Standard (SEI)  — Software Engineering Institute: secure coding
+  CERT C++ Coding Standard       — SEI C++ secure coding
+
+CODE COMPLEXITY METRICS:
+  Cyclomatic Complexity (McCabe) — Max ≤ 10 (MISRA guidance); ≤ 15 (some standards)
+  Halstead Complexity Metrics    — Volume, difficulty, effort
+  Call Graph Depth               — Restricted in safety (DO-178C recommends no recursion)
+  Stack Depth Analysis           — Worst-case stack usage (WCSU); mandatory for safety SW
+  WCET (Worst-Case Execution Time) — Tools: AbsInt aiT, Rapita RVS, LDRA TBvision
+
+COVERAGE METRICS (TESTING):
+  Statement Coverage             — Every executable statement executed (DAL D minimum)
+  Decision Coverage (DC)        — All T/F branches; for DO-178C DAL C
+  Modified Condition/Decision Coverage (MC/DC) — DO-178C DAL A/B; ISO 26262 ASIL D
+      Every condition independently affects decision outcome
+      Boeing defined; FAA AC 20-115D requires it
+  Branch/Path Coverage           — All paths (exponential; not required but analyzed)
+  Structural Coverage Analysis   — Dead code justification required
+
+STATIC ANALYSIS TOOLS:
+  LDRA TBvision                 — MISRA C, MC/DC, DO-178C, ISO 26262 compliance
+  PRQA QA-C/C++ (Helix QAC)    — Perforce: MISRA C/C++ static analysis
+  Polyspace (MathWorks)         — Formal verification-based static analysis (MISRA, CERT)
+  Klocwork (Perforce)           — MISRA C++, CERT, AUTOSAR rules
+  CodeSonar (GrammaTech)        — Deep static analysis for safety-critical
+  PC-lint Plus (Gimpel)         — MISRA C, compiler-like analysis
+  Frama-C                        — Open-source formal analysis for C (EVA, WP plugins)
+  Astrée (AbsInt)                — Sound static analyzer; zero false positives at cost
+
+FORMAL VERIFICATION:
+  DO-333 (Formal Methods)       — Formal methods as DO-178C supplement
+  Frama-C WP plugin             — Weakest precondition (Hoare logic)
+  SPARK (AdaCore)               — Formally verified Ada/SPARK subset
+  CompCert                       — Certified C compiler (verified semantics)
+  TLA+ (Leslie Lamport)          — Temporal Logic of Actions for protocol verification
+  Coq / Isabelle / HOL4          — Proof assistants for formal verification
+  Model Checking (SPIN, UPPAAL, nuSMV) — Property verification on system models
+
+CODE REVIEW STANDARDS:
+  IEEE 1028:2008                 — Software Reviews and Audits
+  Inspection process             — Fagan Inspection (IBM); checklists; defect tracking
+
+TOOL QUALIFICATION:
+  DO-178C §12                    — Tool qualification for airborne software
+      TQL 1 (DAL A criteria elimination tool): highest qualification
+      TQL 5 (DAL A guidance tool): no qualification needed
+  EN 50128 §6.7.4               — Tool Class T1 (no output impact) / T2 / T3 (safety-critical output)
+  IEC 62304 §5.1.4               — Software development planning: tool validation
+  ISO 26262 Part 8, Clause 11   — Tool qualification based on Tool Impact and Tool Error Detection
+
+HISTORICAL TIMELINE:
+  1968 — NATO Software Engineering conference: software crisis
+  1975 — McCabe Cyclomatic Complexity metric
+  1998 — MISRA C:1998 (first version): automotive embedded C guidelines
+  1998 — CERT Secure Coding Initiative begins (SEI)
+  2003 — DO-178B: avionics software (before C → DO-178C)
+  2004 — MISRA C:2004; JSF++ Lockheed Martin
+  2008 — MISRA C++:2008; Polyspace formal analysis mainstream
+  2012 — MISRA C:2012 (major revision); DO-178C published
+  2016 — AUTOSAR Adaptive C++14 guidelines
+  2017 — Toyota unintended acceleration: MISRA violations in mass production code
+  2019 — MISRA C:2012 AMD2 corrigendum; CERT C secure coding updated
+  2020 — Boeing 737 MAX software root cause: inadequate MISRA C, test coverage
+  2023 — MISRA C++:2023; C++17/20 guidance; Rust in automotive discussion
+  2024 — AUTOSAR C++14 updated; Rust for embedded safety: emerging ISO discussion
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Embedded_SW_Quality_Overview.md    01_MISRA_C_2012_Rules.md
+  02_MISRA_Cpp_2023.md                  03_AUTOSAR_Cpp14.md
+  04_JPL_CERT_Coding_Standards.md       05_Code_Coverage_MC_DC.md
+  06_Static_Analysis_Tools.md           07_Formal_Verification.md
+  08_Tool_Qualification.md              09_WCET_Stack_Analysis.md
+  10_Code_Review_IEEE1028.md            11_Deviation_Management.md

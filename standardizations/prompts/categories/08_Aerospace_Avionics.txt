@@ -1,0 +1,108 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 08 — AEROSPACE, AVIONICS & SPACE                                       ║
+║  DO-178C, DO-254, ARP4754A, ARINC, FAA AC, EASA CS, ECSS, NASA-STD-8739.8       ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 7 — Transportation  |  OUTPUT DIR: 08_Aerospace_Avionics/
+
+STANDARDS UNIVERSE:
+AVIONICS SOFTWARE (RTCA):
+  DO-178C (RTCA, 2011)          — Software Considerations in Airborne Systems (replaces DO-178B)
+      DAL A: Catastrophic (71 objectives, MC/DC coverage required)
+      DAL B: Hazardous (69 objectives)
+      DAL C: Major (62 objectives)
+      DAL D: Minor (26 objectives)
+      DAL E: No effect (no objectives)
+  DO-331                         — Model-Based Development and Verification (MB supplement)
+  DO-332                         — Object-Oriented Technology (OOT supplement)
+  DO-333                         — Formal Methods (FM supplement)
+
+AVIONICS HARDWARE (RTCA/EUROCAE):
+  DO-254 / ED-80 (2000)         — Design Assurance Guidance for Airborne Electronic Hardware
+      DAL A-E mirroring DO-178C for FPGAs, ASICs, PLDs
+  DO-160G (2010)                — Environmental Conditions and Test Procedures for Airborne Equipment
+      Temperature, altitude, vibration, shock, EMI, lightning strike sections
+
+AVIONICS SYSTEMS (SAE):
+  ARP4754A (SAE, 2010)          — Guidelines for Development of Civil Aircraft and Systems
+      Development assurance levels; functional hazard assessment
+  ARP4761A (SAE, 2023)          — Safety Assessment Methods for Airborne Systems
+      FHA, PSSA, SSA, CCA, fault trees, FMEA, Markov analysis
+  SAE AS50881                   — Wiring Aerospace Vehicles
+  SAE AS5553                    — Counterfeit Electronic Parts
+
+COMMUNICATIONS & DATA BUS (ARINC):
+  ARINC 429 (1977)              — Aircraft digital data bus (transmitter-to-receiver)
+  ARINC 629                     — Multiple transmitter data bus
+  ARINC 664 Part 7 (AFDX)       — Avionics Full-Duplex Switched Ethernet
+  ARINC 825                     — General Standardization of CAN Bus Usage in Aircraft
+  ARINC 664 Part 2              — Ethernet-based Avionics Backplane
+  ARINC 717/767                 — Flight Recorder (DFDRS) parameters
+
+AVIONICS SECURITY:
+  DO-326A / ED-202A (2018)      — Airworthiness Security Process Specification
+  DO-356A / ED-203A (2018)      — Airworthiness Security Methods and Considerations
+  DO-355A                        — Information Security Guidance for Continuation of Airworthiness
+  EUROCAE WG-72                  — Aeronautical Software working group
+
+FAA TYPE CERTIFICATION:
+  FAA FAR Part 25               — Airworthiness Standards: Transport Category Airplanes
+  FAA FAR Part 23               — Airworthiness: Small Airplanes (AS amendment)
+  FAA Advisory Circular AC 20-115D — Airborne Software Compliance
+  FAA Advisory Circular AC 25.1309 — System Design and Analysis
+  FAA Order 8110.49             — Software Approval Guidelines
+
+EASA CERTIFICATION:
+  EASA CS-25                    — Certification Specifications for Large Aeroplanes
+  EASA CS-23                    — Light Aircraft Certification Specification
+  EASA CM-AS-006                — Compliance with DO-178C Issue 2
+  EASA AMC 20-3                 — Software
+  EASA AMC 20-152A              — Development Assurance Guidance for Airborne Electronic Hardware
+
+MILITARY AVIONICS:
+  MIL-STD-1553B                 — Digital Time Division Command/Response Multiplex Data Bus
+  MIL-STD-1760                  — Store Interface (weapons bus)
+  MIL-HDBK-516C                 — Airworthiness Certification Criteria
+  MIL-HDBK-781A                 — Reliability Test Methods (AGREE, ESS)
+  MIL-PRF-31032                 — Computer Resources in Airborne Systems (Ada era)
+
+SPACE STANDARDS (ECSS):
+  ECSS-E-ST-40C                 — Space Engineering: Software
+  ECSS-Q-ST-80C                 — Space Product Assurance: Software Product Assurance
+  ECSS-E-ST-50 series           — Communications standards
+  ECSS-E-HB-32-11A              — Structural Design Handbook
+  ECSS-Q-HB-80-02A              — Software Verification and Validation
+  CCSDS (Consultative Committee for Space Data Systems)
+      CCSDS 133.0-B             — Space Packet Protocol
+      CCSDS 727.0-B             — CFDP (File Delivery Protocol)
+  NASA-STD-8739.8A              — Software Assurance and Software Safety Standard
+  NASA-STD-8719.13              — Software Safety Standard
+  JPL C Coding Standard         — Software quality for embedded spacecraft
+
+HISTORICAL TIMELINE:
+  1926 — Air Commerce Act (US): first aviation regulation
+  1944 — ICAO Chicago Convention: international aviation law
+  1958 — FAA established (US Civil Aeronautics Act)
+  1967 — Apollo 1 fire: NASA safety culture reform
+  1974 — DO-178: first avionics software standard
+  1982 — DO-178A: updated avionics software
+  1985 — Therac-25: software safety awareness
+  1992 — DO-178B: major revision (until 2011)
+  1994 — DO-254: hardware design assurance
+  1996 — Ariane 5 Flight 501: software reuse without validation
+  2001 — ARP4754 published (systems level)
+  2010 — ARP4754A (systems), ARP4761 updated
+  2011 — DO-178C published (replaces DO-178B)
+  2012 — DO-331/332/333 supplements
+  2018 — DO-326A/DO-356A security
+  2019 — Boeing 737 MAX crash: MCAS analysis, certification reform
+  2023 — ARP4761A (updated safety methods)
+  2024 — EASA AI in aviation guidelines; DO-178C for ML guidance drafts
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Aerospace_Standards_Overview.md      01_DO_178C_Avionics_Software.md
+  02_DO_254_Avionics_Hardware.md          03_ARP4754A_System_Development.md
+  04_ARP4761A_Safety_Assessment.md        05_DO_326A_Security.md
+  06_ARINC_Data_Bus_Standards.md          07_FAA_Type_Certification.md
+  08_EASA_CS25_Certification.md           09_DO_160G_Environmental.md
+  10_MIL_STD_1553B_Avionics_Bus.md        11_ECSS_Space_Software.md
+  12_NASA_Software_Safety.md              13_Boeing_737_MAX_Case_Study.md

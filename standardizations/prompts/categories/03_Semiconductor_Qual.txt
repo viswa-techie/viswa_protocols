@@ -1,0 +1,99 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 03 — SEMICONDUCTOR QUALIFICATION & RELIABILITY                         ║
+║  JEDEC, AEC-Q100/101/102/104/200, MIL-STD-883/750, ESD, FIT, HTOL               ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 3 — Silicon & Electronics  |  OUTPUT DIR: 03_Semiconductor_Qualification/
+
+STANDARDS UNIVERSE:
+JEDEC STANDARDS FAMILY:
+  JESD22-A108F        — Temperature, Bias, and Operating Life (HTOL): 125°C, 168h, stress voltage
+  JESD22-A110F        — Highly Accelerated Temperature and Humidity Stress (HAST)
+  JESD22-A102F        — Accelerated Moisture Resistance (121°C, 100% RH, 168h)
+  JESD22-A104G        — Temperature Cycling (-55°C to +125°C, 1000 cycles)
+  JESD22-A105C        — Power and Temperature Cycling
+  JESD22-B111C        — Board Level Drop Test for Handheld Electronics
+  JESD22-B106         — Resistance to Solvents and Defluxing
+  JESD22-A114F        — ESD Sensitivity Testing: Human Body Model (HBM) ±2000V
+  JESD22-C101F        — ESD Sensitivity: Charged Device Model (CDM)
+  JESD22-A115C        — ESD Machine Model (MM) — being phased out
+  JESD78E             — IC Latch-up Test
+  JESD47K             — Stress-Test-Driven Qualification (AEC derivation basis)
+  JESD201            — Environmental Acceptance Requirements for Tin Whisker
+  JESD85             — Methods for Calculating Failure Rates (Arrhenius model)
+  JESD91A            — Method for Developing Acceleration Models
+  JEDEC JEP122H      — Failure Mechanisms and Models for CMOS Devices
+
+AEC AUTOMOTIVE QUALIFICATION:
+  AEC-Q100 Rev-H     — Stress Test Qualification for Integrated Circuits (AEC-Q100)
+      Grade 0: -40 to +150°C  Grade 1: -40 to +125°C
+      Grade 2: -40 to +105°C  Grade 3: -40 to +85°C
+      11 test groups: biased life, unbiased, endurance, packaging, parametric, solder
+  AEC-Q101 Rev-E     — Stress Test Qualification for Discrete Semiconductors
+  AEC-Q102 Rev-A     — Stress Test Qualification for Optoelectronic Semiconductors
+  AEC-Q103 Rev-A     — Stress Test Qualification for MEMS
+  AEC-Q104 Rev-A     — Stress Test for Multichip Modules (MCM)
+  AEC-Q200 Rev-E     — Stress Test Qualification for Passive Components
+  AEC-Q001           — Pb-Free Qualification Requirements (RoHS compliance)
+  AEC-Q002           — Guidelines for Statistical Yield Analysis
+
+MIL STANDARDS:
+  MIL-STD-883L       — Test Methods for Microelectronics (all military IC tests)
+  MIL-STD-750F       — Test Methods for Semiconductor Devices
+  MIL-PRF-38535      — Integrated Circuits (QML program, radiation hardness assurance)
+  MIL-PRF-19500      — Semiconductor Devices (general specification)
+  MIL-HDBK-217F      — Reliability Prediction (FIT rate calculator)
+  DESC DLA            — Defense Logistics Agency drawing requirements
+
+RELIABILITY METRICS:
+  FIT Rate            — Failures In Time (failures per 10⁹ device hours)
+  DPPM                — Defective Parts Per Million (outgoing quality)
+  MTTF / MTBF         — Mean Time To/Between Failure (Arrhenius extrapolation)
+  PFH                 — Probability of Failure per Hour (IEC 61508 target)
+  AFR                 — Annual Failure Rate
+  Arrhenius equation  — Ea (activation energy); acceleration factor for temperature
+  Black's equation    — Electromigration lifetime model
+  Coffin-Manson       — Thermal cycling fatigue model
+  Eyring model        — Multi-stress acceleration (voltage + temperature)
+
+ESD PROTECTION STANDARDS:
+  ANSI/ESD S20.20:2021 — ESD control program for electronics manufacturing
+  IEC 61340-5-1        — ESD protection (international equivalent)
+  JEDEC JESD22-A114F   — HBM ±2000V test method
+  JEDEC JESD22-C101F   — CDM test method (more relevant for modern ICs)
+  AEC-Q100-002         — HBM for automotive ICs (target ±2000V all pins)
+
+FAILURE ANALYSIS:
+  JEDEC JEP131         — Soft Error Testing and Rate Methodology
+  SEMI G85-0312        — Failure analysis methodology
+  IPC-7711/7721        — Rework, repair, modification of electronic assemblies
+  FIB (Focused Ion Beam), SEM, TEM, EBIC, Photon Emission Microscopy
+
+SILICON LIFECYCLE MANAGEMENT:
+  ISO 26262 Part 11   — Functional safety for semiconductors (PMHF, SPFM, LFM)
+  JEDEC JEP001        — Silicon Lifecycle Management (SLM) concepts
+  IEEE P2851          — Trusted chip and die attestation
+
+HISTORICAL TIMELINE:
+  1947 — Transistor invented (Bell Labs)
+  1962 — JEDEC founded (as EIA-JC, then JEDEC Solid State)
+  1975 — AEC (Automotive Electronics Council) preliminary work
+  1994 — AEC-Q100 Rev A (first automotive IC qualification standard)
+  1999 — AEC-Q200 (passive components); Pb-free solder transition begins
+  2001 — AEC-Q100 Rev C; JEDEC DDR SDRAM standards
+  2006 — AEC-Q100 Rev F; RoHS compliance AEC-Q001
+  2010 — AEC-Q102 (optoelectronics); FinFET effects on qualification
+  2014 — AEC-Q103 (MEMS qualification)
+  2019 — AEC-Q104 (MCM); sub-10nm qualification challenges
+  2022 — SEMI E187/188 fab equipment cyber; advanced packaging qualification gaps
+  2023 — Chiplet qualification gaps (no AEC-Q for die-to-die): active gap
+  2024 — AEC-Q100 Rev H; JEDEC HBM3E; qualification for 2nm/3nm nodes
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Semiconductor_Reliability_Overview.md   01_JEDEC_Standards_Family.md
+  02_AEC_Q100_IC_Qualification.md            03_AEC_Q101_Discrete_Semiconductors.md
+  04_AEC_Q102_Optoelectronics.md             05_AEC_Q103_MEMS.md
+  06_AEC_Q104_Multichip_Modules.md           07_AEC_Q200_Passive_Components.md
+  08_MIL_STD_883_Microelectronics.md         09_MIL_STD_750_Transistors.md
+  10_ESD_Standards_JEDEC_ESDA.md             11_Latch_Up_Standards.md
+  12_Reliability_FIT_MTTF_DPPM.md            13_Failure_Analysis_Techniques.md
+  14_Silicon_Lifecycle_Management.md         15_Automotive_Grade_IC_Design.md

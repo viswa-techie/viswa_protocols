@@ -1,0 +1,152 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 29 — RAILWAY & MASS TRANSIT SYSTEMS STANDARDS                         ║
+║  EN 50126/128/129, ETCS/ERTMS, CENELEC, UIC, ERA, CBTC, TCMS                   ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  7 — Transportation
+OUTPUT DIR:   29_Railway_Systems/
+APPLIES TO:   Rail signaling engineers, traction control engineers, train OEMs
+              (Siemens Mobility, Alstom, Bombardier/Alstom, Hitachi Rail),
+              infrastructure managers, ETCS on-board unit designers, metro/light
+              rail system integrators, CBTC architects
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CENELEC RAILWAY STANDARDS (Primary Safety Framework):
+  EN 50126-1:2017              — RAMS (Reliability, Availability, Maintainability, Safety)
+  EN 50126-2:2017              — Application guide for Safety Integrity
+  EN 50128:2011+AMD1:2020      — Software for railway control systems (SIL 0-4)
+  EN 50129:2018                — Safety-related electronic systems for signaling
+  EN 50159:2010                — Safety-related communication in railway systems
+  EN 50155:2017                — Electronic equipment used in rolling stock
+  EN 50121 series              — Railway EMC (electromagnetic compatibility)
+  EN 50124-1:2017              — Coordination of insulation
+  EN 50153:2014                — Protective provisions for rolling stock
+
+ERTMS / ETCS (European Train Control System):
+  ERA SUBSET-026 v3.6          — System Requirements Specification (SRS) — ETCS core
+  ERA SUBSET-023               — Glossary of Terms and Abbreviations
+  ERA SUBSET-027               — FIS Juridical Recording Device
+  ERA SUBSET-034               — Train Communication
+  ERA SUBSET-037               — EuroRadio FIS (GSM-R and GPRS)
+  ERA SUBSET-041               — Performance Requirements for Interoperability
+  ERA SUBSET-057               — Juridical Data and Requirements
+  ETCS Application Level 1/2/3 — Trackside transponder/radio block/moving block
+  GSM-R (ETRS EN 301 515)      — Railway radio communication (legacy)
+  FRMCS (Future Railway Mobile Comm. System — 5G for railways)
+
+UIC (International Union of Railways):
+  UIC 518                      — Testing and approval of railway vehicles (dynamics)
+  UIC 544-1                    — Brake performance
+  UIC 560                      — Pantographs
+  UIC 612                      — Axle design and fatigue
+  UIC 751-1                    — Maintenance of freight wagons
+  UIC 779-14                   — Safety in rail tunnels
+  RID (Regulations concerning International Carriage of Dangerous Goods by Rail)
+
+IEEE RAILWAY STANDARDS:
+  IEEE 1474.1-2004             — CBTC (Communications-Based Train Control) Performance
+  IEEE 1474.2-2003             — CBTC System Design and Functional Allocations
+  IEEE 1474.3-2008             — CBTC Human Factors Requirements
+  IEEE 1474.4-2011             — CBTC Functional Safety
+  IEEE 1629-2012               — Standard for Wheel Geometry
+  IEEE C37.60                  — High-Voltage AC circuit breakers (substations)
+
+SIGNALING & INTERLOCKING:
+  IEC 62280:2014               — Communication security in railway systems
+  IEC 62267:2009               — Automated urban guided transport — safety requirements
+  IEC 62278:2002               — Railway RAMS specification (basis for EN 50126)
+  ANSI/AREMA Manual            — American Railway Engineering and Maintenance-of-Way (USA)
+  AAR Manual of Standards      — American Association of Railroads
+  FRA Part 236                 — Rules, Standards and Instructions for Train Control (USA)
+
+FIRE & SAFETY:
+  EN 45545-1/2:2013            — Fire protection on railway vehicles
+  NFPA 130                     — Standard for Fixed Guideway Transit (USA)
+  BS 6853                      — Code of practice for fire precautions in rolling stock
+
+CYBERSECURITY:
+  IEC 62443 applied to rail    — Industrial control system cybersecurity in rail
+  NIS2 Directive (EU)          — Railway as critical infrastructure
+  CIRAS (Cyber-security in Rail) — ERA/ENISA joint framework
+  Rail ISAC                    — Railway Information Sharing and Analysis Center
+
+QUALITY & PROCUREMENT:
+  IRIS (ISO/TS 22163:2023)     — International Railway Industry Standard (IRIS Certification)
+  CMMI for rail                — Process maturity (Alstom, Siemens Mobility internal)
+  EN ISO 9001 applied to rail  — Quality management
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1830 — Huskisson death at Manchester-Liverpool opening: first railway fatality
+1879 — Tay Bridge Disaster (Scotland): 75 killed, triggered structural standards
+1952 — Harrow and Wealdstone rail crash (112 dead): triggered AWS (Automatic Warning System)
+1988 — Clapham Junction rail crash (35 dead): triggered first systematic railway software safety
+1994 — CENELEC TC9X established: EN 50126/128/129 development begins
+1996 — ERA (European Railway Agency) predecessor bodies working on ETCS
+1999 — Paddington/Ladbroke Grove crash (31 dead): TPWS (Train Protection Warning System)
+2000 — EN 50128:2001 first edition (software safety for railway)
+2003 — EU First Railway Package: interoperability and ERTMS directive
+2005 — ETCS Level 2 first commercial deployment (Switzerland Mattstetten–Rothrist)
+2009 — Viareggio rail accident (32 dead): tank wagon safety standards review
+2011 — EN 50128:2011 (current major revision)
+2013 — Lac-Mégantic disaster (Canada): tanker train runaway, 47 dead
+2016 — EN 50126-1:2017 revision (risk-based approach with EN 50129)
+2019 — EN 50128 Amendment 1 (2020): clarifies tool qualification
+2022 — ERTMS Level 3 moving block: first commercial deployment
+2024 — FRMCS (5G for railways) first deployments (Germany DB Netz)
+         NIS2 Directive formally makes railways critical infrastructure cybersecurity targets
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Railway_Standards_Overview.md        — Landscape, RAMS framework, safety lifecycle
+  01_EN_50126_RAMS.md                     — Reliability, Availability, Maintainability, Safety
+  02_EN_50128_Software_Safety.md          — SIL 0-4, T1/T2/T3 tools, work product table
+  03_EN_50129_System_Safety.md            — Safety case, safety approval, THA/SHA/FMECA
+  04_EN_50159_Communication_Safety.md     — Category 1/2/3 transmission profiles
+  05_ETCS_ERTMS_Architecture.md           — ERA SUBSET-026, Level 1/2/3, RBC, balise
+  06_CBTC_IEEE_1474.md                    — Moving block, ATP/ATO/ATS, CBTC architecture
+  07_EN_50155_Rolling_Stock_Electronics.md — Environmental classes, power supply standards
+  08_FRMCS_5G_Railway_Comms.md            — GSM-R migration, FRMCS architecture
+  09_IRIS_ISO_22163_Quality.md            — Supplier quality, IRIS certification process
+  10_Railway_Cybersecurity.md             — IEC 62443 application, NIS2, ERA framework
+  11_Railway_Case_Studies.md              — Clapham, Ladbroke Grove, Viareggio, Eschede
+  12_Railway_Interview_Questions.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY TECHNICAL CONCEPTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. EN 50128 Software Categories:
+   T1: Tools that generate output verified independently (no qualification needed)
+   T2: Tools whose errors could affect safety if not detected (tool validation required)
+   T3: Tools whose errors could affect safety and not be detected (full qualification)
+
+2. EN 50129 Generic vs. Specific Product Safety Cases:
+   Pre-developed module (PDM): Generic safety case
+   Application-specific: Full safety case with TSHA (Technical and Operating Context)
+   Evidence: hazard log, FMECA, FTA, safety requirements spec, safety audit
+
+3. ETCS Levels:
+   Level 0: No ETCS — national STM or no supervision
+   Level 1: Balise-based, point supervision, speed profile sent at each balise
+   Level 2: Continuous radio (GSM-R/FRMCS), RBC supervises, no lineside signals needed
+   Level 3: Moving block, train integrity assumed, headway based on train length
+
+4. CBTC Architecture:
+   ATP (Automatic Train Protection): safety critical, SIL 4
+   ATO (Automatic Train Operation): operation efficiency, SIL 2/3
+   ATS (Automatic Train Supervision): fleet management, SIL 0/1
+   Communication: 802.11 WLAN, private LTE, licensed spectrum
+
+5. RAMS: Quantitative targets per EN 50126:
+   MTBF (Mean Time Between Failures): hours of operation
+   Availability: (MTBF)/(MTBF + MTTR) — target 99.995% for mainline
+   Hazard Rate: failures per hour with safety consequence (SIL-linked)
+   THR (Tolerable Hazard Rate): typically 10⁻⁹/hr for SIL 4

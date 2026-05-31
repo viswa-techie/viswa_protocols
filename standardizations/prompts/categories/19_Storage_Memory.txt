@@ -1,0 +1,91 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 19 — STORAGE, MEMORY & INTERFACE STANDARDS                             ║
+║  NVMe 2.0, JEDEC DDR5/LPDDR5/HBM3, CXL 3.1, UFS 4.0, eMMC 5.1, PCIe 7.0       ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 3 — Silicon & Electronics  |  OUTPUT DIR: 19_Storage_Memory/
+
+STANDARDS UNIVERSE:
+VOLATILE MEMORY:
+  JEDEC DDR5-8400               — DDR5 SDRAM: ECC on-die, 64/72-bit (2021)
+      Speeds: DDR5-4800 to DDR5-8400 (JEDEC spec)
+      Dual 32-bit sub-channels; on-die ECC; 1.1V VDD
+  JEDEC LPDDR5X-9600            — Low Power DDR5 (mobile/embedded): 9600 Mbps (2023)
+  JEDEC LPDDR4X-4266            — Low Power DDR4: still dominant in IoT/embedded
+  JEDEC HBM3 (JESD238)          — High Bandwidth Memory Gen3: 819 GB/s per stack
+  JEDEC HBM3E                   — HBM3E: 1.2 TB/s per stack (8-die, 128GB)
+  JEDEC HBM4 (expected 2026)    — HBM4: 2.5+ TB/s, 3D stacking
+  JEDEC GDDR6X (JESD250C)       — Graphics DDR6X: 576 Gbps (Micron PAM4)
+  JEDEC SRAM standards          — Embedded SRAM (JESD100)
+
+NON-VOLATILE STORAGE:
+  NVMe 2.0 (NVM Express 2.0, 2021) — Host controller interface for PCIe SSDs
+      NVMe Base Spec: queue pairs, namespaces, ZNS, KV
+      NVMe Zoned Namespaces (ZNS): host-managed zones
+      NVMe-oF (NVMe over Fabrics): RDMA/TCP/FC
+      NVMe Management Interface (NVMe-MI): out-of-band management
+  SATA AHCI 1.3.1               — Legacy: AHCI interface for SATA drives (6 Gbps)
+  UFS 4.0 (JEDEC JESD220F)      — Universal Flash Storage 4.0: 23.2 Gbps (mobile)
+  UFS 3.1                        — 11.6 Gbps; still widely deployed in phones
+  eMMC 5.1 (JEDEC JESD84-B51)  — embedded MMC 5.1: 400 MB/s HS400 (IoT/embedded)
+  SD 8.0 (SD Association)       — SD Express: 985 MB/s (NVMe over UHS-III)
+  NAND Flash standards           — 3D NAND TLC/QLC/PLC (JEDEC JESD79)
+
+INTERCONNECT & FABRIC:
+  PCIe 5.0 (2019)               — 32 GT/s per lane; x16 = 512 Gbps
+  PCIe 6.0 (2022)               — 64 GT/s (PAM4); x16 = 256 GB/s; FLIT mode
+  PCIe 7.0 (2025 expected)      — 128 GT/s; x16 = 512 GB/s bidirectional
+  CXL 1.0/2.0/3.0/3.1          — Compute Express Link: memory expansion/pooling
+      CXL 1.0: accelerator attached memory (PCIe 5.0 layer)
+      CXL 2.0: memory pooling; switching
+      CXL 3.1 (2023): fabric with 256 nodes; port-based routing
+      Use cases: AI memory expansion, large language model inference
+  UCIe 1.1 (2023)              — Universal Chiplet Interconnect Express (die-to-die)
+  OpenCAPI 3.0                   — IBM Power: coherent accelerator attach
+  Gen-Z (merged into CXL)        — Memory semantic fabric (absorbed by CXL)
+
+STORAGE INTERCONNECTS:
+  SAS-4 (24 Gb/s)               — Serial Attached SCSI: enterprise drives
+  Fibre Channel (FC-32G)         — Storage Area Network: 32 Gbps
+  NVMe-oF/FC (FC-NVMe-2)       — NVMe commands over Fibre Channel
+  iSCSI (RFC 7143)               — Block storage over Ethernet/IP
+  NFS v4.2 (RFC 7862)            — Network File System
+  SMB 3.1.1 (MS-SMB2)           — Server Message Block for Windows shares
+
+SECURITY STANDARDS:
+  TCG Opal 2.0                  — Self-encrypting drives (SEDs)
+  TCG Enterprise SSC             — SED for enterprise drives
+  ATA Security (INCITS 558)      — ATA password-based drive lock
+  FIPS 140-3 for storage         — Encryption in NVMe drives (SSD crypto modules)
+  TCG Storage Work Group         — Drives with hardware encryption
+
+RELIABILITY:
+  JEDEC JESD218B                 — Endurance/Retention for SSDs (enterprise)
+  JEDEC JESD219A                 — NAND Flash Workload Characterization
+  NVMe S.M.A.R.T                — Self-Monitoring, Analysis and Reporting Technology
+  AFR (Annualized Failure Rate)  — HDD/SSD field reliability metric
+  UBER (Uncorrectable Bit Error Rate) — <1 UBER per 10¹⁷ bits read (enterprise SSD)
+
+HISTORICAL TIMELINE:
+  1980 — SCSI standard (ANSI); IBM PC XT hard disk
+  1994 — IDE/ATA: consumer HDD standard; PCMCIA flash
+  2000 — USB 2.0; CompactFlash; SD Card Association
+  2003 — SATA 1.0 (1.5 Gbps); first SSDs for enterprise (SanDisk)
+  2007 — PCIe 2.0; NAND flash scaling (SLC → MLC)
+  2008 — AHCI 1.3; first consumer SSDs (Intel X25-M)
+  2011 — NVMe 1.0; PCIe 3.0; mSATA; eMMC 5.0
+  2013 — NVMe 1.1; M.2 form factor; LPDDR4 begins
+  2016 — 3D NAND production (Samsung V-NAND, Intel 3D XPoint)
+  2017 — CXL concept (Intel); JEDEC HBM2
+  2019 — PCIe 5.0 spec; NVMe 1.4
+  2021 — NVMe 2.0; JEDEC DDR5/HBM3; CXL 1.0/2.0
+  2022 — PCIe 6.0; CXL 3.0; UFS 4.0; LPDDR5X
+  2023 — UCIe 1.1; CXL 3.1; HBM3E; NVMe 2.1
+  2024 — PCIe 7.0 specification; HBM4 development; CXL memory pooling for AI
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Storage_Memory_Overview.md         01_DDR5_LPDDR5_JEDEC.md
+  02_HBM3_HBM3E_HBM4.md                03_NVMe_2_0_Protocol.md
+  04_NVMe_oF_Fabrics.md                 05_PCIe_5_6_7_Generations.md
+  06_CXL_3_1_Memory_Fabric.md           07_UFS_eMMC_Mobile.md
+  08_SSD_Reliability_Metrics.md         09_Self_Encrypting_Drives.md
+  10_Storage_Interconnects_SAS_FC.md

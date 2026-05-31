@@ -1,0 +1,186 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 00 — STANDARDS HISTORY & CHRONOLOGICAL TIMELINE                       ║
+║  From 1901 (BSI founding) to 2026 — major incidents, milestones, bodies          ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  All (Foundational Context)
+OUTPUT DIR:   00_Standards_History_Timeline/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MISSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate the COMPLETE HISTORY OF TECHNOLOGY STANDARDIZATION from the industrial
+revolution to the AI era. Document every major incident that triggered a new standard,
+every standards body founding, every paradigm shift, and the geopolitical forces that
+shape international standards today.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+00_Global_Standardization_Overview.md
+    - Why standards exist: interoperability, safety, trade, liability
+    - How standards are made: ISO/IEC JTC 1 process, ANSI, SDO hierarchy
+    - Mandatory vs. voluntary standards: the legal landscape
+    - Standards and geopolitics: US vs. EU vs. China standardization approaches
+    - Standards as competitive tools: standard essential patents (SEPs), FRAND licensing
+    - The "Standards War" concept: VHS vs. Betamax, Blu-ray vs. HD-DVD, 5G specs
+
+01_Pre_1970_Industrial_Origins.md
+    1901 — BSI (British Standards Institution) founded (first national standards body)
+    1906 — IEC (International Electrotechnical Commission) founded
+    1912 — SOLAS 1914 (Titanic disaster triggered)
+    1919 — ICAN/ICAO predecessor (post-WWI aviation regulation)
+    1926 — ISA (ISA = then International Federation of the National Standardizing Associations)
+    1932 — IEC first electromagnetic compatibility discussions
+    1947 — ISO founded (post-WWII: 25 national bodies, Geneva)
+    1948 — IMO (then IMCO) founded
+    1950s — US MIL-SPEC explosion (Korean War, Cold War defense electronics)
+    1954 — IEC TC65 (industrial process measurement & control) formed
+    1957 — Sputnik: space standards development begins
+    1960 — SOLAS 1960 (updated post-WWII)
+    1963 — US FCC established (Radio Act heritage, 1934)
+    1964 — ASCII standard (ANSI X3.4): first widely adopted digital standard
+    1965 — IEEE formed (merger of AIEE + IRE)
+    1968 — NERC founded (Northeast Blackout 1965 trigger)
+    1969 — ARPANET: origin of internet protocols (IETF standards later)
+
+02_1970s_1980s_Safety_Awakening.md
+    1972 — OSHA established (US Occupational Safety and Health Act 1970)
+    1974 — SOLAS 1974 (comprehensive current framework)
+    1975 — IEEE 802 committee formed (LAN standards)
+    1976 — Seveso disaster (Italy): toxic chemical cloud → Seveso Directive (EU chemical safety)
+    1977 — IEC TC56 (Dependability) established
+    1979 — Three Mile Island: nuclear safety standards (NRC rules)
+             Robert Williams killed by industrial robot → OSHA robot guidance
+             IEC 60364 (building electrical installation) published
+    1982 — MIL-STD-882B (System Safety): established hazard risk methodology
+    1983 — TCP/IP becomes ARPANET standard: internet protocols foundation
+    1984 — Bhopal disaster (3,787 dead): chemical process safety IEC 61511 origin
+    1985 — Therac-25 accidents (1985-1987): software safety → IEC 62304, IEC 61508
+    1986 — Chernobyl: IAEA nuclear safety standards accelerated
+             Challenger disaster: NASA system safety culture reform
+    1987 — VHDL IEEE 1076: first formal HDL standard
+    1988 — Clapham Junction rail crash: EN 50128 origin
+    1989 — IEC TC65A WG9: IEC 61508 development begins
+
+03_1990s_Digital_Era_Standards.md
+    1990 — Motorola Six Sigma (process quality: ISO 9001 impact)
+    1991 — WWW invented (Tim Berners-Lee): W3C standards era begins
+    1993 — W3C founded (Tim Berners-Lee)
+    1994 — IEC 61508 Working Draft: functional safety root standard
+             AUTOSAR predecessor discussions (Bosch/BMW/DaimlerChrysler/Volkswagen)
+    1995 — IEEE 802.11 Wi-Fi standard v1: wireless era
+             Verilog IEEE 1364-1995
+    1996 — FIDO Alliance precursor cryptographic work
+             IEC 61850 TC57 WG10 starts (utility automation)
+    1997 — ISO 14001:1996 (environmental management system)
+    1998 — Internet security awareness: CERT/CC, SANS Institute established
+             ISO/IEC 17799 (information security; became ISO 27001)
+    1999 — Ariane 5 Flight 501 (1996 actually): software reuse safety lesson (documented 1999)
+             IEC 61508:1998 published (first edition)
+             Y2K: first global software compliance program (date format standardization)
+    2000 — IEC 61850 Part 1-2 published (utility automation)
+
+04_2000s_Embedded_Internet_Era.md
+    2001 — 9/11: ISPS Code (maritime), FAA security rules, ITAR tightening
+    2002 — PCI DSS v1.0 (payment card security: Visa/MC/Amex/JCB/Discover)
+             Sarbanes-Oxley: IT audit controls for financial systems
+    2003 — NERC CIP development begins (Northeast blackout)
+             ISO 26262 development begins (based on IEC 61508)
+    2004 — AUTOSAR founding (BMW, Bosch, Continental, DaimlerChrysler, Siemens VDO, VW)
+             ISO/IEC 27001 first edition (ISMS)
+    2005 — IEEE 1800-2005 SystemVerilog standardized
+             NIST SP 800-53 v1 (federal cybersecurity)
+    2006 — AUTOSAR R1.0 released; EU Machinery Directive 2006/42/EC
+             3GPP Release 8 (LTE foundations)
+    2007 — NERC CIP v1 standards published
+             iPhone: mobile security/app standards era begins
+    2008 — Heartland breach: PCI DSS emergency revision
+             FIPS 140-2 widely adopted for cryptographic modules
+    2009 — OPC UA IEC 62541 published (industrial comms)
+             ISO 26262 CD (Committee Draft)
+
+05_2010s_Connected_Vehicle_Cloud.md
+    2010 — Stuxnet: first nation-state ICS cyberattack; IEC 62443 urgency
+             iOS App Store security model: mobile app store standards influence
+    2011 — ISO 26262:2011 first edition (automotive functional safety)
+             UVM 1.0 (Accellera): verification methodology unification
+             AUTOSAR R4.0: major architecture
+    2012 — NIST Cybersecurity Framework development begins
+    2013 — FIDO Alliance founded: passwordless auth standards
+             ISO/SAE 21434 concept work begins
+    2014 — NIST CSF v1.0 published
+             Heartbleed (OpenSSL): supply chain vulnerability awareness
+             ISO/IEC 27018: cloud PII protection
+    2015 — Jeep Cherokee remote hack (Miller/Valasek): vehicle cybersecurity emergency
+             → ISO/SAE 21434 accelerated; UNECE R155/R156 development
+             US EMV liability shift; chip card standardization push
+    2016 — NIST SP 800-63-3: digital identity levels
+             EU GDPR published (enforcement 2018)
+             PSD2: Open Banking mandate (EU)
+             3GPP Release 15: 5G NR standards complete
+    2017 — WannaCry ransomware: global OT/IT supply chain damage
+             ISO/IEC 27017 cloud security; Cloud Act (US)
+             ISO/TS 15066 collaborative robot safety
+    2018 — EU GDPR enforcement begins
+             NIST PQC competition Round 1 submissions
+             ISO 26262:2018 (second edition, major revision)
+             AUTOSAR Adaptive Platform R18-10
+    2019 — 3GPP 5G NR commercial deployments (Korea, US, China, Germany)
+             NIST AI framework discussions begin
+             MIL-STD-810H published (environmental)
+
+06_2020s_AI_Quantum_Geopolitical.md
+    2020 — SolarWinds SUNBURST: supply chain attack → US EO 14028 (2021)
+             COVID: remote work; cloud security, Zero Trust acceleration
+             NIST PQC Round 3 candidates announced
+    2021 — US Executive Order 14028: SBOM mandate, Zero Trust, MFA for federal
+             Log4Shell: supply chain vulnerability crisis
+             NIST AI RMF development begins
+    2022 — Russia-Ukraine war: GPS spoofing, drone warfare, energy grid attacks
+             EU Cyber Resilience Act published
+             NIST SP 800-207 Zero Trust Architecture published
+             CHIPS and Science Act (US): domestic semiconductor standards investment
+             ISO/IEC 42001 AI management system standard development
+             PCI DSS v4.0 published
+    2023 — NIST finalizes PQC candidates (Kyber, Dilithium, FALCON, SPHINCS+)
+             EU AI Act political agreement
+             ISO/IEC 42001:2023 published (AI management system)
+             NIST AI RMF 1.0 published
+             eIDAS 2.0 political agreement; EU Digital Identity Wallet
+             IACS E26/E27: mandatory ship cybersecurity
+             SEMI E187/E188: fab equipment cybersecurity
+    2024 — NIST finalizes PQC: FIPS 203 (Kyber/ML-KEM), FIPS 204 (Dilithium/ML-DSA),
+                                 FIPS 205 (SPHINCS+/SLH-DSA) — August 2024
+             EU AI Act published (August 2024); enforcement timeline begins
+             MiCA (crypto-assets): full enforcement December 2024
+             DORA (digital operational resilience): January 2025 enforcement
+             EU NIS2: critical infrastructure cybersecurity mandatory
+             Automotive SPICE 4.0 published
+    2025 — EU AI Act high-risk AI obligations begin
+             EU CRA (Cyber Resilience Act): product security + SBOM for EU market
+             eIDAS 2.0 EUDIW national implementations
+             Post-quantum cryptography migration programs across government/finance
+             AI governance: ISO 42001 first certifications issued
+    2026 — Expected: EU Machinery Regulation 2023/1230 full enforcement
+             NIST PQC FIPS 206 (FALCON lattice signature) expected
+             UAM/eVTOL first commercial operations (Joby, Archer)
+             6G (IMT-2030) first specification releases
+
+07_Standards_Development_Organizations.md
+    Deep dive into SDO processes:
+    - ISO: P-member, O-member voting; TC, SC, WG structure; 60-month lifecycle
+    - IEC: Horizontal vs. vertical standards; IEC Affiliate Program
+    - IEEE: Standards Association (IEEE-SA); PAR process; balloting
+    - IETF: RFC process; Working Group; Proposed/Draft/Internet Standard
+    - W3C: Recommendation process; Working Draft; Candidate Rec; PR; REC
+    - 3GPP: Release cycle; Working Group meetings; Change Request process
+    - NIST: FIPS publication process; SP 800 series; public comment periods
+    - ETSI: ENs (European Norms) vs. TS (Technical Specifications)
+    - Accellera: EDA industry consortium; PAC process
+    - OCP: Open Compute Project: community-developed hardware specs
+    - Standard Essential Patents (SEPs) and FRAND licensing battles
+    - Geopolitical standardization: US vs. EU vs. China GB/T divergence
+    - ISO/IEC JTC 1 structure (software, security, AI)

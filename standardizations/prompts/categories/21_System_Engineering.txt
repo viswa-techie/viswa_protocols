@@ -1,0 +1,92 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 21 — SYSTEMS ENGINEERING & MBSE                                        ║
+║  ISO/IEC 15288, ISO/IEC 12207, SysML v2, V-Model, INCOSE SE Handbook, MBSE      ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 8 — Software Quality & DevOps  |  OUTPUT DIR: 21_System_Engineering/
+
+STANDARDS UNIVERSE:
+SYSTEMS ENGINEERING LIFECYCLE:
+  ISO/IEC/IEEE 15288:2023       — System and Software Engineering: System Lifecycle Processes
+      Technical processes: stakeholder needs definition, requirements, architecture, implementation,
+                            integration, verification, transition, validation, operation, maintenance
+      Management processes: project, quality, risk, configuration, information, measurement
+      Agreement processes: acquisition, supply
+  ISO/IEC/IEEE 12207:2017       — Software Lifecycle Processes (companion to 15288)
+  ISO/IEC 29148:2018            — Requirements Engineering: stakeholder, system, software requirements
+  ISO/IEC 33001:2015            — Process Assessment: concepts and terminology
+  IEEE 1012:2016                — Verification and Validation (V&V)
+  IEEE 1016:2009                — Software Design Descriptions (SDD)
+  IEEE 830 (superseded)         — Software Requirements Specifications (SRS) format
+
+SYSTEMS ENGINEERING PROCESSES:
+  INCOSE Systems Engineering Handbook v4 (2015) — Process areas, patterns, specialty disciplines
+  INCOSE SE Vision 2035         — Future of systems engineering
+  SE body of knowledge (SEBoK)  — Living reference (latest version on sebokwiki.org)
+  NASA Systems Engineering Handbook (NASA/SP-2007-6105 Rev2) — NASA SE practices
+  Defense Acquisition Guidebook (DAG) — US DoD systems acquisition
+  SAE ARP4754A                  — Aircraft system lifecycle (see Category 08)
+
+V-MODEL DEVELOPMENT LIFECYCLE:
+  Classical V-Model             — Requirements ↔ Acceptance; Design ↔ System Test; Code ↔ Unit Test
+  VDA/BMW V-Model Automotive     — Automotive-specific V-model interpretation
+  ASPICE V-Model (SWE processes) — See Category 22 SW Process Quality
+  V-model.bund.de (Germany)     — German federal IT projects
+  ISO 15288 + Agile extensions  — Scaled Agile (SAFe) integration with SE lifecycle
+
+MBSE (MODEL-BASED SYSTEMS ENGINEERING):
+  SysML v1.6 (OMG, 2019)       — Systems Modeling Language: BDD, IBD, REQ, PAR, ACT, SEQ, STM, UC
+  SysML v2 (OMG, 2024)         — Major revision: KerML kernel; structured expressions; improved semantics
+  Harmony for SysML (IBM)       — Top-down design methodology (ROPES predecessor)
+  IBM Rhapsody                   — SysML/UML MBSE tool
+  Capella (Arcadia)              — Open source MBSE tool (Thales methodology)
+  PTC Windchill/Integrity       — PLM integration with MBSE
+  Modelica                      — Physical system simulation language
+  MBSE adoption: NASA, ESA, Airbus, Boeing, Siemens, German automotive OEMs
+
+ARCHITECTURE FRAMEWORKS:
+  DoDAF (v2.02)                 — US Department of Defense Architecture Framework
+  TOGAF 10 (The Open Group)     — Enterprise Architecture (ADM cycle)
+  ArchiMate 3.2                  — Architecture modeling language (Open Group)
+  MODAF (UK MoD)                — UK Ministry of Defence Architecture Framework
+  NAF v4                         — NATO Architecture Framework
+  Zachman Framework              — Enterprise architecture: 6 rows × 6 columns
+
+REQUIREMENTS MANAGEMENT:
+  ISO/IEC 29148:2018            — Requirements engineering processes
+  DOORS (IBM Rational)          — Requirements database tool (de facto standard)
+  Polarion (Siemens)            — Requirements + ALM tool
+  Jama Connect                   — Requirements traceability
+  Reqtify (Dassault)             — Requirements traceability analysis tool
+
+FUNCTIONAL SAFETY METHODS IN SE:
+  FHA (Functional Hazard Assessment) — System-level hazard identification
+  PSSA (Preliminary System Safety Assessment) — Top-down hazard decomposition
+  SSA (System Safety Assessment) — Final safety analysis
+  CCA (Common Cause Analysis)   — ZSA, PRA, CMA
+  FMEA/FTA/FMEDA               — See Category 01
+
+HISTORICAL TIMELINE:
+  1957 — Systems Analysis (RAND Corporation); PERT network (Polaris program)
+  1960 — SAGE air defense: first large-scale software system
+  1968 — NATO Software Engineering conference (software crisis)
+  1969 — Apollo 11: concurrent systems engineering, V&V processes
+  1988 — IEEE 1012: V&V standard
+  1994 — SEI Capability Maturity Model (CMM); early SE maturity
+  1998 — ISO/IEC 15288 development begins; INCOSE
+  2000 — INCOSE Systems Engineering Handbook v1
+  2003 — SysML 1.0 (OMG); MBSE concept popularized
+  2005 — ISO/IEC/IEEE 15288:2008 first edition
+  2010 — INCOSE MBSE Challenge; Capella tool (Thales)
+  2015 — INCOSE SE Handbook v4; SysML 1.4
+  2017 — ISO/IEC 15288:2023 revision begins
+  2019 — SysML v2 alpha; OMG formal submission
+  2023 — ISO/IEC/IEEE 15288:2023; SysML v2 beta
+  2024 — SysML v2 adopted by OMG; Arcadia/Capella v7
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Systems_Engineering_Overview.md    01_ISO_15288_Lifecycle.md
+  02_ISO_12207_Software_Lifecycle.md    03_SysML_v2_Modeling.md
+  04_MBSE_Tools_Methodologies.md        05_V_Model_Development.md
+  06_Requirements_Engineering.md        07_Architecture_Frameworks.md
+  08_Safety_Methods_SE.md               09_NASA_SE_Handbook.md
+  10_INCOSE_SE_Handbook.md

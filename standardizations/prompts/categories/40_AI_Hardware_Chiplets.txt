@@ -1,0 +1,107 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 40 — AI HARDWARE ACCELERATORS, CHIPLETS & INTERCONNECTS               ║
+║  UCIe, BoW, ODSA, UALink, MLCommons, OpenCAPI, NVLink, CXL for AI              ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  3 — Silicon & Electronics
+OUTPUT DIR:   40_AI_Hardware_Chiplets/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHIPLET INTERCONNECT:
+  UCIe 1.1 (Universal Chiplet Interconnect Express) — Standardized die-to-die interface
+      Physical layer: advanced (bump-based) + standard (package)
+      Protocol layer: CXL, PCIe, streaming
+      Management: SMBUS, in-band sideband
+  BoW (Bunch of Wires) — OCP die-to-die at 112 Gbps/wire
+  ODSA (Open Domain-Specific Architecture) — HotChips collaboration framework
+  AIB (Advanced Interface Bus) — Intel die-to-die (EMIB package)
+  HBM (High Bandwidth Memory) — JEDEC: HBM3 (2021), HBM3E (2023), HBM4 (2025)
+  IEEE 1838 — Die, Stack, System Test (3D stacked ICs)
+  SEMI 3DS TSV standards       — Through-silicon via specification
+
+COMPUTE INTERCONNECT FOR AI:
+  CXL (Compute Express Link) 3.1 — CPU-to-accelerator coherent memory
+      CXL.mem: memory expansion (GPU/AI memory pooling)
+      CXL.cache: peer-to-peer cache coherency
+      CXL.io: PCIe-based I/O
+  PCIe 7.0 (128 GT/s)          — GPU/NPU attachment to host
+  NVLink 5.0 (NVIDIA)          — GPU-to-GPU 1.8 TB/s (proprietary but influential)
+  NVSwitch / NVL72              — NVIDIA multi-GPU cluster interconnect
+  UALink 1.0 (AMD/Intel/Broadcom/Google/Meta/Microsoft) — NVLink alternative
+  OpenCAPI 4.0 (IBM/AMD)        — Coherent accelerator interface
+  CCIX (Cache Coherent Interconnect for Accelerators) — ARM-led (now part of CXL)
+  Gen-Z (now CXL/OpenCAPI)     — Memory-semantic fabric
+
+AI ACCELERATOR BENCHMARKS & STANDARDS:
+  MLCommons MLPerf Training v4.0 — Training workload benchmarks
+  MLCommons MLPerf Inference v4.0 — Inference throughput/latency benchmarks
+  MLCommons MLPerf Storage       — Storage I/O for AI training
+  MLCommons MLPerf Tiny          — Edge AI benchmarks (embedded/MCU)
+  STAC (Securities Technology Analysis Center) — Financial AI benchmarks
+  AI Verify (Singapore PDPC)    — AI governance testing framework
+  MLCommons Croissant           — ML dataset format standard
+
+NETWORK STANDARDS FOR AI CLUSTERS:
+  RDMA over Converged Ethernet (RoCE v2) — IEEE 802.1Qbb Priority Flow Control
+  InfiniBand (IBTA) HDR/NDR     — 200/400 Gbps for HPC/AI clusters
+  Ethernet 800G / 1.6T          — IEEE 802.3 for AI cluster fabrics
+  Ultra Ethernet Consortium (UEC) — New Ethernet spec for AI/ML scale
+  NCCL (NVIDIA Collective Communications Library) — De facto standard for AllReduce
+
+POWER & THERMAL:
+  OCP Power Management (OCP-PM) — Open Compute Project power telemetry
+  JEDEC JESD301                  — Power management bus standards
+  NVIDIA NV3 power connector (PCIe 5.0 12VHPWR)
+  IEC 62368-1                   — Safety for AI server systems
+  ASHRAE A3/A4 thermal specs    — Air cooling envelope for GPU/AI servers
+
+SAFETY & RELIABILITY FOR AI HW:
+  ISO 26262 Part 5 & 11         — Automotive AI SoC hardware safety
+  IEEE P2851 (CHIPS Act quality) — Trusted chip supply chain verification
+  JEDEC JEP131                  — Soft-error methodology for space/AI
+  ANSI/ESD S20.20               — ESD control for AI chip handling
+  DoD Trusted Foundry            — RH-hardened AI chips for defense
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2012 — AlexNet (GPU-accelerated deep learning): NVIDIA CUDA ecosystem critical mass
+2014 — Google TPU v1 internal deployment (matrix multiply accelerator)
+2016 — Google announces TPU publicly; ML accelerator market starts
+2017 — NVIDIA V100 (Volta): first tensor core architecture
+2018 — MLPerf v0.5: first standardized AI benchmark
+2019 — MLCommons formed (Google, Intel, NVIDIA, ARM, Harvard); MLPerf governs
+2020 — AMD/Intel/Arm/Google/Microsoft form CXL Consortium
+         HBM2E deployed on A100; AI memory bandwidth bottleneck addressed
+2021 — UCIe (Universal Chiplet Interconnect Express) concept announced
+         JEDEC HBM3 specification published
+2022 — UCIe 1.0 published (Intel, AMD, Arm, ASML, TSMC, Samsung co-authors)
+         NVIDIA H100 (Hopper): 80B transistors; 3.35 TB/s HBM3
+         OCP Chiplet Module standard
+2023 — Intel Meteor Lake: first commercial product with UCIe die-to-die
+         CXL 3.1: fabric topology for memory pooling
+         UALink announced: alternative to NVLink
+2024 — NVIDIA Blackwell (B100/B200): NVL72 rack-scale integration
+         MLPerf Training v4.0: LLM pretraining benchmarks
+         Ultra Ethernet Consortium (UEC) v1.0 spec
+2025 — HBM4 deployment; UCIe 2.0 development; AI accelerator standards maturity
+         IEEE P2851 (trusted chip attestation) for CHIPS Act compliance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_AI_Hardware_Standards_Overview.md   — Ecosystem map, interconnect landscape
+  01_UCIe_Chiplet_Standard.md            — Physical, die-to-die protocols, compliance
+  02_CXL_AI_Memory_Pooling.md            — CXL.mem, cache coherency, AI use cases
+  03_HBM3_HBM4_JEDEC.md                  — Memory architecture, bandwidth, PHY
+  04_MLPerf_Benchmarks.md                — Training/Inference metrics, submission process
+  05_AI_Cluster_Networking.md            — InfiniBand, RoCE, Ultra Ethernet, NVLink
+  06_UALink_vs_NVLink.md                 — Interconnect comparison, adoption roadmap
+  07_Power_Thermal_AI_Servers.md         — OCP-PM, ASHRAE, liquid cooling standards
+  08_AI_Hardware_Safety_Reliability.md   — ISO 26262 for AI SoC, soft errors, SEE
+  09_AI_Hardware_Interview_Questions.md

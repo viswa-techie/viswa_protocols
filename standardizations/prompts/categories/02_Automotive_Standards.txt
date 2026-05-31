@@ -1,0 +1,61 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 02 — AUTOMOTIVE STANDARDS & COMPLIANCE                                 ║
+║  AUTOSAR, ASPICE, ISO 26262, SOTIF, UNECE R155/R156, SAE J3016, CAN/FlexRay    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 7 — Transportation  |  OUTPUT DIR: 02_Automotive_Standards/
+
+STANDARDS UNIVERSE:
+  AUTOSAR Classic R23-11       — ECU software architecture (BSW, RTE, Application)
+      MCAL, ECU Abstraction, Service, Memory, Communication, Diagnostic layers
+  AUTOSAR Adaptive Platform R23-11 — High-compute platform (POSIX OS, Service-Oriented)
+      Execution Management, Communication Management, Update & Config Management
+  AUTOSAR Foundation            — Shared elements (data types, serialization, manifest)
+  ASPICE (Automotive SPICE) v4.0 — Process assessment model (6 process areas)
+      CL 1-5; SWE.1-SWE.6; SYS.1-SYS.5; MAN.3 (project management)
+  ISO 21448:2022 (SOTIF)       — Safety of intended functionality (perception systems)
+  UNECE R155 (2021)            — Cybersecurity: Type Approval for vehicles
+  UNECE R156 (2021)            — Software updates (OTA): Type Approval
+  SAE J3016:2021               — Autonomous driving levels (L0-L5)
+  SAE J1939                    — Heavy-duty vehicle bus (CAN-based)
+  SAE J1979 / ISO 15031        — OBD-II diagnostic standard
+  SAE J2534                    — Pass-thru programming (ECU reprogramming)
+  ISO 11898-1/2:2015           — CAN bus protocol (Classical CAN & CAN FD)
+  ISO 17987                    — LIN bus specification
+  ISO 17458-1/5                — FlexRay protocol
+  ISO 13400                    — DoIP (Diagnostics over IP)
+  OPEN Alliance BroadR-Reach   — Automotive Ethernet 100BASE-T1
+  IEEE 802.1AS-2020            — gPTP (generalized Precision Time Protocol)
+  UDS (ISO 14229)              — Unified Diagnostic Services
+  AUTOSAR DIAG (DCM, DEM, FIM) — Diagnostic Communication Manager modules
+  ISO 26262:2018               — See Category 01 FuSa for deep dive
+  MISRA C:2012 + AUTOSAR C++14 — See Category 17 Embedded SW Quality
+
+KEY INCIDENTS & DRIVERS:
+  Toyota Unintended Acceleration (2009-2010): MISRA violations → ISO 26262:2011
+  Jeep Cherokee remote hack (2015): Uconnect → ISO/SAE 21434, UNECE R155
+  Tesla Autopilot fatalities: SOTIF → ISO 21448
+  VW Dieselgate (2015): calibration software → ASPICE supplier process requirements
+
+HISTORICAL TIMELINE:
+  2003 — AUTOSAR founding consortium (BMW, Bosch, Continental, Daimler, Siemens VDO, VW)
+  2006 — AUTOSAR R1.0; ISO 26262 development begins
+  2009 — AUTOSAR R4.0; Toyota ETCS investigation
+  2011 — ISO 26262:2011 (1st edition); AUTOSAR R4.1
+  2015 — Jeep hack → vehicle cybersecurity emergency; SAE J3016 levels
+  2017 — AUTOSAR Adaptive Platform R17-03 (POSIX-based)
+  2018 — ISO 26262:2018 (2nd edition); ISO/SAE 21434 draft
+  2021 — UNECE R155/R156 adopted; ISO/SAE 21434:2021 published
+  2022 — AUTOSAR R22-11; ASPICE v3.1 release
+  2023 — UNECE R155 mandatory for new types in EU; ASPICE 4.0 work starts
+  2024 — ASPICE 4.0 published; AUTOSAR R24-11; Software-Defined Vehicle architecture
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Automotive_Compliance_Landscape.md  01_AUTOSAR_Classic_Architecture.md
+  02_AUTOSAR_Adaptive_Architecture.md    03_ASPICE_Process_Assessment.md
+  04_ISO_21448_SOTIF.md                  05_UNECE_R155_Cybersecurity.md
+  06_UNECE_R156_SOTA.md                  07_SAE_J1939_Heavy_Vehicle.md
+  08_SAE_J1979_OBD.md                    09_SAE_J3016_Autonomous_Levels.md
+  10_ISO_11898_CAN_Protocol.md           11_LIN_Bus_ISO_17987.md
+  12_FlexRay_ISO_17458.md                13_Automotive_Ethernet_100BASE_T1.md
+  14_Vehicle_Type_Approval.md            15_EV_Standards_IEC_61851.md
+  16_Software_Defined_Vehicle.md

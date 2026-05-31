@@ -1,0 +1,96 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 06 — TELECOMMUNICATIONS & CELLULAR NETWORKS                            ║
+║  3GPP Rel-8 to Rel-19, 5G NR, ITU-R IMT, eSIM SGP.22, OpenRAN, 6G IMT-2030     ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 5 — Connectivity & RF  |  OUTPUT DIR: 06_Telecom_Cellular/
+
+STANDARDS UNIVERSE:
+3GPP RELEASE FAMILY:
+  Release 8 (2009)              — LTE (Long Term Evolution) foundation: OFDMA, MIMO
+  Release 9 (2010)              — LTE-Advanced prep, eMBMS, SON
+  Release 10 (2011)             — LTE-Advanced: carrier aggregation, eICIC
+  Release 11 (2013)             — CoMP, enhanced PDCCH
+  Release 12 (2015)             — D2D (device-to-device), small cells
+  Release 13 (2016)             — LTE-Advanced Pro, IoT (NB-IoT, eMTC, EC-GSM-IoT)
+  Release 14 (2017)             — V2X (C-V2X Sidelink), FD-MIMO
+  Release 15 (2019)             — 5G NR Phase 1: NSA + SA, eMBB, sub-6 GHz + mmWave
+  Release 16 (2020)             — 5G Phase 2: URLLC, MIMO enhancements, V2X NR
+  Release 17 (2022)             — NR-U (unlicensed), RedCap (IoT), NTN (satellite)
+  Release 18 (2024)             — 5G Advanced: AI/ML in network, Ambient IoT, sidelink relay
+  Release 19 (2025)             — 5G Advanced Phase 2; 6G preparation
+  IMT-2030 (6G)                 — ITU-R M.2160 vision document; 3GPP starts feasibility
+
+ITU STANDARDS:
+  ITU-R M.2150                  — IMT-2020 specifications (5G)
+  ITU-R M.2083                  — IMT-2020 Vision (2020 Release)
+  ITU-R M.2160                  — IMT-2030 (6G) framework document
+  ITU-T G.711/G.722/G.729       — Audio codecs for telephony (PCM, ADPCM)
+  ITU-T H.264/H.265/H.266       — Video codecs (AVC, HEVC, VVC)
+  ITU-T X.509                   — Public Key Infrastructure (certificates)
+  ITU-T E.164                   — MSISDN telephone numbering format
+
+GSMA STANDARDS:
+  GSMA SGP.02                   — Remote SIM Provisioning for M2M (eUICC)
+  GSMA SGP.22 (eIM2.5)          — Consumer Remote SIM Provisioning (eSIM)
+  GSMA SGP.32                   — IoT Remote SIM Provisioning
+  GSMA NG.116                   — Device-Type Allocation (TAC/IMEI)
+  GSMA NE.35                    — IMEI Check Guide
+  GSMA PRD IR.92/IR.94          — IMS Profile for Voice/Video
+  GSMA PRD IR.21                — Roaming database
+
+ETSI STANDARDS:
+  ETSI TS 102 221               — UICC smart card specification
+  ETSI TS 102 222               — Administrative commands for UICC
+  ETSI TS 133 501               — 5G Security Architecture (5G AKA, SUPI/SUCI)
+  ETSI EN 303 645               — Cybersecurity for Consumer IoT
+  ETSI EN 319 series            — Electronic signatures and trust services
+  ETSI MEC (Multi-Access Edge Computing) — GS MEC 003, GS MEC 010
+
+5G SECURITY STANDARDS:
+  3GPP TS 33.501                — 5G Security Architecture (AKA, SUPI/SUCI)
+  3GPP TS 33.512/33.514/33.535  — Security assurance for gNodeB, AMF, UDM
+  ETSI SCAS (Security Assurance) — 5G core network element security testing
+  GSMA NESAS                    — Network Equipment Security Assurance Scheme
+  5G-ACIA                       — 5G for industrial automation (TSN over 5G)
+
+OPENRAN:
+  O-RAN Alliance O-RAN.WG1     — Use cases and overall architecture
+  O-RAN Alliance O-RAN.WG2     — Non-RT RIC and A1 interface
+  O-RAN Alliance O-RAN.WG3     — Near-RT RIC and E2 interface
+  O-RAN Alliance O-RAN.WG4     — Open Fronthaul (based on eCPRI ETSI GS 110-003)
+  O-RAN Alliance O-RAN.WG8     — Stack Reference Design (Rel-15/16)
+  O-RAN Alliance O-RAN.WG11    — Security WG (open interface threats)
+
+SPECTRUM ALLOCATION:
+  ITU Radio Regulations (RR)    — Global spectrum allocation; World Radiocommunication Conference (WRC)
+  WRC-23 decisions              — IMT frequencies, satellite spectrum, 6G bands
+  3GPP NR Band table            — FR1 (<6GHz) and FR2 (mmWave 24-52 GHz)
+  CEPT/ECC                      — European spectrum coordination
+  FCC spectrum auctions         — US spectrum management
+
+HISTORICAL TIMELINE:
+  1979 — NTT launches world's first cellular network (1G)
+  1987 — GSM standard agreed (2G)
+  1991 — First GSM call (Finland)
+  1998 — 3GPP formed; cdma2000 (3GPP2) formed
+  2001 — 3G WCDMA (UMTS) deployments
+  2004 — 3GPP Release 6; HSDPA (3.5G)
+  2008 — 3GPP Release 8: LTE standardized
+  2012 — LTE-Advanced (4G); VoLTE
+  2015 — M2M SIM standardization (GSMA SGP.02)
+  2016 — NB-IoT and eMTC for IoT
+  2017 — 5G NR specification completed (3GPP R15)
+  2019 — First 5G commercial deployments (Korea, US, China)
+  2020 — 5G standalone networks; C-V2X emerging
+  2021 — O-RAN deployments; satellite 5G (NTN)
+  2022 — 5G RedCap for IoT
+  2024 — 5G Advanced (R18) commercial; 6G research programs (EU Hexa-X, US NextG)
+  2030 — 6G expected commercial (ITU IMT-2030)
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Telecom_Standards_Landscape.md     01_3GPP_Release_History_LTE_to_5G.md
+  02_5G_NR_Architecture.md             03_5G_Security_Architecture.md
+  04_eSIM_GSMA_SGP22.md                05_ITU_R_Spectrum_Allocation.md
+  06_OpenRAN_Architecture.md           07_NB_IoT_eMTC_LPWAN.md
+  08_IMS_VoLTE_VoNR.md                 09_C_V2X_Cellular_Sidelink.md
+  10_6G_IMT_2030_Vision.md             11_Telecom_Network_Security.md

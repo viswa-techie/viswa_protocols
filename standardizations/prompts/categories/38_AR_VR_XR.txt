@@ -1,0 +1,96 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 38 — AR / VR / XR / SPATIAL COMPUTING STANDARDS                       ║
+║  Khronos OpenXR, IEEE XR, W3C WebXR, ETSI, ISO, Safety & Accessibility          ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  4 — Software & AI
+OUTPUT DIR:   38_AR_VR_XR/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PLATFORM INTEROPERABILITY:
+  Khronos OpenXR 1.1           — Cross-platform XR API (runtime + application layer)
+      Layers: API layer, runtime, OS-specific back-end
+      Supported: Android (Meta, Pico), Windows (SteamVR, WMR), Linux
+  Khronos OpenGL ES 3.2        — Mobile/embedded graphics
+  Khronos Vulkan 1.3           — High-performance cross-platform graphics
+  Khronos OpenCL 3.0           — Compute for XR processing
+  Khronos glTF 2.0             — 3D asset transmission format (WebXR, AR)
+  Khronos WebGL 2.0            — Web-based 3D graphics (underpins WebXR)
+  W3C WebXR Device API         — Browser-based XR (AR/VR in web)
+  W3C WebXR Anchors, Hit Test, DOM Overlay modules
+
+DISPLAY & VISUAL STANDARDS:
+  VESA DisplayPort 2.1         — High-bandwidth display for headsets
+  HDMI 2.1+                    — Headset tethered display interface
+  MIPI DSI-2                   — Panel interface for HMD displays
+  DisplayHDR (VESA)            — HDR certification for XR displays
+  IEEE 2048                    — Resolution/frame rate requirements (draft)
+  Foveated Rendering specs     — Vendor-specific (eye tracking + variable resolution)
+
+SAFETY & HEALTH:
+  IEC 62471:2006               — Photobiological safety (eye safety: lasers, LEDs in HMDs)
+  IEC 62471-5:2015             — Scanning laser safety (LiDAR in XR)
+  EN ISO 10819                 — Vibration transmitted through hand (haptic safety)
+  IEEE P2048 series            — XR health and safety standards (developing)
+  FCC OET Bulletin 65          — RF exposure for tethered wireless headsets
+  SAR limits (ICNIRP/FCC)      — Head-mounted device RF safety
+
+ENTERPRISE & INDUSTRIAL XR:
+  ISO 11442 (Technical documentation) — AR assembly instructions standard
+  IEEE P1589 (Augmented Reality) — AR learning technology standard
+  IEC 62676 (Video surveillance) — AR-enhanced surveillance systems
+  MIL-STD-1472G               — Human factors engineering (applies to AR HMDs in defense)
+  OSHA 1910 (Industrial Safety) — XR training qualification recognition
+
+ACCESSIBILITY:
+  W3C WCAG 2.1 / 3.0           — Web content accessibility (applies to WebXR)
+  XR Access Initiative         — Accessibility in XR best practices
+  ISO/IEC 40500:2012           — WCAG 2.0 as ISO standard
+
+PRIVACY & DATA:
+  GDPR + biometric XR data     — Eye tracking, facial expression = biometric data
+  ISO/IEC 27701                — Privacy information management (XR platform operators)
+  ETSI TS 103 485              — XR devices: privacy and security requirements (draft)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1968 — Ivan Sutherland: "Sword of Damocles" — first head-mounted display
+1991 — Jaron Lanier coins "Virtual Reality"; VPL Research DataGlove
+1995 — Nintendo Virtual Boy: commercial failure; motion sickness concerns raise safety
+1999 — Khronos Group founded (OpenGL oversight, future XR standards)
+2012 — Oculus Rift Kickstarter ($2.4M raised): modern VR renaissance
+2015 — Microsoft HoloLens (Gen 1): enterprise AR; Google Glass failure analysis
+2016 — Pokemon GO: AR mass market; 500M downloads
+         Oculus Rift CV1 + HTC Vive commercial VR launch
+         Khronos begins OpenXR development (fragmentation problem)
+2019 — Khronos OpenXR 0.90 preliminary spec
+2020 — Khronos OpenXR 1.0: major platform alignment (Valve, Epic, Microsoft, Facebook)
+2021 — Facebook rebrands to Meta; $10B+ metaverse investment announced
+2022 — Meta Quest Pro, PSVR2; enterprise XR (Toyota, Boeing, Lockheed)
+         W3C WebXR becomes W3C Recommendation
+2023 — Apple Vision Pro announced (spatial computing); OpenXR 1.0 stable
+         IEEE P2048 XR health/safety working group accelerates
+2024 — Apple Vision Pro ships; enterprise industrial XR at scale
+         XR biometric data (eye tracking) triggers GDPR scrutiny
+         Generative AI + XR convergence
+2025 — Android XR (Google + Samsung); OpenXR 1.2 draft; W3C WebXR 2.0
+         Industrial metaverse standards (ISO/IEC, Digital Twin Consortium)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_XR_Standards_Landscape.md            — Platform fragmentation, standards map
+  01_Khronos_OpenXR_Architecture.md        — Runtime, action system, session lifecycle
+  02_W3C_WebXR_Standard.md                — Browser-based XR, modules, security model
+  03_XR_Display_Graphics_Standards.md     — Vulkan/OpenGL ES, glTF, foveated rendering
+  04_XR_Safety_Health_Standards.md        — IEC 62471, photobiological safety, fatigue
+  05_Industrial_Enterprise_XR.md          — IEEE P1589, Boeing/Lockheed use cases
+  06_XR_Privacy_Biometric_Data.md         — GDPR eye tracking, EU AI Act implications
+  07_XR_Accessibility_Standards.md        — WCAG for XR, XR Access Initiative
+  08_XR_Interview_Questions.md

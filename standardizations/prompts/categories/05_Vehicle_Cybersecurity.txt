@@ -1,0 +1,92 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 05 — VEHICLE CYBERSECURITY                                             ║
+║  ISO/SAE 21434, UNECE R155/R156, TARA, CSMS, Vehicle PKI, V2X IEEE 1609         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+MEGA-DOMAIN: 2 — Security & Privacy  |  OUTPUT DIR: 05_Vehicle_Cybersecurity/
+
+STANDARDS UNIVERSE:
+PRIMARY VEHICLE CYBERSECURITY STANDARDS:
+  ISO/SAE 21434:2021           — Road Vehicles: Cybersecurity Engineering
+      Defines CSMS (Cybersecurity Management System)
+      Clause 9: Distributed cybersecurity activities (supply chain)
+      Clause 10: Concept phase (item definition, TARA)
+      Clause 11: Product development
+      Clause 12: Production
+      Clause 13: Post-development (monitoring, response, updates)
+      Clause 14: End of life
+      Appendix B: TARA methods
+      Appendix C: CAL (Cybersecurity Assurance Level) table
+
+  UNECE WP.29 R155 (2021)      — Cybersecurity Requirements for Vehicles (Type Approval)
+      Mandatory: Cyber Security Management System (CSMS) approval by UN type approval authority
+      Scope: vehicles M, N, O, L categories with ECUs
+      Enforcement: new types July 2022; all new vehicles July 2024 (EU)
+
+  UNECE WP.29 R156 (2021)      — Software Update Requirements (SOTA/FOTA)
+      Mandatory: Software Update Management System (SUMS) approval
+      Ensures OTA updates do not compromise safety or security
+      Applies to vehicles with software-updateable systems
+
+  SAE J3101                    — Hardware Protected Security Environments for Ground Vehicles
+  SAE J3061                    — Cybersecurity Guidebook for Cyber-Physical Vehicle Systems (2016, pre-21434)
+
+THREAT ANALYSIS AND RISK ASSESSMENT (TARA):
+  ISO/SAE 21434 Clause 15      — TARA methodology
+  STRIDE threat modeling       — Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation
+  EVITA project                — E-safety Vehicle Intrusion proTected Applications
+  HEAVENS project              — HEAling Vulnerabilities to ENhance Software Security and Safety
+  Damage scenarios → impact rating → risk value → cybersecurity goals
+  CAL 1-4 (Cybersecurity Assurance Level) — analogous to ASIL in ISO 26262
+  Attack feasibility: elapsed time, specialist expertise, knowledge, window of opportunity
+
+V2X COMMUNICATION SECURITY:
+  IEEE 1609.2 / IEEE 1609.2a   — Security Services for Wireless Access in Vehicular Environments
+  IEEE 1609.3                   — Networking Services (WAVE WSMP)
+  IEEE 1609.4                   — Multi-Channel Operations
+  SAE J2945                     — Minimum Performance Requirements for V2V Safety
+  ETSI TS 103 097               — Security Header and Certificate Formats (ITS-S)
+  ETSI TS 102 940               — ITS Communication Security Architecture
+  ETSI EN 302 636 series        — Intelligent Transport Systems (ETSI ITS)
+  5GAA                          — C-V2X (Cellular Vehicle-to-Everything) standards work
+
+VEHICLE PKI (Public Key Infrastructure):
+  IEEE 1609.2                   — Certificate management; implicit vs. explicit certs
+  SCMS (Security Credential Management System) — US DOT V2X deployment
+  EU C-ITS PKI                  — Certificate Trust Lists (CTL) for Europe
+  pseudonymous certificates     — Privacy-preserving certificate rotation
+
+INTRUSION DETECTION & RESPONSE:
+  SAE J3061 Annex B             — Threat monitoring in vehicles
+  ISO 21434 Clause 13           — Cybersecurity monitoring, vulnerability management
+  IDPS (In-vehicle Intrusion Detection & Prevention Systems)
+  AutoISAC (Automotive Information Sharing and Analysis Center)
+  ENISA guidelines for connected vehicles
+
+OTA SECURITY:
+  UNECE R156                    — Software update integrity and rollback
+  UPTANE framework              — Secure OTA for automotive (open source specification)
+  TUF (The Update Framework)    — Origin of UPTANE
+  GENIVI/Automotive Grade Linux — Open source SOTA frameworks
+
+KEY INCIDENTS:
+  2015 — Jeep Cherokee hack (Miller/Valasek): CAN bus injection via Uconnect
+  2016 — Tesla Autopilot fatality: OTA update response; Model S CAN bus research
+  2022 — Rivian, Ford, Toyota debug port vulnerabilities
+  2023 — Marc Rogers: charging station OCPP attack → EV charging security gap
+
+HISTORICAL TIMELINE:
+  2015 — Jeep Cherokee remote hack → automotive cybersecurity emergency
+  2016 — SAE J3061: first vehicle cyber guidebook; NHTSA guidance
+  2017 — UNECE WP.29 IWG on CS/OTA begins
+  2020 — ISO/SAE 21434 CD published; US EO 14028 awareness
+  2021 — ISO/SAE 21434:2021 published; UNECE R155/R156 adopted
+  2022 — UNECE R155 mandatory (new types); AutoISAC guidelines updated
+  2024 — UNECE R155 mandatory (all new vehicles EU); China GB/T equivalent
+
+REQUIRED OUTPUT DOCUMENTS:
+  00_Vehicle_Cyber_Landscape.md          01_ISO_SAE_21434_Engineering.md
+  02_UNECE_R155_CSMS_TypeApproval.md     03_UNECE_R156_OTA_SUMS.md
+  04_TARA_Methodology.md                 05_V2X_Security_IEEE_1609.md
+  06_Vehicle_PKI_SCMS.md                 07_In_Vehicle_IDS_IPS.md
+  08_OTA_Security_UPTANE.md              09_Secure_ECU_Design.md
+  10_Vehicle_Cyber_Supply_Chain.md

@@ -1,0 +1,140 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 01 — FUNCTIONAL SAFETY (FuSa)                                         ║
+║  IEC 61508, ISO 26262, DO-178C, IEC 62304, EN 50128, ARP4754A, IEC 62061        ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  1 — Safety & Reliability
+OUTPUT DIR:   01_Functional_Safety/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MISSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate a COMPLETE FUNCTIONAL SAFETY ENGINEERING BIBLE covering all major safety
+integrity standards across automotive, industrial, medical, railway, aerospace, and
+machinery domains. This is the root domain: ALL other safety standards derive from here.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ROOT STANDARD:
+  IEC 61508:2010 (Ed.2)        — Functional Safety of E/E/PE Safety-Related Systems
+      Part 1: General requirements (scope, definitions, management)
+      Part 2: Requirements for E/E/PE safety-related systems (hardware)
+      Part 3: Software requirements (development, V&V)
+      Part 4: Definitions and abbreviations
+      Part 5: Examples of methods for determination of SIL
+      Part 6: Guidelines on application of IEC 61508-2 and -3
+      Part 7: Overview of techniques and measures
+      SIL 1 (PFH < 10⁻⁵/hr) to SIL 4 (PFH < 10⁻⁹/hr)
+      Key concepts: safety function, safety integrity level, safety lifecycle
+
+AUTOMOTIVE (IEC 61508 domain-specific):
+  ISO 26262:2018 (2nd Ed.)     — Road vehicles: Functional safety
+      Part 1: Vocabulary
+      Part 2: Management of functional safety
+      Part 3: Concept phase
+      Part 4: Product development at system level
+      Part 5: Product development at hardware level (hardware metrics)
+      Part 6: Product development at software level
+      Part 7: Production, operation, service, decommissioning
+      Part 8: Supporting processes
+      Part 9: ASIL decomposition
+      Part 10: Guideline on ISO 26262
+      Part 11: Guidelines on application to semiconductors
+      Part 12: Adaptation for motorcycles
+      ASIL A/B/C/D (D = highest integrity); QM (no safety requirement)
+  ISO 21448:2022               — SOTIF (Safety of The Intended Functionality)
+
+AVIONICS (Independent domain):
+  DO-178C (RTCA/EUROCAE ED-12C) — Software Considerations in Airborne Systems
+      DAL A (catastrophic) through DAL E (no effect)
+      Objectives: 71 objectives for DAL A; MC/DC coverage
+  DO-254 (RTCA/EUROCAE ED-80)  — Design Assurance Guidance for Airborne Electronic Hardware
+  DO-331                        — Model-Based Development & Verification supplement
+  DO-332                        — Object-Oriented Technology and Related Techniques supplement
+  DO-333                        — Formal Methods supplement
+  DO-326A / ED-202A             — Airworthiness Security Process Specification
+  DO-356A / ED-203A             — Airworthiness Security Methods and Considerations
+
+SYSTEMS LEVEL (AVIONICS):
+  ARP4754A (SAE)               — Guidelines for Development of Civil Aircraft and Systems
+  ARP4761A (SAE)               — Safety Assessment Methods (FHA, PSSA, SSA)
+
+MEDICAL (IEC 61508 domain-specific):
+  IEC 62304:2006+AMD1:2015     — Medical device software lifecycle processes
+      Software safety classes: A (no injury), B (non-serious injury), C (serious injury/death)
+  IEC 82304-1:2016             — Health software (standalone software)
+  IEC 60601-1:2005+AMD1+AMD2   — Medical electrical equipment (electrical safety + FuSa)
+
+RAILWAY (IEC 61508 domain-specific):
+  EN 50128:2011+AMD1:2020      — Software for railway control systems (SIL 0-4)
+  EN 50129:2018                — Safety-related electronic systems for signaling
+  EN 50126-1:2017              — RAMS for railway applications
+
+MACHINERY (IEC 61508 domain-specific):
+  IEC 62061:2021+AMD1          — Safety of machinery: SIL assignment
+  EN ISO 13849-1:2023          — Safety of machinery: Performance Level required (PLr)
+  EN ISO 13849-2               — Validation of safety-related control systems
+
+PROCESS INDUSTRY:
+  IEC 61511:2016               — Functional safety for process industry (SIS systems)
+      Relates to IEC 61508; Process Industry Sector Standard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL METRICS TO DOCUMENT IN DEPTH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SIL COMPARISON ACROSS DOMAINS:
+| Metric      | IEC 61508  | ISO 26262 | DO-178C | EN 50128 | IEC 62061 | ISO 13849 |
+|-------------|-----------|-----------|---------|---------|-----------|-----------|
+| Highest     | SIL 4     | ASIL D    | DAL A   | SIL 4   | SIL 3     | PLr e     |
+| PFH target  | <10⁻⁹/hr  | <10⁻⁸/hr  | n/a     |<10⁻⁹/hr | <10⁻⁸/hr  | <10⁻⁸/hr  |
+| MC/DC Cov   | Recommended| Required  | Required| Required| Recommended| Recommended|
+
+ANALYSIS METHODS:
+  FMEA: Failure Mode and Effects Analysis
+  FMEDA: FMEA + Diagnostics Analysis (IEC 61508 hardware architecture)
+  FTA: Fault Tree Analysis (top-down: probability of hazardous event)
+  HAZOP: Hazard and Operability Study (process, guide words)
+  ETA: Event Tree Analysis (forward from initiating event)
+  STAMP/STPA: Systems-theoretic methods (Nancy Leveson, MIT)
+  Common Cause Failure (CCF): β-factor method (IEC 61508)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FAMOUS INCIDENTS THAT SHAPED FUNCTIONAL SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each: system, failure, root cause, what standard now prevents it:
+  Therac-25 (1985-87)          — Race condition, removed hardware safety → IEC 62304
+  Bhopal (1984)                — Process safety failure → IEC 61511
+  Piper Alpha (1988)           — Offshore platform fire, 167 dead → IEC 61511
+  Challenger (1986)            — O-ring management, SRM → NASA system safety (DO-178C)
+  Ariane 5 (1996)              — Software reuse without re-validation → DO-178C §12
+  Patriot Missile (1991)       — Floating point accumulation error → software safety
+  Toyota Unintended Accel.     — MISRA violations, stack overflow → ISO 26262
+  Boeing 737 MAX (2018/2019)   — MCAS single sensor, inadequate FMEA → ARP4754A/DO-178C
+  Viareggio (2009)             — Rail axle fatigue → EN 50126 RAMS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_FuSa_Overview_Architecture.md       — Domain map, SIL family, lifecycle concept
+  01_IEC_61508_Root_Standard.md          — 7-part deep dive; hardware architecture metrics
+  02_ISO_26262_Automotive.md             — 12-part deep dive; ASIL decomposition; FMEDA
+  03_DO_178C_Avionics_Software.md        — 71 objectives table; MC/DC; supplements
+  04_DO_254_Avionics_Hardware.md         — 51 objectives; design assurance levels
+  05_IEC_62304_Medical_Software.md       — Class A/B/C; lifecycle activities; FDA mapping
+  06_EN_50128_Railway_Software.md        — T1/T2/T3 tools; SIL activities table
+  07_EN_50129_System_Safety.md           — Safety case; generic/specific product
+  08_IEC_62061_Machinery_SIL.md          — SILCL; hardware architecture; DC
+  09_ISO_13849_PLr.md                    — PLr determination; Categories; SISTEMA tool
+  10_ARP4754A_System_Development.md      — DAL assignment; FHA; PSSA; SSA
+  11_ARP4761A_Safety_Methods.md          — Safety assessment techniques; FTA; FMEA
+  12_SIL_ASIL_DAL_PLr_Mapping.md         — Cross-standard integrity level comparison
+  13_FMEA_FTA_FMEDA_Methods.md           — All analysis methods with worked examples
+  14_Fault_Injection_Testing.md          — Hardware/software fault injection; FMEDA validation
+  15_FuSa_Tool_Qualification.md          — T1/T2/T3 (EN 50128); TQL 1-5 (DO-178C); IEC 61508 §12
+  16_FuSa_Case_Studies.md                — 10+ incidents with root cause analysis

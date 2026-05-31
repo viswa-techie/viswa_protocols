@@ -1,0 +1,118 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 34 — INDUSTRY 4.0, DIGITAL TWIN & SMART MANUFACTURING                 ║
+║  RAMI 4.0, IEC 62890, ISO 23247, Asset Admin Shell, OPC UA, DTC, IIRA           ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  6 — Industrial & Robotics
+OUTPUT DIR:   34_Industry40_DigitalTwin/
+APPLIES TO:   Industry 4.0 architects, digital twin platform engineers, smart factory
+              automation engineers, manufacturing execution system (MES) designers,
+              IIoT platform architects, additive manufacturing quality engineers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INDUSTRY 4.0 REFERENCE ARCHITECTURES:
+  RAMI 4.0 (Reference Architectural Model for Industry 4.0) — DIN SPEC 91345:2016
+      3D model: Life Cycle/Value Stream × Hierarchy Levels × Architecture Layers
+  IIC-IIRA (Industrial Internet Reference Architecture) — IIC Architecture v1.9
+  IIRA (Industrial Internet Reference Architecture) — IIC/IIC
+  IEC 62890:2020               — Life cycle management for industrial systems (LCMS)
+  IEC 62264 series (ISA-95)    — Enterprise-control system integration (ERP-MES-PLC)
+  IEC 62443 series             — Security for industrial automation
+  ISO/IEC 30141               — Internet of Things Reference Architecture
+
+DIGITAL TWIN:
+  ISO 23247-1:2021             — Digital Twin framework for manufacturing (Part 1: overview)
+  ISO 23247-2:2021             — Reference architecture
+  ISO 23247-3:2021             — Digital representation of manufacturing elements
+  ISO 23247-4:2021             — Information exchange (Part 4: D2E, D2T interfaces)
+  DTC (Digital Twin Consortium) — Terminology, use cases, technology requirements
+  IEC/TS 63069:2019            — Industrial automation: framework for functional safety
+  AIAA S-120:2021              — Digital Twin standard (aerospace, NASA)
+  Asset Administration Shell (AAS):
+      IDTA Specification 01001 — AAS Metamodel Part 1
+      IDTA Specification 01002 — Serialization Part 2 (JSON, XML, AASX)
+      VDI/VDE 2193 Part 1/2    — AAS specification (German origin)
+      ECLASS / IEC 61360         — Property definition and semantics for AAS submodels
+
+OPC UNIFIED ARCHITECTURE (OPC UA):
+  IEC 62541-1 to -14 (OPC UA Family)
+      Part 1: Overview and Concepts
+      Part 2: Security Model
+      Part 3: Address Space Model
+      Part 4: Services
+      Part 5: Information Model
+      Part 6: Mappings (JSON/XML/binary)
+      Part 14: OPC UA PubSub (MQTT/AMQP)
+  OPC UA Companion Specs:
+      OPC UA for Machinery (OPC 40001)
+      OPC UA for PackML (OPC 30070)
+      OPC UA for CNC Systems (OPC 40501)
+      OPC UA for Robotics (OPC 40010)
+
+ADDITIVE MANUFACTURING / 3D PRINTING:
+  ISO/ASTM 52900:2021          — Additive manufacturing: General principles and terminology
+  ISO/ASTM 52901:2017          — AM: General principles and procurement
+  ISO/ASTM 52910:2018          — AM: Design requirements, guidelines, recommendations
+  ISO/ASTM 52911:2019          — AM: Design for additive manufacturing
+  ISO/ASTM 52920:2023          — AM: Qualification principles
+  ISO/ASTM 52950:2021          — General principles: Overview of data processing
+  ISO 17296 series             — Rapid manufacturing
+  ASTM F3001-14                — SLS Nylon material specification
+  AWS D17.1 (additive)         — Structural welding for additive
+
+MANUFACTURING EXECUTION & DATA:
+  ISA-95 / IEC 62264            — Manufacturing operations management (MOM)
+  ISA-88 / IEC 61512            — Batch manufacturing standard (recipe management)
+  ISO 15926                     — Integration of lifecycle data for process plants
+  ISO 10303 (STEP)              — Standard for Exchange of Product model data
+  ISO 15531 (MANDATE)           — Manufacturing management data
+  IPC-2581                      — Generic requirements for printed circuit board CAD/CAM
+
+SMART MANUFACTURING CYBERSECURITY:
+  IEC 62443 (Security for IACS) — OT/ICS/SCADA cybersecurity
+  NIST Manufacturing Profile    — NIST CSF applied to manufacturing
+  SEMI E187                     — Specification for cybersecurity of fab equipment
+  SEMI E188                     — Malware free equipment integration
+  NIST SP 800-82 Rev3           — OT security guide (manufacturing focus)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HISTORICAL CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1969 — PLC invented (Dick Morley, Modicon 084): programmable logic replaces relay logic
+1984 — CIM (Computer Integrated Manufacturing): first concept of digital factory
+1994 — ISA-88 Batch Control standard published
+2000 — OPC Classic (COM-based) widely deployed in industrial SCADA
+2002 — Festo/SAP/Siemens begin Industry 4.0 concept discussions (pre-naming)
+2004 — OPC UA development begins (Microsoft COM-free)
+2006 — OPC UA Part 1-5 first published; IEC 62264 (ISA-95) published
+2011 — "Industry 4.0" term coined at Hannover Messe (German government initiative)
+2013 — German government RAMI 4.0 reference model development
+2016 — RAMI 4.0 published as DIN SPEC 91345
+         IIC (Industrial Internet Consortium) founded in USA
+         Asset Administration Shell (Verwaltungsschale) concept published
+2017 — Digital Twin Consortium (DTC) founded
+         ISO/IEC JTC 1/SC 41 (IoT) and SC 42 (AI) established
+2019 — IEC 62890:2020 published (life cycle for industrial systems)
+2021 — ISO 23247 Digital Twin for Manufacturing published (4 parts)
+2022 — AAS IDTA specifications (Plattform Industrie 4.0, Germany)
+2023 — SEMI E187/E188 cybersecurity for semiconductor fabs (major)
+2024 — Industrial Metaverse emergence; Siemens Xcelerator, AWS IoT Twin Maker
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Industry40_Overview.md               — RAMI 4.0 cube, IIC IIRA, evolution
+  01_Asset_Administration_Shell_AAS.md    — IDTA spec, submodels, AASX format
+  02_OPC_UA_IEC_62541.md                  — Architecture, PubSub, companion specs
+  03_Digital_Twin_ISO_23247.md            — 4-part standard, D2E/D2T interfaces
+  04_ISA_95_IEC_62264_MES.md              — Enterprise-control integration, B2MML
+  05_Additive_Manufacturing_ISO_ASTM.md   — 52900 series, design, qualification
+  06_Smart_Mfg_Cybersecurity.md           — IEC 62443, SEMI E187/188, NIST profile
+  07_Digital_Twin_Platforms.md            — AWS IoT TwinMaker, Azure DT, Siemens Xcelerator
+  08_IIoT_Architecture_Standards.md       — Edge, connectivity, cloud standards
+  09_Industry40_Interview_Questions.md

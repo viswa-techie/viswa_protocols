@@ -1,0 +1,78 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  CATEGORY 37 — BLOCKCHAIN, DISTRIBUTED LEDGER & DIGITAL ASSETS                  ║
+║  ISO 22739, NIST, FATF, MiCA, W3C DID/VC, Hyperledger, CBDC                    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+MEGA-DOMAIN:  4 — Software & AI | 8 — Infrastructure
+OUTPUT DIR:   37_Blockchain_Digital_Assets/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STANDARDS UNIVERSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ISO / IEC:
+  ISO 22739:2020               — Blockchain and DLT: Vocabulary
+  ISO TC 307                   — Blockchain standards committee (50+ work items)
+      ISO 23257                — Distributed ledger technology reference architecture
+      ISO 23635                — Guidelines for smart contracts
+      ISO 24643                — DLT privacy
+  IEC 63228                    — Blockchain for energy systems
+
+NIST / US:
+  NIST IR 8202                 — Blockchain Technology Overview
+  NIST SP 800-202              — Guidelines for Blockchain Technology
+  SEC Digital Asset Guidance   — When tokens are securities (Howey Test)
+  US Stablecoin legislation     — GENIUS Act / STABLE Act (2025 progress)
+  US Digital Asset EO 14067    — Ensuring Responsible Development of Digital Assets
+
+EU REGULATION:
+  MiCA (Markets in Crypto-Assets Regulation 2023/1114) — Full enforcement Dec 2024
+      Title II: Asset-referenced tokens (ARTs)
+      Title III: E-money tokens (EMTs)
+      Title IV: Other crypto-asset service providers (CASPs)
+  TFR (Transfer of Funds Regulation) — Travel rule for crypto (FATF implementation)
+  eIDAS 2.0                     — Verifiable credentials on blockchain
+
+AML/CFT:
+  FATF Guidance on Virtual Assets (2021 update) — VASP definition, travel rule
+  FATF Recommendation 16       — Travel Rule: sender/receiver info ≥ $1000
+  FinCEN guidance (USA)         — MSB registration for VASPs
+  6AMLD (EU Anti-Money Laundering) — Crypto-specific requirements
+
+TECHNICAL STANDARDS:
+  W3C DID v1.0                  — Decentralized Identifiers
+  W3C Verifiable Credentials v2 — VC Data Model
+  IEEE P2418.5                  — Blockchain in IoT payments
+  IEEE P2140.x series           — Cryptocurrency standards
+  ERC-20, ERC-721, ERC-1155     — Ethereum token standards (de facto industry standards)
+  EIP-1559                      — Ethereum base fee mechanism
+  BIP-32/44/84                  — Bitcoin Improvement Proposals (HD wallets)
+  Lightning Network BOLTs       — Basis of Lightning Technology specs
+
+CBDC (Central Bank Digital Currency):
+  BIS CPMI Framework (2020)     — Central bank digital currencies design
+  ECB Digital Euro feasibility report
+  SWIFT CBDC interoperability trial
+  Project mBridge (BIS + HKMA + PBOC + BOT + CBUAE)
+  Hyperledger Fabric / Besu     — Enterprise blockchain used in CBDC pilots
+
+ENTERPRISE BLOCKCHAIN:
+  Hyperledger Fabric 2.5        — Permissioned blockchain (Linux Foundation)
+  Hyperledger Besu              — Ethereum-compatible enterprise
+  Corda (R3)                    — Financial services DLT
+  Quorum (ConsenSys)            — Enterprise Ethereum
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REQUIRED OUTPUT DOCUMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  00_Blockchain_Standards_Overview.md     — Technology taxonomy, regulatory landscape
+  01_ISO_22739_TC307_Standards.md         — Vocabulary, reference architecture, smart contracts
+  02_MiCA_EU_Crypto_Regulation.md         — Full MiCA breakdown: ART/EMT/CASP requirements
+  03_FATF_Travel_Rule_VASP.md             — AML/CFT obligations, technical implementations
+  04_W3C_DID_VC_SSI.md                    — Decentralized identity on blockchain
+  05_CBDC_Architecture_Standards.md       — BIS framework, CBDC design choices
+  06_Smart_Contract_Security.md           — ERC standards, auditing, formal verification
+  07_Enterprise_Blockchain.md             — Fabric, Besu, Corda comparison
+  08_Post_Quantum_Blockchain.md           — Hash-based signatures, lattice crypto in blockchain
+  09_Blockchain_Interview_Questions.md
