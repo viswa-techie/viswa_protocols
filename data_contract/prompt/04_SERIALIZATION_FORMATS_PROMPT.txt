@@ -1,0 +1,313 @@
+================================================================================
+VOLUME 04 — SERIALIZATION FORMATS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a serialization engineer, wire format analyst, data encoding specialist,
+and binary protocol designer with expertise across text, binary, and hybrid
+encoding formats.
+
+Stack position:
+    Schema Layer
+        ↓
+    SERIALIZATION / ENCODING ← (this volume)
+        ↓
+    RPC / IPC Binding
+
+Serialization = the process of converting an in-memory data structure into a
+sequence of bytes suitable for storage or transmission.
+Deserialization = the reverse: reconstructing a data structure from bytes.
+
+A serialization FORMAT specifies:
+  - how primitive types are encoded (integers, floats, strings, booleans, null)
+  - how composite types are encoded (arrays, objects, maps)
+  - how framing and delimiters work
+  - whether schema is embedded, referenced, or assumed
+  - whether the format is self-describing or schema-dependent
+
+================================================================================
+SECTION 1 — TEXT-BASED SERIALIZATION FORMATS
+================================================================================
+
+─────────────────────────────────────────────────────────
+1.1  JSON (JavaScript Object Notation)
+─────────────────────────────────────────────────────────
+  Spec     : ECMA-404, RFC 8259 (2017) — Tier 5 / Tier 2
+  Types    : null, boolean, number (no integer/float distinction), string, array, object
+  Encoding : UTF-8 (required by RFC 8259), UTF-16, UTF-32 allowed
+  Schema   : None native — use JSON Schema for validation
+  Self-desc: Yes (field names are in the payload)
+  Streaming: NDJSON (Newline-Delimited JSON), JSON Streaming
+  Strengths : Human-readable, universal language support, ubiquitous tooling
+  Weaknesses: No integer/float type distinction, no binary type (use base64),
+              verbose (field names repeated), no comments, no schema
+  Variants : JSON5 (comments, trailing commas), JSONC, JSONLines / NDJSON
+  Uses     : REST APIs, configuration, logging, web services, event payloads
+
+─────────────────────────────────────────────────────────
+1.2  XML (Extensible Markup Language)
+─────────────────────────────────────────────────────────
+  Spec     : W3C XML 1.0 (1998), XML 1.1 (2004) — Tier 2
+  Structure: Elements, attributes, CDATA, processing instructions, DOCTYPE
+  Encoding : UTF-8, UTF-16 (declared in XML declaration)
+  Schema   : XSD 1.0/1.1 (W3C), DTD, RelaxNG, Schematron
+  Self-desc: Partially (element names carry semantics)
+  Strengths : Mature tooling (XSLT, XPath, XQuery), XSD validation,
+              document + data model, namespace support
+  Weaknesses: Verbose, complex to parse, large payload sizes, namespace complexity
+  Uses     : SOAP/WSDL, enterprise integration (EDI), configuration files,
+              document formats (OOXML, SVG), AUTOSAR arxml, HL7
+
+─────────────────────────────────────────────────────────
+1.3  YAML (YAML Ain't Markup Language)
+─────────────────────────────────────────────────────────
+  Spec     : yaml.org/spec/1.2.2 (2021) — community standard, Tier 8
+  Structure: Scalars, sequences, mappings; flow vs block style
+  Types    : string, integer, float, boolean, null, binary (base64), timestamps
+  Schema   : YAML Core Schema, YAML JSON Schema (subset)
+  Strengths : Human-friendly, superset of JSON (YAML 1.2), supports comments,
+              multi-document streams (---), anchors (&) and aliases (*)
+  Weaknesses: Norway problem (boolean-like strings), tab sensitivity,
+              complex parsing (11+ implicit type casts), security risks
+              (YAML arbitrary code execution in some parsers — !!python/object)
+  Uses     : Configuration (Kubernetes, Ansible, Docker Compose, GitHub Actions),
+              OpenAPI spec files, CI/CD pipelines
+
+─────────────────────────────────────────────────────────
+1.4  TOML (Tom's Obvious Minimal Language)
+─────────────────────────────────────────────────────────
+  Spec     : github.com/toml-lang/toml — Tier 8
+  Types    : String, Integer, Float, Boolean, Datetime, Array, Table, Inline Table
+  Strengths : Minimal, unambiguous, strongly typed vs YAML's implicit types
+  Weaknesses: Limited adoption outside configuration use cases
+  Uses     : Rust Cargo.toml, Python pyproject.toml, config files
+
+─────────────────────────────────────────────────────────
+1.5  CSV (Comma-Separated Values)
+─────────────────────────────────────────────────────────
+  Spec     : RFC 4180 (2005) — Tier 2 (informational RFC)
+  Types    : Flat text only — no type information
+  Strengths : Universally understood, spreadsheet-compatible, streaming-friendly
+  Weaknesses: No schema, no types, no nesting, no nulls vs empty strings,
+              delimiter conflicts, no standardized escaping
+  Uses     : Data export/import, analytics pipelines, ETL, reporting
+
+─────────────────────────────────────────────────────────
+1.6  INI / Properties Files
+─────────────────────────────────────────────────────────
+  No formal spec — ad-hoc configuration format
+  Key=value pairs, [section] headers, # or ; comments
+  Variants: .properties (Java), .ini (Windows), .cfg
+  Uses : Application configuration (legacy)
+
+================================================================================
+SECTION 2 — BINARY SERIALIZATION FORMATS
+================================================================================
+
+─────────────────────────────────────────────────────────
+2.1  Protocol Buffers Wire Format (Protobuf)
+─────────────────────────────────────────────────────────
+  Spec     : developers.google.com/protocol-buffers/docs/encoding — Tier 6
+  Schema   : Required — .proto file (tag numbers identify fields)
+  Encoding model:
+    - Each field: (field_number << 3) | wire_type as a varint key
+    - Wire types:
+        0 = Varint (int32, int64, uint32, uint64, sint32, sint64, bool, enum)
+        1 = 64-bit (fixed64, sfixed64, double)
+        2 = Length-delimited (string, bytes, message, packed repeated)
+        5 = 32-bit (fixed32, sfixed32, float)
+    - Varint encoding: 7 bits per byte, MSB = continuation bit
+    - ZigZag encoding for sint32/sint64: (n << 1) ^ (n >> 31)
+    - Strings: length-prefixed UTF-8 bytes
+    - Nested messages: length-prefixed binary blobs
+  Self-desc: No — field names not in wire format (only tag numbers)
+  Zero-copy : No — requires parsing and copying into language types
+  Strengths : Compact, fast, backward/forward compatible, excellent tooling
+  Weaknesses: Not human-readable, debugging requires .proto file,
+               no native integer type for JSON interop
+  Uses     : gRPC, Android AIDL alternatives, Kubernetes API storage,
+              Google internal systems, AAOS vehicle HALs
+
+─────────────────────────────────────────────────────────
+2.2  Apache Avro Binary Encoding
+─────────────────────────────────────────────────────────
+  Spec     : avro.apache.org/docs/current/spec.html — Tier 5
+  Schema   : Required — Avro schema must be known by both parties
+  Encoding model:
+    - null  : zero bytes
+    - boolean: 0x00 (false) or 0x01 (true)
+    - int/long: variable-length zig-zag encoding
+    - float  : IEEE 754 single (4 bytes)
+    - double : IEEE 754 double (8 bytes)
+    - string : long (byte count) + UTF-8 bytes
+    - bytes  : long (byte count) + bytes
+    - array  : block count + items + 0 terminator (with block sizes)
+    - map    : same as array but key+value pairs
+    - record : field values written in schema-declared order (NO FIELD NAMES)
+    - union  : int index into union type list + encoded value
+    - enum   : int index into symbol list
+  Schema in payload: Avro container files embed schema; Kafka+Confluent uses registry ID
+  Self-desc: No — schema must match exactly
+  Zero-copy : No
+  Strengths : Compact without tags, strong schema evolution, schema registry integration,
+               native Hadoop/Spark/Kafka ecosystem
+  Weaknesses: Schema required, no in-place access, Avro RPC rarely used
+  Uses     : Kafka event streaming, Hadoop data pipelines, Confluent Platform
+
+─────────────────────────────────────────────────────────
+2.3  Apache Thrift Binary Protocol
+─────────────────────────────────────────────────────────
+  Spec     : thrift.apache.org — Tier 5
+  Protocols:
+    - TBinaryProtocol : field type (1 byte) + field ID (2 bytes) + value
+    - TCompactProtocol: zigzag varints + delta field IDs (more compact than binary)
+    - TJSONProtocol   : JSON text encoding
+    - TSimpleJSONProtocol: JSON without type metadata (non-round-trippable)
+  Schema   : Required — Thrift IDL
+  Self-desc: No (TBinaryProtocol has type byte but not name)
+  Zero-copy : No
+  Strengths : Multiple protocol choices, good cross-language support
+  Weaknesses: Less compact than Protobuf in some cases, smaller community
+  Uses     : Facebook legacy systems, some enterprise service buses
+
+─────────────────────────────────────────────────────────
+2.4  BSON (Binary JSON)
+─────────────────────────────────────────────────────────
+  Spec     : bsonspec.org — Tier 6 (MongoDB-owned)
+  Types    : All JSON types + Date, Binary, ObjectId, Decimal128, Regular Expression,
+              JavaScript code, Timestamp, Min/Max key, Symbol
+  Encoding : Little-endian, length-prefixed documents
+  Self-desc: Yes (type codes embedded in document)
+  Schema   : Optional
+  Strengths : Typed extension of JSON, fast scan without full parse,
+               native MongoDB storage format, binary data support
+  Weaknesses: Often larger than JSON (length-prefixed overhead),
+               not human-readable, primarily MongoDB ecosystem
+  Uses     : MongoDB wire protocol, MongoDB storage engine, BSON over MQTT (IoT)
+
+─────────────────────────────────────────────────────────
+2.5  CBOR (Concise Binary Object Representation)
+─────────────────────────────────────────────────────────
+  Spec     : RFC 8949 (2020) — Tier 2 (IETF)
+  Model    : Superset of JSON data model in binary; based on JSON types
+  Encoding : Initial byte = major type (3 bits) + additional info (5 bits)
+  Major types: 0=uint, 1=negative int, 2=byte string, 3=text string,
+               4=array, 5=map, 6=tag, 7=float/simple
+  Tags     : Semantic annotations (e.g., tag 1 = epoch datetime, tag 32 = URI)
+  Schema   : Optional — CDDL (Concise Data Definition Language, RFC 8610)
+  Self-desc: Yes (type info in each item)
+  CBOR Sequences: RFC 8742 — streaming multiple items
+  Strengths : Compact, IETF standard, IoT-friendly, extensible via tags,
+               smaller than JSON, CoAP ecosystem
+  Weaknesses: Less tooling than JSON, requires CBOR-aware tooling
+  Uses     : CoAP (constrained devices), COSE (CBOR-based signing/encryption),
+              JOSE alternative, Bluetooth Low Energy, FIDO2/WebAuthn
+
+─────────────────────────────────────────────────────────
+2.6  MessagePack
+─────────────────────────────────────────────────────────
+  Spec     : msgpack.org — Tier 8 (de-facto)
+  Model    : Binary equivalent of JSON data model
+  Encoding : Type byte prefix determines format; compact integers (positive fixint, etc.)
+  Types    : nil, bool, int, float, str, bin, array, map, ext (extension types)
+  Self-desc: Yes (type in first byte)
+  Schema   : None native
+  Strengths : More compact than JSON, fast, wide language support (50+),
+               simple encoder/decoder
+  Weaknesses: No formal spec body, limited schema support, less adoption than CBOR
+  Uses     : Redis Streams, game state serialization, RPC in Ruby/Python ecosystems,
+              Neovim plugin protocol (msgpack-rpc)
+
+─────────────────────────────────────────────────────────
+2.7  SMILE (Binary JSON — Jackson project)
+─────────────────────────────────────────────────────────
+  Spec     : github.com/FasterXML/smile-format-specification — Tier 8
+  Model    : Binary encoding of Jackson data model (same as JSON tree)
+  Features : Back-references for repeated field names and values (compression)
+  Uses     : Jackson-based Java services wanting compact JSON-equivalent
+
+─────────────────────────────────────────────────────────
+2.8  UBJSON (Universal Binary JSON)
+─────────────────────────────────────────────────────────
+  Spec     : ubjson.org — Tier 8
+  Model    : Typed binary JSON; type+value per element
+  Types    : All JSON types + char, high-precision number
+  Optimized containers: typed arrays (all same type, no per-element type byte)
+  Uses     : Niche; some game engines and embedded JSON-equivalent needs
+
+================================================================================
+SECTION 3 — ZERO-COPY / IN-PLACE FORMATS
+================================================================================
+(Full coverage in Volume 09 — brief summary here for completeness)
+
+3.1  FlatBuffers — schema-driven, vtable-based in-place access, no parse step
+3.2  Cap'n Proto — arena-allocated, true zero-copy, capability system
+3.3  Apache Arrow — columnar layout, IPC batch format, SIMD-friendly
+3.4  SBE (Simple Binary Encoding) — fixed-layout, template-driven, finance domain
+
+================================================================================
+SECTION 4 — SERIALIZATION FORMAT COMPARISON MATRIX
+================================================================================
+
+| Format | Text/Binary | Schema Required | Self-describing | Zero-copy | Streaming | Approx. Size vs JSON | Primary Use Cases | Governance Tier |
+|--------|-------------|----------------|-----------------|-----------|-----------|---------------------|-------------------|----------------|
+| JSON | Text | No | Yes | No | NDJSON | 1x (baseline) | REST, config, logging | 5/2 |
+| XML | Text | No (optional XSD) | Yes | No | SAX/StAX | 2-4x | SOAP, enterprise, doc | 2 |
+| YAML | Text | No | Yes | No | Partial | ~1.1x | Config, OpenAPI | 8 |
+| TOML | Text | No | Yes | No | No | ~1x | Config files | 8 |
+| CSV | Text | No | No | No | Yes | 0.5-0.7x | Analytics, export | 2 |
+| Protobuf | Binary | Yes (.proto) | No | No | Partial | 0.3-0.7x | gRPC, cloud, Android | 6 |
+| Avro Binary | Binary | Yes (Avro schema) | No | No | Container | 0.3-0.6x | Kafka, Hadoop | 5 |
+| Thrift Binary | Binary | Yes (.thrift) | No | No | No | 0.4-0.7x | Service RPC | 5 |
+| BSON | Binary | No | Yes | No | No | 1.0-1.5x | MongoDB | 6 |
+| CBOR | Binary | No (CDDL optional) | Yes | No | Yes | 0.5-0.8x | IoT, CoAP, FIDO2 | 2 |
+| MessagePack | Binary | No | Yes | No | No | 0.4-0.7x | Redis, game state | 8 |
+| FlatBuffers | Binary | Yes (.fbs) | No | Yes | No | 1-2x (with padding) | Games, embedded | 6 |
+| Cap'n Proto | Binary | Yes (.capnp) | No | Yes | No | ~0.5-1x | Services, RPC | 8 |
+| SBE | Binary | Yes (XML template) | No | Yes | Yes | Minimal | HFT, financial | 8 |
+| Apache Arrow | Binary (columnar) | Yes | No | Yes | Batch | Varies | Analytics, OLAP | 5 |
+
+================================================================================
+SECTION 5 — ENCODING PATTERN TAXONOMY
+================================================================================
+
+5.1  Tag-Length-Value (TLV) — ASN.1 BER, Protobuf wire format
+5.2  Schema-ordered (no tags) — Avro binary, SBE
+5.3  Type-Length-Value (TLV with type) — CBOR, MessagePack, BSON
+5.4  Fixed-layout with vtable — FlatBuffers
+5.5  Arena-allocated pointer structures — Cap'n Proto
+5.6  Columnar layout — Apache Arrow
+5.7  Delimited text — CSV, NDJSON
+5.8  Markup with attributes — XML, HTML
+
+================================================================================
+SECTION 6 — STREAMING & FRAMING CONSIDERATIONS
+================================================================================
+
+6.1  Length-prefixed framing: 4-byte big-endian length + payload (gRPC, many binary protocols)
+6.2  Record separator framing: newline delimiter (NDJSON, CSV)
+6.3  Self-framing: length embedded in CBOR/MessagePack items
+6.4  Multi-record container: Avro Object Container File (magic + schema + blocks)
+6.5  Chunked streaming: HTTP/2 DATA frames carry length-prefixed gRPC messages
+6.6  End-of-stream signaling: EOF, sentinel value, explicit count
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 04
+================================================================================
+
+  04.0  — What is serialization (formal definition and stack placement)
+  04.1  — Text formats: JSON, XML, YAML, TOML, CSV (Section 1)
+  04.2  — Binary formats: Protobuf, Avro, Thrift, BSON, CBOR, MessagePack, Smile (Section 2)
+  04.3  — Zero-copy formats summary (Section 3 — detail in Volume 09)
+  04.4  — Comparison matrix (Section 4)
+  04.5  — Encoding pattern taxonomy (Section 5)
+  04.6  — Streaming and framing (Section 6)
+  04.7  — Security considerations: injection attacks in text formats, schema validation at boundaries
+  04.8  — Cross-references to Volume 05 (Binary Encoding), Volume 09 (Zero-Copy)
+
+================================================================================
+END OF VOLUME 04 PROMPT
+================================================================================

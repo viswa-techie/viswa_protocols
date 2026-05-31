@@ -1,0 +1,347 @@
+================================================================================
+VOLUME 15 — CROSS-LANGUAGE / CROSS-PLATFORM INTEROPERABILITY
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a polyglot systems architect, cross-platform interoperability specialist,
+ABI compatibility expert, language runtime analyst, and platform portability engineer.
+
+Cross-language and cross-platform interoperability is the ability of systems
+written in different programming languages, running on different operating systems
+or hardware architectures, to exchange data and call each other's code correctly.
+
+This volume addresses:
+  - Language binding coverage per technology
+  - ABI stability across compilers and platforms
+  - Platform endianness and pointer size concerns
+  - Stability mechanisms (Stable AIDL, HAL versioning)
+  - WASM as an interoperability layer
+  - REST / OpenAPI as the lingua franca for cross-system interop
+  - The interop stack from wire format up through language-native types
+
+================================================================================
+SECTION 1 — LANGUAGE BINDING COVERAGE MATRIX
+================================================================================
+
+1.1  What is a language binding:
+     A language-specific generated or hand-written library that allows code in
+     language X to:
+       - Serialize data structures into the target format
+       - Deserialize bytes back into language-native types
+       - Call RPC stubs or implement server interfaces
+
+1.2  Language binding quality levels:
+     - Level 1: Official reference implementation (by standard/tool author)
+     - Level 2: Official well-maintained binding (by framework project)
+     - Level 3: Community-maintained binding (quality varies)
+     - Level 4: Partial or experimental binding
+
+| Technology | C | C++ | Java | Kotlin | Python | Go | Rust | TypeScript/JS | Swift | C# | PHP | Ruby | Dart | Scala | Haskell |
+|-----------|---|-----|------|--------|--------|----|----|--------------|-------|----|----|------|------|-------|---------|
+| Protobuf | L2 | L1 | L1 | L2 | L1 | L1 | L2(prost) | L2(protobuf-ts) | L2 | L1 | L2 | L2 | L2 | L2 | L3 |
+| gRPC | L1 | L1 | L1 | L2 | L1 | L1 | L2 | L1 | L2 | L1 | L2 | L2 | L2 | L2 | L3 |
+| Thrift | L1 | L1 | L1 | L3 | L1 | L1 | L3 | L1 | L3 | L1 | L1 | L1 | L3 | L2 | L2 |
+| Avro | L1(C) | L3 | L1 | L2 | L1 | L2 | L2(apache-avro) | L2 | L3 | L2 | L3 | L3 | L3 | L2 | L3 |
+| FlatBuffers | L1 | L1 | L1 | L1 | L1 | L1 | L1 | L1 | L1 | L2 | L3 | L3 | L3 | L3 | L3 |
+| Cap'n Proto | L3 | L1 | L3 | L3 | L2 | L3 | L2 | L2 | L3 | L3 | L3 | L3 | L3 | L3 | L3 |
+| Apache Arrow | L1(C++) | L1 | L1 | L2 | L1(PyArrow) | L1 | L1 | L2(arrow-js) | L3 | L2 | L3 | L3 | L3 | L2(Spark) | L3 |
+| CBOR | L1(TinyCBOR) | L2 | L2 | L2 | L1(cbor2) | L2 | L2 | L1(cbor-web) | L2 | L2 | L2 | L2 | L2 | L3 | L3 |
+| JSON Schema (validation) | L3 | L3 | L1 | L2 | L1 | L1 | L2 | L1(ajv) | L3 | L2 | L2 | L2 | L3 | L3 | L3 |
+| OpenAPI codegen | — | L2 | L1 | L1 | L1 | L1 | L2 | L1 | L2 | L1 | L2 | L2 | L2 | L2 | L3 |
+| AIDL | No | L1 | L1 | L1 | No | No | L2 | No | No | No | No | No | No | No | No |
+| FIDL | No | L1 | L3 | No | No | L1 | L1 | No | No | No | No | No | L1(Dart) | No | No |
+| ASN.1 | L1(asn1c) | L2 | L1(BouncyCastle) | L2 | L2(pyasn1) | L2 | L3 | L3 | L3 | L1 | L3 | L3 | L3 | L3 | L3 |
+| DDS (RTPS) | L1 | L1 | L1 | L2 | L1 | L3 | L3 | L3 | L3 | L1 | No | No | No | No | No |
+| MessagePack | L1 | L1 | L1 | L2 | L1 | L1 | L1 | L1 | L2 | L1 | L1 | L1 | L2 | L2 | L2 |
+
+================================================================================
+SECTION 2 — ABI STABILITY
+================================================================================
+
+2.1  ABI (Application Binary Interface): the binary-level contract between
+     compiled code units covering:
+       - Function calling convention (register usage, stack layout)
+       - Data structure layout (field offsets, padding, alignment)
+       - Name mangling (C++ symbol names)
+       - Object file format (ELF, Mach-O, PE/COFF)
+       - Exception handling model (DWARF, SEH, SjLj)
+
+2.2  ABI stability for data contracts:
+     - Zero-copy formats (FlatBuffers structs, SBE, C struct overlays) are
+       ABI-dependent: changing struct layout breaks existing binary readers
+     - Tag-based formats (Protobuf, Thrift) are ABI-independent: only the
+       wire format matters, not the generated code layout
+
+2.3  C++ ABI incompatibility sources:
+     - Name mangling differences between compilers (GCC vs MSVC vs Clang)
+     - std::string / std::vector layout differences between libstdc++ and libc++
+     - virtual function table layout (vptr) across compilers/versions
+     - Exception model differences
+
+2.4  C ABI: universally stable across compilers on same platform
+     - C struct layout: determined by platform ABI (ARM64, x86-64, ARM32)
+     - AAPCS64 (ARM Cortex-A64 Procedure Call Standard): ARM64 Linux ABI
+     - System V AMD64 ABI: Linux/macOS x86-64 calling convention
+     - Microsoft x64 ABI: Windows x86-64 calling convention
+
+2.5  ABI stability tools:
+     - libabigail + abidiff: detect ABI changes in C/C++ shared libraries
+     - abi-compliance-checker: header-level ABI comparison
+     - Android libclang-based ABI checker in AOSP
+     - Rust: repr(C) guarantees C-compatible layout; no repr guarantees for default Rust layout
+
+================================================================================
+SECTION 3 — ENDIANNESS AND POINTER SIZE
+================================================================================
+
+3.1  Big-endian (BE): network byte order; most significant byte at lowest address
+     - Platforms: IBM POWER (configurable), MIPS BE, Motorola 68k, Sparc
+     - Protocols: most network protocols use big-endian (RFC convention)
+
+3.2  Little-endian (LE): most significant byte at highest address
+     - Platforms: x86, x86-64, ARM (LE mode, standard on Android/iOS/Linux ARM)
+     - Protocols: Protobuf, Avro, FlatBuffers, SBE (default LE for perf on x86/ARM)
+
+3.3  Protocol handling:
+     - Protobuf: always little-endian for multi-byte fixed values (float, double, fixed32)
+     - CBOR: always big-endian (network byte order per IETF convention)
+     - DDS CDR: negotiated between peers (flags in RTPS header)
+     - SOME/IP: big-endian header, payload endianness is application-defined
+
+3.4  Pointer size:
+     - 32-bit platforms: sizeof(void*) = 4 bytes
+     - 64-bit platforms: sizeof(void*) = 8 bytes
+     - Impact: serialized pointer values are NEVER portable across pointer sizes
+     - Solution: serialize as integer offsets (relative) not absolute pointers
+     - FlatBuffers and Cap'n Proto use relative offsets → pointer-size portable
+
+3.5  Integer size:
+     - int: 32 bits on all common platforms (ILP32 and LP64 and LLP64 all agree)
+     - long: 32 bits on Windows (LLP64), 64 bits on Linux/macOS (LP64)
+     - Protobuf solution: explicit int32/int64/uint32/uint64 types (no ambiguity)
+     - C best practice: use <stdint.h> fixed-width types (uint32_t, int64_t)
+
+================================================================================
+SECTION 4 — STABLE INTERFACES AND VERSIONED HAL PATTERNS
+================================================================================
+
+4.1  Android VINTF (Vendor Interface):
+     - Interface compatibility matrix: framework declares what HAL versions it supports
+     - Device manifest: vendor declares which HAL versions are implemented
+     - VINTF compatibility check at boot: prevents framework/vendor ABI mismatch
+     - Stable AIDL (see Volume 02, Section 4 and Volume 10, Section 9):
+       @VintfStability on AIDL interfaces means the interface is frozen at the
+       published version and can be used across system/vendor partition updates
+
+4.2  Linux kernel stable ABI:
+     - Kernel-userspace interface: stable (UABI headers in include/uapi/)
+     - Kernel module ABI: NOT stable (must be recompiled for each kernel version)
+     - syscall numbers: stable per architecture (never reused)
+
+4.3  gRPC service versioning (see Volume 10, Section 8):
+     - Package-based versioning: com.example.v1 vs com.example.v2
+     - Both versions served simultaneously with separate gRPC service names
+
+4.4  AUTOSAR HAL versioning:
+     - AUTOSAR BSW module versions in ARXML manifests
+     - Semantic versioning for BSW interfaces
+     - AUTOSAR schema version: AUTOSAR schema version in each ARXML file
+
+================================================================================
+SECTION 5 — WEBASSEMBLY (WASM) AS INTEROP LAYER
+================================================================================
+
+5.1  WebAssembly (WASM): binary instruction format for a virtual machine
+     - Runs in browser (via JavaScript engine) and server-side (Wasmtime, WasmEdge)
+     - Governance: W3C WebAssembly Working Group + Community Group (Tier 2)
+
+5.2  WASM as cross-language interop:
+     - Compile C/C++/Rust/Go/AssemblyScript to .wasm
+     - Host language (JavaScript, Python via wasmtime) calls WASM exports
+     - WASM calls host imports (host functions)
+
+5.3  WASM Interface Types (Component Model — WIT):
+     - WIT (WASM Interface Types): IDL for WASM component interfaces
+     - Types: bool, s8/u8/s16/u16/s32/u32/s64/u64, f32/f64, char, string,
+                list<T>, tuple<T...>, option<T>, result<T,E>, record, variant, enum, flags
+     - Enables type-safe calls across WASM component boundaries
+     - Governance: W3C / Bytecode Alliance (Tier 2/5)
+
+5.4  WASM use case for data contracts:
+     - Validate Protobuf schemas in-browser (compile protoc to WASM)
+     - Run policy/validation logic in WASM sandbox
+     - Cross-language codec sharing (one WASM module, multiple host languages)
+
+================================================================================
+SECTION 6 — REST / OPENAPI AS LINGUA FRANCA
+================================================================================
+
+6.1  Why REST + JSON is the universal interop layer:
+     - Every language has an HTTP client and JSON parser
+     - No code generation required for basic integration
+     - Human-readable: debugging without special tools
+     - Firewall-friendly: HTTP/HTTPS on port 80/443
+
+6.2  REST as the interop fallback:
+     - Two systems with incompatible IDLs → expose REST endpoint as bridge
+     - gRPC-Gateway: REST ↔ gRPC transcoding (see Volume 06)
+     - SOAP to REST proxy: still common in enterprise
+
+6.3  OpenAPI as the interop specification:
+     - Smithy → OpenAPI: Amazon generates OpenAPI from Smithy for external consumption
+     - gRPC reflection → OpenAPI: tools like grpc-gateway proto-gen-openapi
+     - TypeSpec → OpenAPI: Microsoft TypeSpec emits OpenAPI for any language
+
+6.4  Pitfalls of REST as lingua franca:
+     - Lossy: gRPC bidirectional streaming cannot be expressed in OpenAPI 3.0
+     - Type imprecision: JSON number has no int/float distinction
+     - No streaming: HTTP/1.1 REST is request-response only (no server push)
+
+================================================================================
+SECTION 7 — CROSS-PLATFORM CONSIDERATIONS BY OS
+================================================================================
+
+7.1  Linux:
+     - Dominant for cloud, servers, embedded, automotive (AUTOSAR Adaptive, ROS2)
+     - IPC: Unix sockets, POSIX shm, D-Bus, Netlink
+     - Serialization: all major formats supported
+     - Standard: glibc or musl libc; POSIX.1-2017
+
+7.2  Android:
+     - Linux kernel + Android-specific IPC (Binder)
+     - Language: Java/Kotlin (primary), C++ via NDK
+     - Serialization: Protobuf (preferred), Parcel (Binder), JSON
+     - Interop: AIDL for cross-process, gRPC for cross-device
+
+7.3  macOS / iOS:
+     - XNU kernel; Mach IPC + BSD POSIX IPC
+     - Language: Swift (primary), Objective-C, C++
+     - Serialization: Codable (Swift), NSCoding, Protobuf, JSON
+     - Interop: XPC for local, URLSession for network
+
+7.4  Windows:
+     - Win32 / NT kernel; COM/DCOM, Named Pipes, WinSock
+     - Language: C++ / C# (primary)
+     - Serialization: .NET serialization (DataContract), WCF bindings, Protobuf, JSON
+     - Interop: COM for local, WCF/REST for network
+
+7.5  Fuchsia:
+     - Zircon kernel; Zircon channels (FIDL)
+     - Language: C++, Rust, Dart, Go
+     - Serialization: FIDL binary (native); JSON for config
+     - Interop: FIDL for all local IPC; HTTP for external
+
+7.6  RTOS (FreeRTOS, Zephyr, VxWorks, QNX):
+     - Limited or no OS-provided IPC; application manages shared memory / message queues
+     - Serialization: FlatBuffers, SBE, CBOR, ASN.1 BER preferred (no dynamic allocation)
+     - Safety context: MISRA C compliance required in safety-critical variants
+
+================================================================================
+SECTION 8 — INTEROPERABILITY ANTI-PATTERNS
+================================================================================
+
+8.1  Using language-specific serialization (Java serialization, Python pickle):
+     - NEVER portable across languages
+     - Security: arbitrary code execution risk (deserialization attacks)
+     - Correct approach: use schema-based binary (Protobuf/Avro) or REST/JSON
+
+8.2  Depending on struct memory layout for cross-process communication:
+     - Compiler padding is not portable across compilers or optimization levels
+     - Correct approach: use explicit serialization (Protobuf) or __attribute__((packed))
+       with fully-specified alignment rules for zero-copy overlays
+
+8.3  Trusting field names in schema-dependent binary:
+     - Protobuf/Avro binary does not include field names — only tags or positions
+     - Renaming a field in the schema does NOT break wire format, but DOES break
+       code reading the renamed field if not regenerated
+
+8.4  Using nullable types without explicit schema support:
+     - JSON null vs missing key: semantically different but often treated identically
+     - Protobuf proto3: missing field == zero value (no distinction without optional)
+     - Correct approach: use optional/nullable with explicit presence tracking
+
+8.5  Assuming platform byte order in serialized data:
+     - Writing a C struct directly to disk then reading on another architecture
+     - Correct approach: always use explicit encoding (htonl/ntohl or format-defined order)
+
+================================================================================
+SECTION 9 — INTEROPERABILITY DECISION FRAMEWORK
+================================================================================
+
+Provide a decision tree for selecting the right interop technology:
+
+Q1: Is communication within the SAME process?
+  → Yes: use direct function calls + language-native types. No IPC/serialization needed.
+
+Q2: Is communication within the SAME machine (different processes)?
+  → Same OS, high-throughput, latency-critical: shared memory (Iceoryx, mmap)
+  → Android cross-process: AIDL over Binder
+  → Linux desktop: D-Bus or Unix Domain Sockets
+  → Fuchsia: FIDL over Zircon channels
+  → macOS/iOS: XPC or Mach IPC
+
+Q3: Is communication across machines (network)?
+  → Internal microservices, multi-language, streaming: gRPC + Protobuf
+  → External API (partner/client-facing): REST + JSON + OpenAPI
+  → Event streaming: Kafka + Avro or Protobuf + Schema Registry
+  → IoT constrained devices: CoAP + CBOR
+  → Enterprise SOAP-based system: WSDL + SOAP (or wrap with REST adapter)
+
+Q4: Is safety-critical or embedded context?
+  → Safety certified: ASN.1 PER (formally verified tools) or FlatBuffers (no allocation)
+  → Automotive ECU: SOME/IP, DDS, AUTOSAR COM signals
+  → Low-resource MCU: CBOR with CDDL schema, FlatBuffers
+
+Q5: Is there a schema evolution requirement?
+  → Long-lived event store: Avro + Schema Registry
+  → RPC with independent upgrade of client/server: Protobuf (tag-based) or Stable AIDL
+  → No evolution: SBE, fixed-layout C structs (not recommended for evolving systems)
+
+================================================================================
+SECTION 10 — INTEROPERABILITY MATURITY MATRIX
+================================================================================
+
+| Technology | Cross-language | Cross-platform | Cross-OS | Cross-arch | Cross-version | Schema registry | Formal spec |
+|-----------|--------------|--------------|---------|-----------|-------------|----------------|------------|
+| Protobuf | Excellent | Excellent | Yes | Yes (LE fixed) | Strong (tags) | Confluent BSR | Yes (Google) |
+| gRPC | Excellent | Excellent | Yes | Yes | Strong | BSR | Yes (CNCF) |
+| OpenAPI + REST + JSON | Universal | Universal | Yes | Yes | Partial (versioning) | Apicurio | Yes (OAI) |
+| Avro | Excellent | Excellent | Yes | Yes | Strong (registry) | Confluent/Apicurio | Yes (Apache) |
+| Thrift | Good | Good | Yes | Yes | Moderate | No | Yes (Apache) |
+| CBOR | Good | Good | Yes | Yes (BE) | Partial (CDDL) | No | Yes (IETF) |
+| FlatBuffers | Good | Good | Yes | Yes (LE) | Moderate (table) | No | Yes (Google) |
+| Cap'n Proto | Moderate | Moderate | Yes | Yes (relative ptrs) | Moderate | No | Partial |
+| SBE | Limited | Limited | Yes | LE by default | Very Limited | No | Yes (FIX TC) |
+| AIDL (Binder) | Limited (Java/C++/Rust) | No (Android only) | Android only | Yes | Strong (Stable AIDL) | No | Yes (AOSP) |
+| ASN.1 BER/DER | Good | Excellent | Yes | Yes (explicit encoding) | Strong (extensibility) | No | Yes (ISO/ITU-T) |
+| ASN.1 PER | Good | Excellent | Yes | Yes | Strong | No | Yes (ISO/ITU-T) |
+| WSDL + SOAP | Limited | Good | Yes | Yes | Limited | No | Yes (W3C) |
+| DDS (RTPS) | Moderate | Good | Yes | Yes | Strong (X-Types) | No | Yes (OMG) |
+| SOME/IP | Limited (C++) | Limited | POSIX/Win | Yes | Moderate | No | Yes (AUTOSAR) |
+| GraphQL | Excellent | Excellent | Yes | Yes | Partial | No | Yes (GraphQL Fnd) |
+| AsyncAPI + Kafka | Excellent | Excellent | Yes | Yes | Depends on payload | Yes (Confluent) | Yes (AsyncAPI Init) |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 15
+================================================================================
+
+  15.0  — What cross-language/cross-platform interoperability means and why it is hard
+  15.1  — Language binding coverage matrix (Section 1)
+  15.2  — ABI stability analysis (Section 2)
+  15.3  — Endianness and pointer size (Section 3)
+  15.4  — Stable interface patterns (VINTF, AIDL, gRPC versioning) (Section 4)
+  15.5  — WebAssembly as interop layer (Section 5)
+  15.6  — REST/OpenAPI as lingua franca (Section 6)
+  15.7  — Cross-platform considerations by OS (Section 7)
+  15.8  — Interoperability anti-patterns (Section 8)
+  15.9  — Interoperability decision framework (Section 9)
+  15.10 — Interoperability maturity matrix (Section 10)
+  15.11 — Final synthesis: universal technology selection guidance
+  15.12 — Cross-references to all other volumes
+
+================================================================================
+END OF VOLUME 15 PROMPT
+================================================================================

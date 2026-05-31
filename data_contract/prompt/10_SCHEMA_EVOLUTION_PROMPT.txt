@@ -1,0 +1,376 @@
+================================================================================
+VOLUME 10 — SCHEMA EVOLUTION & COMPATIBILITY
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a distributed systems architect, API versioning strategist, data
+engineering lead, Confluent Schema Registry expert, and backward/forward
+compatibility analyst.
+
+Schema evolution = the controlled modification of data schemas and API contracts
+over time without breaking existing producers, consumers, or stored data.
+
+This is one of the most critical concerns in long-lived distributed systems,
+microservices, and event-driven architectures.
+
+================================================================================
+SECTION 1 — FORMAL COMPATIBILITY DEFINITIONS
+================================================================================
+
+1.1  BACKWARD COMPATIBILITY
+     Definition: A new schema (reader) can read data written with an old schema (writer).
+     Producer is upgraded first; consumers continue working.
+     
+     Example: Old schema had fields {A, B}. New schema adds field {C}.
+     Old data has no field C → reader assigns C its default value.
+     
+     Rules to maintain backward compatibility:
+       ✔ Add new optional fields (with defaults)
+       ✔ Remove fields that consumers don't use
+       ✘ Add new required fields without defaults
+       ✘ Rename fields
+       ✘ Change field types incompatibly
+
+1.2  FORWARD COMPATIBILITY
+     Definition: An old schema (reader) can read data written with a new schema (writer).
+     Consumer is upgraded first; producers continue working.
+     
+     Example: New schema adds field {C}. Old reader ignores unknown field C.
+     
+     Rules to maintain forward compatibility:
+       ✔ Add new fields that old readers can safely ignore
+       ✔ Remove fields that are not required
+       ✘ Remove fields that old readers depend on
+       ✘ Change types of existing fields
+
+1.3  FULL COMPATIBILITY
+     Definition: Both backward AND forward compatible.
+     Any version of reader can read any version of writer.
+     
+     Rules: Only additive changes with defaults allowed; no removals of required fields.
+
+1.4  NONE (No compatibility guarantee)
+     Any change is allowed. Only use when version management is done externally.
+
+1.5  TRANSITIVE VARIANTS
+     BACKWARD_TRANSITIVE: compatible with ALL previous schema versions (not just latest)
+     FORWARD_TRANSITIVE: compatible from ALL previous schema versions to current
+     FULL_TRANSITIVE: all directions, all versions
+
+================================================================================
+SECTION 2 — PROTOBUF EVOLUTION RULES
+================================================================================
+
+2.1  Field number (tag) is the identity:
+     - Field NAME can change if you update all code simultaneously
+     - Field NUMBER must NEVER be reused (even if field is deleted)
+     
+2.2  Wire type compatibility (same wire type = safe type change):
+     Varint group: int32, int64, uint32, uint64, sint32, sint64, bool, enum
+     - You can change int32 ↔ uint32 (same wire type, signed interpretation changes)
+     - Changing int32 → int64 is safe (varints expand naturally)
+     
+     Length-delimited group: string, bytes, embedded message, packed repeated
+     - A field defined as embedded message can be changed to/from bytes (raw bytes)
+     - string and bytes are interchangeable at the wire level (validation only)
+     
+     Fixed32 group: fixed32, sfixed32, float (incompatible with fixed64 group)
+     Fixed64 group: fixed64, sfixed64, double
+     
+2.3  Reserved fields and names:
+     // After removing a field or renaming it:
+     message Foo {
+       reserved 3, 5 to 9;         // prohibit reuse of field numbers
+       reserved "old_name", "bar"; // prohibit reuse of field names
+     }
+     
+2.4  Default values in proto3:
+     - Missing fields = zero value for type (0, false, "", empty bytes, empty list)
+     - Distinguish "not present" from "present with zero value" using optional keyword
+     
+2.5  Extending with proto3 + editions:
+     - optional keyword in proto3 enables field presence (HasField)
+     - Editions feature: field_presence = EXPLICIT enables proto2-style presence
+
+2.6  oneof evolution:
+     - Adding a new field inside oneof = safe
+     - Moving a field into or out of oneof = wire-format compatible but semantic change
+     - Never reuse oneof field numbers
+
+2.7  Enum evolution:
+     - OPEN enum (proto3 default): unknown values preserved as integer
+     - CLOSED enum (proto2 behavior): unknown values = error
+     - Adding enum values = backward compatible for OPEN enums
+     - Never remove an enum value in use
+
+================================================================================
+SECTION 3 — AVRO EVOLUTION RULES
+================================================================================
+
+3.1  Schema resolution: Avro uses a reader schema and a writer schema that may differ.
+     Resolution rules define how to translate values:
+     
+     - If writer has a field not in reader schema → ignored
+     - If reader has a field not in writer schema → reader's default value used (REQUIRED)
+     - If both have the field: type promotion applies
+     
+3.2  Avro type promotions (safe widening):
+     int → long, float, double
+     long → float, double
+     float → double
+     string → bytes, bytes → string (UTF-8 encoding assumed)
+     
+3.3  Backward compatible changes:
+     ✔ Add field with default value
+     ✔ Remove field that has a default value
+     ✔ Promote type (int → long, float → double)
+     ✘ Add field WITHOUT default value
+     ✘ Remove required field
+     ✘ Change type incompatibly
+     
+3.4  Schema fingerprinting:
+     - Each Avro schema has a canonical form + fingerprint (Rabin, MD5, SHA-256)
+     - Fingerprint used to look up schema in registry (schema ID)
+     
+3.5  Confluent Schema Registry compatibility enforcement:
+     - POST /subjects/{subject}/versions → checks compatibility before accepting
+     - GET /compatibility/subjects/{subject}/versions/latest → test before registration
+     
+3.6  Avro Container File (OCF):
+     - Embeds the writer schema in the file header
+     - Reader reads header schema → applies resolution rules vs reader schema
+
+================================================================================
+SECTION 4 — THRIFT EVOLUTION RULES
+================================================================================
+
+4.1  Field IDs are the identity (like Protobuf tag numbers):
+     - Never reuse a deleted field ID
+     - Field names can be changed in code if field ID is preserved
+     
+4.2  Required vs optional history:
+     - required fields CANNOT be removed without breaking compatibility
+     - This is why required is now deprecated in Thrift (use optional always)
+     
+4.3  Safe changes:
+     ✔ Add optional field with default value
+     ✔ Remove optional field
+     ✘ Remove required field
+     ✘ Change field type
+     ✘ Change field ID
+
+================================================================================
+SECTION 5 — JSON SCHEMA EVOLUTION
+================================================================================
+
+5.1  JSON Schema has NO built-in evolution mechanism — it describes structure only
+5.2  Evolution strategies:
+     - URI-based versioning: $id = "https://example.com/v2/schema.json"
+     - additionalProperties: false = strict (breaking: add required property)
+     - additionalProperties: true = open (non-breaking: add property, consumers may ignore)
+     
+5.3  Breaking changes in JSON Schema:
+     ✘ Adding a new required property
+     ✘ Changing a property type
+     ✘ Reducing enum values
+     ✘ Adding minimum/maximum constraints
+     
+5.4  Non-breaking changes:
+     ✔ Adding an optional property (when additionalProperties: true)
+     ✔ Widening an enum (adding values) — consumers must handle unknowns
+     ✔ Relaxing a constraint (remove minimum)
+
+================================================================================
+SECTION 6 — OPENAPI / REST API VERSIONING
+================================================================================
+
+6.1  OpenAPI versioning lifecycle:
+     1. Design: contract-first, write OpenAPI spec before implementation
+     2. Publish: version in URL (/v1) or header
+     3. Deprecate: mark operations with deprecated: true, add sunset header
+     4. Remove: after sunset date, remove from routing
+
+6.2  Sunset header (RFC 8594):
+     HTTP response: Sunset: Sat, 01 Jan 2026 00:00:00 GMT
+     Instructs clients to stop using the endpoint by that date
+
+6.3  Breaking vs non-breaking REST API changes:
+
+     NON-BREAKING:
+     ✔ Add optional request parameter
+     ✔ Add new response field (if consumers use lenient parsing)
+     ✔ Add new endpoint
+     ✔ Add new enum value in response
+     ✔ Expand acceptable input types
+     
+     BREAKING:
+     ✘ Remove or rename endpoint
+     ✘ Change HTTP method (GET → POST)
+     ✘ Remove required request parameter
+     ✘ Add required request parameter
+     ✘ Remove response field
+     ✘ Change response field type
+     ✘ Remove enum value in request
+     ✘ Change auth requirement
+
+6.4  API evolution tools:
+     - oasdiff: CLI diff tool for OpenAPI specs (breaking change detection)
+     - openapi-diff: visual HTML diff of OpenAPI specs
+     - Spectral: rule-based linting + deprecation rules
+     - Bump.sh: API change management platform
+
+================================================================================
+SECTION 7 — CONFLUENT SCHEMA REGISTRY
+================================================================================
+
+7.1  Architecture:
+     - Central REST service storing schemas
+     - Subjects: each Kafka topic has a value subject and optionally key subject
+     - Schema IDs: monotonically increasing integers
+     - Wire format: 0x00 (magic byte) + 4-byte schema ID (big-endian) + encoded bytes
+
+7.2  Naming strategies for subjects:
+     - TopicNameStrategy: {topic-name}-value (default)
+     - RecordNameStrategy: {fully-qualified-schema-name}
+     - TopicRecordNameStrategy: {topic-name}-{record-name}
+
+7.3  Compatibility levels (per subject):
+     - BACKWARD: new schema can read old data
+     - BACKWARD_TRANSITIVE: new schema can read ALL previous versions
+     - FORWARD: old schema can read new data
+     - FORWARD_TRANSITIVE: ALL old schemas can read new data
+     - FULL: both directions, latest only
+     - FULL_TRANSITIVE: both directions, all versions
+     - NONE: no check
+
+7.4  Schema formats supported: Avro, Protobuf, JSON Schema
+7.5  Schema normalization: canonical form for duplicate detection
+7.6  Schema references: Protobuf imports across subjects
+7.7  REST API endpoints:
+     POST /subjects/{subject}/versions     → register schema
+     GET  /subjects/{subject}/versions     → list versions
+     GET  /schemas/ids/{id}               → get schema by ID
+     POST /compatibility/subjects/{subject}/versions/latest → test compatibility
+     DELETE /subjects/{subject}            → soft delete subject
+
+================================================================================
+SECTION 8 — GRPC / PROTOBUF API VERSIONING PATTERNS
+================================================================================
+
+8.1  Protobuf versioning by package name:
+     package myapi.v1;    // stable
+     package myapi.v2;    // new incompatible version
+     // Both served simultaneously from same server (different gRPC service names)
+
+8.2  gRPC service versioning:
+     service VehicleService {}  in myapi.v1 → route: /myapi.v1.VehicleService/Method
+     service VehicleService {}  in myapi.v2 → route: /myapi.v2.VehicleService/Method
+
+8.3  Proto message evolution (backward-compatible server updates):
+     - Only add fields with new numbers
+     - Reserve old numbers when removing fields
+     - Use well-known google.protobuf.FieldMask for partial updates
+
+8.4  buf tool: Protobuf schema management
+     - buf lint: enforce style rules on .proto files
+     - buf breaking: detect breaking changes vs previous version
+     - buf build: compile .proto to FileDescriptorSet
+     - buf generate: code generation with plugins
+
+8.5  Protobuf breaking change rules (buf definition):
+     BREAKING: remove field, change field number, change field type (wire-incompatible),
+               remove enum value, change service name, change method name,
+               change request/response type, change streaming mode
+
+================================================================================
+SECTION 9 — AIDL STABLE VERSIONING (ANDROID)
+================================================================================
+
+9.1  Problem: Android vendor partition (HALs) and system partition (framework) can be
+     updated independently → interfaces must be stable across updates
+
+9.2  Stable AIDL:
+     - @VintfStability annotation: freezes the interface for VINTF compatibility
+     - Versioned interfaces stored in: hardware/interfaces/android.hardware.foo/aidl/
+     - Version directories: aidl_api/{interface_name}/{version}/
+
+9.3  AIDL versioning rules:
+     ✔ Add new methods to an interface (new methods return UNKNOWN_TRANSACTION for old callers)
+     ✔ Add optional parcelable fields
+     ✘ Remove/rename methods
+     ✘ Change method signatures
+     ✘ Remove parcelable fields
+
+9.4  Hash-based freeze: aidl-freeze-api generates hash; CI checks for unintended drift
+
+================================================================================
+SECTION 10 — BREAKING CHANGE TAXONOMY
+================================================================================
+
+10.1  Structural breaking changes:
+       - Type change: string → integer, float → string
+       - Nullability change: non-null → null (consumer must handle null), reverse
+       - Cardinality change: single value → array (or reverse)
+       - Name change: field/method/property rename
+       - Removal: field, method, endpoint, type
+
+10.2  Semantic breaking changes (not detectable by schema diff tools):
+       - Behavior change: endpoint previously returned sorted list, now unsorted
+       - Unit change: speed returned in km/h, now in m/s (same field name, same type)
+       - Timezone change: timestamps previously in UTC, now in local time
+       - Null semantics change: null previously meant "unknown", now means "zero"
+
+10.3  Additive breaking changes:
+       - Adding a required field / required parameter
+       - Adding a new enum value that existing switch statements don't handle (if exhaustive)
+       - Adding a required authentication requirement
+
+10.4  Contract-level breaking changes:
+       - Changing error codes for same error condition
+       - Changing rate limiting behavior
+       - Changing pagination behavior
+       - Changing idempotency guarantees
+
+================================================================================
+SECTION 11 — SCHEMA EVOLUTION COMPARISON MATRIX
+================================================================================
+
+| Technology | Add Optional Field | Remove Field | Rename Field | Change Type | Add Enum Value | Schema Registry | Built-in Versioning | Evolution Strategy Name |
+|-----------|-------------------|-------------|-------------|------------|----------------|-----------------|--------------------|-----------------------|
+| Protobuf | ✔ (new tag) | ✔ (use reserved) | ✘ (by tag) | Conditional (wire type) | ✔ (OPEN enum) | Confluent | Package versioning | Tag-based |
+| Avro | ✔ (with default) | ✔ (if has default) | ✘ | Promotion only | ✔ | Confluent/Glue | None native | Reader/Writer schema |
+| Thrift | ✔ (new ID, optional) | ✔ (optional only) | ✘ | ✘ | ✔ | No | None native | ID-based |
+| JSON Schema | ✔ (if addlProps=true) | ✔ | ✔ (breaking) | ✘ | ✔ | Apicurio | URI versioning | URI-based |
+| OpenAPI | ✔ | ✔ | ✘ | ✘ | ✔ | Apicurio | URL/header | Sunset header |
+| Avro IDL | ✔ (with default) | ✔ | ✘ | Promotion | ✔ | Confluent | None | Protocol version |
+| GraphQL SDL | ✔ | ✔ (deprecate first) | ✘ | ✘ | ✔ | Schema registry tools | None formal | Deprecation |
+| FlatBuffers | ✔ (new vtable entry) | ✔ (deprecated) | ✔ (field index) | ✘ | ✔ | No | File identifier | vtable |
+| Cap'n Proto | ✔ (end of struct) | ✔ | ✔ (no binary effect) | ✘ | ✔ | No | None | Struct position |
+| Stable AIDL | ✔ | ✘ | ✘ | ✘ | ✔ | No | @VintfStability + version | Hash-frozen |
+| YANG | ✔ (augment) | ✘ (deprecate) | ✘ | ✘ | ✔ | No | Module revision | Augment-based |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 10
+================================================================================
+
+  10.0  — Why schema evolution is the hardest problem in distributed systems
+  10.1  — Formal compatibility definitions (backward/forward/full/transitive)
+  10.2  — Protobuf evolution rules (wire type compatibility matrix)
+  10.3  — Avro evolution rules (reader/writer schema resolution algorithm)
+  10.4  — Thrift evolution rules
+  10.5  — JSON Schema evolution
+  10.6  — OpenAPI/REST versioning (non-breaking / breaking taxonomy)
+  10.7  — Confluent Schema Registry (full API + compatibility modes)
+  10.8  — gRPC / Protobuf API versioning patterns + buf tool
+  10.9  — AIDL Stable versioning
+  10.10 — Breaking change taxonomy (structural / semantic / additive / contract)
+  10.11 — Comparison matrix
+  10.12 — Anti-patterns: what kills compatibility (no defaults, removed fields, required fields)
+  10.13 — Cross-references to Volume 03 (Schema Systems) and Volume 12 (Governance)
+
+================================================================================
+END OF VOLUME 10 PROMPT
+================================================================================

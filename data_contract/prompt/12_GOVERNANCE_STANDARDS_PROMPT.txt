@@ -1,0 +1,318 @@
+================================================================================
+VOLUME 12 — GOVERNANCE, STANDARDS BODIES & OWNERSHIP
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a standards policy analyst, technology governance expert, open-source
+foundation specialist, and intellectual property strategist.
+
+This volume maps every major standards body, foundation, and vendor involved
+in the governance of data contracts, serialization, IDLs, API contracts, and
+interoperability technologies.
+
+Key principle: A technology is only as stable as its governance model.
+Understanding who controls a standard determines: longevity risk, fork risk,
+patent encumbrance, open-source licensing, and implementation diversity.
+
+================================================================================
+SECTION 1 — GOVERNANCE TIER LADDER (FULL DEFINITION)
+================================================================================
+
+TIER 0 — MATHEMATICAL / FORMAL FOUNDATIONS
+  Examples : Formal grammars (BNF, EBNF), type theory, algebraic data types,
+              lambda calculus, set theory for data models
+  Authority: No governing body — mathematical truth
+  Stability : Permanent
+  Relevance : Foundational basis for all formal schema and IDL languages
+
+TIER 1 — INTERNATIONAL TREATY-LEVEL STANDARDS BODIES
+  Bodies    : ISO, IEC, ISO/IEC JTC1
+  Authority : Intergovernmental treaty; national standards body members
+  Process   : Multi-year consensus process; national body voting
+  Examples  :
+    ISO 8824 / ITU-T X.680 (ASN.1)
+    ISO/IEC 9075 (SQL)
+    ISO 20022 (Financial messaging)
+    IEC 61508 (Functional safety)
+    ISO 26262 (Automotive safety)
+    IEC 62541 (OPC UA)
+    ISO/IEC 19505 (UML — jointly with OMG)
+  Patents   : FRAND licensing for essential patents required for ISO standards
+  Stability : Very high; backward-incompatible changes extremely rare
+
+TIER 2 — INTERGOVERNMENTAL / GLOBAL INTERNET STANDARDS BODIES
+  Bodies    : ITU-T, IETF, IEEE, W3C
+  Authority : Global consensus; major implementers drive adoption
+  Process   :
+    IETF   : RFC process (Individual → Working Group → IESG → RFC Editor)
+    ITU-T  : ITU-T Recommendations (X., G., H., Q. series); national member bodies
+    W3C    : Working Draft → Candidate Rec → Proposed Rec → Recommendation
+    IEEE   : Standards project → ballot → approval
+  Examples  :
+    IETF: RFC 8259 (JSON), RFC 8949 (CBOR), RFC 7950 (YANG), RFC 6241 (NETCONF),
+           RFC 7252 (CoAP), RFC 7519 (JWT), RFC 5531 (ONC-RPC), RFC 4506 (XDR)
+    ITU-T: X.680 (ASN.1), X.690 (BER/DER), X.691 (PER), X.693 (XER), X.509 (PKI)
+    W3C  : XML 1.0, XSD 1.1, SOAP 1.2, WSDL 2.0, SPARQL, RDF, OWL
+    IEEE : IEEE 754 (floating point), IEEE 802.x (networking)
+  Stability : High; formal IP disclosure required
+
+TIER 3 — INDUSTRY CONSORTIA STANDARDS
+  Bodies    : OMG, AUTOSAR, SAE, 3GPP, COVESA, OpenAPI Initiative, OPC Foundation,
+               OASIS, W3C TAG, GraphQL Foundation (Linux Foundation sub-project)
+  Authority : Consortium member companies vote; membership-based
+  Process   : Member proposals → working group → specification → ratification
+  Examples  :
+    OMG       : CORBA IDL, DDS, DDS-XTypes, UML, MOF
+    AUTOSAR   : AUTOSAR Classic/Adaptive specs, SOME/IP, ARXML
+    3GPP      : LTE/5G ASN.1 specs (TS 38.331, TS 38.413, etc.)
+    OpenAPI Initiative : OpenAPI Specification 3.x
+    OASIS     : SAML, OData, AMQP 1.0, WS-BPEL
+    COVESA    : Vehicle Signal Specification, Franca IDL
+    OPC Foundation : OPC UA (IEC 62541)
+    SAE       : Automotive protocols, AUTOSAR liaison
+    ETSI      : NFV data models, MEC APIs
+  Stability : Medium-high; members have commercial interests
+
+TIER 4 — PROFESSIONAL / TRADE ASSOCIATIONS
+  Bodies    : FIX Trading Community, HL7 International, SWIFT, FIXML TC,
+               Object Management Group (overlaps Tier 3)
+  Authority : Industry practitioners; membership from financial/healthcare firms
+  Examples  :
+    FIX Trading : FIX Protocol, SBE, FIXML
+    HL7         : HL7 v2, HL7 v3, FHIR
+    SWIFT       : SWIFT MT, MX (ISO 20022 implementation)
+  Stability : Medium; driven by industry adoption
+
+TIER 5 — OPEN-SOURCE FOUNDATION STANDARDS
+  Bodies    : Apache Software Foundation, Linux Foundation, CNCF, Eclipse Foundation,
+               Open Robotics Foundation, Python Software Foundation, OpenJS Foundation
+  Authority : Committer community + foundation board; open governance
+  Examples  :
+    Apache ASF      : Avro, Thrift, Kafka, Arrow, Dubbo
+    Linux Foundation: Zephyr RTOS, Iceoryx, ACRN, Yocto, OpenEmbedded
+    CNCF            : gRPC (graduated), Protobuf (sandbox), CloudEvents, AsyncAPI (proposed)
+    Eclipse Foundation : Iceoryx, Eclipse Cyclone DDS, Eclipse Kuksa
+    Open Robotics   : ROS, ROS2
+    GraphQL Foundation (LF) : GraphQL specification
+  Stability : Medium; community can fork; governance through TSC/PMC
+
+TIER 6 — VENDOR-LED OPEN SOURCE (Single vendor primary control)
+  Examples  :
+    Google    : Protocol Buffers, gRPC, FlatBuffers, Flatbuffers2, Abseil, FIDL
+    Amazon    : Smithy IDL, AWS CDK (CloudFormation schema)
+    Microsoft : Bond IDL, TypeSpec (Cadl), WCF
+    Meta      : Apache Thrift (originated), Hack/HHVM protocols
+    HashiCorp : HCL (HashiCorp Configuration Language)
+    Confluent : Schema Registry, ksqlDB schema handling
+    MongoDB   : BSON specification
+  Stability : Vendor risk: if vendor discontinues, community may fork or abandon
+  License   : Typically Apache 2.0 or MIT; patents via CLA
+
+TIER 7 — VENDOR PROPRIETARY (Closed specification)
+  Examples  : Internal Google formats not published, vendor-specific wire formats
+               in closed automotive ECU software, SWIFT proprietary extensions
+  Stability : Controlled by vendor; black box to external implementers
+
+TIER 8 — DE-FACTO STANDARDS (No formal body)
+  Examples  :
+    JSON        : De-facto standard (formalized later as ECMA-404 and RFC 8259)
+    REST        : Architectural style from Fielding dissertation, no formal body
+    YAML        : Community specification at yaml.org
+    MessagePack : Community specification at msgpack.org
+    Cap'n Proto : Informal specification
+    JSON-RPC    : Community specification
+    GraphQL (pre-LF) : Facebook internal → de-facto → GraphQL Foundation
+  Stability : Variable; depends on ecosystem adoption momentum
+
+================================================================================
+SECTION 2 — ISO AND IEC RELEVANT STANDARDS CATALOG
+================================================================================
+
+| Standard | Title | Tier | Relevance |
+|---------|-------|------|----------|
+| ISO 8824-1 (X.680) | ASN.1 Basic Notation | 1/2 | Data description language |
+| ISO 8825-1 (X.690) | ASN.1 BER / DER | 1/2 | Binary encoding rules |
+| ISO 8825-2 (X.691) | ASN.1 PER | 1/2 | Compact encoding for telecom |
+| ISO 8825-5 (X.693) | ASN.1 XER | 1/2 | XML encoding rules |
+| ISO/IEC 9075 | SQL | 1 | Relational data modeling |
+| ISO/IEC 19505 | UML | 1 | Unified Modeling Language |
+| ISO 20022 | Financial messaging | 1 | Financial data contracts |
+| IEC 61508 | Functional safety | 1 | Safety-critical data interfaces |
+| ISO 26262 | Road vehicles — functional safety | 1 | Automotive safety data |
+| IEC 62541 | OPC UA | 1/3 | Industrial automation data model |
+| ISO 9735 | EDIFACT | 1 | Enterprise data interchange |
+| ISO/IEC 14776 | SCSI protocol data | 1 | Storage interface contracts |
+
+================================================================================
+SECTION 3 — IETF RFC CATALOG (Data Contract Relevant)
+================================================================================
+
+| RFC | Title | Tier | Technology |
+|----|-------|------|-----------|
+| RFC 8259 | JSON | 2 | Serialization format |
+| RFC 8949 | CBOR | 2 | Binary serialization |
+| RFC 8610 | CDDL | 2 | CBOR schema language |
+| RFC 7950 | YANG 1.1 | 2 | Network data modeling |
+| RFC 6241 | NETCONF | 2 | Network configuration protocol |
+| RFC 8040 | RESTCONF | 2 | REST access to YANG models |
+| RFC 7252 | CoAP | 2 | IoT application protocol |
+| RFC 5531 | ONC-RPC | 2 | Sun/ONC remote procedure call |
+| RFC 4506 | XDR | 2 | External data representation |
+| RFC 7519 | JWT | 2 | JSON Web Token |
+| RFC 7515 | JWS | 2 | JSON Web Signature |
+| RFC 7517 | JWK | 2 | JSON Web Key |
+| RFC 8152 | COSE | 2 | CBOR signing/encryption |
+| RFC 5280 | X.509 v3 | 2 | Certificate data structure |
+| RFC 5652 | CMS | 2 | Cryptographic message syntax |
+| RFC 6733 | Diameter | 2 | Telecom AVP encoding |
+| RFC 2578 | SMIv2 | 2 | MIB structure (ASN.1 subset) |
+| RFC 4180 | CSV | 2 | Comma-separated values |
+| RFC 8594 | Sunset header | 2 | API deprecation signaling |
+
+================================================================================
+SECTION 4 — W3C RELEVANT SPECIFICATIONS
+================================================================================
+
+| Specification | Tier | Technology |
+|--------------|------|-----------|
+| XML 1.0 / 1.1 | 2 | Extensible Markup Language |
+| XSD 1.0 / 1.1 | 2 | XML Schema Definition |
+| SOAP 1.1 / 1.2 | 2 | Simple Object Access Protocol |
+| WSDL 1.1 / 2.0 | 2 | Web Services Description Language |
+| SPARQL 1.1 | 2 | RDF query language |
+| RDF 1.1 | 2 | Resource Description Framework |
+| OWL 2 | 2 | Web Ontology Language |
+| JSON-LD 1.1 | 2 | Linked Data in JSON |
+| SKOS | 2 | Knowledge organization |
+| Web Services Addressing | 2 | WS-Addressing |
+
+================================================================================
+SECTION 5 — OMG RELEVANT SPECIFICATIONS
+================================================================================
+
+| Specification | Tier | Technology |
+|--------------|------|-----------|
+| CORBA 3.4 | 3 | CORBA IDL, GIOP, IIOP, CDR |
+| UML 2.5.1 | 3 | Unified Modeling Language |
+| MOF 2.5.1 | 3 | Meta-Object Facility (metamodel) |
+| DDS 1.4 | 3 | Data Distribution Service |
+| DDS-XTypes 1.3 | 3 | Extensible and Dynamic Types |
+| DDS-Security 1.1 | 3 | DDS security model |
+| IDL 4.2 | 3 | Interface Definition Language |
+
+================================================================================
+SECTION 6 — OPEN SOURCE FOUNDATION GOVERNANCE COMPARISON
+================================================================================
+
+| Foundation | Governance Model | IP Policy | Notable Data Contract Projects |
+|-----------|----------------|----------|-------------------------------|
+| Apache Software Foundation (ASF) | Meritocracy; PMC; Apache License 2.0 | Apache License + CLA | Avro, Thrift, Kafka, Arrow, Dubbo, Parquet |
+| Linux Foundation (LF) | Board + Technical Advisory Council | Varies per project; LF projects retain own IP | gRPC (via CNCF), CloudEvents, Iceoryx, OpenEmbedded |
+| CNCF (Cloud Native) | TOC + TAG; graduated / incubating / sandbox | Apache 2.0 preferred | gRPC (graduated), CloudEvents (incubating), AsyncAPI (sandbox) |
+| Eclipse Foundation | Board + PMC; Eclipse Public License | Eclipse Public License 2.0 | Eclipse Cyclone DDS, Iceoryx, Kuksa.val |
+| GraphQL Foundation (LF subproject) | Spec Working Group | Open Web Foundation agreement | GraphQL specification |
+| OpenAPI Initiative (LF subproject) | Technical Steering Committee | Apache 2.0 | OpenAPI Specification |
+| AsyncAPI Initiative (LF) | Core committers; open governance | Apache 2.0 | AsyncAPI Specification |
+| OpenJS Foundation (LF) | Board + CPC | Apache 2.0 / MIT | JSON Schema (liaison) |
+| Open Robotics | Board | Apache 2.0 | ROS, ROS2, rosidl |
+
+================================================================================
+SECTION 7 — VENDOR GOVERNANCE ANALYSIS
+================================================================================
+
+7.1  Google
+     Technologies: Protocol Buffers, gRPC, FlatBuffers, FlatBuffers2, Abseil, FIDL
+     License: Apache 2.0 / BSD 3-Clause
+     CLA: Google CLA required
+     Risk: Google has deprecated products before (Google+, Cloud IoT Core)
+     Mitigation: gRPC donated to CNCF (reduces single-vendor dependency)
+
+7.2  Amazon Web Services
+     Technologies: Smithy IDL, CloudFormation schema, Event Bridge schema registry
+     License: Apache 2.0 (Smithy)
+     Risk: AWS-centric toolchain; cross-cloud portability concerns
+
+7.3  Microsoft
+     Technologies: Bond IDL, TypeSpec (Cadl), WCF, MIDL
+     License: MIT (Bond, TypeSpec)
+     Mitigation: TypeSpec designed to emit OpenAPI (reduces lock-in)
+
+7.4  Apache Software Foundation
+     Governance: PMC model; any contributor can become committer
+     IP: Apache License 2.0; software grants required
+     Projects: Avro (PMC: Apache Avro), Thrift (PMC: Apache Thrift), Arrow (PMC: Apache Arrow)
+
+7.5  Confluent
+     Technologies: Confluent Schema Registry (originally open source, then BSL)
+     License change risk: Confluent changed Schema Registry to BSL 1.1 in 2023
+     Alternatives: Apicurio Registry (Red Hat / open-source), AWS Glue Schema Registry
+
+================================================================================
+SECTION 8 — GOVERNANCE & OWNERSHIP MASTER MATRIX
+================================================================================
+
+| Technology | Governing Body | Tier | License | Open/Closed | Spec Publication | Ref Implementation |
+|-----------|--------------|------|--------|------------|-----------------|-------------------|
+| ASN.1 (X.680) | ISO/ITU-T | 1/2 | Paid (ISO doc) | Open spec | ISO doc / ITU-T Rec | asn1c (open), commercial |
+| BER/DER (X.690) | ISO/ITU-T | 1/2 | Paid | Open spec | ITU-T X.690 | OpenSSL, BouncyCastle |
+| PER (X.691) | ISO/ITU-T | 1/2 | Paid | Open spec | ITU-T X.691 | asn1c, OSS Nokalva |
+| JSON (RFC 8259) | IETF | 2 | Free (RFC) | Open | IETF RFC 8259 | Every language |
+| CBOR (RFC 8949) | IETF | 2 | Free (RFC) | Open | IETF RFC 8949 | cbor2, TinyCBOR |
+| XML / XSD | W3C | 2 | Free (W3C) | Open | W3C Recommendation | libxml2, Xerces |
+| SOAP/WSDL | W3C | 2 | Free (W3C) | Open | W3C Recommendation | Apache CXF, .NET WCF |
+| YANG (RFC 7950) | IETF | 2 | Free (RFC) | Open | IETF RFC 7950 | pyang, libyang |
+| DDS (RTPS) | OMG | 3 | Free (OMG) | Open spec | OMG DDS spec | FastDDS, Cyclone DDS |
+| CORBA / OMG IDL | OMG | 3 | Free (OMG) | Open spec | OMG CORBA spec | OpenORB, Orbix |
+| AUTOSAR / SOME/IP | AUTOSAR | 3 | Member-restricted | Open to members | AUTOSAR PRS | Vector, ETAS, dSPACE |
+| OpenAPI 3.1 | OpenAPI Initiative / LF | 3 | Apache 2.0 | Open | GitHub repo | swagger-parser |
+| AsyncAPI 3.0 | AsyncAPI Initiative / LF | 3 | Apache 2.0 | Open | GitHub repo | asyncapi-parser |
+| GraphQL | GraphQL Foundation / LF | 5 | OWF agreement | Open | GitHub spec | graphql-js |
+| Protobuf (.proto) | Google / CNCF | 6 | Apache 2.0 | Open | GitHub + docs | protoc |
+| gRPC | Google / CNCF | 5/6 | Apache 2.0 | Open | GitHub + docs | grpc-core |
+| Apache Avro | Apache ASF | 5 | Apache 2.0 | Open | apache.org/avro | avro-java |
+| Apache Thrift | Apache ASF | 5 | Apache 2.0 | Open | apache.org/thrift | thrift (C++) |
+| Apache Arrow | Apache ASF | 5 | Apache 2.0 | Open | apache.org/arrow | arrow-cpp |
+| FlatBuffers | Google | 6 | Apache 2.0 | Open | Google / GitHub | flatc |
+| FIDL | Google / Fuchsia | 6 | BSD 3-Clause | Open | Fuchsia docs | fidlc |
+| AIDL | Google / AOSP | 6 | Apache 2.0 | Open | AOSP / Android docs | aidl compiler |
+| Bond | Microsoft | 6 | MIT | Open | GitHub | gbc (Bond compiler) |
+| Smithy | Amazon | 6 | Apache 2.0 | Open | GitHub | smithy-build |
+| TypeSpec | Microsoft | 6 | MIT | Open | GitHub | tsp compiler |
+| BSON | MongoDB | 6 | Apache 2.0 | Open | bsonspec.org | libbson, pymongo |
+| Confluent Schema Registry | Confluent | 6→7 | BSL 1.1 (since 2023) | Partially open | GitHub | Schema Registry |
+| Cap'n Proto | Community | 8 | MIT | Open | capnproto.org | capnp (C++) |
+| MessagePack | Community | 8 | Apache 2.0 | Open | msgpack.org | msgpack-c |
+| ISO 20022 | ISO TC68 | 1 | ISO licensing | Open spec | iso20022.org | SWIFT MX |
+| HL7 FHIR | HL7 International | 4 | HL7 IP policy | Open | hl7.org/fhir | HAPI FHIR |
+| FIX Protocol | FIX Trading Community | 4 | FTC license | Open to members | fixtrading.org | QuickFIX |
+| SBE | FIX Trading Community | 4 | Apache 2.0 | Open | GitHub | sbe-tool |
+| OPC UA | OPC Foundation / IEC | 3/1 | OPC Foundation | Open spec | opcfoundation.org | open62541 |
+| MQTT 5.0 | OASIS | 3 | OASIS license | Open | oasis-open.org | Eclipse Paho, Mosquitto |
+| CoAP (RFC 7252) | IETF | 2 | Free (RFC) | Open | IETF RFC 7252 | libcoap, CoAP.NET |
+| X.509 | ISO/ITU-T | 1/2 | Free (ITU-T) | Open | ITU-T X.509 | OpenSSL, GnuTLS |
+| JWT / JWS | IETF | 2 | Free (RFC) | Open | RFC 7519/7515 | nimbus-jose |
+| COSE | IETF | 2 | Free (RFC) | Open | RFC 8152 | COSE-JS, pycose |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 12
+================================================================================
+
+  12.0  — Why governance matters for data contract technology selection
+  12.1  — Governance tier ladder (full formal definitions)
+  12.2  — ISO/IEC standards catalog
+  12.3  — IETF RFC catalog
+  12.4  — W3C specifications
+  12.5  — OMG specifications
+  12.6  — Open-source foundation governance comparison
+  12.7  — Vendor governance analysis (Google, AWS, Microsoft, Confluent)
+  12.8  — Governance and ownership master matrix
+  12.9  — Technology selection framework: how to use governance tiers for risk assessment
+  12.10 — Patent and licensing risks in standards adoption
+  12.11 — Cross-references to all other volumes
+
+================================================================================
+END OF VOLUME 12 PROMPT
+================================================================================

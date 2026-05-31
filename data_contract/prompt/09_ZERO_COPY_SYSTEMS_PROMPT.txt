@@ -1,0 +1,336 @@
+================================================================================
+VOLUME 09 — ZERO-COPY & HIGH-PERFORMANCE BINARY LAYOUTS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a high-performance systems engineer, memory architecture specialist,
+SIMD/vectorization expert, financial exchange platform architect, and
+autonomous driving data pipeline engineer.
+
+Zero-copy and high-performance binary layout systems are formats designed to
+eliminate or minimize data copying between serialization and application use.
+
+The key insight:
+  Traditional serialization:    encode → wire bytes → decode → heap object → use
+  Zero-copy serialization:       memory layout IS the wire format → use in-place
+
+Stack position:
+    Schema Layer
+        ↓
+    ZERO-COPY BINARY LAYOUTS ← (this volume)
+        ↓
+    Shared Memory / IPC / Transport
+
+================================================================================
+SECTION 1 — WHY ZERO-COPY MATTERS
+================================================================================
+
+1.1  CPU cost of copying:
+       - memcpy of 1 MB: ~100–400 microseconds on modern CPUs
+       - Cache pollution: copied data evicts hot working set from L1/L2/L3
+       - Memory bandwidth saturation in high-throughput systems (trading, ADAS)
+
+1.2  Traditional serialization path costs:
+       1. Serialize: walk object graph, encode to byte buffer (heap alloc + writes)
+       2. Write to kernel: copy_from_user (userspace → kernel buffer)
+       3. Read from kernel: copy_to_user (kernel buffer → userspace)
+       4. Deserialize: walk byte buffer, allocate heap objects
+       Total copies: 4+ memory copies + allocations
+
+1.3  Zero-copy path:
+       1. Place data directly in shared memory segment in canonical binary layout
+       2. Other process maps same physical pages
+       3. Direct in-place read via typed overlay
+       Total copies: 0 (after initial setup)
+
+1.4  Where zero-copy is essential:
+       - High-frequency trading (HFT): microsecond latency requirements
+       - ADAS perception pipelines: camera frames (4K = 12MB per frame at 60fps)
+       - Network packet processing (DPDK, XDP)
+       - GPU compute data sharing (CUDA unified memory)
+       - Inter-process video/audio streaming (Android ION/DMABuf, GBM)
+
+================================================================================
+SECTION 2 — FLATBUFFERS
+================================================================================
+
+2.1  Origin: Google (2014), open-sourced; primary use: game development, Android
+2.2  Key concept: the serialized buffer IS the in-memory representation
+     - No parsing step needed for reading
+     - Access via vtable-based offset mechanism
+
+2.3  Schema: .fbs files (table, struct, enum, union, root_type — see Volume 02)
+
+2.4  Binary layout:
+     - Root offset (4 bytes at position 0): points to the root table
+     - Table: vtable_offset (relative, 4 bytes) + field data
+     - vtable: vtable size + object size + field offsets (2 bytes each)
+     - Structs: fixed-layout, no vtable (faster but not evolvable)
+     - Strings: 4-byte length prefix + UTF-8 bytes + null terminator
+     - Vectors: 4-byte count prefix + consecutive elements
+     - Unions: 4-byte type enum + 4-byte offset to value
+
+2.5  How zero-copy reading works:
+     - Builder fills a byte buffer
+     - Reader gets pointer to byte buffer
+     - Reader accesses fields via GetRoot<T>(buf)->field_name()
+     - field_name() computes: vtable_entry_offset → field value at that offset
+     - No allocation, no parsing, just pointer arithmetic
+
+2.6  Evolution: table fields can be added (new vtable entries); old readers skip unknown
+     fields; removed fields leave 0 in vtable (reader gets default value)
+
+2.7  Mutation: FlatBufferBuilder creates immutable buffers; FlatBuffers::GetMutableRoot
+     provides a typed overlay for limited in-place mutation (no size changes)
+
+2.8  SIMD-friendliness: struct-of-arrays layout achievable with explicit FlatBuffers structs
+
+2.9  Generated code: flatc --cpp / --java / --python / --rust / --ts / --kotlin / --swift
+
+2.10 Comparison to Protobuf:
+     - FlatBuffers: zero-copy read, fixed layout, larger buffer size (vtable overhead)
+     - Protobuf: requires parse step, smaller wire size, better streaming support
+
+2.11 Governance: Google / open-source (Tier 6)
+
+================================================================================
+SECTION 3 — CAP'N PROTO
+================================================================================
+
+3.1  Origin: Kenton Varda (ex-Google, Protobuf v2 author) — 2013
+3.2  Design philosophy: "data is already in-memory format" — no encode/decode step
+
+3.3  Schema: .capnp files (struct, enum, interface, annotation — see Volume 02)
+
+3.4  Binary layout — arena allocation:
+     - Message = sequence of segments (contiguous memory)
+     - Pointer types: struct pointer, list pointer, far pointer (cross-segment)
+     - Struct pointer: 2-word header (data section size + pointer section size + offset)
+     - List pointer: count + element size encoding
+     - All pointers are RELATIVE (offset from current word) → relocatable
+     - Capability pointer: for passing object capabilities across process boundaries
+
+3.5  True zero-copy: reader API gives access to underlying memory directly
+     - No allocation; arena owns all memory
+     - MessageReader wraps an existing byte array
+
+3.6  Promise pipelining:
+     - Call a method on a result that hasn't been received yet
+     - The network automatically chains calls without round trips
+     - Enabled by the capability system (each interface value is an address)
+
+3.7  Capability system (Cap'n Proto RPC):
+     - Interfaces are first-class values (capabilities = unforgeable references)
+     - Object capabilities: security model — possession of capability grants permission
+     - Useful for sandboxing, privilege separation
+
+3.8  Mutable builders: MallocMessageBuilder builds into heap; FlatArrayMessageBuilder builds
+     into pre-allocated array
+
+3.9  Evolution: fields added at end of struct = safe; removing = safe (default value);
+     field ordering matters for binary compatibility (unlike Protobuf tags)
+
+3.10 Language support: C++ (reference), Rust (capnproto-rust), Python, JavaScript, Java
+
+3.11 Governance: Sandstorm.io / community (Tier 8)
+
+================================================================================
+SECTION 4 — APACHE ARROW
+================================================================================
+
+4.1  Origin: Apache Software Foundation (2016)
+4.2  Purpose: columnar in-memory data format for analytics; zero-copy IPC between
+     analytical processes (Python, C++, Java, Rust, R, Julia)
+
+4.3  Columnar vs row-oriented layout:
+     - Row-oriented: [record1_field1, record1_field2, record2_field1, ...]
+     - Columnar: [field1_all_records, field2_all_records, ...]
+     - Columnar enables SIMD vectorization for aggregation (SUM, AVG, WHERE)
+
+4.4  Arrow memory layout per column type:
+     - Validity buffer: null bitmap (1 bit per value)
+     - Values buffer: fixed-width primitives (Int32Array, Float64Array, etc.)
+     - Offsets buffer + values buffer: variable-width (StringArray, BinaryArray)
+     - Children buffers: nested types (StructArray, ListArray, MapArray)
+
+4.5  RecordBatch: a 2D chunk of data (fixed number of rows × typed columns)
+
+4.6  Arrow IPC format:
+     - Schema message + one or more RecordBatch messages
+     - Flat buffers with 8-byte alignment
+     - Zero-copy sharing via shared memory file descriptor passing
+
+4.7  Arrow Flight: RPC protocol (gRPC-based) for high-throughput Arrow data transfer
+     - FlightDescriptor, FlightInfo, FlightEndpoint, Ticket
+     - DoGet, DoPut, DoExchange: bulk data transfer operations
+     - Arrow Flight SQL: SQL over Arrow Flight
+
+4.8  Apache Parquet vs Arrow:
+     - Arrow: in-memory, zero-copy, fast random access
+     - Parquet: columnar on-disk, compressed, slower random access, better for storage
+
+4.9  Arrow compute engine: kernels for vectorized operations on Arrow arrays (SIMD)
+
+4.10 Integration: Pandas (PyArrow backend), Polars (Arrow-native), Spark (Arrow optimized),
+     DuckDB (Arrow-native), Velox (Meta query engine)
+
+4.11 Governance: Apache Software Foundation (Tier 5)
+
+================================================================================
+SECTION 5 — SBE (SIMPLE BINARY ENCODING)
+================================================================================
+
+5.1  Origin: FIX Trading Community (financial markets protocol) — Tier 4
+5.2  Purpose: lowest-latency binary encoding for financial market data and orders
+
+5.3  Design principles:
+     - Fixed-length fields wherever possible (no variable-length parsing)
+     - Direct memory layout: cast a pointer to the struct type (C++ "overlay" pattern)
+     - No dynamic memory allocation in encoder/decoder
+     - Template-driven codecs generated from XML schema
+
+5.4  Schema: XML-based message schema (SBE XSD)
+     - <message name="ExecutionReport" id="8" semanticType="8">
+       <field name="orderId" id="37" type="uint64" />
+       <field name="price" id="44" type="Decimal" />
+     </message>
+
+5.5  SBE binary layout:
+     - Fixed-size header: templateId + schemaId + version + blockLength
+     - Message body: consecutive fixed-size fields (native CPU endianness optional)
+     - Repeating groups: numInGroup count + fixed-size member structures
+     - Variable-length data (varData): length + bytes at end of message
+
+5.6  Message flyweight pattern:
+     - Generated "flyweight" class wraps byte buffer with typed accessor methods
+     - price() reads 8 bytes at offset 16 and interprets as IEEE 754 double
+     - No allocation — pure pointer arithmetic
+
+5.7  Latency characteristics:
+     - Encode/decode: ~50–100 nanoseconds for typical market messages
+     - Used by: London Stock Exchange, CME Group, Nasdaq, CBOE
+
+5.8  SBE vs FIX tag-value (traditional):
+     - FIX tag=value: text-based, microseconds to parse, human-readable
+     - SBE: binary, nanoseconds to encode/decode, machine-optimized
+
+5.9  Governance: FIX Trading Community (Tier 4), also used with CBOE/CME extensions
+
+================================================================================
+SECTION 6 — ICEORYX SHARED MEMORY MIDDLEWARE
+================================================================================
+
+6.1  (Covered in depth in Volume 07 — IPC Mechanisms)
+6.2  Summary for zero-copy context:
+     - Zero-copy by design: data written once to shared memory pool by publisher
+     - Subscriber receives pointer to the SAME physical memory (no copy)
+     - RouDi manages memory pool, routing, and segment lifecycle
+     - RAII-based sample ownership: loan() to write, send() to transfer ownership,
+       take() to receive, release() to return
+     - Typed Publisher<T> / Subscriber<T> for safe zero-copy access
+
+================================================================================
+SECTION 7 — DPDK RING BUFFERS
+================================================================================
+
+7.1  DPDK: Data Plane Development Kit (Linux Foundation, Intel origin)
+7.2  rte_ring: lock-free multi-producer multi-consumer (MPMC) ring buffer
+     - SPSC, SPMC, MPSC, MPMC variants
+     - Stores void* pointers (objects allocated from rte_mempool)
+7.3  rte_mempool: pre-allocated memory pool for packet buffers (mbufs)
+     - Objects in pool are NUMA-local, cache-line aligned
+     - Zero-copy: pass pointer to mbuf across ring rather than copying data
+7.4  Application: DPDK-based packet processing (NFV, network functions virtualization)
+7.5  Governance: Linux Foundation / Intel (Tier 4/5)
+
+================================================================================
+SECTION 8 — SHARED MEMORY WITH TYPED OVERLAYS (Pattern)
+================================================================================
+
+8.1  Pattern: map a fixed-layout struct directly over shared memory
+     struct VehicleState {
+         uint64_t timestamp_us;
+         float    speed_kmh;
+         float    heading_deg;
+         uint8_t  gear;
+         uint8_t  pad[3];
+     };
+     // Both writer and reader cast shared memory pointer to VehicleState*
+
+8.2  Requirements for correctness:
+     - ABI stability: struct layout must not change (no reorder, no size change)
+     - Endianness: producer and consumer must agree (same architecture for intra-host)
+     - Alignment: struct must be aligned to its natural alignment
+     - Synchronization: use atomics, futex, or POSIX mutex for concurrent access
+     - Padding: explicit padding to avoid compiler-added padding variation
+
+8.3  Tools for ABI stability enforcement:
+     - abigail (libabigail + abidiff): detects ABI changes in C/C++ structs
+     - abi-compliance-checker: header-level ABI check
+     - Compiler extension: __attribute__((packed)) or #pragma pack
+
+================================================================================
+SECTION 9 — ZERO-COPY COMPARISON MATRIX
+================================================================================
+
+| Format | True Zero-Copy | Random Access | Schema-Required | Code Gen | Mutable In-Place | SIMD-friendly | Languages | Primary Use Case |
+|--------|---------------|--------------|----------------|---------|------------------|--------------|-----------|-----------------|
+| FlatBuffers | Yes (read) | Yes | Yes (.fbs) | Yes (flatc) | Limited | Partial (structs) | C++/Java/Go/Rust/Python/TS | Games, Android, embedded |
+| Cap'n Proto | Yes (read+write) | Yes | Yes (.capnp) | Yes (capnp) | Yes | Partial | C++/Rust/Python/JS | Services, RPC, embedded |
+| Apache Arrow | Yes (in-process) | Columnar | Yes (schema msg) | Yes (codegen) | Partial (builder) | Yes (columnar) | C++/Python/Java/Rust/R | Analytics, OLAP, ML pipelines |
+| SBE | Yes (overlay) | Fixed-offset | Yes (XML) | Yes (sbe-tool) | Yes | Yes (fixed-width) | C++/Java | HFT, financial markets |
+| Iceoryx | Yes (pointer pass) | N/A (opaque) | C++ template | Partial | Yes | N/A | C++ | ADAS, automotive |
+| Shared mem + struct | Yes | Yes | C/C++ struct | No | Yes | Yes (if aligned) | C/C++ | Kernel-adjacent, OS IPC |
+| DPDK rte_ring | Yes (pointer) | Via mbuf | No (void*) | No | Yes (via mbuf pool) | Yes (SIMD NIC) | C | Network packet processing |
+| Protobuf | No (parse required) | No | Yes (.proto) | Yes (protoc) | No | No | All | gRPC, cloud |
+| Avro | No (parse required) | No | Yes (JSON schema) | Yes | No | No | Java/Python/C++ | Kafka, Hadoop |
+
+================================================================================
+SECTION 10 — ALIGNMENT, PADDING, AND ABI STABILITY
+================================================================================
+
+10.1  Natural alignment rule: field of size N should be at address divisible by N
+10.2  struct padding example:
+       struct Bad  { char a; int b; }    // compiler adds 3 bytes after a → 8 bytes total
+       struct Good { int b; char a; }    // b at 0, a at 4, 3 bytes pad → 8 bytes total (same)
+       struct Packed { char a; int b; } __attribute__((packed)) // 5 bytes, unaligned int b
+
+10.3  Cache line considerations:
+       - Cache line = 64 bytes on x86/ARM64
+       - Hot data should fit in one cache line (false sharing if shared across cores)
+       - rte_cache_aligned, alignas(64) — force alignment to cache line
+
+10.4  ABI breaking changes for zero-copy structs:
+       - Adding a field in the middle → BREAKING (all offsets shift)
+       - Changing a field type → BREAKING
+       - Appending a field at the end → may be safe if size-compatible
+       - Changing a field size → BREAKING
+
+10.5  Versioning zero-copy structures:
+       - Include a version field at the start
+       - Keep old fields, add new ones at the end with explicit padding
+       - Use optional overlay patterns: base struct + extension pointer
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 09
+================================================================================
+
+  09.0  — Why zero-copy matters (formal analysis of copy costs)
+  09.1  — FlatBuffers (full layout + vtable explanation)
+  09.2  — Cap'n Proto (full layout + arena model + promise pipelining)
+  09.3  — Apache Arrow (columnar layout + IPC format + Flight)
+  09.4  — SBE (fixed-layout + market data use case)
+  09.5  — Iceoryx (shared memory middleware)
+  09.6  — DPDK ring buffers
+  09.7  — Typed struct overlays (pattern)
+  09.8  — Zero-copy comparison matrix
+  09.9  — Alignment, padding, ABI stability
+  09.10 — When NOT to use zero-copy (evolvability tradeoffs)
+  09.11 — Cross-references to Volume 07 (IPC), Volume 04 (Serialization)
+
+================================================================================
+END OF VOLUME 09 PROMPT
+================================================================================

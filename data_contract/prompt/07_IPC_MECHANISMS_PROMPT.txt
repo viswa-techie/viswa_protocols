@@ -1,0 +1,374 @@
+================================================================================
+VOLUME 07 — IPC MECHANISMS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as an OS internals engineer, kernel developer, Android platform architect,
+macOS/iOS XPC specialist, Windows COM expert, and Fuchsia/Zircon systems engineer.
+
+IPC (Inter-Process Communication) = mechanisms provided by an operating system
+to allow processes on the SAME machine to exchange data and synchronize.
+
+IPC differs from RPC:
+  - IPC = OS-kernel-provided, same-machine, process-boundary crossing
+  - RPC = application-framework, can span machines, uses network or IPC as transport
+  - IPC mechanisms are the transport substrate for OS-level RPC systems (Binder, Mach IPC)
+
+Stack position:
+    Serialization / Schema
+        ↓
+    IPC MECHANISMS ← (this volume)
+        ↓
+    Transport / OS kernel
+
+Key principle: IPC is a kernel feature. The kernel manages:
+  - Process address space isolation
+  - Data copying (or mapping) across the process boundary
+  - Synchronization (blocking vs non-blocking)
+  - Security (credentials, capabilities, SELinux labels)
+
+================================================================================
+SECTION 1 — LINUX IPC MECHANISMS
+================================================================================
+
+─────────────────────────────────────────────────────────
+1.1  Pipes (Anonymous Pipes)
+─────────────────────────────────────────────────────────
+  Syscalls  : pipe(2), pipe2(2)
+  Model     : Unidirectional byte stream between related processes (parent/child)
+  Kernel    : Maintained as a circular buffer in kernel memory (default 64KB page limit)
+  Copy count: 2 (write user→kernel, read kernel→user)
+  Max size  : Pipe capacity (default 65536 bytes on Linux)
+  Blocking  : write() blocks when full; read() blocks when empty
+  Use case  : Shell pipelines (cmd1 | cmd2), stdin/stdout redirection
+
+─────────────────────────────────────────────────────────
+1.2  Named Pipes (FIFOs)
+─────────────────────────────────────────────────────────
+  Syscalls  : mkfifo(3), open(2), read(2), write(2)
+  Model     : Named file in the filesystem, unidirectional byte stream
+  Unlike anonymous pipes: unrelated processes can communicate
+  Copy count: 2 (same as anonymous pipes)
+  Use case  : Simple unidirectional IPC between unrelated processes
+
+─────────────────────────────────────────────────────────
+1.3  Unix Domain Sockets (UDS)
+─────────────────────────────────────────────────────────
+  Syscalls  : socket(AF_UNIX), bind, connect, send, recv, sendmsg, recvmsg
+  Types     : SOCK_STREAM (connection-oriented), SOCK_DGRAM (connectionless),
+               SOCK_SEQPACKET (connection-oriented with message boundaries)
+  Address   : Filesystem path (e.g., /run/systemd/journal.socket) or abstract namespace
+  Special   : SCM_RIGHTS (pass file descriptors), SCM_CREDENTIALS (pass PID/UID/GID)
+  Copy count: 2 (user→kernel→user) for regular data; 0 extra for FD passing
+  Throughput: Higher than TCP loopback (no TCP/IP stack overhead)
+  Use case  : X11 display server, systemd journal, Docker daemon, D-Bus,
+               gRPC local optimization, Kubernetes kubelet
+
+─────────────────────────────────────────────────────────
+1.4  SysV Message Queues
+─────────────────────────────────────────────────────────
+  Syscalls  : msgget, msgsnd, msgrcv, msgctl — IPC key (ftok)
+  Model     : Message-typed queue; receiver can select by message type
+  Copy count: 2 per message
+  Limits    : MSGMAX (default 8192 bytes), MSGMNB (queue capacity)
+  Issues    : Global resource (IPC keys can collide), not cleaned up on process exit
+  Status    : Legacy — POSIX message queues preferred in new code
+
+─────────────────────────────────────────────────────────
+1.5  POSIX Message Queues
+─────────────────────────────────────────────────────────
+  Syscalls  : mq_open, mq_send, mq_receive, mq_notify, mq_close, mq_unlink
+  Model     : Named queue (/name in /dev/mqueue), priority queue, notify on arrival
+  Copy count: 2 per message
+  Advantages: Cleaner API than SysV, kernel-maintained, notify via signal or thread
+  Use case  : Embedded systems, RTOS-like patterns on Linux
+
+─────────────────────────────────────────────────────────
+1.6  SysV Shared Memory
+─────────────────────────────────────────────────────────
+  Syscalls  : shmget, shmat, shmdt, shmctl
+  Copy count: 0 (after mapping — true shared memory)
+  Model     : Memory segment identified by IPC key; multiple processes map same pages
+  Synchronization: separate semaphores required
+  Issues    : No automatic cleanup, global key namespace
+  Use case  : High-performance data sharing (legacy databases, older middleware)
+
+─────────────────────────────────────────────────────────
+1.7  POSIX Shared Memory (mmap)
+─────────────────────────────────────────────────────────
+  Syscalls  : shm_open, ftruncate, mmap, munmap, shm_unlink
+  Also      : mmap(MAP_SHARED) on regular file for persistent shared memory
+  Copy count: 0 (true zero-copy after mapping)
+  Synchronization: pthread_mutex (PTHREAD_PROCESS_SHARED), semaphores, futex
+  Use case  : High-performance IPC (Iceoryx, DDS shared memory transport,
+               media sharing in Android HALs, graphics buffers)
+
+─────────────────────────────────────────────────────────
+1.8  eventfd / signalfd / timerfd
+─────────────────────────────────────────────────────────
+  eventfd(2) : 64-bit counter; write increments, read resets; epoll-compatible
+  signalfd(2): receive signals as file descriptor reads (epoll-compatible)
+  timerfd(2) : timer events as file descriptor reads
+  Use case  : Notification and wake-up primitives in event loops
+
+─────────────────────────────────────────────────────────
+1.9  io_uring
+─────────────────────────────────────────────────────────
+  Kernel version: Linux 5.1+ (2019)
+  Model     : Shared ring buffers (submission queue + completion queue) between
+               user space and kernel — reduces syscall overhead for high-I/O workloads
+  Copy count: 0 for the ring structure; data copies depend on operation
+  Use case  : High-performance servers (Nginx io_uring backend, io_uring-based IPC)
+
+─────────────────────────────────────────────────────────
+1.10 D-Bus
+─────────────────────────────────────────────────────────
+  Spec      : freedesktop.org D-Bus specification — Tier 8
+  Model     : Message bus daemon (dbus-daemon); named services, signals, method calls
+  Transport : Unix Domain Sockets (system bus: /var/run/dbus/system_bus_socket)
+  Serialization: D-Bus wire format (binary, type-code prefix per value)
+  Type system : byte, boolean, int16/32/64, uint16/32/64, double, string, object_path,
+                 signature, array, struct, variant, dict_entry, unix_fd
+  Addresses : bus name (org.freedesktop.NetworkManager), object path (/org/freedesktop/...),
+               interface (org.freedesktop.NetworkManager.Device), member (GetApplied)
+  Variant type: runtime dynamic typing — equivalent of CHOICE
+  Governance: freedesktop.org (Tier 8 / community)
+  Use case  : Linux desktop (NetworkManager, BlueZ, polkit, systemd, PulseAudio/PipeWire)
+
+─────────────────────────────────────────────────────────
+1.11 Netlink Sockets
+─────────────────────────────────────────────────────────
+  Purpose   : Kernel ↔ user-space communication for network and system configuration
+  Families  : NETLINK_ROUTE (routing, ifaces), NETLINK_NETFILTER, NETLINK_AUDIT,
+               NETLINK_KOBJECT_UEVENT (udev), NETLINK_GENERIC
+  Model     : Datagram sockets (AF_NETLINK); kernel sends async notifications
+  Use case  : ip(8), ss(8), iproute2, udev, audit framework
+
+================================================================================
+SECTION 2 — ANDROID IPC: BINDER
+================================================================================
+
+─────────────────────────────────────────────────────────
+2.1  Binder Overview
+─────────────────────────────────────────────────────────
+  Origin    : BeOS → OpenBinder → Android Binder
+  Kernel    : /dev/binder character device + binder.ko kernel module
+  Model     : Reference-counted object model; processes hold references to Binder objects
+  Copy count: 1 (single copy via mmap optimization — NOT 2 like pipes/sockets)
+               Sender: copy_from_user(kernel_buf, user_data)
+               Receiver: mmap-mapped buffer readable directly (no second copy)
+  Transaction: ioctl(BINDER_WRITE_READ) on /dev/binder
+  Types     : BBinder (server-side, receives transactions), BpBinder (client-side proxy),
+               IBinder (interface), Parcel (serialization container)
+
+─────────────────────────────────────────────────────────
+2.2  Parcel — Binder Serialization
+─────────────────────────────────────────────────────────
+  Parcel    : Flat byte buffer used for Binder IPC serialization
+  Methods   : writeInt32, writeString16, writeParcelable, writeBinder, writeFileDescriptor
+  Types     : Primitives, String (UTF-16), Parcelable objects, IBinder references,
+               FileDescriptor, byte arrays
+  Limitation: Not stable across Android versions — not suitable for HAL versioning
+               (Stable AIDL / AIDL parcelable solves this)
+
+─────────────────────────────────────────────────────────
+2.3  AIDL Over Binder
+─────────────────────────────────────────────────────────
+  AIDL      : see Volume 02 (IDL) for full AIDL language coverage
+  Runtime   : Stub (BBinder subclass on server), Proxy (BpBinder wrapper on client)
+  Transaction codes: TRANSACTION_methodName integers (auto-assigned, fragile)
+  Stability  : Stable AIDL uses explicit versioned interfaces; @VintfStability annotation
+  HAL path  : android.hardware.* interfaces used across vendor/system boundary
+
+─────────────────────────────────────────────────────────
+2.4  HIDL (Hardware Interface Definition Language) — Legacy
+─────────────────────────────────────────────────────────
+  Introduced: Android 8 (Project Treble)
+  Purpose   : Stable, versioned interface between Android framework and vendor HALs
+  Transports: Binder (hwbinder, vndbinder for different domains)
+  Status    : Deprecated — migrating to Stable AIDL in Android 11+
+  Key types : IBase interface, Result<T>, Status, hidl_vec, hidl_string
+
+─────────────────────────────────────────────────────────
+2.5  Binder Security
+─────────────────────────────────────────────────────────
+  Caller UID/PID: kernel injects into every Binder transaction (unforgeable)
+  SELinux: binder_call, binder_transfer SELinux policy rules
+  Permission checks: Binder.getCallingUid() / getCallingPid() in service implementation
+  ServiceManager access control: which services can be registered / looked up
+
+─────────────────────────────────────────────────────────
+2.6  Binder Thread Pool
+─────────────────────────────────────────────────────────
+  Default   : 15 + 1 threads per process (configurable)
+  Model     : Blocked threads wait on ioctl() until transaction arrives
+  Main thread: ProcessState::self()->startThreadPool() launches the pool
+  Starvation: Binder thread pool exhaustion causes ANR (Application Not Responding)
+
+================================================================================
+SECTION 3 — MACOS / IOS IPC: MACH IPC AND XPC
+================================================================================
+
+─────────────────────────────────────────────────────────
+3.1  Mach IPC (Ports)
+─────────────────────────────────────────────────────────
+  Model     : Port = endpoint; port right = capability to send/receive on port
+  Rights    : SEND right (can send), SEND_ONCE right, RECEIVE right (owns port)
+  Messages  : mach_msg(): inline data + out-of-line data + port rights
+  Copy count: Out-of-line data is copy-on-write (COW) until written
+  Kernel    : XNU kernel manages port namespaces per task
+  Bootstrap : bootstrap_register / bootstrap_lookup (launchd as bootstrap server)
+  Use case  : macOS kernel service calls, CoreServices, IOKit user-kernel comms
+
+─────────────────────────────────────────────────────────
+3.2  XPC (Cross-Process Communication)
+─────────────────────────────────────────────────────────
+  API       : libxpc (xpc/xpc.h), NSXPCConnection (Objective-C / Swift)
+  Model     : Service-oriented; xpc_connection_t, xpc_object_t (typed dictionary-like)
+  Transport : Mach ports under the hood; launchd manages service registration
+  Types     : xpc_bool, xpc_int64, xpc_double, xpc_string, xpc_data, xpc_array,
+               xpc_dictionary, xpc_fd, xpc_uuid, xpc_connection
+  Privilege separation: App → XPC service (sandboxed helper process)
+  Use case  : macOS/iOS app extensions, privilege separation, background services
+
+================================================================================
+SECTION 4 — WINDOWS IPC: COM, ALPC, NAMED PIPES
+================================================================================
+
+─────────────────────────────────────────────────────────
+4.1  Named Pipes (Windows)
+─────────────────────────────────────────────────────────
+  API       : CreateNamedPipe, ConnectNamedPipe, ReadFile, WriteFile
+  Name space: \\.\pipe\PipeName (local), \\server\pipe\PipeName (remote)
+  Mode      : Byte stream or message mode; synchronous or overlapped (async)
+  Security  : Access control via SECURITY_ATTRIBUTES
+  Use case  : SQL Server, IIS, local RPC, inter-service communication
+
+─────────────────────────────────────────────────────────
+4.2  COM / DCOM (Component Object Model)
+─────────────────────────────────────────────────────────
+  COM       : In-process (DLL) or out-of-process (exe) component model
+  IDL       : MIDL (Microsoft IDL, based on DCE RPC IDL)
+  Transport : LPC/ALPC (local), DCOM over RPC over TCP (remote)
+  Marshaling: Standard marshaling (proxy/stub DLLs), custom marshaling
+  DCOM      : Distributed COM — extends COM over network (Windows RPC)
+  Registry  : CLSID, ProgID, InProcServer32, LocalServer32
+  Use case  : OLE automation, ActiveX, Windows shell extensions,
+               COM-based APIs (DirectX, WMI, Speech SDK)
+
+─────────────────────────────────────────────────────────
+4.3  ALPC (Advanced Local Procedure Call)
+─────────────────────────────────────────────────────────
+  Model     : Kernel-internal successor to LPC; used by Windows RPC and COM
+  Not public: No documented public API; used internally by Windows RPC runtime
+  Security  : Connection ports, security QoS, connection policy
+
+─────────────────────────────────────────────────────────
+4.4  Windows Mailslots
+─────────────────────────────────────────────────────────
+  API       : CreateMailslot, ReadFile / WriteFile (one-way, broadcast capable)
+  Model     : One-way, unreliable, broadcast-capable within a domain
+  Status    : Legacy; rarely used in new code
+
+================================================================================
+SECTION 5 — FUCHSIA: ZIRCON CHANNELS AND FIDL
+================================================================================
+
+5.1  Zircon kernel handles: channel, vmo, socket, port, timer, event, fifo
+5.2  zx_channel_write / zx_channel_read: send and receive messages with handles
+5.3  Message format: bytes + handles
+5.4  FIDL: the data contract for Zircon channel messages (see Volume 02)
+5.5  Services: published via the Component Framework service directory
+5.6  Composability: capability routing — no ambient authority, capability-based security
+
+================================================================================
+SECTION 6 — AUTOMOTIVE IPC: ICEORYX AND SOME/IP
+================================================================================
+
+─────────────────────────────────────────────────────────
+6.1  Iceoryx (Eclipse Foundation)
+─────────────────────────────────────────────────────────
+  Purpose   : Zero-copy shared memory IPC middleware for autonomous driving
+  Model     : Publish-subscribe over shared memory; no data copy in hot path
+  Daemon    : RouDi (Routing and Discovery) manages memory segments and routing
+  API       : C++ typed Publisher<T>, Subscriber<T>, sample() for zero-copy
+  Transport : POSIX shared memory (mmap), semaphores for notification
+  Integration: ROS2 rmw_iceoryx (DDS-like interface), AUTOSAR Adaptive
+  Governance: Eclipse Foundation (Tier 4)
+  Copy count: 0 (true zero-copy after initial setup)
+
+─────────────────────────────────────────────────────────
+6.2  SOME/IP as IPC and Network Protocol
+─────────────────────────────────────────────────────────
+  SOME/IP    : Scalable service-Oriented MiddlewarE over IP
+  Scope      : Intra-ECU (IPC-like) and inter-ECU (network) in automotive
+  Transport  : UDP (events/notifications), TCP (methods requiring reliable delivery)
+  See        : Volume 11 (Industry: Automotive) for full SOME/IP coverage
+
+================================================================================
+SECTION 7 — IPC MECHANISM COMPARISON MATRIX
+================================================================================
+
+| Mechanism | OS | Kernel-level | Copy Count | Max Msg Size | Typed Contract | Code Gen | Zero-copy | Bidirectional | Use Cases |
+|-----------|----|-----------|-----------|-----------|---------|----|------|------|------|
+| Anonymous Pipe | Linux/macOS/Win | Yes | 2 | Unlimited (streaming) | No | No | No | No | Shell pipes |
+| Named Pipe (FIFO) | Linux/macOS | Yes | 2 | Unlimited | No | No | No | No | Simple IPC |
+| Unix Domain Socket | Linux/macOS | Yes | 2 | Unlimited | No | No | No | Yes | D-Bus, gRPC local |
+| POSIX Shared Memory | Linux/macOS | Yes (mmap) | 0 | Limited by RAM | No (manual) | No | Yes | Yes (manual) | Iceoryx, HAL, media |
+| POSIX Msg Queue | Linux | Yes | 2 | MSGMAX | No | No | No | No | RTOS-style IPC |
+| D-Bus | Linux | No (via UDS) | 2 | 128MB limit | Partial (XML introspection) | Partial | No | Yes | Linux desktop |
+| Binder | Android | Yes (/dev/binder) | 1 | 1MB (default) | Yes (AIDL) | Yes (aidl) | Partial (mmap) | Yes | Android services |
+| Mach IPC | macOS/iOS | Yes | COW | ~4MB inline | No (C structs) | No | COW | Yes | macOS internals |
+| XPC | macOS/iOS | Yes (via Mach) | 1 | ~100MB | No | No | No | Yes | App extensions |
+| Named Pipe (Win) | Windows | Yes | 2 | Configurable | No | No | No | Yes | SQL Server, RPC |
+| COM/DCOM | Windows | Via ALPC | 2+ | configurable | Yes (MIDL IDL) | Yes (MIDL) | No | Yes | Win components |
+| Zircon Channel | Fuchsia | Yes | 1 | 64KB (+handles) | Yes (FIDL) | Yes (fidlc) | No | Yes | Fuchsia services |
+| Iceoryx | Linux (POSIX) | mmap | 0 | Limited by pool | Partial (C++ template) | Partial | Yes | Yes | ADAS, automotive |
+| io_uring | Linux | Yes | 0 (ring) | Variable | No | No | Partial | Yes | High-perf I/O |
+
+================================================================================
+SECTION 8 — COPY COUNT ANALYSIS
+================================================================================
+
+8.1  Two-copy path (classic pipes, sockets):
+       Write side: copy_from_user(kernel_buf, user_ptr) [user → kernel]
+       Read side:  copy_to_user(user_ptr, kernel_buf)   [kernel → user]
+
+8.2  One-copy path (Android Binder):
+       Write side: copy_from_user(receiver_mmap_region, sender_ptr)
+       Read side:  receiver reads directly from its mmap region (no second copy)
+       Why: receiver process has a region of its address space mmap'd to
+            the same kernel Binder buffer → eliminates second copy
+
+8.3  Zero-copy path (shared memory):
+       Both processes map the SAME physical pages
+       No kernel data movement after initial mmap
+       Requires explicit synchronization (mutex, semaphore, futex)
+
+8.4  Copy-on-write (Mach IPC out-of-line):
+       Pages mapped copy-on-write between sender and receiver
+       Only copied on first write → amortized cost
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 07
+================================================================================
+
+  07.0  — What is IPC (formal definition, stack position, difference from RPC)
+  07.1  — Copy count analysis (why it matters for performance)
+  07.2  — Linux IPC mechanisms (Sections 1.1–1.11)
+  07.3  — Android Binder (Section 2, full depth)
+  07.4  — macOS/iOS Mach IPC + XPC (Section 3)
+  07.5  — Windows COM / Named Pipes / ALPC (Section 4)
+  07.6  — Fuchsia Zircon channels (Section 5)
+  07.7  — Automotive IPC: Iceoryx + SOME/IP summary (Section 6)
+  07.8  — IPC comparison matrix (Section 7)
+  07.9  — Copy count analysis detail (Section 8)
+  07.10 — Security: IPC authentication, SELinux/AppArmor, capability-based access
+  07.11 — Cross-references to Volume 06 (RPC), Volume 09 (Zero-Copy), Volume 11 (Automotive)
+
+================================================================================
+END OF VOLUME 07 PROMPT
+================================================================================

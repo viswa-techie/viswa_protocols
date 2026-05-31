@@ -1,0 +1,309 @@
+================================================================================
+VOLUME 08 — API CONTRACT SYSTEMS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as an API governance architect, REST API design authority, event-driven
+architecture specialist, OpenAPI specification expert, and enterprise API
+platform engineer.
+
+An API contract system is a machine-readable specification that describes:
+  - the endpoints or channels a service exposes
+  - the request and response data shapes
+  - authentication and authorization requirements
+  - error structures and codes
+  - versioning and deprecation policies
+  - operation semantics (idempotent, safe, etc.)
+
+API contract systems differ from IDLs:
+  - IDL → code generation → typed client stubs
+  - API contract → documentation + SDK generation + validation + governance
+
+Stack position:
+    IDL / Schema
+        ↓
+    API CONTRACT SYSTEMS ← (this volume)
+        ↓
+    Transport (HTTP/WebSocket/AMQP)
+
+================================================================================
+SECTION 1 — OPENAPI SPECIFICATION
+================================================================================
+
+1.1  History:
+       - Swagger 1.x (Wordnik, 2010)
+       - Swagger 2.0 (2014)
+       - Renamed to OpenAPI 3.0 (OpenAPI Initiative, 2017)
+       - OpenAPI 3.1 (2021, aligned with JSON Schema 2020-12)
+
+1.2  OpenAPI 3.1 document structure:
+       openapi        : "3.1.0"
+       info           : title, version, description, contact, license, termsOfService
+       servers        : [url, description, variables]
+       paths          : /path → HTTP method → operation object
+       components     : schemas, responses, parameters, requestBodies, headers,
+                         securitySchemes, links, callbacks, pathItems, examples
+       security       : global security requirement
+       tags           : tag metadata
+       externalDocs   : external documentation link
+       webhooks       : (3.1 new) incoming webhooks
+
+1.3  Operation object:
+       operationId, summary, description, tags, parameters, requestBody,
+       responses, callbacks, deprecated, security, servers, x-* extensions
+
+1.4  Parameter types: path, query, header, cookie
+       - schema-based: inline schema or $ref
+       - content-based: per-media-type schema
+
+1.5  Response object: description, headers, content (media type → schema), links
+
+1.6  Schema object (3.1 = full JSON Schema 2020-12):
+       type, properties, required, allOf, anyOf, oneOf, not, if/then/else,
+       discriminator, $ref, $defs, unevaluatedProperties
+
+1.7  Security schemes: apiKey, http (Bearer/Basic), oauth2 (flows), openIdConnect
+
+1.8  OpenAPI 3.0 vs 3.1 key differences:
+       - 3.1: $ref can have siblings, nullable removed (use type: ["string", "null"]),
+              type: array of types, webhooks, JSON Schema 2020-12 alignment
+
+1.9  Tooling ecosystem:
+       - Editors: Swagger Editor, Stoplight Studio, Postman
+       - Validators: swagger-parser, ibm-openapi-validator, vacuum
+       - SDK generators: openapi-generator (50+ languages), swagger-codegen
+       - Docs: Swagger UI, Redoc, Scalar, Elements
+       - Mocking: Prism, Mockoon
+       - Testing: Dredd, Schemathesis, REST-assured with OpenAPI
+
+1.10 Governance: OpenAPI Initiative (Linux Foundation) — Tier 3
+
+ANNOTATED MINIMAL EXAMPLE:
+  openapi: "3.1.0"
+  info:
+    title: Vehicle Speed API
+    version: "1.0.0"
+  paths:
+    /vehicles/{id}/speed:
+      get:
+        operationId: getVehicleSpeed
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema: { type: string }
+        responses:
+          "200":
+            description: Current speed
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/VehicleSpeed'
+  components:
+    schemas:
+      VehicleSpeed:
+        type: object
+        required: [value_kmh, timestamp_us]
+        properties:
+          value_kmh: { type: number, minimum: 0 }
+          timestamp_us: { type: integer }
+          unit: { type: string, enum: [km/h, mph, m/s] }
+
+================================================================================
+SECTION 2 — ASYNCAPI SPECIFICATION
+================================================================================
+
+2.1  Purpose: API contract for event-driven and async messaging systems
+2.2  History: AsyncAPI 1.x (2017) → 2.0 (2020) → 2.6 (2022) → 3.0 (2023)
+2.3  Supported protocols: AMQP, MQTT, Kafka, WebSocket, HTTP (server-sent events),
+       JMS, NATS, Redis, SNS/SQS, Mercure
+2.4  Document structure:
+       asyncapi, info, servers, channels, components, operations (3.0)
+2.5  Key concepts:
+       - Channel = logical destination (topic, queue, exchange + routing key)
+       - Message = the event or command definition (headers + payload schema)
+       - Operation = publish or subscribe action
+       - Bindings = protocol-specific options (Kafka partition key, MQTT QoS, etc.)
+2.6  Message object: name, title, summary, contentType, headers, payload, correlationId,
+       traits, bindings, examples
+2.7  Schema support: JSON Schema, Avro, Protobuf, OpenAPI Schema Object as payload schemas
+2.8  Governance: AsyncAPI Initiative (Linux Foundation) — Tier 3
+2.9  Use cases: Kafka event schemas, MQTT IoT device APIs, microservice event buses,
+                 webhooks, server-sent events
+
+================================================================================
+SECTION 3 — GRAPHQL AS API CONTRACT
+================================================================================
+
+3.1  GraphQL schema as an API contract:
+       - Single endpoint (typically /graphql)
+       - Operations: query (read), mutation (write), subscription (real-time)
+3.2  Introspection: __schema, __type — built-in contract discovery
+3.3  Apollo Federation v2: supergraph as a composed API contract
+       - @key, @extends, @external, @provides, @requires
+3.4  Persisted queries: named query documents as stable contracts
+3.5  Schema governance tools: GraphQL Inspector, graphql-schema-linter
+3.6  Breaking change detection: field removal, type change, required arg addition
+3.7  Use cases: meta.com, GitHub API v4, Shopify, Atlassian, Hasura
+
+================================================================================
+SECTION 4 — WSDL (Web Services Description Language)
+================================================================================
+
+(Covered in Volume 02 — IDL. Summary here for API contract perspective)
+
+4.1  WSDL as the API contract for SOAP services
+4.2  WSDL document = types (XSD) + messages + portType (operations) + binding + service
+4.3  API contract enforcement: client generated from WSDL is contract-bound
+4.4  WS-Policy: attaches policy assertions to WSDL elements
+4.5  Status: Active in enterprise/banking; new projects use OpenAPI
+
+================================================================================
+SECTION 5 — JSON:API
+================================================================================
+
+5.1  Specification: jsonapi.org — Tier 8 (community)
+5.2  Standardized JSON response format for REST APIs
+5.3  Structure: data (primary data), included (related resources), meta, errors, links
+5.4  Resource object: type, id, attributes, relationships, links
+5.5  Sparse fieldsets: fields[type]=field1,field2
+5.6  Sorting, pagination, filtering query parameters standardized
+5.7  Use case: REST APIs where consistent client parsing matters
+
+================================================================================
+SECTION 6 — HAL (Hypertext Application Language)
+================================================================================
+
+6.1  Spec: tools.ietf.org/html/draft-kelly-json-hal — Tier 8
+6.2  _links: self, related resources with href
+6.3  _embedded: nested resource representations
+6.4  Implements HATEOAS (Level 3 REST) in practice
+6.5  HAL-JSON and HAL-XML variants
+
+================================================================================
+SECTION 7 — ODATA (Open Data Protocol)
+================================================================================
+
+7.1  Origin: Microsoft, adopted as OASIS standard (OData TC) — Tier 3
+7.2  URL conventions: $filter, $select, $expand, $orderby, $top, $skip, $count
+7.3  Metadata document: $metadata endpoint exposes entity data model (EDMX/CSDL)
+7.4  Batch requests: $batch
+7.5  Use case: Microsoft Power Platform, Azure DevOps, SharePoint, SAP APIs
+
+================================================================================
+SECTION 8 — RAML (RESTful API Modeling Language)
+================================================================================
+
+8.1  Origin: MuleSoft (2013) — Tier 6/7
+8.2  YAML-based API description language
+8.3  Structure: title, version, baseUri, mediaType, types, traits, resourceTypes, /resources
+8.4  Traits: reusable request/response patterns
+8.5  Status: largely superseded by OpenAPI in the community
+
+================================================================================
+SECTION 9 — CLOUDEVENTS
+================================================================================
+
+9.1  Specification: CNCF CloudEvents — Tier 5
+9.2  Purpose: standard envelope for event data across event sources and sinks
+9.3  Required attributes: id, source, specversion, type
+9.4  Optional attributes: datacontenttype, dataschema, subject, time
+9.5  Data: arbitrary payload (JSON, Avro, Protobuf, etc.)
+9.6  Transport bindings: HTTP, AMQP, Kafka, MQTT, NATS
+9.7  Use case: event-driven cloud architectures, event catalogs,
+                 Knative eventing, Argo Events, EventBridge
+
+================================================================================
+SECTION 10 — TYPESPEC (MICROSOFT)
+================================================================================
+
+10.1 Origin: Microsoft (formerly Cadl) — Tier 6
+10.2 Purpose: high-level API contract language that compiles to OpenAPI, JSON Schema, Protobuf
+10.3 Language features: namespace, model, interface, op, template (generics), decorator
+10.4 Built-in libraries: @typespec/http, @typespec/rest, @typespec/openapi3, @typespec/grpc
+10.5 Code generation: TypeSpec → OpenAPI 3 → openapi-generator → SDKs
+10.6 Use case: DRY API definitions — write once, emit OpenAPI + Protobuf + JSON Schema
+10.7 Governance: Microsoft / open-source (Tier 6)
+
+================================================================================
+SECTION 11 — API VERSIONING STRATEGIES
+================================================================================
+
+11.1  URL path versioning: /v1/resource, /v2/resource
+        - Advantages: explicit, cacheable, easy to route
+        - Disadvantages: breaks REST resource semantics, requires parallel maintenance
+
+11.2  Header versioning: Accept: application/vnd.myapi.v2+json
+                          or API-Version: 2
+        - Advantages: cleaner URIs, closer to REST principles
+        - Disadvantages: less visible, harder to test in browser
+
+11.3  Query parameter: /resource?version=2
+        - Simple; cache-unfriendly if used without care
+
+11.4  Date-based versioning: API-Version: 2024-01-01 (used by Stripe, Azure)
+        - Represents API snapshot at a date; new features added to new date
+
+11.5  Semantic versioning for APIs:
+        MAJOR.MINOR.PATCH — breaking / additive / patch
+        Breaking changes = MAJOR bump; used in gRPC service versioning, AIDL
+
+11.6  OpenAPI deprecation:
+        - deprecated: true on operation or schema property
+        - Sunset header (RFC 8594): HTTP response header announcing future removal date
+        - x-deprecation-date, x-removal-date extensions
+
+================================================================================
+SECTION 12 — API CONTRACT GOVERNANCE PATTERNS
+================================================================================
+
+12.1  API-first development: contract written before implementation
+12.2  Spectral linting: rules-based OpenAPI/AsyncAPI linting (Stoplight Spectral)
+12.3  API registry / catalog: central repository of API contracts (Backstage, Apicurio)
+12.4  Contract testing: Pact (consumer-driven), Dredd (OpenAPI-to-server), Schemathesis (fuzzing)
+12.5  API gateway contract enforcement: Kong, AWS API Gateway, Azure APIM
+12.6  Breaking change detection: openapi-diff, oasdiff, gRPC Buf breaking rules
+
+================================================================================
+SECTION 13 — API CONTRACT COMPARISON MATRIX
+================================================================================
+
+| Contract System | Protocol Style | Format | Service Def | Schema | Code Gen | Streaming | Event-Driven | Governance |
+|----------------|---------------|--------|-------------|--------|---------|-----------|-------------|-----------|
+| OpenAPI 3.1 | REST/HTTP | YAML/JSON | Yes (paths/ops) | JSON Schema | Yes (openapi-gen) | Via WebSocket | Via webhook | OpenAPI Initiative |
+| AsyncAPI 3.0 | Async/Event | YAML/JSON | Yes (channels/ops) | JSON Schema/Avro | Yes | Native | Primary use | AsyncAPI Initiative |
+| GraphQL SDL | Graph query | SDL | Yes (query/mutation/subscription) | GraphQL types | Yes | Yes (subscription) | Via subscription | GraphQL Foundation |
+| WSDL 2.0 | SOAP/REST | XML | Yes (interface) | XSD | Yes | No | No | W3C |
+| gRPC (.proto) | RPC | Protobuf | Yes (service/rpc) | Protobuf | Yes (protoc) | Yes (4 modes) | Via stream | Google/CNCF |
+| Smithy | REST/RPC | Smithy IDL | Yes (service) | Smithy model | Yes | No | No | Amazon |
+| CloudEvents | Event | JSON | No (envelope only) | $ref to external | No | No | Primary | CNCF |
+| JSON:API | REST/JSON | JSON | Implicit | No | No | No | No | Community |
+| OData | REST/OData | YAML/XML | Yes ($metadata) | EDMX/CSDL | Yes | No | No | OASIS |
+| TypeSpec | REST+RPC | TypeSpec DSL | Yes | Yes | Yes (→OpenAPI/Proto) | No | No | Microsoft |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 08
+================================================================================
+
+  08.0  — What is an API contract system (definition vs IDL vs schema)
+  08.1  — OpenAPI 3.1 (full coverage with annotated example)
+  08.2  — AsyncAPI 3.0
+  08.3  — GraphQL as API contract
+  08.4  — WSDL 2.0
+  08.5  — JSON:API
+  08.6  — HAL
+  08.7  — OData
+  08.8  — RAML
+  08.9  — CloudEvents
+  08.10 — TypeSpec
+  08.11 — API versioning strategies
+  08.12 — API contract governance patterns
+  08.13 — API contract comparison matrix
+  08.14 — Cross-references to Volume 02 (IDL), Volume 03 (Schema), Volume 12 (Governance)
+
+================================================================================
+END OF VOLUME 08 PROMPT
+================================================================================

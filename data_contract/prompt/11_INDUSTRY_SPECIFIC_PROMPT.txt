@@ -1,0 +1,370 @@
+================================================================================
+VOLUME 11 — INDUSTRY-SPECIFIC DATA CONTRACTS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a domain specialist across automotive software, 5G telecom, robotics,
+financial systems, healthcare IT, IoT/embedded, safety-critical systems,
+and cloud-native microservices.
+
+This volume maps how data contracts, serialization, IDLs, and schemas are
+applied in each industry vertical — including the specific technologies mandated
+or commonly used, the governing consortia, and the architectural patterns.
+
+================================================================================
+SECTION 1 — AUTOMOTIVE / ADAS / AAOS
+================================================================================
+
+1.1  AUTOSAR Classic Platform (CP)
+       - Data types: AUTOSAR application data types (boolean, uint8...uint64, sint8...sint64,
+                      float32, float64, arrays, records)
+       - Signal-based communication: PDU (Protocol Data Unit), I-Signal, I-PDU
+       - COM module: sends/receives signals over CAN, LIN, FlexRay, Ethernet
+       - ARXML (AUTOSAR XML): the AUTOSAR schema language for CP configuration
+         - XML format, XSD-validated
+         - Exported from AUTOSAR configuration tooling (Vector DaVinci, ETAS INCA)
+       - Transport: CAN, LIN, FlexRay, Automotive Ethernet (100BASE-T1, 1000BASE-T1)
+       - Governance: AUTOSAR consortium (BMW, Bosch, Continental, Volkswagen, etc.) — Tier 3
+
+1.2  AUTOSAR Adaptive Platform (AP)
+       - ara::com: service-oriented communication API
+       - Service proxy/skeleton generated from Franca IDL or ARXML manifests
+       - Methods, events, fields: the three ara::com service interface element types
+       - Method: request-response (like RPC)
+       - Event: publisher-subscriber data stream
+       - Field: stateful attribute with Get/Set methods + notifier
+       - Binding implementations: SOME/IP (most common), DDS, IPC (shared memory)
+       - ara::core: fundamental types (Result<T,E>, Future<T>, Promise<T>)
+       - Governance: AUTOSAR consortium — Tier 3
+
+1.3  SOME/IP (Scalable service-Oriented MiddlewarE over IP)
+       - Specification: AUTOSAR PRS_SOMEIPProtocol — Tier 3
+       - Transport: UDP (preferred) and TCP
+       - Message types: REQUEST (method call), REQUEST_NO_RETURN, NOTIFICATION,
+                         RESPONSE, ERROR
+       - Header format (16 bytes):
+           Service ID (2 bytes) + Method ID (2 bytes) + Length (4 bytes) +
+           Client ID (2 bytes) + Session ID (2 bytes) +
+           Protocol Version (1) + Interface Version (1) + Message Type (1) + Return Code (1)
+       - Serialization: SOME/IP serialization rules (little-endian, no TLV for basic types,
+                         TLV optional for extensible types via SOME/IP-SD)
+       - SOME/IP-SD (Service Discovery):
+           - Find/Offer/Subscribe service discovery messages
+           - UDP multicast (224.0.0.1) for discovery broadcasts
+       - Endpoint options: IPv4/IPv6 + UDP/TCP endpoint descriptors
+       - Governance: AUTOSAR (Tier 3)
+
+1.4  DDS (Data Distribution Service) in Automotive
+       - OMG DDS specification — Tier 3
+       - Data-centric publish-subscribe (DCPS) model
+       - RTPS (Real-Time Publish Subscribe protocol): wire protocol over UDP multicast/unicast
+       - DDS entities: DomainParticipant, Publisher, Subscriber, DataWriter, DataReader, Topic
+       - QoS policies: Reliability (BEST_EFFORT/RELIABLE), Durability, Deadline,
+                        LatencyBudget, History, Liveliness, TransportPriority
+       - DDS-XTypes: schema evolution for DDS topics (see Volume 10)
+       - Implementations: FastDDS (eProsima), Cyclone DDS (Eclipse), RTI Connext, OpenDDS
+       - ADAS use: sensor data (LiDAR, camera, RADAR), ADAS domain control
+
+1.5  Franca IDL in Automotive
+       (Covered in Volume 02 — IDL. Key automotive context here)
+       - Used for IVI (In-Vehicle Infotainment) service contracts
+       - CommonAPI C++ framework: generates proxy/stub from .fidl files
+       - Deployment files (.fdepl): SOME/IP binding, D-Bus binding, IPC binding
+       - Governance: COVESA / GENIVI — Tier 3
+
+1.6  ROS2 / ADAS
+       - Robot Operating System 2: uses DDS as middleware (via RMW abstraction)
+       - rosidl: IDL for ROS2 messages, services, actions
+       - .msg files: field type field_name on each line
+       - .srv files: request fields, ---, response fields
+       - .action files: goal, ---, result, ---, feedback
+       - rosidl_generator_cpp / _python / _java: generate language bindings
+       - DDS QoS mapping in rmw layer
+       - Governance: Open Robotics / ROS2 TSC — Tier 5
+
+1.7  Android Automotive OS (AAOS) / Vehicle HAL
+       - AIDL-based Vehicle HAL: android.hardware.automotive.vehicle
+       - VehicleProperty: vehicle property ID + area type + data type
+       - VehiclePropValue: property ID + value (int32, int64, float, byte array)
+       - IVehicle, IVehicleCallback: Stable AIDL interfaces
+       - Property area types: GLOBAL, WINDOW, DOOR, SEAT, MIRROR, WHEEL
+       - CarPropertyManager: framework API for app-level access
+       - Governance: Google / AOSP — Tier 6
+
+1.8  COVESA Vehicle Signal Specification (VSS)
+       - Hierarchical tree: Vehicle.Speed, Vehicle.Body.Lights.Beam.High
+       - Node types: branch, sensor, actuator, attribute
+       - Datatypes: float, double, int8/16/32/64, uint8/16/32/64, bool, string
+       - Exporters: JSON, YAML, CSV, Protobuf (vss-tools)
+       - Overlay mechanism: extend base VSS tree with OEM-specific signals
+       - Kuksa.val: in-vehicle signal data broker implementing VSS
+       - Governance: COVESA (Tier 3)
+
+================================================================================
+SECTION 2 — TELECOM / 3GPP / 5G
+================================================================================
+
+2.1  3GPP ASN.1 usage
+       - RRC (Radio Resource Control): unaligned PER; RRC connection, measurement reports,
+                                        handover, system information blocks
+       - NAS (Non-Access Stratum): unaligned PER; authentication, security mode, attach
+       - NGAP (Next Generation Application Protocol): unaligned PER; NG interface (gNB ↔ AMF)
+       - XnAP: unaligned PER; Xn interface (gNB ↔ gNB)
+       - E1AP, F1AP: unaligned PER; CU-DU split interfaces
+       - S1AP (LTE): unaligned PER; S1 interface (eNB ↔ MME)
+       - ASN.1 specification documents: 3GPP TS 38.331 (RRC), TS 24.501 (NAS), TS 38.413 (NGAP)
+
+2.2  Diameter Protocol (4G/IMS)
+       - IETF RFC 6733: Diameter base protocol
+       - AVP (Attribute-Value-Pair): code (4 bytes) + flags (1 byte) + length (3 bytes) + value
+       - Application IDs: Cx, Sh, Gx, Gy, Ro, Rf, S6a, S13
+       - Transport: TCP or SCTP
+       - Governance: IETF (Tier 2)
+
+2.3  SNMP and SMIv2
+       - RFC 2578: SMIv2 — ASN.1 MODULE-IDENTITY, OBJECT-TYPE macro for MIB modules
+       - SNMP PDU types: GetRequest, GetNextRequest, GetBulkRequest, SetRequest, Trap, Inform
+       - SNMP transport: UDP port 161 (agent), port 162 (manager for traps)
+       - OID: hierarchical identifier for MIB objects
+       - MIB modules: IF-MIB, IP-MIB, TCP-MIB, enterprise MIBs
+
+2.4  YANG / NETCONF / RESTCONF
+       (Full YANG coverage in Volume 03 — Schema Systems)
+       - NETCONF (RFC 6241): XML-based protocol for network device configuration
+         - Operations: get, get-config, edit-config, lock, unlock, commit, close-session
+         - Transport: SSH (mandatory), TLS optional
+       - RESTCONF (RFC 8040): REST API for YANG-modeled data
+         - Binds YANG data to HTTP methods (GET/PUT/POST/PATCH/DELETE)
+         - Content: application/yang-data+json or +xml
+       - gNMI (gRPC Network Management Interface): gRPC-based YANG data access
+         - Capabilities, Get, Set, Subscribe (ONCE, POLL, STREAM)
+         - Governance: OpenConfig Working Group + gNMI spec
+
+2.5  SIP (Session Initiation Protocol) — RFC 3261
+       - Header-based text protocol for session establishment
+       - Headers as ad-hoc data contracts: From, To, Contact, Via, CSeq, Content-Type
+       - SDP (Session Description Protocol — RFC 4566): media session description
+       - SIP message body: SDP, XML (PIDF for presence), JSON
+
+================================================================================
+SECTION 3 — ROBOTICS / ROS / ROS2
+================================================================================
+
+3.1  ROS1 message system
+       - .msg files: primitive types, constants, arrays, nested message types
+       - .srv files: service definitions (request + response)
+       - rosmsg: serialized in roscpp's message serialization (little-endian, no versioning)
+       - rosserial: ROS over serial (Arduino)
+       - Transport: TCPROS, UDPROS over XML-RPC master
+       - Limitation: no DDS, no real-time, no multi-master, Python 2
+
+3.2  ROS2 message system
+       - rosidl: IDL system for ROS2; .msg/.srv/.action → DDS IDL → language bindings
+       - Supported types: bool, byte, char, float32/64, int8/16/32/64, uint8/16/32/64,
+                           string, wstring, arrays, bounded arrays, sequences
+       - Code generation: rosidl_generator_cpp, rosidl_generator_py, rosidl_generator_java
+       - DDS middleware abstraction (RMW): swappable DDS implementation
+         - rmw_fastrtps_cpp (FastDDS), rmw_cyclonedds_cpp (CycloneDDS)
+         - rmw_iceoryx_cpp (Iceoryx for zero-copy)
+       - ROS2 QoS: Reliability, Durability, History, Lifespan, Deadline, Liveliness
+
+3.3  Standard ROS2 message packages:
+       - std_msgs: Header, Bool, Int32, Float64, String
+       - sensor_msgs: Image, PointCloud2, LaserScan, NavSatFix, Imu, CameraInfo
+       - geometry_msgs: Pose, Twist, Transform, Vector3, Quaternion
+       - nav_msgs: Odometry, Path, OccupancyGrid
+       - tf2_msgs: TFMessage (coordinate frame transforms)
+
+================================================================================
+SECTION 4 — CLOUD MICROSERVICES
+================================================================================
+
+4.1  gRPC + Protobuf: the dominant internal microservice RPC (Google, Netflix, Uber)
+4.2  Apache Kafka + Avro + Confluent Schema Registry: event streaming backbone
+4.3  OpenAPI + REST + JSON: external-facing APIs, partner integrations
+4.4  GraphQL: graph-structured data fetching APIs (GitHub, Shopify, Meta)
+4.5  Apache Thrift: Facebook/Twitter/Evernote legacy services
+4.6  gRPC-Gateway: REST-to-gRPC transcoding for backward compatibility
+4.7  AsyncAPI + CloudEvents: async event catalog and event envelope standards
+4.8  Service mesh data contracts: Istio/Envoy use Protobuf for xDS API (Envoy API)
+
+================================================================================
+SECTION 5 — ENTERPRISE INTEGRATION
+================================================================================
+
+5.1  SOAP + WSDL + XSD: dominant in banking, insurance, government pre-2015
+5.2  EDI / ANSI X12: supply chain data exchange (purchase orders, invoices)
+       - X12 segments, elements, loop structures; HIPAA X12 transactions (837, 835, 270/271)
+5.3  EDIFACT (ISO 9735): European EDI standard; similar to X12
+5.4  HL7 v2.x: healthcare messaging; MSH, PID, OBR, OBX segments over MLLP
+5.5  HL7 v3: XML-based; Reference Information Model (RIM) based messaging
+5.6  FHIR (Fast Healthcare Interoperability Resources):
+       - RESTful API contract (HTTP + JSON/XML)
+       - Resource types: Patient, Encounter, Observation, DiagnosticReport, Medication
+       - FHIR Profiles: constrain base resources for specific use cases
+       - Governance: HL7 International (Tier 4)
+5.7  ISO 20022 (Financial messaging):
+       - Business Process Catalogue (BPC) → Logical Data Dictionary (LDD) → MDD → XSD
+       - Messages: pacs.008 (credit transfer), pain.001, camt.053 (bank statement)
+       - Migration: SWIFT MT → ISO 20022 MX transition
+       - Governance: ISO TC68/SC9 (Tier 1)
+5.8  FIX Protocol (Financial Information eXchange):
+       - Tag=Value text protocol for order management
+       - FIX 4.2, 4.4, 5.0 SP2: widely used in equities trading
+       - FIXML: XML version of FIX
+       - SBE: binary FIX successor (low latency)
+       - Governance: FIX Trading Community (Tier 4)
+
+================================================================================
+SECTION 6 — SECURITY / PKI / CERTIFICATES
+================================================================================
+
+6.1  X.509 certificates:
+       - Structure: ASN.1 DER (see Volume 05)
+       - Fields: version, serialNumber, signature, issuer, validity, subject,
+                  subjectPublicKeyInfo, extensions
+       - Extensions: SubjectAltName, BasicConstraints, KeyUsage, ExtendedKeyUsage,
+                      AuthorityKeyIdentifier, SubjectKeyIdentifier, CRL Distribution Points
+       - PEM encoding: base64(DER) with -----BEGIN CERTIFICATE----- header
+       - DER: raw binary ASN.1
+6.2  PKCS family: see Volume 05 (Section 11)
+6.3  CMS (Cryptographic Message Syntax — RFC 5652):
+       - SignedData, EnvelopedData, AuthenticatedData, DigestedData
+       - Used in S/MIME email, code signing (Authenticode, APK signing)
+6.4  JOSE (JSON Object Signing and Encryption — RFC 7515-7520):
+       - JWS (JSON Web Signature): Base64URL(header).Base64URL(payload).signature
+       - JWE (JSON Web Encryption): encrypted token
+       - JWK (JSON Web Key): key material in JSON
+       - JWT (JSON Web Token): JWS with JSON claims payload
+6.5  COSE (CBOR Object Signing and Encryption — RFC 8152):
+       - CBOR-based equivalent of JOSE; used in FIDO2/WebAuthn, IETF ACE, IoT
+6.6  SAML (Security Assertion Markup Language — OASIS):
+       - XML-based SSO assertions
+       - SP-initiated and IdP-initiated flows
+6.7  OAuth 2.0 / OpenID Connect:
+       - Access token = JWT with claims (sub, aud, exp, iss, scope)
+       - Token data contract: RFC 7591 (client registration), RFC 8693 (token exchange)
+
+================================================================================
+SECTION 7 — IOT / EMBEDDED SYSTEMS
+================================================================================
+
+7.1  MQTT + JSON / CBOR:
+       - MQTT (Message Queuing Telemetry Transport): publish-subscribe over TCP
+       - Payload: application-defined — JSON for interop, CBOR for constrained devices
+       - MQTT 5.0: added content type header, message expiry, topic aliases
+
+7.2  CoAP (Constrained Application Protocol — RFC 7252):
+       - REST-like protocol over UDP for constrained devices
+       - Content formats: CBOR (application/cbor), JSON, SENML
+       - CoAP observe: server-sent updates on resource changes
+
+7.3  LwM2M (Lightweight Machine-to-Machine — OMA SpecWorks):
+       - Object model for IoT device management
+       - Objects: 0=Security, 1=Server, 3=Device, 4=Connectivity Monitoring
+       - Encoding: TLV (custom binary), JSON, CBOR (LwM2M 2.0), SenML
+
+7.4  CBOR in IoT: (see Volume 04 and Volume 05)
+       - CDDL (Concise Data Definition Language, RFC 8610): schema for CBOR
+       - CoSWID: software identity in CBOR (RFC 9393)
+
+7.5  ASN.1 in embedded:
+       - DER for X.509 in TLS on embedded (mbedTLS, wolfSSL)
+       - PER for 3GPP protocols in modem firmware
+       - asn1c compiler outputs C code for embedded targets
+
+7.6  FlatBuffers and SBE in embedded:
+       - FlatBuffers: no dynamic allocation, suitable for MCUs with limited heap
+       - SBE: fixed-layout, predictable memory, used in automotive ECUs
+
+================================================================================
+SECTION 8 — SAFETY-CRITICAL SYSTEMS
+================================================================================
+
+8.1  Data interface requirements in safety standards:
+       - DO-178C (avionics): data interfaces must be unambiguously defined;
+                               formal verification of data types required
+       - IEC 61508 (functional safety): data element specification with type, range, unit
+       - ISO 26262 (automotive): data interfaces documented in Technical Safety Concept
+       - MISRA C/C++: coding standards affect how data structures are defined
+                        and accessed (no dynamic allocation in safety-critical code)
+
+8.2  Implications for serialization choice:
+       - No dynamic memory allocation: use FlatBuffers or fixed-struct overlays
+       - No external libraries without safety qualification
+       - Deterministic execution time: avoid variable-length encoding
+       - Formal verification: ASN.1 + formally-specified encoding rules preferred
+
+8.3  IEC 61784 (industrial communication): specifies fieldbus protocols
+       - Profinet, EtherNet/IP, PROFIBUS data objects
+
+8.4  OPC UA (OPC Unified Architecture — IEC 62541):
+       - Mature data model + transport for industrial automation
+       - Information model: nodes (Object, Variable, Method, View, DataType)
+       - Encoding: Binary (OPC UA Binary), XML, JSON
+       - Transport: TCP (OPC UA TCP), HTTPS, WebSocket
+       - Security: X.509 certificates for authentication + encryption
+       - Governance: OPC Foundation (Tier 3)
+
+================================================================================
+SECTION 9 — FINANCE / HFT
+================================================================================
+
+9.1  FIX Protocol: tag-value text encoding for order management
+9.2  SBE: zero-copy binary encoding for market data (CME, LSE, Nasdaq, CBOE)
+9.3  SWIFT MT (Message Type): proprietary text message standard for interbank
+9.4  ISO 20022 MX: XML-based international financial messaging
+9.5  FpML (Financial products Markup Language): XML for OTC derivatives contracts
+9.6  FIXML: XML version of FIX protocol messages
+9.7  CFTC/SEC regulatory reporting: typically ISO 20022 or FpML-based schemas
+
+================================================================================
+SECTION 10 — INDUSTRY USAGE MATRIX
+================================================================================
+
+| Technology | Cloud | Automotive | Telecom | Robotics | Embedded/IoT | Enterprise | Safety | Finance | Healthcare | Security/PKI |
+|-----------|-------|-----------|---------|----------|------------|-----------|--------|---------|-----------|------------|
+| Protobuf + gRPC | Primary | Secondary | Rare | Secondary | Rare | Secondary | Rare | Rare | Rare | Rare |
+| SOME/IP | Rare | Primary | Rare | Rare | Secondary | Rare | Secondary | Rare | Rare | Rare |
+| DDS (RTPS) | Secondary | Primary | Rare | Primary | Secondary | Rare | Secondary | Rare | Rare | Rare |
+| AIDL (Binder) | Rare | Primary | Rare | Rare | Rare | Rare | Rare | Rare | Rare | Rare |
+| ASN.1 / DER | Rare | Secondary | Primary | Rare | Primary | Rare | Secondary | Rare | Rare | Primary |
+| ASN.1 / PER | Rare | Secondary | Primary | Rare | Secondary | Rare | Secondary | Rare | Rare | Secondary |
+| OpenAPI + REST | Primary | Rare | Primary | Rare | Rare | Primary | Rare | Secondary | Primary | Rare |
+| AsyncAPI + Kafka | Primary | Rare | Rare | Rare | Rare | Secondary | Rare | Secondary | Rare | Rare |
+| WSDL + SOAP | Rare | Rare | Secondary | Rare | Rare | Primary | Rare | Secondary | Primary | Rare |
+| SBE | Rare | Rare | Rare | Rare | Secondary | Rare | Rare | Primary | Rare | Rare |
+| CBOR / CoAP | Rare | Secondary | Rare | Rare | Primary | Rare | Rare | Rare | Rare | Secondary |
+| OPC UA | Rare | Secondary | Rare | Secondary | Primary | Secondary | Primary | Rare | Rare | Rare |
+| ISO 20022 | Rare | Rare | Rare | Rare | Rare | Secondary | Rare | Primary | Rare | Rare |
+| FIX / FIXML | Rare | Rare | Rare | Rare | Rare | Rare | Rare | Primary | Rare | Rare |
+| HL7 / FHIR | Rare | Rare | Rare | Rare | Rare | Secondary | Rare | Rare | Primary | Rare |
+| X.509 / DER | Secondary | Secondary | Secondary | Rare | Secondary | Secondary | Secondary | Secondary | Secondary | Primary |
+| YANG / NETCONF | Secondary | Rare | Primary | Rare | Rare | Secondary | Rare | Rare | Rare | Rare |
+| FlatBuffers | Secondary | Secondary | Rare | Secondary | Primary | Rare | Secondary | Secondary | Rare | Rare |
+| Apache Arrow | Primary | Rare | Rare | Secondary | Rare | Secondary | Rare | Primary | Rare | Rare |
+| ROS2 / rosidl | Rare | Secondary | Rare | Primary | Rare | Rare | Rare | Rare | Rare | Rare |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 11
+================================================================================
+
+  11.0  — Why industry verticals need domain-specific data contract standards
+  11.1  — Automotive / ADAS / AAOS (Section 1, full depth)
+  11.2  — Telecom / 3GPP / 5G (Section 2)
+  11.3  — Robotics / ROS / ROS2 (Section 3)
+  11.4  — Cloud microservices (Section 4)
+  11.5  — Enterprise integration (EDI, SOAP, HL7, FHIR, ISO 20022) (Section 5)
+  11.6  — Security / PKI / Certificates (Section 6)
+  11.7  — IoT / Embedded (Section 7)
+  11.8  — Safety-critical systems (Section 8)
+  11.9  — Finance / HFT (Section 9)
+  11.10 — Industry usage matrix (Section 10)
+  11.11 — Cross-references to all other volumes
+
+================================================================================
+END OF VOLUME 11 PROMPT
+================================================================================

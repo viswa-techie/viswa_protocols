@@ -1,0 +1,261 @@
+================================================================================
+VOLUME 14 — TRANSPORT LAYER & RUNTIME BINDING
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a network protocol engineer, OS networking stack expert, gRPC/HTTP/2
+specialist, and transport-layer abstraction designer.
+
+Transport = the mechanism that moves encoded bytes from one process or machine
+to another. Transport is BELOW the RPC/IPC layer; it provides:
+  - byte stream or datagram delivery
+  - connection establishment and teardown
+  - optional reliability, ordering, and flow control
+  - optional security (TLS)
+
+Stack position:
+    RPC / IPC Framework
+        ↓
+    TRANSPORT LAYER ← (this volume)
+        ↓
+    Network / Hardware / OS
+
+================================================================================
+SECTION 1 — HTTP/1.1
+================================================================================
+
+1.1  RFC 9112 (HTTP/1.1): request-response protocol over TCP
+1.2  Request: method + URI + HTTP/1.1 + CRLF + headers + CRLF + optional body
+1.3  Response: HTTP/1.1 + status code + reason phrase + CRLF + headers + CRLF + body
+1.4  Connection: persistent (keep-alive default), close, Upgrade
+1.5  Chunked transfer encoding: for variable-length response bodies
+1.6  REST APIs over HTTP/1.1: primary transport for OpenAPI/REST services
+1.7  Limitations: head-of-line blocking (one request at a time per connection), no multiplexing
+1.8  SOAP / WSDL: uses HTTP/1.1 POST with SOAPAction header
+
+================================================================================
+SECTION 2 — HTTP/2
+================================================================================
+
+2.1  RFC 9113 (HTTP/2): multiplexed binary protocol over TCP
+2.2  Key improvements over HTTP/1.1:
+       - Stream multiplexing: multiple requests over one TCP connection
+       - Binary framing layer: structured frames vs text headers
+       - Header compression (HPACK — RFC 7541): reduces header overhead
+       - Server push: server can send resources before client requests them
+       - Flow control: per-stream and per-connection
+2.3  Frame types: DATA, HEADERS, PRIORITY, RST_STREAM, SETTINGS, PUSH_PROMISE,
+                   PING, GOAWAY, WINDOW_UPDATE, CONTINUATION
+2.4  gRPC over HTTP/2 (see Volume 06, Section 1):
+       - Each gRPC call = one HTTP/2 stream
+       - Request headers: :method POST, :path /Service/Method, content-type application/grpc
+       - DATA frames: 5-byte length-prefix + Protobuf payload
+       - TRAILERS (trailing HEADERS): grpc-status, grpc-message
+2.5  HTTP/2 over TLS: Application-Layer Protocol Negotiation (ALPN) extension → "h2"
+2.6  HTTP/2 over cleartext (h2c): uncommon; used in cluster-internal communication
+
+================================================================================
+SECTION 3 — HTTP/3 (QUIC)
+================================================================================
+
+3.1  RFC 9000 (QUIC), RFC 9114 (HTTP/3)
+3.2  QUIC: UDP-based, multiplexed transport with built-in TLS 1.3
+3.3  HTTP/3 improvements:
+       - No head-of-line blocking at transport level (stream independence)
+       - Faster connection establishment (0-RTT and 1-RTT handshake)
+       - Connection migration: handles IP address changes (mobile networks)
+3.4  Header compression: QPACK (QUIC equivalent of HPACK — RFC 9204)
+3.5  gRPC over HTTP/3: experimental; requires QUIC-capable gRPC implementation
+3.6  ALPN: "h3" for HTTP/3 negotiation
+
+================================================================================
+SECTION 4 — TCP
+================================================================================
+
+4.1  RFC 9293 (TCP): connection-oriented, reliable, ordered byte stream
+4.2  Three-way handshake: SYN → SYN-ACK → ACK
+4.3  Flow control: sliding window; receiver-advertised window
+4.4  Congestion control: Reno, CUBIC (Linux default), BBR (Google)
+4.5  TCP options: Timestamps (RTTM), Window Scale, SACK (Selective ACK)
+4.6  Nagle algorithm: coalesces small writes (disable with TCP_NODELAY for latency-critical RPC)
+4.7  Use case: gRPC, REST/HTTP, SOAP, Thrift TSocket, gNMI, NETCONF
+
+================================================================================
+SECTION 5 — UDP
+================================================================================
+
+5.1  RFC 768 (UDP): connectionless, unreliable, unordered datagram delivery
+5.2  No reliability, no ordering, no flow control — application must handle
+5.3  Multicast: UDP supports one-to-many delivery (IP multicast groups)
+5.4  Use cases:
+       - DDS RTPS: real-time publish-subscribe over UDP multicast
+       - SOME/IP events/notifications: UDP for low-latency notifications
+       - SOME/IP-SD: service discovery over UDP multicast (224.0.0.1:30490)
+       - CoAP: IoT application protocol over UDP
+       - SNMP: UDP port 161/162
+       - DNS: UDP port 53
+       - gRPC over QUIC (QUIC is UDP-based)
+
+================================================================================
+SECTION 6 — UNIX DOMAIN SOCKETS (UDS)
+================================================================================
+
+6.1  AF_UNIX, SOCK_STREAM / SOCK_DGRAM / SOCK_SEQPACKET
+6.2  Filesystem path (e.g., /run/service.sock) or abstract namespace (@abstract)
+6.3  No TCP/IP overhead: higher throughput and lower latency than TCP loopback
+6.4  Credential passing: SCM_CREDENTIALS (PID, UID, GID) — kernel-enforced, unforgeable
+6.5  File descriptor passing: SCM_RIGHTS — pass open FDs between processes
+6.6  gRPC UDS transport: grpc.Dial("unix:///path/to/socket")
+6.7  D-Bus system bus: /var/run/dbus/system_bus_socket
+6.8  Docker daemon: /var/run/docker.sock
+
+================================================================================
+SECTION 7 — ANDROID BINDER TRANSPORT
+================================================================================
+
+7.1  Not a network protocol — kernel driver: /dev/binder
+7.2  ioctl(BINDER_WRITE_READ): the core system call
+7.3  Binder one-copy mechanism: sender copy_from_user → receiver mmap region
+7.4  Binder FD passing: file descriptors transferred with ownership semantics
+7.5  gRPC-Binder transport: gRPC calls over Android Binder
+       - Uses IBinder as the transport primitive
+       - gRPC client/server communicate via AIDL-wrapped Binder transactions
+       - Enables gRPC between Android apps (cross-process, same device)
+
+================================================================================
+SECTION 8 — MACH PORTS (macOS/iOS)
+================================================================================
+
+8.1  XNU kernel Mach IPC: ports as communication endpoints
+8.2  mach_msg(): fundamental system call for send/receive
+8.3  XPC service connections: built on Mach ports (libxpc)
+8.4  Out-of-line memory: copy-on-write page sharing between tasks
+
+================================================================================
+SECTION 9 — ZIRCON CHANNELS (FUCHSIA)
+================================================================================
+
+9.1  zx_channel_write / zx_channel_read: fundamental system calls
+9.2  Message = bytes + handles (Zircon object references)
+9.3  FIDL messages carried over channels
+9.4  No explicit transport choice: all service communication is channel-based
+
+================================================================================
+SECTION 10 — SHARED MEMORY AS TRANSPORT
+================================================================================
+
+10.1 POSIX: shm_open + mmap; System V: shmget + shmat
+10.2 Iceoryx: shared memory pub/sub for ADAS zero-copy messaging
+10.3 DDS shared memory transport (FastDDS SHM transport):
+       - Large data exchange without network stack involvement
+       - Uses port tokens to identify data segments
+10.4 Android HIDL FMQ (Fast Message Queue):
+       - Shared memory ring buffer for HAL ↔ framework communication
+       - Particularly for high-bandwidth sensor data (audio, camera frames)
+10.5 Android ION / DMABuf:
+       - Graphic buffer sharing between processes (camera → display pipeline)
+       - Zero-copy: GPU driver maps same physical buffer as CPU
+10.6 Synchronization for shared memory:
+       - POSIX pthread_mutex (PTHREAD_PROCESS_SHARED), sem_wait/sem_post
+       - futex (fast user-space mutex — Linux kernel atomic compare-exchange)
+       - Iceoryx: semaphore via eventfd notification
+
+================================================================================
+SECTION 11 — TRANSPORT BINDING IN RPC FRAMEWORKS
+================================================================================
+
+11.1  Apache Thrift TTransport abstraction:
+       TSocket           → TCP stream
+       TServerSocket     → TCP server
+       TFramedTransport  → 4-byte length-prefixed messages (required for async servers)
+       TBufferedTransport → userspace buffer for write batching
+       THttpTransport    → HTTP 1.1 POST
+       TMemoryBuffer     → in-process byte array
+       TZlibTransport    → compression wrapper
+
+11.2  gRPC transport abstraction:
+       core transport interface: abstract C++ class (SendMessageBatch, etc.)
+       Implementations:
+         - HTTP/2 (chttp2): standard gRPC transport
+         - Binder (grpc-binder): Android Binder transport
+         - InProcess: same-process call optimization (go/net/pipe, C++ in-process)
+         - Cronet: Android Cronet library (QUIC + HTTP/2)
+       TLS: BoringSSL (Google fork of OpenSSL), or mbedTLS
+
+11.3  DDS transport plugins:
+       - UDP unicast: default; peer-to-peer
+       - UDP multicast: efficient for pub/sub with many subscribers
+       - TCP: for WAN scenarios (requires DDS TCP transport plugin)
+       - Shared memory: FastDDS SHM, Cyclone DDS SHM
+       - DTLS: secure UDP for DDS-Security
+
+11.4  SOME/IP transport:
+       - Methods (request/response): TCP or UDP
+       - Events (fire-and-forget): UDP preferred
+       - Service Discovery: UDP multicast 224.0.0.1:30490
+       - Endpoint binding specified in SOMEIP deployment (ARXML)
+
+================================================================================
+SECTION 12 — TLS AS TRANSPORT SECURITY LAYER
+================================================================================
+
+12.1  TLS 1.3 (RFC 8446): mandatory for gRPC in production, HTTPS, etc.
+12.2  TLS handshake: ClientHello → ServerHello → Certificate → CertificateVerify → Finished
+12.3  0-RTT in TLS 1.3: session resumption without full handshake
+12.4  mTLS (Mutual TLS): both client and server present certificates
+       - Used in: gRPC service mesh (Istio/Envoy), Kubernetes API server, industrial OPC UA
+12.5  DTLS (RFC 6347): TLS over UDP
+       - Used in: CoAP+DTLS (IoT), WebRTC DTLS-SRTP, DDS-Security
+12.6  ALPN (Application-Layer Protocol Negotiation — RFC 7301):
+       - TLS extension to negotiate HTTP/2 ("h2") or HTTP/1.1 ("http/1.1")
+12.7  SNI (Server Name Indication — RFC 6066):
+       - TLS extension to indicate hostname; enables virtual hosting with TLS
+
+================================================================================
+SECTION 13 — TRANSPORT DEPENDENCY MATRIX
+================================================================================
+
+| Framework / Protocol | HTTP/1.1 | HTTP/2 | HTTP/3/QUIC | TCP raw | UDP | Unix Socket | Binder | Mach Port | Zircon Ch | Shared Mem | SOME/IP | DDS-RTPS |
+|---------------------|---------|--------|------------|---------|-----|------------|--------|----------|----------|------------|--------|---------|
+| gRPC | No | Primary | Experimental | No | No | Yes (UDS) | Yes (gRPC-Binder) | No | No | No | No | No |
+| REST / OpenAPI | Primary | Yes | Yes | No | No | Rarely | No | No | No | No | No | No |
+| SOAP / WSDL | Primary | Yes | No | No | No | No | No | No | No | No | No | No |
+| Thrift | Yes (HTTP) | No | No | Yes (TCP) | No | Yes | No | No | No | No | No | No |
+| JSON-RPC | Yes | Yes | No | Yes | No | Yes | No | No | No | No | No | No |
+| CORBA (IIOP) | No | No | No | Yes | No | No | No | No | No | No | No | No |
+| DDS (RTPS) | No | No | No | No | Primary | No | No | No | No | Yes (SHM) | No | Primary |
+| SOME/IP | No | No | No | Yes | Primary | No | No | No | No | No | Primary | No |
+| AIDL / Binder | No | No | No | No | No | No | Primary | No | No | No | No | No |
+| FIDL | No | No | No | No | No | No | No | No | Primary | No | No | No |
+| D-Bus | No | No | No | No | No | Primary | No | No | No | No | No | No |
+| XPC | No | No | No | No | No | No | No | Yes | No | No | No | No |
+| gRPC-Web | Yes | Yes | No | No | No | No | No | No | No | No | No | No |
+| CoAP | No | No | No | No | Primary | No | No | No | No | No | No | No |
+| MQTT | No | No | No | Yes | No | No | No | No | No | No | No | No |
+| Iceoryx | No | No | No | No | No | Yes | No | No | No | Primary | No | No |
+| OPC UA | No | No | No | Yes | No | No | No | No | No | No | No | No |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 14
+================================================================================
+
+  14.0  — What the transport layer provides and does NOT provide
+  14.1  — HTTP/1.1
+  14.2  — HTTP/2 (binary framing, multiplexing, HPACK)
+  14.3  — HTTP/3 / QUIC
+  14.4  — TCP (reliability model, congestion control, Nagle)
+  14.5  — UDP (datagrams, multicast)
+  14.6  — Unix Domain Sockets
+  14.7  — Android Binder as transport
+  14.8  — Mach ports (macOS/iOS)
+  14.9  — Zircon channels (Fuchsia)
+  14.10 — Shared memory as transport
+  14.11 — Transport binding in RPC frameworks (Thrift TTransport, gRPC, DDS, SOME/IP)
+  14.12 — TLS as transport security
+  14.13 — Transport dependency matrix (Section 13)
+  14.14 — Cross-references to Volume 06 (RPC), Volume 07 (IPC), Volume 09 (Zero-Copy)
+
+================================================================================
+END OF VOLUME 14 PROMPT
+================================================================================

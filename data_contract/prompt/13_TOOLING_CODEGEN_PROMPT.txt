@@ -1,0 +1,389 @@
+================================================================================
+VOLUME 13 — TOOLING & CODE GENERATION
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a build systems engineer, DevOps architect, code generation pipeline
+designer, compiler toolchain expert, and API development workflow specialist.
+
+This volume documents the complete tooling ecosystem for every major data
+contract, IDL, schema, and serialization technology — from the canonical
+compiler to the CI/CD integration patterns.
+
+TOOLING CATEGORIES covered:
+  A. IDL Compilers (protoc, thrift, aidl, fidlc, capnp, flatc, etc.)
+  B. Schema validators and linters
+  C. API contract generators and validators (openapi-generator, buf, spectral)
+  D. Schema registry CLI tools
+  E. Code generation scaffolding
+  F. Build system integration (Maven, Gradle, Bazel, CMake, Cargo)
+  G. CI/CD integration patterns
+
+================================================================================
+SECTION 1 — PROTOBUF TOOLCHAIN
+================================================================================
+
+1.1  protoc (Protocol Buffers Compiler)
+     - Input: .proto files
+     - Output: language-specific code via plugins
+     - Core flags:
+         --proto_path (-I): search path for imports
+         --descriptor_set_out: emit binary FileDescriptorSet
+         --include_imports: include imported protos in descriptor
+     - Built-in outputs: --cpp_out, --java_out, --python_out
+     - Plugin system: protoc invokes plugins as child processes (via stdin/stdout)
+     - Plugin naming: protoc-gen-X → --X_out flag
+     
+1.2  protoc plugins:
+     - protoc-gen-go (google.golang.org/protobuf): Go output
+     - protoc-gen-go-grpc: Go gRPC service stubs
+     - protoc-gen-java (built-in): Java output
+     - protoc-gen-grpc-java: Java gRPC service stubs
+     - protoc-gen-grpc-web: gRPC-Web JavaScript client
+     - protoc-gen-cpp (built-in): C++ output
+     - protoc-gen-grpc (grpc plugin): C++ gRPC stubs
+     - protoc-gen-js: JavaScript (deprecated in favor of protoc-gen-grpc-web)
+     - protoc-gen-ts (protobuf-ts): TypeScript with full type safety
+     - protoc-gen-rust (prost): Rust output
+     - protoc-gen-validate (PGV): validation rules (open policy agent-style)
+     - protoc-gen-doc: documentation generation
+     - protoc-gen-openapi: .proto → OpenAPI 3.0
+
+1.3  buf (Buf CLI — buf.build)
+     - Modern Protobuf workflow tool
+     - buf.yaml: module configuration (name, deps, breaking)
+     - buf.gen.yaml: code generation pipeline (plugins + outputs)
+     - Commands:
+         buf lint         : enforce style rules (.proto style, naming conventions)
+         buf format       : format .proto files
+         buf breaking     : detect breaking changes vs baseline or git ref
+         buf generate     : run code generation (replaces protoc)
+         buf build        : compile to FileDescriptorSet
+         buf push         : push module to Buf Schema Registry (BSR)
+         buf dep update   : update module dependencies
+     - Buf Schema Registry (BSR): central registry for .proto modules with versioning
+     - Breaking change detection rules: FILE, PACKAGE, WIRE_JSON, WIRE modes
+     
+1.4  Build system integration:
+     - Maven: protobuf-maven-plugin (xolstice)
+     - Gradle: com.google.protobuf plugin
+     - Bazel: rules_proto, rules_go, rules_java_proto
+     - CMake: FindProtobuf module + add_custom_command for protoc invocation
+     - Cargo: prost-build in build.rs
+
+================================================================================
+SECTION 2 — APACHE THRIFT TOOLCHAIN
+================================================================================
+
+2.1  thrift compiler
+     - Input: .thrift files
+     - Output: --gen cpp / --gen java / --gen py / --gen go / --gen js / --gen rb
+     - Namespace flag: controls package/namespace in output
+     - Options: --gen java:bean (JavaBeans style), --gen cpp:cob_style
+     
+2.2  Build integration:
+     - Maven: libthrift-maven-plugin
+     - Gradle: custom task using exec {} block
+     - Bazel: no official rules; community rules exist
+
+================================================================================
+SECTION 3 — AIDL TOOLCHAIN (ANDROID)
+================================================================================
+
+3.1  aidl compiler (Android SDK / AOSP)
+     - Input: .aidl files
+     - Output: Java (.java), C++ (Binder) or NDK-style C++ with --lang=cpp
+     - New languages: Rust (--lang=rust), NDK (--lang=ndk)
+     - Options: --stability (for stable interface verification)
+     
+3.2  Android build integration:
+     - Soong (Android.bp): aidl_interface module type
+       aidl_interface { name: "android.hardware.foo", srcs: ["*.aidl"], versions: ["1", "2"] }
+     - Gradle (app-level AIDL): automatically compiled by AGP (Android Gradle Plugin)
+     - aidl_freeze_api: run to create versioned snapshot
+
+3.3  Stable AIDL hash verification:
+     - aidl_api/{interface_name}/{version}/.hash file: SHA256 of all .aidl files
+     - CI check: ensure hash does not change unintentionally
+
+================================================================================
+SECTION 4 — FIDL TOOLCHAIN (FUCHSIA)
+================================================================================
+
+4.1  fidlc: FIDL compiler (C++ based, in Fuchsia source tree)
+     - Input: .fidl files
+     - Output: JSON IR (Intermediate Representation)
+     
+4.2  fidlgen-*: backend code generators that consume the JSON IR
+     - fidlgen-cpp: C++ HLCPP and LLCPP bindings
+     - fidlgen-rust: Rust bindings
+     - fidlgen-go: Go bindings
+     - fidlgen-dart: Dart bindings
+     
+4.3  Build: Fuchsia's GN/Ninja build system; fidl() GN template
+
+================================================================================
+SECTION 5 — OPENAPI TOOLCHAIN
+================================================================================
+
+5.1  openapi-generator (openapi-tools/openapi-generator)
+     - 50+ generators: java, go, python, typescript-axios, typescript-fetch,
+                         kotlin, swift5, csharp, rust, cpp-qt5, csharp-netcore, etc.
+     - Server stubs: spring, python-fastapi, go-gin, aspnet, nodejs-express, etc.
+     - Config: generator-specific config file (--config config.yaml)
+     - Templates: Mustache templates, customizable per generator
+     - Command: openapi-generator-cli generate -i spec.yaml -g java -o ./out
+     
+5.2  swagger-codegen (classic, pre-openapi-generator fork)
+     - Older, less maintained; openapi-generator is the recommended successor
+     
+5.3  Spectral (Stoplight)
+     - Rules-based OpenAPI/AsyncAPI linter
+     - Built-in ruleset: spectral:oas (OpenAPI style rules)
+     - Custom rules in JavaScript / TypeScript
+     - CI integration: spectral lint spec.yaml
+     
+5.4  oasdiff (CLI tool)
+     - Breaking change detection between two OpenAPI specs
+     - oasdiff breaking old.yaml new.yaml --fail-on-diff
+     
+5.5  Redoc / Swagger UI / Scalar
+     - Documentation rendering from OpenAPI spec
+     
+5.6  Prism (Stoplight)
+     - Mock server from OpenAPI spec: prism mock spec.yaml
+     - Validates requests/responses against spec at runtime
+     
+5.7  Schemathesis
+     - Property-based testing from OpenAPI spec (fuzzing-style)
+     - schemathesis run spec.yaml --url http://localhost:8080
+
+5.8  vacuum (quobix)
+     - Fast OpenAPI linter (alternative to Spectral, written in Go)
+
+5.9  Build integration:
+     - Maven: swagger-codegen-maven-plugin or openapi-generator-maven-plugin
+     - Gradle: openapi-generator Gradle plugin
+     - Bazel: community rules
+
+================================================================================
+SECTION 6 — AVRO TOOLCHAIN
+================================================================================
+
+6.1  avro-tools.jar (Apache Avro)
+     - Compile Avro IDL (.avdl) → Avro JSON schema (.avsc)
+     - Generate Java code from .avsc
+     - Command: java -jar avro-tools.jar compile schema schema.avsc out/
+     
+6.2  avro-maven-plugin (Apache)
+     - Generates Java classes from .avsc files in Maven build
+
+6.3  avro-gradle-plugin: Gradle variant
+
+6.4  Confluent Schema Registry CLI
+     - Register, retrieve, test compatibility, delete schemas
+     - kafka-avro-console-producer / kafka-avro-console-consumer: CLI for Avro+Registry
+
+================================================================================
+SECTION 7 — ASN.1 TOOLCHAIN
+================================================================================
+
+7.1  asn1c (Lev Walkin, open source)
+     - C code generation from ASN.1 modules
+     - Supports BER/DER/PER/XER
+     - Usage: asn1c -fcompound-names -pdu=auto *.asn1
+
+7.2  OSS Nokalva ASN.1 Studio (commercial)
+     - Full IDE + compiler for all encoding rules
+     - C, C++, Java, C#, Python output
+     
+7.3  Objsys ASN1C (commercial)
+     - C/C++, Java, C# output
+
+7.4  pyasn1 (Python library)
+     - Runtime ASN.1 encode/decode without code generation
+     - Widely used in Python security/PKI tooling
+
+7.5  asn1tools (Python CLI + library)
+     - Parse ASN.1 + encode/decode without compiled stubs
+     
+7.6  openssl asn1parse: inspect DER/BER encoded data
+
+7.7  dumpasn1: detailed TLV dump of DER data
+
+================================================================================
+SECTION 8 — FLATBUFFERS TOOLCHAIN
+================================================================================
+
+8.1  flatc (FlatBuffers compiler)
+     - Input: .fbs schema files
+     - Outputs: flatc --cpp / --java / --python / --rust / --ts / --kotlin / --swift / --go
+     - Mutability: flatc --gen-mutable for mutable C++ accessors
+     - JSON: flatc --json (converts FlatBuffers binary to JSON)
+     
+8.2  FlatBuffers C++ builder API: FlatBufferBuilder, CreateVector, CreateString, Finish
+8.3  FlatBuffers Kotlin: FlatBufferBuilder, readPackedByte
+8.4  Build: flatc invoked via CMake add_custom_command, Bazel rules_flatbuffers, Gradle exec task
+
+================================================================================
+SECTION 9 — CAP'N PROTO TOOLCHAIN
+================================================================================
+
+9.1  capnp (Cap'n Proto compiler)
+     - Input: .capnp files
+     - Outputs: capnp compile -oc++ schema.capnp, --oc++ / --orust / --opython
+     - ID generation: capnp id (generates random 64-bit type ID)
+     
+9.2  Build: CMake find_package(CapnProto), Bazel rules_capnproto
+
+================================================================================
+SECTION 10 — GRAPHQL TOOLCHAIN
+================================================================================
+
+10.1 graphql-code-generator (The Guild)
+     - Generates TypeScript types, React hooks, resolvers, client operations
+     - Plugins: @graphql-codegen/typescript, @graphql-codegen/typescript-operations,
+                 @graphql-codegen/typescript-react-apollo
+     - Config: codegen.yaml specifying schema source, documents, plugins, outputs
+
+10.2 graphql-schema-linter: lint GraphQL schemas
+10.3 GraphQL Inspector: breaking change detection, schema diffing
+10.4 Apollo Client Codegen: iOS/Android type-safe GraphQL clients
+10.5 graphql-java (server-side): schema-first or code-first schema definition
+
+================================================================================
+SECTION 11 — JSON SCHEMA TOOLCHAIN
+================================================================================
+
+11.1 jsonschema (Python): validate JSON against JSON Schema
+11.2 ajv (JavaScript): fast JSON Schema validator; ajv-formats for format validation
+11.3 json-schema-validator (Java: networknt): high-performance validator
+11.4 quicktype: JSON Schema / JSON → TypeScript / Go / Python / Rust / Java types
+11.5 json-schema-to-typescript: TypeScript type generation from JSON Schema
+11.6 jsonschema2pojo: Java POJO generation from JSON Schema
+
+================================================================================
+SECTION 12 — BUILD SYSTEM INTEGRATION PATTERNS
+================================================================================
+
+12.1  Maven integration pattern:
+       <plugin>
+         <groupId>com.github.os72</groupId>
+         <artifactId>protoc-jar-maven-plugin</artifactId>
+         <version>3.11.4</version>
+         <executions>
+           <execution>
+             <phase>generate-sources</phase>
+             <goals><goal>run</goal></goals>
+             <configuration>
+               <addProtoSources>inputs</addProtoSources>
+               <outputTargets>
+                 <outputTarget><type>java</type></outputTarget>
+                 <outputTarget><type>grpc-java</type></outputTarget>
+               </outputTargets>
+             </configuration>
+           </execution>
+         </executions>
+       </plugin>
+
+12.2  Gradle integration pattern:
+       plugins { id "com.google.protobuf" version "0.9.4" }
+       protobuf {
+         protoc { artifact = "com.google.protobuf:protoc:4.26.1" }
+         plugins { grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.63.0" } }
+         generateProtoTasks { all()*.plugins { grpc {} } }
+       }
+
+12.3  Bazel integration pattern (BUILD file):
+       load("@rules_proto//proto:defs.bzl", "proto_library")
+       load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
+       
+       proto_library(name = "vehicle_proto", srcs = ["vehicle.proto"])
+       java_proto_library(name = "vehicle_java_proto", deps = [":vehicle_proto"])
+       java_grpc_library(name = "vehicle_grpc_java", srcs = [":vehicle_proto"])
+
+12.4  CMake integration:
+       find_package(Protobuf REQUIRED)
+       protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS vehicle.proto)
+       add_library(vehicle_proto ${PROTO_SRCS} ${PROTO_HDRS})
+
+12.5  Cargo (Rust) build.rs integration with prost-build:
+       fn main() {
+           prost_build::compile_protos(&["src/vehicle.proto"], &["src/"]).unwrap();
+       }
+
+================================================================================
+SECTION 13 — CI/CD INTEGRATION PATTERNS
+================================================================================
+
+13.1  Breaking change detection in CI:
+       # GitHub Actions: buf breaking check
+       - name: Check Protobuf breaking changes
+         uses: bufbuild/buf-action@v1
+         with:
+           breaking_against: https://github.com/org/repo.git#branch=main
+
+13.2  OpenAPI linting in CI:
+       - name: Lint OpenAPI spec
+         run: npx @stoplight/spectral-cli lint openapi.yaml --ruleset .spectral.yaml
+
+13.3  Schema registry compatibility check before Kafka deploy:
+       kafka-schema-registry-check --url $REGISTRY_URL --subject my-topic-value \
+         --schema schema.avsc --compatibility BACKWARD
+
+13.4  Contract testing with Pact:
+       - Consumer publishes pact to Pact Broker after consumer tests pass
+       - Provider verifies pact before deployment
+       - Can-I-Deploy: verifies all pacts are verified before deployment gate
+
+13.5  AIDL hash check in Android AOSP CI:
+       - m check-api: verifies AIDL API hasn't changed unexpectedly
+       - m update-api: records new API state
+
+================================================================================
+SECTION 14 — TOOLCHAIN COMPARISON MATRIX
+================================================================================
+
+| Technology | Primary Compiler | Language Targets | Build System | Breaking Change Detection | Schema Registry | Linting |
+|-----------|----------------|-----------------|-------------|--------------------------|----------------|--------|
+| Protobuf | protoc / buf | All major | Maven/Gradle/Bazel/CMake/Cargo | buf breaking | Buf BSR, Confluent | buf lint |
+| Thrift | thrift | All major | Maven/Gradle | Manual diff | No | No |
+| AIDL | aidl | Java/C++/Rust/Kotlin | Soong/Gradle | aidl check-api | No | No |
+| FIDL | fidlc + fidlgen-* | C++/Rust/Dart/Go | GN/Ninja | fidl_api_compatibility | No | fx lint |
+| OpenAPI | openapi-generator | 50+ | All | oasdiff / openapi-diff | Apicurio | Spectral/vacuum |
+| GraphQL SDL | graphql-codegen | TS/Java/Kotlin/Swift | npm/Gradle | GraphQL Inspector | No | graphql-linter |
+| Avro | avro-tools | Java/Python/C++ | Maven/Gradle | Schema Registry compat check | Confluent/Apicurio | No |
+| FlatBuffers | flatc | All major | CMake/Bazel/Gradle | Manual | No | No |
+| Cap'n Proto | capnp | C++/Rust/Python | CMake/Bazel | Manual | No | No |
+| JSON Schema | (validators) | via quicktype | npm/Maven | ajv / json-schema-diff | Apicurio | Various |
+| ASN.1 | asn1c / OSS Nokalva | C/C++/Java/C# | Make/CMake | Manual | No | No |
+| YANG | pyang / yanglint | Python/C | Makefile | yangdiff / pyang diff | No | pyang |
+| AsyncAPI | asyncapi-parser | TS/Python/Java | npm/Maven | asyncapi diff | Apicurio | asyncapi-validate |
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 13
+================================================================================
+
+  13.0  — Why tooling quality determines adoption (practical perspective)
+  13.1  — Protobuf toolchain (protoc + buf) — Section 1
+  13.2  — Thrift toolchain — Section 2
+  13.3  — AIDL toolchain (Android) — Section 3
+  13.4  — FIDL toolchain (Fuchsia) — Section 4
+  13.5  — OpenAPI toolchain — Section 5
+  13.6  — Avro toolchain — Section 6
+  13.7  — ASN.1 compilers — Section 7
+  13.8  — FlatBuffers toolchain — Section 8
+  13.9  — Cap'n Proto toolchain — Section 9
+  13.10 — GraphQL toolchain — Section 10
+  13.11 — JSON Schema toolchain — Section 11
+  13.12 — Build system integration patterns (Maven/Gradle/Bazel/CMake/Cargo)
+  13.13 — CI/CD integration patterns (breaking change detection, linting, contract testing)
+  13.14 — Toolchain comparison matrix
+  13.15 — Cross-references to Volume 02 (IDL), Volume 08 (API Contracts)
+
+================================================================================
+END OF VOLUME 13 PROMPT
+================================================================================

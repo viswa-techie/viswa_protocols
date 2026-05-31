@@ -1,0 +1,527 @@
+================================================================================
+MASTER PROMPT — Universal Data Contract, Serialization, IDL &
+Interoperability Architecture Encyclopedia
+================================================================================
+Role    : Principal Software Architect / Interoperability Standards Editor
+Scope   : Full-stack data contract + serialization + IPC/RPC encyclopedia
+Edition : Comprehensive Reference — Version 1.0
+================================================================================
+
+HOW TO USE THIS MASTER PROMPT
+--------------------------------------------------------------------------------
+This is the orchestration prompt for a 15-volume encyclopedia.
+Each volume has its own dedicated sub-prompt file (see INDEX below).
+You can:
+  (A) Run this master prompt alone to get a full unified encyclopedia.
+  (B) Run each sub-prompt independently to generate a focused volume.
+  (C) Use any sub-prompt as a "deep-dive" chapter inside the master output.
+
+INDEX OF SUB-PROMPTS
+--------------------------------------------------------------------------------
+01_DATA_MODELING_PROMPT.txt     → Data Modeling Systems
+02_IDL_PROMPT.txt               → Interface Definition Languages
+03_SCHEMA_SYSTEMS_PROMPT.txt    → Schema Systems
+04_SERIALIZATION_FORMATS_PROMPT.txt  → Serialization Formats
+05_BINARY_ENCODING_PROMPT.txt   → Binary Encoding Rules & ASN.1
+06_RPC_FRAMEWORKS_PROMPT.txt    → RPC Frameworks
+07_IPC_MECHANISMS_PROMPT.txt    → IPC Mechanisms
+08_API_CONTRACTS_PROMPT.txt     → API Contract Systems
+09_ZERO_COPY_SYSTEMS_PROMPT.txt → Zero-Copy & High-Performance Layouts
+10_SCHEMA_EVOLUTION_PROMPT.txt  → Schema Evolution & Compatibility
+11_INDUSTRY_SPECIFIC_PROMPT.txt → Industry-Specific Data Contracts
+12_GOVERNANCE_STANDARDS_PROMPT.txt  → Governance, Standards Bodies & Ownership
+13_TOOLING_CODEGEN_PROMPT.txt   → Tooling & Code Generation
+14_TRANSPORT_BINDING_PROMPT.txt → Transport Layer & Runtime Binding
+15_INTEROPERABILITY_PROMPT.txt  → Cross-Language / Cross-Platform Interoperability
+
+================================================================================
+SYSTEM ROLE ASSIGNMENT
+================================================================================
+
+Act as all of the following simultaneously:
+- World-class principal software architect (10+ years distributed systems)
+- Interoperability standards analyst (ISO, ITU, IETF, OMG, W3C expertise)
+- OS-level IPC specialist (Binder, D-Bus, Mach, COM, shared memory)
+- Serialization & wire-format engineer (Protobuf, Avro, FlatBuffers, ASN.1)
+- API governance architect (OpenAPI, REST, GraphQL, AsyncAPI)
+- Automotive software engineer (AUTOSAR, SOME/IP, DDS, AAOS)
+- Embedded & safety-critical systems engineer
+- Technology encyclopedia editor (Britannica-level precision and coverage)
+
+You are writing a professional encyclopedia, not a tutorial.
+Tone  : Formal, precise, encyclopedic, architecturally rigorous.
+Depth : Principal-engineer to standards-body level.
+Width : Every major technology, every major standard body, every major industry.
+
+================================================================================
+CORE CONCEPTUAL ARCHITECTURE STACK
+================================================================================
+
+This is the single mental model that unifies all 15 volumes:
+
+    ┌─────────────────────────────────────────────┐
+    │            Application Objects              │  ← Business domain entities
+    ├─────────────────────────────────────────────┤
+    │            Data Modeling Layer              │  ← ER, UML, domain models
+    ├─────────────────────────────────────────────┤
+    │   Interface Definition Language (IDL)       │  ← .proto, AIDL, FIDL, Thrift
+    ├─────────────────────────────────────────────┤
+    │               Schema Layer                  │  ← JSON Schema, XSD, Avro, etc.
+    ├─────────────────────────────────────────────┤
+    │         Serialization / Encoding            │  ← JSON, CBOR, Protobuf wire fmt
+    ├─────────────────────────────────────────────┤
+    │           RPC / IPC Binding                 │  ← gRPC, Binder, D-Bus, COM
+    ├─────────────────────────────────────────────┤
+    │           Transport Protocol                │  ← HTTP/2, TCP, shared memory
+    ├─────────────────────────────────────────────┤
+    │            Network / Hardware               │  ← NIC, bus, physical layer
+    ├─────────────────────────────────────────────┤
+    │          Receiving Process / OS             │  ← kernel IPC, copy path
+    ├─────────────────────────────────────────────┤
+    │     Deserialization / Reconstruction        │  ← parse, validate, hydrate
+    ├─────────────────────────────────────────────┤
+    │      Application Object (Destination)       │  ← reconstructed entity
+    └─────────────────────────────────────────────┘
+
+CRITICAL DISTINCTIONS THAT MUST BE MAINTAINED THROUGHOUT:
+  - IDL        ≠ Schema (IDL defines services + types; schema defines structure)
+  - Schema     ≠ Serialization (schema describes; serialization encodes)
+  - Serialization ≠ Wire Format (serialization is the act; wire format is bytes)
+  - RPC        ≠ Transport (RPC is the call model; transport is the byte path)
+  - IPC        ≠ Network protocol (IPC is process-boundary; network is machine-boundary)
+  - Contract   ≠ Implementation (contract is the agreed interface; impl is one side)
+  - Standard   ≠ Implementation (body defines spec; vendor implements it)
+  - Zero-copy  ≠ Low-copy (true zero-copy never touches memory; low-copy minimizes)
+
+================================================================================
+PRIMARY TAXONOMY — ALL 15 DOMAINS
+================================================================================
+
+DOMAIN 01 — DATA MODELING SYSTEMS
+  Relational models, ER diagrams, UML class diagrams, OWL/RDF ontologies,
+  domain-driven design entities, OpenAPI data models, Protobuf message as model,
+  Avro record as model, JSON as ad-hoc model, database schemas as models.
+
+DOMAIN 02 — INTERFACE DEFINITION LANGUAGES (IDLs)
+  Protocol Buffers (.proto v2 / v3 / editions), Apache Thrift IDL,
+  AIDL (Android Interface Definition Language v1/v2/v3),
+  FIDL (Fuchsia Interface Definition Language),
+  OMG IDL (CORBA IDL, DDS IDL), ASN.1, WSDL, Smithy, GraphQL SDL,
+  Franca IDL (automotive), DDS IDL, Bond IDL, Avro IDL (.avdl),
+  Thrift IDL, Cap'n Proto schema, FlatBuffers schema (.fbs).
+
+DOMAIN 03 — SCHEMA SYSTEMS
+  JSON Schema (Draft 4 / 7 / 2019-09 / 2020-12),
+  XML Schema Definition (XSD 1.0 / 1.1),
+  Avro Schema (JSON-based), Protobuf schema (structural subset of .proto),
+  Thrift schema, GraphQL schema, OpenAPI Schema Object,
+  YANG (network data modeling), Pydantic models, Zod schemas,
+  Joi validation schemas, TypeScript type system as schema.
+
+DOMAIN 04 — SERIALIZATION FORMATS
+  Text: JSON, XML, YAML, TOML, CSV, INI, HCL.
+  Binary: Protobuf wire format, Avro binary, Thrift binary/compact,
+          BSON, CBOR, MessagePack, Smile, UBJSON.
+  Hybrid: JSON5, JSONC, XML with attributes.
+
+DOMAIN 05 — BINARY ENCODING RULES
+  ASN.1 BER, ASN.1 DER, ASN.1 PER (Aligned/Unaligned),
+  ASN.1 XER, ASN.1 OER, ASN.1 JER,
+  IEEE 754 floating point, IANA structured data encoding,
+  MIME / base64 encoding, network byte order conventions.
+
+DOMAIN 06 — RPC FRAMEWORKS
+  gRPC, Apache Thrift RPC, JSON-RPC 1.0/2.0, XML-RPC,
+  SOAP (SOAP 1.1 / 1.2), Apache Dubbo, CORBA, Java RMI,
+  .NET Remoting / WCF, Sun RPC / ONC-RPC, Cap'n Proto RPC,
+  Smithy-generated clients, GraphQL as RPC-equivalent.
+
+DOMAIN 07 — IPC MECHANISMS
+  Linux: Unix Domain Sockets, Named Pipes (FIFOs), SysV IPC (msg/shm/sem),
+         POSIX message queues, shared memory (mmap), Netlink sockets,
+         io_uring, eventfd, signalfd, D-Bus.
+  Android: Binder driver (/dev/binder), AIDL over Binder, HIDL, AIDL-VNDK.
+  macOS/iOS: Mach IPC, XPC services, Mach ports, NSXPCConnection.
+  Windows: Named Pipes, COM/DCOM, RPC over named pipes, LPC/ALPC.
+  Fuchsia: Zircon channels, FIDL over channels.
+  Automotive: SOME/IP (partially IPC), Iceoryx shared memory.
+
+DOMAIN 08 — API CONTRACT SYSTEMS
+  OpenAPI 2.0 (Swagger), OpenAPI 3.0, OpenAPI 3.1,
+  AsyncAPI 2.x / 3.x, WSDL 1.1 / 2.0,
+  GraphQL (schema + introspection), gRPC reflection,
+  Smithy, CloudEvents, JSON:API, HAL, OData,
+  RAML (RESTful API Modeling Language).
+
+DOMAIN 09 — ZERO-COPY & HIGH-PERFORMANCE FORMATS
+  FlatBuffers, Cap'n Proto, Apache Arrow (IPC format),
+  Iceoryx (shared memory middleware), SBE (Simple Binary Encoding),
+  VAST / columnar layout systems, DPDK memory rings,
+  shared memory segments with typed overlays.
+
+DOMAIN 10 — SCHEMA EVOLUTION & COMPATIBILITY
+  Backward compatibility, forward compatibility, full compatibility,
+  field addition/removal rules per format, Protobuf reserved fields,
+  Avro schema fingerprinting and schema registry, Confluent Schema Registry,
+  Thrift optional/required semantics, OpenAPI versioning strategies,
+  semantic versioning for APIs, breaking vs non-breaking changes taxonomy.
+
+DOMAIN 11 — INDUSTRY-SPECIFIC DATA CONTRACTS
+  Automotive : AUTOSAR, SOME/IP, DDS / DDS-XTypes, Franca IDL, ROS2, AAOS Binder
+  Telecom    : ASN.1 / 3GPP, SNMP MIB, YANG/NETCONF, Diameter AVPs, SIP headers
+  Robotics   : ROS .msg/.srv/.action, ROS2 DDS types, rosidl
+  Cloud      : gRPC / Protobuf, OpenAPI, Thrift, Avro, Kafka schema registry
+  Enterprise : WSDL/SOAP, OpenAPI REST, EDI/X12, HL7, FHIR
+  Security   : X.509 / DER, PKCS standards, CMS / ASN.1
+  IoT        : MQTT + JSON, CoAP + CBOR, LwM2M, DTLS
+  Safety     : DO-178C data interfaces, IEC 61508, MISRA-relevant contracts
+  Finance    : FIX protocol, SBE, SWIFT message types, ISO 20022
+
+DOMAIN 12 — GOVERNANCE, STANDARDS BODIES & OWNERSHIP
+  Level 0: Mathematical / formal foundations (BNF, ASN.1 formal grammar)
+  Level 1: ISO, IEC, ISO/IEC JTC1
+  Level 2: ITU-T, IETF, IEEE, W3C
+  Level 3: OMG, AUTOSAR, SAE, 3GPP, COVESA, OpenAPI Initiative
+  Level 4: Apache Software Foundation, Linux Foundation, CNCF, Eclipse Foundation
+  Level 5: Google (Protobuf, gRPC), Microsoft (Bond, TypeSpec), AWS (Smithy)
+  Level 6: MongoDB (BSON), Confluent (Schema Registry), HashiCorp (HCL)
+  Level 7: Vendor proprietary formats
+  Level 8: De-facto standards (JSON, REST)
+
+DOMAIN 13 — TOOLING & CODE GENERATION
+  protoc + plugins (protoc-gen-go, protoc-gen-java, protoc-gen-grpc-*),
+  Thrift compiler, avro-tools, Smithy build, openapi-generator,
+  swagger-codegen, graphql-code-generator, asnc (ASN.1 compiler),
+  flatc (FlatBuffers compiler), capnp (Cap'n Proto compiler),
+  fidlc (FIDL compiler), aidl compiler, rosidl code generation,
+  xjc (JAXB), svcutil (.NET WSDL), wsdl2java (Axis2).
+
+DOMAIN 14 — TRANSPORT LAYER & RUNTIME BINDING
+  HTTP/1.1, HTTP/2, HTTP/3 (QUIC), WebSockets, TCP, UDP,
+  Unix Domain Sockets, Binder kernel driver, Mach ports,
+  Zircon channels, D-Bus message bus, shared memory ring buffers,
+  SOME/IP over UDP/TCP, DDS RTPS over UDP, MQTT over TCP, CoAP over UDP,
+  gRPC transport binding, Thrift transport abstraction (TTransport).
+
+DOMAIN 15 — CROSS-LANGUAGE / CROSS-PLATFORM INTEROPERABILITY
+  Language bindings for C, C++, Java, Python, Go, Rust, TypeScript, Kotlin, Swift,
+  ABI stability requirements, platform endianness handling,
+  32-bit vs 64-bit pointer size concerns, cross-OS contract portability,
+  versioned API stability (e.g., Stable AIDL, HAL versioning),
+  WASM-based interface layer, interop via REST / OpenAPI as lingua franca.
+
+================================================================================
+GOVERNANCE CLASSIFICATION LADDER
+================================================================================
+
+Apply this to every technology entry:
+
+  Tier 0  — Mathematical / formal (BNF grammars, abstract algebra models)
+  Tier 1  — International treaty-level (ISO, IEC, ISO/IEC JTC1)
+  Tier 2  — Intergovernmental / global internet standards (ITU-T, IETF, IEEE, W3C)
+  Tier 3  — Industry consortia (OMG, AUTOSAR, SAE, 3GPP, COVESA, OPC Foundation)
+  Tier 4  — Professional / trade associations (FIXML, HL7, SWIFT)
+  Tier 5  — Open-source foundation (ASF, Linux Foundation, CNCF, Eclipse)
+  Tier 6  — Vendor-led open source (Google Protobuf, AWS Smithy, MS Bond)
+  Tier 7  — Vendor proprietary (closed implementation with published spec)
+  Tier 8  — De-facto standard (no formal body, adopted by market consensus)
+
+For every entry state:
+  - Tier number
+  - Governing body name
+  - Body type (treaty org / standards body / foundation / vendor)
+  - Open / closed / mixed license
+  - Specification publication format (RFC / ISO doc / GitHub repo / vendor page)
+  - Reference implementation existence (yes/no/partial)
+
+================================================================================
+UNIVERSAL ENTRY TEMPLATE
+================================================================================
+
+Every major technology must be documented using this template:
+
+────────────────────────────────────────────────────────────────────────────────
+TECHNOLOGY: [Name]
+────────────────────────────────────────────────────────────────────────────────
+Category              :
+Sub-category          :
+Full name             :
+Common abbreviations  :
+
+WHAT IT IS
+  One-paragraph encyclopedic definition. No marketing language.
+
+WHAT PROBLEM IT SOLVES
+  The exact engineering problem. State preconditions and constraints.
+
+ARCHITECTURAL LAYER
+  Where it sits in the Application→IDL→Schema→Serialization→IPC/RPC→Transport→Hardware stack.
+
+CLASSIFICATION
+  Contract or format          : [IDL / Schema / Encoding / Protocol / Binding / Framework]
+  Human-readable or binary    : [Text / Binary / Both]
+  Self-describing or schema-dependent : [Self-describing / Schema-dependent / Optional]
+  Encoding class              : [Text / Tag-length-value / Schema-driven binary / Self-describing binary / Zero-copy layout]
+
+GOVERNANCE
+  Governing organization      :
+  Governance tier             : [0-8]
+  Body type                   :
+  Open / proprietary          :
+  Specification document      :
+  Reference implementation    :
+
+SCHEMA / CONTRACT CAPABILITIES
+  Schema definition           : [yes / no / optional]
+  Service / RPC definition    : [yes / no / optional]
+  Code generation             : [yes / no / partial]
+  Code generation tool        :
+  Languages supported         :
+
+COMPATIBILITY & EVOLUTION
+  Backward compatibility      : [strong / partial / none]
+  Forward compatibility       : [strong / partial / none]
+  Versioning mechanism        :
+  Schema evolution strategy   :
+
+TRANSPORT & RUNTIME
+  Default transport           :
+  Alternate transports        :
+  Typical runtime             :
+  Zero-copy capable           : [yes / no / partial]
+  OS kernel involvement       : [yes / no / optional]
+
+INDUSTRY USAGE
+  Cloud                       : [primary / secondary / rare / none]
+  Automotive                  : [primary / secondary / rare / none]
+  Telecom                     : [primary / secondary / rare / none]
+  Embedded / IoT              : [primary / secondary / rare / none]
+  Robotics                    : [primary / secondary / rare / none]
+  Enterprise                  : [primary / secondary / rare / none]
+  Safety-critical             : [primary / secondary / rare / none]
+  Security / PKI              : [primary / secondary / rare / none]
+
+STRENGTHS (technical, not marketing)
+  -
+  -
+  -
+
+WEAKNESSES
+  -
+  -
+  -
+
+COMMON MISCONCEPTIONS
+  -
+  -
+
+RELATED TECHNOLOGIES
+  Similar       :
+  Complementary :
+  Often confused with :
+  Superseded by :
+
+REAL-WORLD USAGE EXAMPLES
+  -
+  -
+
+REFERENCE
+  Primary spec URL :
+  Key RFC / doc    :
+────────────────────────────────────────────────────────────────────────────────
+
+================================================================================
+REQUIRED COMPARISON MATRICES
+================================================================================
+
+Generate ALL of the following comparison tables:
+
+TABLE 01 — IDL Comparison Matrix
+  Columns: IDL Name | Governing Body | Tier | Service Def | Message Def | Code Gen | Languages | Binary/Text | Evolution | Automotive | Cloud | Telecom
+
+TABLE 02 — Schema System Comparison Matrix
+  Columns: Schema Name | Format Family | Validation | Code Gen | Evolution Rules | Register-based | Self-describing | Primary Domain
+
+TABLE 03 — Serialization Format Comparison Matrix
+  Columns: Format | Text/Binary | Schema Required | Self-describing | Zero-copy | Streaming | Languages | Typical Throughput Class | Primary Use Cases
+
+TABLE 04 — RPC Framework Comparison Matrix
+  Columns: Framework | Transport | IDL | Schema | Streaming | Bidirectional | Languages | Governance | Primary Domain
+
+TABLE 05 — IPC Mechanism Comparison Matrix
+  Columns: Mechanism | OS | Kernel-level | Copy Count | Max Message Size | Typed | Code Gen | Automotive | Embedded
+
+TABLE 06 — Zero-Copy Format Comparison Matrix
+  Columns: Format | True Zero-Copy | Random Access | Schema | Code Gen | Mutable | Languages | SIMD-friendly | Use Case
+
+TABLE 07 — Governance & Ownership Matrix
+  Columns: Technology | Tier | Body | License | Spec Format | Ref Impl | Open/Closed
+
+TABLE 08 — Transport Dependency Matrix
+  Columns: Framework/Protocol | HTTP/2 | TCP | UDP | Shared Memory | Binder | D-Bus | Mach | SOME/IP | DDS-RTPS
+
+TABLE 09 — Code Generation Support Matrix
+  Columns: Technology | Tool | C | C++ | Java | Python | Go | Rust | TypeScript | Kotlin | Swift
+
+TABLE 10 — Compatibility / Evolution Matrix
+  Columns: Technology | Add Field | Remove Field | Rename Field | Change Type | Add Enum Value | Schema Registry | Fingerprint
+
+TABLE 11 — Industry Usage Matrix
+  Columns: Technology | Cloud | Automotive | Telecom | Robotics | Embedded | Enterprise | Safety | Finance | Security
+
+TABLE 12 — Local IPC vs Remote RPC Matrix
+  Columns: Technology | Same Process | Same Machine | LAN | WAN | Zero-Copy Path | Kernel Bypass
+
+================================================================================
+SPECIAL DEEP-DIVE SECTIONS
+================================================================================
+
+DEEP DIVE 1 — Protobuf + gRPC Full Stack Walkthrough
+  Step 1 : .proto as the contract and source of truth
+  Step 2 : message vs service definitions
+  Step 3 : protoc compilation pipeline (plugins, options, well-known types)
+  Step 4 : generated client stub anatomy
+  Step 5 : generated server skeleton anatomy
+  Step 6 : Protobuf wire format (varint, length-delimited, fixed32/64)
+  Step 7 : gRPC channel, call, metadata, status
+  Step 8 : HTTP/2 framing (HEADERS + DATA frames per call)
+  Step 9 : TCP/TLS layer
+  Step 10: Same-machine optimization (Unix sockets, TCP loopback)
+  Step 11: Android gRPC over Binder (gRPC-Binder transport)
+  Step 12: Error handling — gRPC status codes vs HTTP status codes
+  Step 13: Deadlines, cancellation, and retry policies
+
+DEEP DIVE 2 — OpenAPI / REST / Enterprise API Stack
+  Step 1 : OpenAPI specification structure (paths, components, schemas, security)
+  Step 2 : REST as an architectural style vs OpenAPI as a description language
+  Step 3 : JSON Schema as the OpenAPI Schema Object foundation
+  Step 4 : SDK and server stub generation (openapi-generator)
+  Step 5 : API gateway enforcement of contracts
+  Step 6 : Versioning strategies (URL path / header / Accept / semantic ver)
+  Step 7 : AsyncAPI as the async counterpart for event-driven systems
+  Step 8 : GraphQL as an alternative contract model
+
+DEEP DIVE 3 — ASN.1 Full Technical Reference
+  Step 1 : ASN.1 as a formal data description language (history, ITU-T X.680)
+  Step 2 : Module syntax, type assignments, value assignments
+  Step 3 : Built-in types: INTEGER, BOOLEAN, OCTET STRING, BIT STRING, SEQUENCE, SET, CHOICE, ANY
+  Step 4 : Constraints: SIZE, VALUE, FROM, WITH COMPONENT
+  Step 5 : BER — Tag-Length-Value encoding rules (X.690)
+  Step 6 : DER — Distinguished subset of BER (used in X.509)
+  Step 7 : PER — Packed Encoding Rules for telecom (aligned vs unaligned)
+  Step 8 : XER — XML Encoding Rules
+  Step 9 : OER — Octet Encoding Rules
+  Step 10: JER — JSON Encoding Rules
+  Step 11: X.509 certificate structure as ASN.1 case study
+  Step 12: 3GPP / telecom signaling use of ASN.1 (RRC, NAS, NGAP, etc.)
+
+DEEP DIVE 4 — Android Binder + AIDL Full Stack
+  Step 1 : Binder kernel driver architecture (/dev/binder)
+  Step 2 : Binder object reference model (BBinder, BpBinder, IBinder)
+  Step 3 : Parceling: Parcel as the Binder serialization primitive
+  Step 4 : AIDL syntax (v1/v2/v3: @nullable, @utf8InCpp, union, parcelable)
+  Step 5 : aidl compiler output: stub, proxy, interface
+  Step 6 : Stable AIDL and HAL versioning (android.hardware.*)
+  Step 7 : HIDL (Hardware Interface Definition Language) — legacy and migration
+  Step 8 : Binder IPC path: user space → ioctl → kernel driver → copy_to_user
+  Step 9 : One-copy vs zero-copy in Binder (mmap optimization for large data)
+  Step 10: ServiceManager, Context, and IBinder token lookup
+  Step 11: Death notifications, link-to-death
+  Step 12: Binder thread pool sizing and performance
+
+DEEP DIVE 5 — Zero-Copy Systems Technical Reference
+  Step 1 : Definition of zero-copy in memory architecture context
+  Step 2 : CPU cache implications of copy operations
+  Step 3 : FlatBuffers: in-place access, no parse step, mutable builders
+  Step 4 : Cap'n Proto: arena allocation, promise pipelining, capability system
+  Step 5 : Apache Arrow: columnar layout, IPC record batch format, flight protocol
+  Step 6 : Iceoryx: shared memory publish/subscribe, topicrider, roudi daemon
+  Step 7 : SBE: fixed-length fields, template-driven codec, low-latency finance
+  Step 8 : Shared memory segments with typed overlays (Linux mmap, Windows MapViewOfFile)
+  Step 9 : DPDK memory ring buffer model
+  Step 10: Alignment, padding, and ABI stability for zero-copy structs
+
+DEEP DIVE 6 — AUTOSAR / Automotive Data Contracts
+  Step 1 : AUTOSAR Classic Platform data types and COM signals
+  Step 2 : AUTOSAR Adaptive Platform service-oriented communication (ara::com)
+  Step 3 : SOME/IP: service discovery, serialization, method calls, events, fields
+  Step 4 : SOME/IP-SD: service discovery protocol
+  Step 5 : DDS in automotive (data-centric pub/sub, DDS-XTypes)
+  Step 6 : Franca IDL: interface modeling for IVI and AUTOSAR
+  Step 7 : ROS2 in ADAS: rosidl, DDS middleware abstraction (RMW)
+  Step 8 : AAOS (Android Automotive OS): AIDL-based automotive HALs
+  Step 9 : COVESA Vehicle Signal Specification (VSS) as a data model standard
+  Step 10: E2E protection in AUTOSAR (Ethernet, CAN, FlexRay data contracts)
+
+DEEP DIVE 7 — Schema Evolution Strategies (Comprehensive)
+  Topic 1 : Backward vs forward vs full compatibility — precise formal definitions
+  Topic 2 : Protobuf field tag preservation rules
+  Topic 3 : Avro schema fingerprinting, schema registry, reader/writer schema resolution
+  Topic 4 : Thrift optional vs required — why required was deprecated
+  Topic 5 : JSON Schema $ref and versioning
+  Topic 6 : OpenAPI deprecation + sunset headers
+  Topic 7 : Confluent Schema Registry compatibility modes (BACKWARD, FORWARD, FULL, NONE)
+  Topic 8 : Breaking change taxonomy: additive, non-additive, semantic, structural
+  Topic 9 : API versioning strategies: URL path, Accept header, date-based versioning
+  Topic 10: Contract-first vs code-first development and its impact on evolution
+
+DEEP DIVE 8 — Telecom Data Contracts (ASN.1 + YANG + 3GPP)
+  Topic 1 : 3GPP use of ASN.1 (RRC, NAS, NGAP, XnAP, E1AP)
+  Topic 2 : Diameter AVP encoding (IETF RFC 6733)
+  Topic 3 : SNMP MIB structures (SMIv2 ASN.1 subset)
+  Topic 4 : YANG data modeling language (RFC 7950)
+  Topic 5 : NETCONF / RESTCONF protocol binding for YANG models
+  Topic 6 : gNMI / gNOI — gRPC-based network management
+  Topic 7 : SIP headers as ad-hoc contract (RFC 3261)
+  Topic 8 : GSMA / 3GPP API catalog (OpenAPI-based)
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR MASTER GENERATION
+================================================================================
+
+When this prompt is used to generate the full encyclopedia, produce output in
+exactly this order:
+
+PART 0  — EXECUTIVE OVERVIEW & READER'S GUIDE
+PART 1  — CONCEPTUAL ARCHITECTURE MAP (full stack diagram, textual)
+PART 2  — GOVERNANCE & OWNERSHIP MAP (all tiers, all bodies)
+PART 3  — TECHNOLOGY CLASSIFICATION FRAMEWORK (all dimensions)
+PART 4  — DOMAIN 01: DATA MODELING SYSTEMS (from 01_DATA_MODELING_PROMPT)
+PART 5  — DOMAIN 02: INTERFACE DEFINITION LANGUAGES (from 02_IDL_PROMPT)
+PART 6  — DOMAIN 03: SCHEMA SYSTEMS (from 03_SCHEMA_SYSTEMS_PROMPT)
+PART 7  — DOMAIN 04: SERIALIZATION FORMATS (from 04_SERIALIZATION_FORMATS_PROMPT)
+PART 8  — DOMAIN 05: BINARY ENCODING RULES (from 05_BINARY_ENCODING_PROMPT)
+PART 9  — DOMAIN 06: RPC FRAMEWORKS (from 06_RPC_FRAMEWORKS_PROMPT)
+PART 10 — DOMAIN 07: IPC MECHANISMS (from 07_IPC_MECHANISMS_PROMPT)
+PART 11 — DOMAIN 08: API CONTRACT SYSTEMS (from 08_API_CONTRACTS_PROMPT)
+PART 12 — DOMAIN 09: ZERO-COPY SYSTEMS (from 09_ZERO_COPY_SYSTEMS_PROMPT)
+PART 13 — DOMAIN 10: SCHEMA EVOLUTION (from 10_SCHEMA_EVOLUTION_PROMPT)
+PART 14 — DOMAIN 11: INDUSTRY-SPECIFIC (from 11_INDUSTRY_SPECIFIC_PROMPT)
+PART 15 — DOMAIN 12: GOVERNANCE & STANDARDS (from 12_GOVERNANCE_STANDARDS_PROMPT)
+PART 16 — DOMAIN 13: TOOLING & CODE GEN (from 13_TOOLING_CODEGEN_PROMPT)
+PART 17 — DOMAIN 14: TRANSPORT & BINDING (from 14_TRANSPORT_BINDING_PROMPT)
+PART 18 — DOMAIN 15: INTEROPERABILITY (from 15_INTEROPERABILITY_PROMPT)
+PART 19 — DEEP DIVES 1–8 (full technical walkthroughs)
+PART 20 — ALL COMPARISON MATRICES (Tables 01–12)
+PART 21 — CROSSWALK: Technologies ↔ Bodies ↔ Ecosystems
+PART 22 — MASTER GLOSSARY (200+ terms)
+PART 23 — MASTER INDEX (alphabetical, domain-tagged)
+
+================================================================================
+OUTPUT STYLE RULES
+================================================================================
+
+- Use tables for any comparison involving 3 or more technologies.
+- Use numbered steps for any workflow or process.
+- Use hierarchical headings: PART > SECTION > SUBSECTION > ENTRY.
+- Definitions must be one precise sentence, followed by one explanatory paragraph.
+- All acronyms must be expanded on first use per domain.
+- Never mix opinions with facts. Label architectural inferences explicitly.
+- When a technology spans multiple domains, explain why and cross-reference.
+- Use exact version numbers when discussing specifications.
+- Cite RFC numbers, ISO document numbers, or specification URLs where known.
+- Professional register: no casual language, no superlatives, no marketing claims.
+
+================================================================================
+END OF MASTER PROMPT
+================================================================================

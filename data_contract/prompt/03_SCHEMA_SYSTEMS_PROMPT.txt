@@ -1,0 +1,316 @@
+================================================================================
+VOLUME 03 — SCHEMA SYSTEMS
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a schema design expert, data validation engineer, API schema governance
+architect, and standards analyst for schema languages across JSON, XML, Avro,
+GraphQL, Protobuf, and network data modeling ecosystems.
+
+Stack position:
+    IDL / Contract
+        ↓
+    SCHEMA SYSTEMS ← (this volume)
+        ↓
+    Serialization / Encoding
+
+A schema is the precise structural and semantic specification for data:
+  - field names and types
+  - required vs optional fields
+  - validation constraints
+  - allowed values (enumerations, patterns, ranges)
+  - evolution and compatibility rules
+  - default values
+
+A schema is NOT an IDL (no service definitions) and NOT a serialization format
+(no encoding rules). A schema is the CONTRACT for what data looks like.
+
+================================================================================
+SECTION 1 — JSON SCHEMA
+================================================================================
+
+1.1  History: Draft 01 (2009) → Draft 04 / 06 / 07 → 2019-09 → 2020-12 (current)
+1.2  Core vocabulary: type, properties, required, additionalProperties,
+       patternProperties, items, prefixItems, contains, minItems, maxItems,
+       minLength, maxLength, pattern, format, minimum, maximum, enum, const
+1.3  Composition: allOf, anyOf, oneOf, not
+1.4  References: $ref, $defs, $anchor, $dynamicRef, $recursiveRef
+1.5  Meta-schemas and dialects: $schema, $vocabulary, $id
+1.6  Annotations vs assertions distinction
+1.7  Validation output formats: flag, basic, detailed, verbose
+1.8  Format keywords: date-time, date, time, email, uri, uuid, ipv4, ipv6 — assertion vs annotation
+1.9  Unevaluated properties/items (2019-09+): unevaluatedProperties, unevaluatedItems
+1.10 OpenAPI Schema Object subset vs full JSON Schema
+1.11 Code generation: json-schema-to-typescript, quicktype, jsonschema2pojo
+1.12 Governance: IETF Internet-Draft (Tier 2) — Note: not a formal RFC as of 2024
+
+ANNOTATED EXAMPLE (2020-12):
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/vehicle-speed.schema.json",
+    "title": "VehicleSpeed",
+    "type": "object",
+    "properties": {
+      "value_kmh": { "type": "number", "minimum": 0, "maximum": 300 },
+      "timestamp_us": { "type": "integer" },
+      "unit": { "type": "string", "enum": ["km/h", "mph", "m/s"] }
+    },
+    "required": ["value_kmh", "timestamp_us"],
+    "additionalProperties": false
+  }
+
+================================================================================
+SECTION 2 — XML SCHEMA DEFINITION (XSD)
+================================================================================
+
+2.1  History: W3C XSD 1.0 (2001), XSD 1.1 (2012)
+2.2  Core constructs: xs:element, xs:complexType, xs:simpleType, xs:attribute,
+       xs:sequence, xs:choice, xs:all, xs:any, xs:anyAttribute
+2.3  Simple types: built-in types (xs:string, xs:integer, xs:boolean, xs:dateTime,
+       xs:decimal, xs:float, xs:double, xs:base64Binary, xs:hexBinary)
+2.4  Facets: xs:restriction, xs:minInclusive, xs:maxInclusive, xs:pattern,
+       xs:enumeration, xs:length, xs:minLength, xs:maxLength, xs:totalDigits
+2.5  Complex type extensions and restrictions
+2.6  Element substitution groups
+2.7  Wildcard content models (xs:any, xs:anyAttribute)
+2.8  XSD 1.1 additions: conditional type assignment (xs:assert, xs:alternative),
+       xs:override, xs:defaultOpenContent
+2.9  Namespaces: targetNamespace, elementFormDefault, attributeFormDefault
+2.10 Code generation: xjc (JAXB, Java), xsd.exe (.NET), xmlbeans, xs2ts
+2.11 Relationship to WSDL and SOAP
+2.12 Governance: W3C (Tier 2)
+
+================================================================================
+SECTION 3 — AVRO SCHEMA
+================================================================================
+
+3.1  Avro schema as JSON documents
+3.2  Primitive types: null, boolean, int, long, float, double, bytes, string
+3.3  Complex types: record, array, map, union, fixed, enum
+3.4  record: name, namespace, doc, aliases, fields (name, type, default, order, aliases)
+3.5  union: ["null", "string"] pattern for optional fields
+3.6  Schema evolution and compatibility:
+       - Schema fingerprinting (Rabin fingerprint, MD5, SHA-256)
+       - Reader schema vs writer schema resolution
+       - Field addition with default, field removal, type promotion rules
+3.7  Confluent Schema Registry integration:
+       - Schema registration, subject naming strategies
+       - Compatibility levels: BACKWARD, FORWARD, FULL, NONE, *_TRANSITIVE
+       - Wire format: magic byte (0x00) + schema ID (4 bytes) + Avro bytes
+3.8  Code generation: avro-tools (avro-maven-plugin, avro-gradle-plugin)
+3.9  Governance: Apache Software Foundation (Tier 5)
+
+ANNOTATED EXAMPLE:
+  {
+    "type": "record",
+    "name": "VehicleSpeed",
+    "namespace": "com.example.vehicle",
+    "fields": [
+      { "name": "value_kmh", "type": "float" },
+      { "name": "timestamp_us", "type": "long" },
+      { "name": "unit", "type": ["null", "string"], "default": null }
+    ]
+  }
+
+================================================================================
+SECTION 4 — PROTOBUF SCHEMA (structural layer of .proto)
+================================================================================
+
+4.1  Protobuf as both IDL and schema
+4.2  Type system: double, float, int32, int64, uint32, uint64, sint32, sint64,
+       fixed32, fixed64, sfixed32, sfixed64, bool, string, bytes
+4.3  message as the schema type
+4.4  Field numbering and the contract — why tag numbers are the true schema identity
+4.5  reserved fields and names — the evolution safety mechanism
+4.6  oneof — discriminated union modeling
+4.7  map<K, V> — key-value map type
+4.8  Nested messages and enums
+4.9  Proto editions and feature flags (2023): field_presence, enum_type, repeated_field_encoding
+4.10 How Protobuf schema differs from Protobuf wire format (see Volume 05)
+4.11 Governance: Google / open-source (Tier 6)
+
+================================================================================
+SECTION 5 — THRIFT SCHEMA
+================================================================================
+
+5.1  Thrift type system: bool, byte, i8, i16, i32, i64, double, string, binary
+5.2  struct: named fields with integer IDs
+5.3  union: exactly-one-of semantics
+5.4  exception: struct with exception semantics
+5.5  Field requirement qualifiers: required (deprecated), optional, default
+5.6  Field ID preservation: critical for binary protocol compatibility
+5.7  Enum type: named integer constants
+5.8  Container types: list<T>, set<T>, map<K,V>
+5.9  Evolution rules: field addition/removal safety, type change restrictions
+5.10 Governance: Apache Software Foundation (Tier 5)
+
+================================================================================
+SECTION 6 — GRAPHQL SCHEMA
+================================================================================
+
+6.1  GraphQL Schema Definition Language (SDL) recap (see Volume 02)
+6.2  GraphQL type system as a schema:
+       - Scalar types: Int, Float, String, Boolean, ID + custom scalars
+       - Object type: fields with types and arguments
+       - Input type: used for mutation arguments
+       - Interface type: abstract type contract
+       - Union type: polymorphic type without shared fields
+       - Enum type: named string constants
+       - Non-null (!) and list ([]) modifiers
+6.3  Schema introspection as runtime schema access
+6.4  Schema stitching and federation: distributed schema composition
+6.5  Schema linting and governance: graphql-eslint, graphql-schema-linter
+6.6  Code generation: graphql-code-generator → TypeScript, Java, Kotlin, Swift
+6.7  Governance: GraphQL Foundation / Linux Foundation (Tier 5)
+
+================================================================================
+SECTION 7 — OPENAPI SCHEMA OBJECT
+================================================================================
+
+7.1  OpenAPI Schema Object as a JSON Schema subset/superset hybrid
+7.2  OpenAPI 3.0 schema: subset of JSON Schema Draft 07 with extensions
+7.3  OpenAPI 3.1 schema: aligned with JSON Schema 2020-12
+7.4  OpenAPI-specific keywords: discriminator, xml, externalDocs, example, nullable (3.0)
+7.5  discriminator: polymorphic schema selection by field value
+7.6  Schema reuse: $ref to #/components/schemas
+7.7  Schema validation in API gateways vs client-side
+7.8  Governance: OpenAPI Initiative (Linux Foundation) — Tier 3
+
+================================================================================
+SECTION 8 — YANG (Network Data Modeling Language)
+================================================================================
+
+8.1  Full YANG coverage as schema system (governance, RFC 7950)
+8.2  YANG modules as schema containers
+8.3  Core statement types: container, leaf, leaf-list, list, anydata, anyxml
+8.4  Grouping and uses: reusable schema fragments
+8.5  Typedef: derived types with constraints
+8.6  Augment: extending another module's schema
+8.7  Deviation: modifying constraints for implementation-specific profiles
+8.8  Feature / if-feature: conditional schema elements
+8.9  Identity and identityref: open enumeration mechanism
+8.10 RPC and notification statements (service-like constructs)
+8.11 YANG validation: yanglint, pyang
+8.12 Schema binding: NETCONF, RESTCONF, gNMI
+8.13 Standard YANG models: ietf-interfaces, ietf-ip, openconfig-bgp
+8.14 Governance: IETF (Tier 2)
+
+================================================================================
+SECTION 9 — PYDANTIC / RUNTIME SCHEMA SYSTEMS
+================================================================================
+
+9.1  Pydantic (Python): BaseModel, Field, validator, @root_validator
+       - Pydantic v1 vs v2 (Rust core in v2)
+       - JSON schema generation from Pydantic models
+       - Use in FastAPI for request/response validation
+
+9.2  Zod (TypeScript): z.string(), z.number(), z.object(), z.infer<>
+       - Type inference: schema as TypeScript type source
+       - Integration with tRPC, React Hook Form
+
+9.3  Joi (JavaScript): Joi.object(), Joi.string().email(), .required()
+       - Runtime validation without compile-time types
+
+9.4  Valibot (TypeScript): alternative to Zod with smaller bundle size
+
+9.5  Why runtime schema validation matters vs compile-time type checking:
+       - System boundary enforcement (network input, file input)
+       - Runtime type safety vs static analysis
+
+================================================================================
+SECTION 10 — SCHEMA REGISTRY SYSTEMS
+================================================================================
+
+10.1  Confluent Schema Registry
+        - Purpose: central schema store for Kafka producers and consumers
+        - REST API: register, retrieve, check compatibility
+        - Subjects: value subject, key subject, topic naming strategy
+        - Compatibility modes: BACKWARD, FORWARD, FULL, NONE, *_TRANSITIVE
+        - Supported formats: Avro, Protobuf, JSON Schema
+        - Wire format: magic byte + schema ID prefix
+
+10.2  AWS Glue Schema Registry
+        - Integration with AWS Kafka (MSK), Kinesis, SQS
+        - Supported formats: Avro, Protobuf, JSON Schema
+
+10.3  Apicurio Registry
+        - Open-source schema registry (Red Hat / open source)
+        - Supports Avro, Protobuf, JSON Schema, OpenAPI, AsyncAPI
+
+10.4  Why schema registries matter:
+        - Decouples schema evolution from code deployment
+        - Central compatibility enforcement
+        - Schema versioning and audit trail
+
+================================================================================
+SECTION 11 — SCHEMA COMPARISON MATRIX
+================================================================================
+
+| Schema System | Format | Standalone | Validation | Code Gen | Evolution Rules | Registry Support | Self-describing | Primary Domain |
+|--------------|--------|-----------|-----------|---------|-----------------|-----------------|-----------------|----------------|
+| JSON Schema 2020-12 | JSON | Yes | Yes | Yes | Partial | No | No (ref required) | REST/API/Cloud |
+| XSD 1.1 | XML | Yes | Yes | Yes (xjc) | Limited | No | No | Enterprise/SOAP |
+| Avro Schema | JSON | Embedded | Yes | Yes | Strong (reader/writer) | Yes (Confluent) | No | Cloud/Kafka |
+| Protobuf schema | .proto | No (IDL part) | Partial | Yes (protoc) | Strong (tags) | Yes (Confluent) | No | Cloud/Automotive |
+| Thrift schema | .thrift | No (IDL part) | Partial | Yes (thrift) | Moderate | No | No | Cloud/Enterprise |
+| GraphQL SDL | SDL | Yes | Yes | Yes | Partial | No | Yes (introspection) | Web API |
+| OpenAPI Schema | YAML/JSON | Yes | Yes | Yes | Partial | No | No | REST APIs |
+| YANG | RFC text | Yes | Yes | Yes (pyang) | Strong (augment) | No | No | Network/Telecom |
+| Pydantic | Python code | Runtime | Yes | Yes (JSON Schema out) | Manual | No | No | Python services |
+| Zod | TypeScript code | Runtime | Yes | Yes (TypeScript types) | Manual | No | No | TypeScript services |
+
+================================================================================
+SECTION 12 — SCHEMA EVOLUTION RULES DETAIL
+================================================================================
+
+12.1  JSON Schema evolution:
+        - No built-in versioning; use URI versioning or $id versioning
+        - Adding new required properties = breaking change
+        - Removing properties = breaking change for consumers that depend on them
+        - Adding optional properties = non-breaking
+
+12.2  XSD evolution:
+        - Extension via xs:anyAttribute / xs:any (open content model)
+        - Version attribute pattern
+        - Breaking changes: type changes, required element changes
+
+12.3  Avro evolution rules:
+        - BACKWARD compatible: new schema can read old data (add field with default)
+        - FORWARD compatible: old schema can read new data (remove field with default)
+        - FULL compatible: both directions (add with default AND remove with default)
+        - Writer schema is embedded in data or looked up from registry
+
+12.4  Protobuf evolution rules:
+        - Never reuse a field number (even after deletion — use reserved)
+        - Add new fields with new field numbers = safe
+        - Change field type within wire-compatible group = conditional
+        - Wire type compatibility groups:
+            Varint: int32, int64, uint32, uint64, sint32, sint64, bool, enum
+            64-bit: fixed64, sfixed64, double
+            Length-delimited: string, bytes, message, packed repeated
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 03
+================================================================================
+
+  03.0  — What is a schema (precise definition and stack placement)
+  03.1  — JSON Schema (full coverage, Section 1)
+  03.2  — XML Schema / XSD (Section 2)
+  03.3  — Avro Schema (Section 3)
+  03.4  — Protobuf schema layer (Section 4)
+  03.5  — Thrift schema (Section 5)
+  03.6  — GraphQL Schema (Section 6)
+  03.7  — OpenAPI Schema Object (Section 7)
+  03.8  — YANG (Section 8)
+  03.9  — Runtime schema systems (Pydantic, Zod, Joi) (Section 9)
+  03.10 — Schema Registry systems (Section 10)
+  03.11 — Comparison matrix (Section 11)
+  03.12 — Schema evolution rules (Section 12)
+  03.13 — Cross-references to Volume 10 (Schema Evolution) and Volume 02 (IDL)
+
+================================================================================
+END OF VOLUME 03 PROMPT
+================================================================================

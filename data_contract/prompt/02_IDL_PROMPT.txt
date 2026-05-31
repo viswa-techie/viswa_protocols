@@ -1,0 +1,356 @@
+================================================================================
+VOLUME 02 — INTERFACE DEFINITION LANGUAGES (IDLs)
+Sub-prompt of: MASTER_PROMPT.txt
+Part of: Universal Data Contract Encyclopedia
+================================================================================
+
+ROLE & CONTEXT
+--------------------------------------------------------------------------------
+Act as a compiler engineer, distributed systems architect, OS internals expert,
+and formal language specification analyst.
+
+This volume covers all Interface Definition Languages — the formal languages used
+to define service interfaces, message types, and method signatures that serve as
+the language-neutral source of truth for code generation and interoperability.
+
+Stack position:
+    Data Modeling
+        ↓
+    INTERFACE DEFINITION LANGUAGES ← (this volume)
+        ↓
+    Schema Layer
+        ↓
+    Serialization
+
+An IDL is distinct from a schema: an IDL defines BOTH types AND services/methods.
+A schema defines only structure. Some systems (Protobuf, Thrift) provide both.
+
+================================================================================
+SECTION 1 — WHAT IS AN IDL (Precise Definition)
+================================================================================
+
+1.1  Formal definition: IDL as a language-neutral description of:
+       - Data types (structs, enums, unions, primitive types)
+       - Service interfaces (methods, RPCs, events)
+       - Type aliases and constants
+       - Annotations and metadata
+
+1.2  IDL vs Schema vs Data Model — the exact distinctions:
+       - IDL = contract + types + services
+       - Schema = structure + validation + evolution
+       - Data model = conceptual domain representation
+
+1.3  IDL compilation pipeline:
+       Source .idl/.proto/.aidl → Parser → AST → Code Generator Plugin → Target Language
+
+1.4  Why IDL matters:
+       - Language neutrality
+       - Versioning and evolution control
+       - Code generation accuracy
+       - Cross-team contract enforcement
+
+================================================================================
+SECTION 2 — PROTOCOL BUFFERS (.proto)
+================================================================================
+
+2.1  History: proto2 (2008, Google) → proto3 (2016) → Editions (2023)
+2.2  .proto syntax: syntax, package, import, option, message, enum, service, rpc
+2.3  Field types: scalar, message, enum, repeated, map, oneof
+2.4  Field numbers: tags 1–536870911, reserved tags, extension ranges
+2.5  Service definition: service, rpc, stream keyword (unary/server/client/bidi)
+2.6  Well-known types: google.protobuf.Timestamp, Duration, Struct, Value, Any, Empty
+2.7  Options: java_package, go_package, optimize_for, deprecated
+2.8  proto2 vs proto3 vs Editions differences:
+       - Required/optional/default semantics
+       - Field presence (optional keyword in proto3)
+       - Syntax = "editions" and feature flags
+2.9  Code generation: protoc, buf, plugins per language
+2.10 Governance: Google / CNCF (Tier 6)
+
+ANNOTATED EXAMPLE:
+  syntax = "proto3";
+  package com.example.vehicle;
+  
+  message Speed {
+    float value_kmh = 1;
+    int64 timestamp_us = 2;
+    optional string unit = 3;
+  }
+  
+  service VehicleService {
+    rpc GetSpeed (SpeedRequest) returns (Speed);
+    rpc WatchSpeed (SpeedRequest) returns (stream Speed);
+  }
+
+================================================================================
+SECTION 3 — APACHE THRIFT IDL
+================================================================================
+
+3.1  History: Facebook (2007), Apache Software Foundation (2008)
+3.2  Syntax: namespace, include, const, typedef, enum, struct, union, exception, service
+3.3  Field requirements: required, optional, default (optional is deprecated)
+3.4  Field IDs: positive integers, required for binary protocol
+3.5  Service inheritance and extension
+3.6  Exception types and error handling
+3.7  Multiplexing multiple services over one transport
+3.8  Protocol stack: TTransport + TProtocol + TProcessor
+3.9  Governance: Apache Software Foundation (Tier 5)
+
+================================================================================
+SECTION 4 — AIDL (Android Interface Definition Language)
+================================================================================
+
+4.1  Purpose: defining IPC interfaces for Android Binder IPC
+4.2  Evolution: AIDL v1 (original) → v2 (@nullable, @utf8InCpp) → v3 (union, parcelable nesting)
+4.3  Syntax: package, import, interface, oneway, in/out/inout parameters
+4.4  Supported types: primitives, String, CharSequence, List, Map, Parcelable, IBinder, FileDescriptor
+4.5  Parcelable generation: structured parcelable in AIDL v3
+4.6  Stable AIDL: @VintfStability, versioned interfaces in android.hardware.*
+4.7  HIDL (HAL Interface Definition Language):
+       - History: introduced in Android 8 (Treble)
+       - Types: struct, enum, typedef, interface, generates
+       - Now deprecated in favor of Stable AIDL
+4.8  aidl compiler output: .java (IFoo, IFoo.Stub, IFoo.Proxy) or .cpp/.h
+4.9  IBinder, Parcel, DeathRecipient lifecycle
+4.10 Governance: Google / Android Open Source Project (Tier 6)
+
+ANNOTATED EXAMPLE:
+  // IVehicleCallback.aidl
+  package android.hardware.automotive.vehicle;
+  
+  @VintfStability
+  oneway interface IVehicleCallback {
+    void onPropertyEvent(in VehiclePropValues propValues, int sharedMemoryFileCount);
+    void onPropertySetError(in VehiclePropErrors errors);
+  }
+
+================================================================================
+SECTION 5 — FIDL (Fuchsia Interface Definition Language)
+================================================================================
+
+5.1  Purpose: IPC contract language for Fuchsia OS Zircon kernel channels
+5.2  Syntax: library, using, bits, const, enum, struct, table, union, protocol, service
+5.3  struct vs table: struct = fixed layout, table = evolvable (field ordinals)
+5.4  Flexible vs strict unions
+5.5  Protocol methods: one-way, two-way (request+response), events
+5.6  Handles: zx.handle, zx.channel, zx.vmo, zx.socket
+5.7  FIDL wire format: envelope encoding for tables, union discriminant
+5.8  fidlc compiler → IR JSON → backend generators (LLCPP, HLCPP, Rust, Dart, Go)
+5.9  FIDL versioning: @available attribute for API lifecycle management
+5.10 Governance: Google / Fuchsia project (Tier 6)
+
+================================================================================
+SECTION 6 — OMG IDL (CORBA IDL)
+================================================================================
+
+6.1  History: OMG CORBA (1991), IDL defined in CORBA 3.0 (2002)
+6.2  Syntax: module, interface, exception, struct, union, enum, typedef, readonly attribute
+6.3  Operation signatures: in, out, inout parameters, raises clause
+6.4  Inheritance: single and multiple interface inheritance
+6.5  Value types and abstract interfaces
+6.6  IDL to language mappings: Java, C++, Python, Ada (OMG-specified)
+6.7  DDS IDL (extension for Data Distribution Service)
+       - DDS data types: @topic, @key, @optional, @must_understand
+       - X-Types (extensible and dynamic types): @appendable, @mutable, @final
+       - Governance: OMG DDS specification
+6.8  Governance: Object Management Group (OMG) — Tier 3
+
+================================================================================
+SECTION 7 — ASN.1 (Abstract Syntax Notation One)
+================================================================================
+
+7.1  History: ISO 8824 (1984), ITU-T X.208 → ITU-T X.680 series (current)
+7.2  Role: formal data description language, NOT just a serialization format
+7.3  Syntax: DEFINITIONS, AUTOMATIC TAGS, EXPORTS, IMPORTS, ::= assignment
+7.4  Types: INTEGER, BOOLEAN, REAL, BIT STRING, OCTET STRING, NULL,
+            SEQUENCE, SET, SEQUENCE OF, SET OF, CHOICE, ANY, OPEN TYPE
+7.5  Constraints: SIZE, VALUE, FROM, WITH COMPONENTS, PATTERN
+7.6  Information Object Class (IOC): parameterized types
+7.7  Encoding rules (separate volume, see 05_BINARY_ENCODING_PROMPT):
+       BER, DER, PER (Aligned/Unaligned), XER, OER, JER
+7.8  Governance: ISO / ITU-T joint — Tier 1 (ISO 8824) / Tier 2 (ITU-T X.680)
+
+================================================================================
+SECTION 8 — WSDL (Web Services Description Language)
+================================================================================
+
+8.1  History: W3C (WSDL 1.1 — 2001, WSDL 2.0 — 2007)
+8.2  Structure: types, message, portType, binding, service, port
+8.3  Relationship to SOAP: WSDL describes SOAP services
+8.4  XSD as the type system for WSDL messages
+8.5  WSDL 1.1 vs 2.0 differences (interface vs portType, etc.)
+8.6  Code generation: svcutil (.NET), wsdl2java (Apache Axis2), wsimport (JAX-WS)
+8.7  Status: largely superseded by OpenAPI in REST-based systems
+8.8  Governance: W3C (Tier 2)
+
+================================================================================
+SECTION 9 — AWS SMITHY
+================================================================================
+
+9.1  Purpose: vendor-neutral service description language (AWS, 2019)
+9.2  Syntax: namespace, use, metadata, service, resource, operation, structure, union, enum, list, map, trait
+9.3  Traits system: @required, @http, @paginated, @idempotent, @deprecated, custom traits
+9.4  Model selectors and linting
+9.5  Protocol traits: @restJson1, @awsJson1_0, @awsJson1_1, @restXml
+9.6  Smithy → OpenAPI transformation
+9.7  Smithy → SDK code generation for AWS SDKs
+9.8  Governance: Amazon Web Services / open-sourced (Tier 6)
+
+================================================================================
+SECTION 10 — GRAPHQL SDL (Schema Definition Language)
+================================================================================
+
+10.1  GraphQL as both IDL and query language
+10.2  SDL syntax: type, interface, union, enum, scalar, input, directive, schema
+10.3  Fields, arguments, non-null (!), list ([]), default values
+10.4  Directives: @deprecated, @skip, @include, custom schema directives
+10.5  Introspection: __schema, __type — GraphQL as self-describing
+10.6  Federation (Apollo): @key, @extends, @external, @requires for distributed schemas
+10.7  Code generation: graphql-code-generator (TypeScript, Java, Kotlin, Swift)
+10.8  Governance: GraphQL Foundation / Linux Foundation (Tier 5)
+
+================================================================================
+SECTION 11 — FRANCA IDL (Automotive)
+================================================================================
+
+11.1  Purpose: IVI and AUTOSAR service modeling
+11.2  Syntax: .fidl files (interface), .fdepl files (deployment descriptors)
+11.3  interface, typeCollection, method, broadcast, attribute, struct, array, enumeration
+11.4  Deployment models: SOME/IP, D-Bus, CommonAPI C++ binding
+11.5  CommonAPI C++ framework as the Franca runtime
+11.6  Status: broadly used in AUTOSAR Adaptive / IVI, partially superseded by ara::com
+11.7  Governance: COVESA (formerly GENIVI) — Tier 3
+
+================================================================================
+SECTION 12 — BOND IDL (Microsoft)
+================================================================================
+
+12.1  Purpose: Microsoft high-performance serialization + service IDL
+12.2  Syntax: namespace, struct, service, method, enum, import
+12.3  Schema evolution: optional vs required, default values
+12.4  Protocols: Fast Binary, Compact Binary, Simple Binary, Simple JSON, JSON
+12.5  Services: Bond over gRPC, Bond Comm (custom transport)
+12.6  Code generation: gbc (Bond compiler) → C++, C#, Python, Java
+12.7  Governance: Microsoft / open-sourced (Tier 6)
+
+================================================================================
+SECTION 13 — CAP'N PROTO SCHEMA
+================================================================================
+
+13.1  Schema syntax: struct, enum, interface, annotation, const, using
+13.2  Field IDs: explicit @0, @1 numbering required
+13.3  Generic types (List, Text, Data, AnyPointer)
+13.4  Cap'n Proto interface (capability system): interface, method, param struct, result struct
+13.5  Promise pipelining: calling methods on not-yet-returned results
+13.6  capnp compiler → C++, Rust, Python, Java, JavaScript
+13.7  Relationship to FlatBuffers: different approach to zero-copy
+13.8  Governance: Sandstorm.io / open-source (Tier 8)
+
+================================================================================
+SECTION 14 — FLATBUFFERS SCHEMA (.fbs)
+================================================================================
+
+14.1  Schema syntax: namespace, table, struct, enum, union, root_type, attribute, include
+14.2  table vs struct: table = evolvable (forward/backward compat), struct = fixed layout
+14.3  Field ordering and deprecation
+14.4  flatc compiler → C++, Java, C#, Python, Go, Rust, TypeScript, Kotlin, Swift
+14.5  How FlatBuffers achieves zero-copy: vtable offset mechanism
+14.6  Mutation API vs non-mutable access
+14.7  Governance: Google / open-source (Tier 6)
+
+================================================================================
+SECTION 15 — DDS IDL AND X-TYPES
+================================================================================
+
+15.1  DDS IDL as an extension of OMG IDL for data-centric systems
+15.2  @topic annotation: marks a type as a DDS topic
+15.3  @key annotation: defines the key fields for data instance identity
+15.4  DDS-XTypes (Extensible and Dynamic Types — OMG spec):
+        - @final, @appendable, @mutable extensibility annotations
+        - TypeObject representation
+        - Dynamic types API
+15.5  ROS2 rosidl: DDS-IDL subset with .msg/.srv/.action surface
+15.6  Governance: OMG (Tier 3)
+
+================================================================================
+SECTION 16 — AVRO IDL (.avdl)
+================================================================================
+
+16.1  Avro IDL as a higher-level IDL that compiles to Avro JSON schema
+16.2  Syntax: @namespace, protocol, record, enum, fixed, union, message (RPC)
+16.3  Message definitions: request parameters, response type, one-way
+16.4  Avro Protocol: RPC capability over HTTP or direct sockets
+16.5  IDL → JSON schema transformation
+16.6  Governance: Apache Software Foundation (Tier 5)
+
+================================================================================
+SECTION 17 — IDL COMPARISON MATRIX
+================================================================================
+
+Generate a comprehensive comparison table covering ALL IDLs above:
+
+| IDL | Governing Body | Tier | Service Def | Message/Type Def | Code Gen Tool | Key Languages | Binary/Text | Schema Evolution | Transport Agnostic | Automotive | Cloud | Telecom | Embedded | OS-IPC |
+|-----|---------------|------|-------------|-----------------|--------------|---------------|-------------|------------------|--------------------|------------|-------|---------|----------|--------|
+| Protobuf .proto | Google/CNCF | 6 | Yes (service/rpc) | Yes (message) | protoc | All | Binary wire | Strong (tags) | Yes | Secondary | Primary | Rare | Secondary | Secondary |
+| Thrift IDL | Apache | 5 | Yes (service) | Yes (struct/union) | thrift | All | Binary/Text | Partial | Yes | Rare | Secondary | Rare | Rare | No |
+| AIDL | Google/AOSP | 6 | Yes (interface) | Yes (parcelable) | aidl | Java/C++/Kotlin | Binder Parcel | Stable AIDL | No (Binder only) | Primary | No | No | Rare | Primary |
+| FIDL | Google/Fuchsia | 6 | Yes (protocol) | Yes (struct/table) | fidlc | C++/Rust/Dart/Go | Binary | Strong (table) | No (Zircon channels) | No | No | No | Rare | Primary |
+| OMG IDL | OMG | 3 | Yes (interface) | Yes (struct/union) | omgidl | C++/Java/Python | CDR (CORBA) | Limited | Yes | Secondary | Rare | Rare | Rare | No |
+| ASN.1 | ISO/ITU-T | 1/2 | No | Yes (SEQUENCE/CHOICE) | asn1c, asnc | C/C++/Java/Python | Multi (BER/DER/PER) | Strong | Yes | Rare | Rare | Primary | Primary | No |
+| WSDL | W3C | 2 | Yes (portType) | Yes (via XSD) | wsdl2java/svcutil | Java/.NET | XML (SOAP) | Limited | Yes (HTTP) | No | Rare | Rare | No | No |
+| Smithy | Amazon | 6 | Yes (service) | Yes (structure) | smithy-build | All (via SDK) | JSON/XML | Strong | Yes | No | Primary | No | No | No |
+| GraphQL SDL | GraphQL Fnd. | 5 | Yes (Query/Mutation) | Yes (type) | graphql-codegen | All | JSON | Partial | HTTP | No | Primary | No | No | No |
+| Franca IDL | COVESA | 3 | Yes (interface) | Yes (typeCollection) | franca tooling | C++ | SOME/IP/D-Bus | Partial | Partial | Primary | No | No | Secondary | No |
+| Bond | Microsoft | 6 | Yes (service) | Yes (struct) | gbc | C++/C#/Python | Binary/JSON | Strong | Yes | No | Secondary | No | No | No |
+| Cap'n Proto | Open source | 8 | Yes (interface) | Yes (struct) | capnp | C++/Rust/Python | Binary (zero-copy) | Strong | Yes | No | Secondary | No | Secondary | No |
+| FlatBuffers | Google | 6 | No (table only) | Yes (table/struct) | flatc | All | Binary (zero-copy) | Partial (table) | Yes | Secondary | Secondary | No | Secondary | No |
+| DDS IDL / X-Types | OMG | 3 | No (separate) | Yes (@topic) | DDS tooling | C++/Java | CDR/XCDR2 | Strong (mutable) | Yes (UDP/TCP) | Primary | Secondary | Rare | Secondary | No |
+| Avro IDL | Apache | 5 | Yes (protocol) | Yes (record) | avro-tools | Java/Python/C++ | Binary (Avro) | Strong (registry) | Yes (HTTP/socket) | No | Primary | No | No | No |
+
+================================================================================
+REQUIRED TECHNOLOGY ENTRIES (Universal Template from MASTER_PROMPT)
+================================================================================
+
+Produce full entries for:
+  1. Protocol Buffers (.proto)
+  2. Apache Thrift IDL
+  3. AIDL (all versions)
+  4. FIDL
+  5. OMG IDL / DDS IDL
+  6. ASN.1
+  7. WSDL
+  8. Smithy
+  9. GraphQL SDL
+  10. Franca IDL
+  11. Bond IDL
+  12. Cap'n Proto schema
+  13. FlatBuffers schema (.fbs)
+  14. Avro IDL (.avdl)
+
+================================================================================
+REQUIRED OUTPUT STRUCTURE FOR VOLUME 02
+================================================================================
+
+  02.0  — What is an IDL (precise definition and stack placement)
+  02.1  — IDL vs Schema vs Data Model (formal distinction)
+  02.2  — IDL compilation pipeline architecture
+  02.3  — Protocol Buffers (.proto)
+  02.4  — Apache Thrift IDL
+  02.5  — AIDL (Android)
+  02.6  — FIDL (Fuchsia)
+  02.7  — OMG IDL / CORBA / DDS IDL
+  02.8  — ASN.1 (as IDL / data description language)
+  02.9  — WSDL
+  02.10 — Smithy
+  02.11 — GraphQL SDL
+  02.12 — Franca IDL
+  02.13 — Bond IDL
+  02.14 — Cap'n Proto schema
+  02.15 — FlatBuffers schema
+  02.16 — Avro IDL
+  02.17 — Comprehensive IDL comparison matrix
+  02.18 — Cross-references to Volume 04 (Serialization) and Volume 06 (RPC)
+
+================================================================================
+END OF VOLUME 02 PROMPT
+================================================================================
